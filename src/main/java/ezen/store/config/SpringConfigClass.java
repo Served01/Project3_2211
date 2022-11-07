@@ -5,6 +5,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class SpringConfigClass extends AbstractAnnotationConfigDispatcherServletInitializer{
+	
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
@@ -26,6 +27,7 @@ public class SpringConfigClass extends AbstractAnnotationConfigDispatcherServlet
 		encodingFilter.setEncoding("UTF-8");
 		return new Filter[] {encodingFilter};
 	}
+	
 }
 
 
