@@ -5,7 +5,7 @@ import java.sql.Date;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class OrderDataBean {
+public class Or_Bean {
 	
 	private int or_number; 
 	
@@ -37,7 +37,7 @@ public class OrderDataBean {
 	
 	
 	//생성자 주입 단, 한번만 실행
-	public OrderDataBean() {
+	public Or_Bean() {
 		this.userIdExist = false;
 		this.userlogin = false;
 	}

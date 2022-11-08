@@ -1,39 +1,35 @@
 package ezen.store.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
-import ezen.store.beans.CartDataBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import ezen.store.beans.Ca_Bean;
 import ezen.store.mapper.Ca_Mapper;
 
+@Repository
 public class Ca_DAO {
 	
 	@Autowired
 	private Ca_Mapper ca_Mapper;
 	
-	public String checkUserIdExist(String user_id){
-				
-		return ca_Mapper.checkUserIdExist(user_id);		
+	public	List<Ca_Bean> getCartInfo(String ca_mbid) {
+		return ca_Mapper.getCartInfo(ca_mbid);
 	}
 	
-	public void addUserInfo(CartDataBean joinUserDataBean) {
-		
-		ca_Mapper.addUserInfo(joinUserDataBean); 
+	public void delcart(int ca_bknumbers) {
+		ca_Mapper.delcart(ca_bknumbers);
 	}
 	
-	//카트 정보 로드
-	public CartDataBean getCa_select(CartDataBean tempCa_Bean) {
-		
-		return ca_Mapper.getCa_select(tempCa_Bean);
+	public void delcartAll(String ca_mbid) {
+		ca_Mapper.delcartAll(ca_mbid);
 	}
 	
-	//카트 정보 수정
-	public CartDataBean getCa_update(int user_idx) {				
-		return ca_Mapper.getCa_update(user_idx); 		
+	public void addCartStuff(String ca_mbid,int ca_bknumbers) {
+		ca_Mapper.addCartStuff(ca_mbid,ca_bknumbers);
 	}
-	
-	// 비번 수정
-	public void modifyUserInfo(CartDataBean modifyUserDataBean) {
-		ca_Mapper.modifyUserInfo(modifyUserDataBean);
-		
-	}
+//	public void addCartStuff(String ca_mbid) {
+//		ca_Mapper.addCartStuff(ca_mbid);
+//	}
 }
