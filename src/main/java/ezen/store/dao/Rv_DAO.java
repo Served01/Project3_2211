@@ -27,4 +27,20 @@ public class Rv_DAO {
 		rvMapper.insertReview(insertRvBean);
 		
 	}
+	
+	// 수정 대상 리뷰 정보 불러오기
+	public Rv_Bean updatecheckRvBean(int rv_number) {
+		
+		return rvMapper.updatecheckRvBean(rv_number);
+		
+	}
+	
+	// 리뷰 수정
+	public void updateReview(Rv_Bean updateRvBean) {
+		
+		rvMapper.updateReview(updateRvBean);
+		
+	}
+	
+	
 }

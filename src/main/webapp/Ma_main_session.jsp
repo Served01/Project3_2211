@@ -11,8 +11,10 @@
 <body>
 
 <a href='${root }review/list?rv_bknumber=22020001'>Rv_list</a>
-<br>
+<hr>
 <a href='${root }review/insert?rv_bknumber=22020001'>Rv_insert</a>
+<hr>
+<a href='${root }review/update?rv_number=2'>Rv_update</a>
 
 
 </body>

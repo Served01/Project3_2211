@@ -21,10 +21,26 @@ public class Rv_Service {
 		
 	}
 	
+	//리뷰 입력
 	public void insertReview(Rv_Bean insertRvBean) {
 		
 		rvDAO.insertReview(insertRvBean);
 		
 	}
+	
+	//수정 리뷰 정보 불러오기
+	public Rv_Bean updatecheckRvBean(int rv_number) {
+		
+		return rvDAO.updatecheckRvBean(rv_number);
+		
+	}
+	
+	//리뷰 수정
+	public void updateReview(Rv_Bean updateRvBean) {
+		
+		rvDAO.updateReview(updateRvBean);
+		
+	}
+	
 	
 }

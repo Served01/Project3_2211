@@ -28,7 +28,6 @@ public class Rv_Controller {
 	public String list(@RequestParam("rv_bknumber") int rv_bknumber, Model model) {
 		
 		// Review 목록 열기
-		model.addAttribute("rv_bknumber", rv_bknumber);
 		
 		List<Rv_Bean> reviewlist = rvService.getRvList(rv_bknumber);
 		model.addAttribute("reviewlist", reviewlist);
@@ -61,16 +60,22 @@ public class Rv_Controller {
 	
 	
 	@GetMapping("/review/update")
-	public String update() {
+	public String update(@RequestParam("rv_number") int rv_number, Model model) {
+		
+		// update 페이지 열기
+		Rv_Bean updateRvBean = rvService.updatecheckRvBean(rv_number);
+		model.addAttribute("updateRvBean",updateRvBean);
 		
 		return "review/Rv_update";
 	}
 	
 	
 	@PostMapping("/review/update_pro")
-	public String updatePro() {
+	public String updatePro(@ModelAttribute("updateRvBean") Rv_Bean updateRvBean) {
 		
 		//return "review/Rv_update_fail";
+		
+		rvService.updateReview(updateRvBean);
 		
 		return "review/Rv_update_success";
 	}
