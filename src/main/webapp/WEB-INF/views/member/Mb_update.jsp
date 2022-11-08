@@ -17,7 +17,7 @@
 
 </head>
 <body>
-<c:import url="/WEB-INF/views/include/top_menu.jsp"/>
+<!-- <c:import url="/WEB-INF/views/include/top_menu.jsp"/> -->
 
 <div class="container" style="margin-top:100px">
 	<div class="row">
@@ -25,7 +25,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${root}member/update_pro" method="post" modelAttribute="modifyUserDataBean">
+					<form:form action="${root}member/Mb_update_pro" method="post" modelAttribute="update_mb_Bean">
 					<div class="form-group">
 						<form:label path="mb_name">이름</form:label>
 						<form:input path="mb_name" class="form-control" readonly="true"/>
@@ -35,28 +35,41 @@
 						<form:input path="mb_id" class="form-control" readonly="true"/>
 					</div>
 					<div class="form-group">
-						<form:label path="mb_pw">비밀번호</form:label>
-						<form:input path="mb_pw" class="form-control"/>
+						<form:label path="mb_pw">변경할 비밀번호</form:label>
+						<form:input type="password" path="mb_pw" class="form-control"/>
 						<form:errors path="mb_pw" style="color:red"/>
 					</div>
 					<div class="form-group">
-						<form:label path="mb_pw2">비밀번호 확인</form:label>
-						<form:input path="mb_pw2" class="form-control"/>
+						<form:label path="mb_pw2">변경할 비밀번호 확인</form:label>
+						<form:input type="password" path="mb_pw2" class="form-control"/>
 						<form:errors path="mb_pw2" style="color:red"/>
+					</div>
+					<div class="form-group">
+						<form:label path="mb_email">변경할 이메일</form:label>
+						<form:input type="email" path="mb_email" class="form-control"/>
+						<form:errors path="mb_email" style="color:red"/>
+					</div>
+					<div class="form-group">
+						<form:label path="mb_tel">변경할 연락처</form:label>
+						<form:input type="tel" path="mb_tel" class="form-control"/>
+						<form:errors path="mb_tel" style="color:red"/>
 					</div>
 					<div class="form-group">
 						<div class="text-right">
 							<form:button class="btn btn-primary">정보수정</form:button>
+							<a href="${root }member/Mb_insert" class="btn btn-danger">회원가입</a>
 						</div>
-					</div>					
+					</div>
+					<a href="${root }index" class="btn btn-danger">메인으로</a>
 					</form:form>
+					<a href="${root }member/Mb_select" class="btn btn-danger">마이페이지</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-<c:import url="/WEB-INF/views/include/footer_menu.jsp"/>
+<!--<c:import url="/WEB-INF/views/include/footer_menu.jsp"/> -->
 
 </body>
 </html>

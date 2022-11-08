@@ -24,8 +24,8 @@
 			<div class="card shadow">
 				<div class="card-body">
 					<div class="form-group">
-						<label for="board_writer_name">작성자</label>
-						<input type="text" id="board_writer_name" name="board_writer_name" class="form-control" value="${readContentDataBean.content_writer_name }" disabled="disabled"/>
+						<label for="mb_name">작성자</label>
+						<input type="text" id="mb_name" name="mb_name" class="form-control" value="${readMb_Bean.mb_name }" disabled="disabled"/>
 					</div>
 					<div class="form-group">
 						<label for="board_date">작성날짜</label>

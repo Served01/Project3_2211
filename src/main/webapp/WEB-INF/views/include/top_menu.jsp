@@ -33,13 +33,20 @@
 		
 		<ul class="navbar-nav ml-auto">
 			<c:choose>
-				<c:when test="${loginUserDataBean.mblogin == true }">
+				<c:when test="${login_mb_Bean.mblogin == true }">
+					<li class="nav-item">
+							<a href='${root }member/list?mb_idx=1'>전체회원목록</a>
+<%-- 						<a href="${root }member/Mb_list" class="nav-link">전체회원목록</a> --%>
+					</li>				
+					<li class="nav-item">
+						<a href="${root }member/Mb_select" class="nav-link">마이페이지</a>
+					</li>				
 					<li class="nav-item">
 						<a href="${root }member/Mb_update" class="nav-link">정보수정</a>
 					</li>
 					<li class="nav-item">
 						<a href="${root }member/Mb_logout" class="nav-link">로그아웃</a>
-					</li>				
+					</li>
 				</c:when>
 				<c:otherwise>
 					<li class="nav-item">
