@@ -1,0 +1,37 @@
+package ezen.store.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import ezen.store.beans.Ca_Bean;
+import ezen.store.beans.Wi_Bean;
+import ezen.store.mapper.Ca_Mapper;
+import ezen.store.mapper.Wi_Mapper;
+
+@Repository
+public class Wi_DAO {
+	
+	@Autowired
+	private Wi_Mapper wi_Mapper;
+	
+	public	List<Wi_Bean> getWishInfo(String wi_mbid) {
+		return wi_Mapper.getWishInfo(wi_mbid);
+	}
+	
+	public void delwish(int wi_bknumbers) {
+		wi_Mapper.delwish(wi_bknumbers);
+	}
+	
+	public void delwishAll(String wi_mbid) {
+		wi_Mapper.delwishAll(wi_mbid);
+	}
+	
+	public void addWishStuff(String wi_mbid,int wi_bknumbers) {
+		wi_Mapper.addWishStuff(wi_mbid,wi_bknumbers);
+	}
+//	public void addCartStuff(String ca_mbid) {
+//		ca_Mapper.addCartStuff(ca_mbid);
+//	}
+}
