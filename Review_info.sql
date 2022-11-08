@@ -17,4 +17,12 @@ insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_con
 insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_content)
 	values(3, 22020001, 'hyun3', sysdate, 3, '내용3');
 	
-commit
+commit;
+
+delete from REVIEW_DATA;
+
+create sequence review_seq
+	start with 1
+	increment by 1
+	maxvalue 9999999999
+	nocycle;

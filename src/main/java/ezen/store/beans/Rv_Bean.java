@@ -1,5 +1,8 @@
 package ezen.store.beans;
 
+import javax.validation.constraints.Pattern;
+
+
 public class Rv_Bean {
 	
 	private int rv_number;

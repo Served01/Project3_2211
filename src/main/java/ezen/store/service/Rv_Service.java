@@ -12,12 +12,18 @@ import ezen.store.dao.Rv_DAO;
 public class Rv_Service {
 
 	@Autowired
-	private Rv_DAO rv_DAO;
+	private Rv_DAO rvDAO;
 	
 	//리뷰 리스트
 	public List<Rv_Bean> getRvList(int rv_bknumber){
 		
-		return rv_DAO.getRvList(rv_bknumber);
+		return rvDAO.getRvList(rv_bknumber);
+		
+	}
+	
+	public void insertReview(Rv_Bean insertRvBean) {
+		
+		rvDAO.insertReview(insertRvBean);
 		
 	}
 	

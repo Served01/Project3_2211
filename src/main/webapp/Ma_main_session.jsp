@@ -11,6 +11,9 @@
 <body>
 
 <a href='${root }review/list?rv_bknumber=22020001'>Rv_list</a>
+<br>
+<a href='${root }review/insert?rv_bknumber=22020001'>Rv_insert</a>
+
 
 </body>
 </html>
