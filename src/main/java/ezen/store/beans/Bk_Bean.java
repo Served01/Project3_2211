@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Bk_Bean {
 
 	@NotBlank
-	private String bk_number;
+	private int bk_number;
 	private String bk_title;
 	private String bk_writer;
 	private String bk_publisher;
@@ -15,20 +15,18 @@ public class Bk_Bean {
 	private String bk_image;
 	//upload
 	private MultipartFile upload_file;
+	
 	private int bk_local;
 	private int bk_genre;
 	private String bk_infodate;
 	private String bk_detail;
 	private int bk_quantity;
 	private int bk_price;
-	private String bk_title_upper;
 	
-	private boolean checkBk_numExist;
-	
-	public String getBk_number() {
+	public int getBk_number() {
 		return bk_number;
 	}
-	public void setBk_number(String bk_number) {
+	public void setBk_number(int bk_number) {
 		this.bk_number = bk_number;
 	}
 	public String getBk_title() {
@@ -103,19 +101,5 @@ public class Bk_Bean {
 	public void setBk_price(int bk_price) {
 		this.bk_price = bk_price;
 	}
-	public String getBk_title_upper() {
-		return bk_title_upper;
-	}
-	public void setBk_title_upper(String bk_title_upper) {
-		this.bk_title_upper = bk_title_upper;
-	}
-	public boolean isCheckBk_numExist() {
-		return checkBk_numExist;
-	}
-	public void setCheckBk_numExist(boolean checkBk_numExist) {
-		this.checkBk_numExist = checkBk_numExist;
-	}
-	
-	
 	
 }

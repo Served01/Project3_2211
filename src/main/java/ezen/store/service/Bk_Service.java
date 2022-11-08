@@ -14,23 +14,12 @@ import ezen.store.dao.Bk_DAO;
 @Service
 @PropertySource("/WEB-INF/properties/option.properties")
 public class Bk_Service {
-
-	public boolean checkBk_numExist(String bk_number) {
-		
-		String bk_title = Bk_DAO.checkBk_numExist(bk_number);
-		
-		if(bk_title == null) {
-			return true;
-		}else {
-			return false;		
-		}			
-	}
-	
-	@Autowired
-	private Bk_DAO bk_DAO;
 	
 	@Value("${path.upload}")
 	private String path_upload;
+	
+	@Autowired
+	private Bk_DAO bk_DAO;
 		
 	@SuppressWarnings("unused")
 	private String saveUploadfile(MultipartFile upload_file) {
@@ -56,15 +45,11 @@ public class Bk_Service {
 					
 			insert_bk_Bean.setBk_image(file_name);
 		}
-		
-		Bk_DAO.addBk_info(joinUserDataBean);
+
+		bk_DAO.addBk_info(insert_bk_Bean);
 		
 		}
 		
 	}
-	}
-
-
-}
 
 

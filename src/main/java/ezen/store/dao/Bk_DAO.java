@@ -12,11 +12,6 @@ public class Bk_DAO {
 	@Autowired
 	private Bk_Mapper bk_Mapper;
 	
-	public String checkBk_numExist(String bk_number){
-		
-		return bk_Mapper.checkBk_numExist(bk_number);		
-	}
-	
 	public void addBk_info(Bk_Bean insert_bk_Bean) {
 		
 		bk_Mapper.addBk_info(insert_bk_Bean); 
