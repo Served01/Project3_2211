@@ -42,5 +42,12 @@ public class Rv_Service {
 		
 	}
 	
+	//리뷰 삭제
+	public void deleteReview(int rv_number) {
+		
+		rvDAO.deleteReview(rv_number);
+		
+	}
+	
 	
 }

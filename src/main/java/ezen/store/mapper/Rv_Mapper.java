@@ -2,6 +2,7 @@ package ezen.store.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -27,5 +28,9 @@ public interface Rv_Mapper {
 	@Update("update Review_Data set rv_score = #{rv_score}, rv_content = #{rv_content}"
 			+ "where rv_number = #{rv_number}")
 	void updateReview(Rv_Bean updateRvBean);
+	
+	//리뷰를 삭제하는 SQL문
+	@Delete("delete Review_Data where rv_number = #{rv_number}")
+	void deleteReview(int rv_number);
 	
 }

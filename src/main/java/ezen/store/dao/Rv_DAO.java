@@ -42,5 +42,12 @@ public class Rv_DAO {
 		
 	}
 	
+	// 리뷰 삭제
+	public void deleteReview(int rv_number) {
+		
+		rvMapper.deleteReview(rv_number);
+		
+	}
+	
 	
 }

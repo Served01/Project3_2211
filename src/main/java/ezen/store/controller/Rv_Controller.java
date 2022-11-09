@@ -10,14 +10,18 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import ezen.store.beans.Rv_Bean;
 import ezen.store.service.Rv_Service;
 
 @Controller
+//controller + responsebody = restcontroller
 public class Rv_Controller {
 	
 	@Autowired
@@ -48,14 +52,18 @@ public class Rv_Controller {
 	
 	
 	@PostMapping("/review/insert_pro")
-	public String insertPro(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean) {
+	public String insertPro(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean,
+							BindingResult result) {
 		
 		// insert 처리
-		//return "review_insert_fail";
+		if(result.hasErrors()) {
+			return "review/Rv_insert_fail";
+		}
 		
 		rvService.insertReview(insertRvBean);
 		
 		return "review/Rv_insert_success";
+		
 	}
 	
 	
@@ -71,9 +79,12 @@ public class Rv_Controller {
 	
 	
 	@PostMapping("/review/update_pro")
-	public String updatePro(@ModelAttribute("updateRvBean") Rv_Bean updateRvBean) {
+	public String updatePro(@ModelAttribute("updateRvBean") Rv_Bean updateRvBean,
+							BindingResult result) {
 		
-		//return "review/Rv_update_fail";
+		if(result.hasErrors()) {
+		return "review/Rv_update_fail";
+		}
 		
 		rvService.updateReview(updateRvBean);
 		
@@ -81,10 +92,14 @@ public class Rv_Controller {
 	}
 	
 	
-	@DeleteMapping("/review/delete_pro")
-	public String deletePro() {
+	@GetMapping("/review/delete_pro")
+	public String deletePro(@RequestParam("rv_number") int rv_number,
+							BindingResult result) {
 		
-		//return "review/Rv_delete_fail";
+		if(result.hasErrors()) {
+		return "review/Rv_delete_fail";
+		}
+		rvService.deleteReview(rv_number);
 		
 		return "review/Rv_delete_success";
 	}
