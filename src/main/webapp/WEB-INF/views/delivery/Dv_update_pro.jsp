@@ -8,8 +8,9 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("배송지 작성이 정상적으로 완료되었습니다.")
-		location.href="${root}delivery/Dv_insert"
+		alert("배송지 수정이 정상적으로 완료되었습니다.")
+		location.href="${root}delivery/Dv_update"
 	</script>
+</body>
 </body>
 </html>

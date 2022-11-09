@@ -94,8 +94,8 @@
           </div>
           <hr class="mb-4">
           <div class="hi">
-          <button class="btn btn-dark" type="submit">입력 완료</button>
-          <button class="btn btn-dark" onclick="location.href='inputshippingAddress.jsp'">뒤로 가기</button>
+          <form:button class="btn btn-dark" type="submit">입력 완료</form:button>
+          <form:button class="btn btn-dark" onclick="location.href='inputshippingAddress.jsp'">뒤로 가기</form:button>
           </div>
         </form:form>
       </div>
