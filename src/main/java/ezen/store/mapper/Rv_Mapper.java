@@ -12,7 +12,7 @@ import ezen.store.beans.Rv_Bean;
 public interface Rv_Mapper {
 
 	//리뷰 리스트를 가져오는 SQL문
-	@Select("select * from Review_data where rv_bknumber = #{rv_bknumber}")
+	@Select("select * from Review_data where rv_bknumber = #{rv_bknumber} and rv_deleted = '0'")
 	List<Rv_Bean> getRvList(int rv_bknumber);
 	
 	//리뷰를 입력하는 SQL문
@@ -30,7 +30,7 @@ public interface Rv_Mapper {
 	void updateReview(Rv_Bean updateRvBean);
 	
 	//리뷰를 삭제하는 SQL문
-	@Delete("delete Review_Data where rv_number = #{rv_number}")
+	@Update("update Review_Data set rv_deleted = 'deleted' where rv_number = #{rv_number}")
 	void deleteReview(int rv_number);
 	
 }

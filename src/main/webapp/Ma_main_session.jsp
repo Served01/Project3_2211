@@ -10,13 +10,13 @@
 </head>
 <body>
 
-<a href='${root }review/list?rv_bknumber=22020001'>Rv_list</a>
+<a href='${root }Review/RvList?rv_bknumber=22020001'>Rv_list</a>
 <hr>
-<a href='${root }review/insert?rv_bknumber=22020001'>Rv_insert</a>
+<a href='${root }Review/RvInsert?rv_bknumber=22020001'>Rv_insert</a>
 <hr>
-<a href='${root }review/update?rv_number=3'>Rv_update</a>
+<a href='${root }Review/RvUpdate?rv_number=3'>Rv_update</a>
 <hr>
-<a href='${root }review/delete_pro?rv_number=3'>Rv_delete</a>
+<a href='${root }Review/RvDeletePro?rv_number=3'>Rv_delete</a>
 
 
 </body>

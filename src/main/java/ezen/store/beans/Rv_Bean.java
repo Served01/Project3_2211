@@ -8,6 +8,7 @@ public class Rv_Bean {
 	private String rv_date;
 	private int rv_score;
 	private String rv_content;
+	private String rv_deleted;
 	
 	public int getRv_number() {
 		return rv_number;
@@ -45,6 +46,13 @@ public class Rv_Bean {
 	public void setRv_content(String rv_content) {
 		this.rv_content = rv_content;
 	}
+	public String getRv_deleted() {
+		return rv_deleted;
+	}
+	public void setRv_deleted(String rv_deleted) {
+		this.rv_deleted = rv_deleted;
+	}
+	
 	
 	
 }

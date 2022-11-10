@@ -6,33 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import ezen.store.beans.Rv_Bean;
 import ezen.store.service.Rv_Service;
 
 @Controller
-@RequestMapping("/review")
+@RequestMapping("/Review")
 public class Rv_Controller {
 	
 	@Autowired
 	private Rv_Service rvService;
 	
 	
-	@GetMapping("/list")
-	public String list(@RequestParam("rv_bknumber") int rv_bknumber, Model model) {
+	@GetMapping("/RvList")
+	public String RvList(@RequestParam("rv_bknumber") int rv_bknumber, Model model) {
 		
 		// Review 목록 열기
-		
 		List<Rv_Bean> reviewlist = rvService.getRvList(rv_bknumber);
 		model.addAttribute("reviewlist", reviewlist);
 		
@@ -40,7 +33,7 @@ public class Rv_Controller {
 	}
 
 	
-	@GetMapping("/review/insert")
+	@GetMapping("/RvInsert")
 	public String insert(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean,
 						 @RequestParam("rv_bknumber") int rv_bknumber) {
 		
@@ -51,7 +44,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@PostMapping("/review/insertPro")
+	@PostMapping("/RvInsertPro")
 	public String insertPro(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean,
 							BindingResult result) {
 		
@@ -67,7 +60,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@GetMapping("/review/update")
+	@GetMapping("/RvUpdate")
 	public String update(@RequestParam("rv_number") int rv_number, Model model) {
 		
 		// update 페이지 열기
@@ -78,7 +71,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@PostMapping("/review/updatePro")
+	@PostMapping("/RvUpdatePro")
 	public String updatePro(@ModelAttribute("updateRvBean") Rv_Bean updateRvBean,
 							BindingResult result) {
 		
@@ -92,7 +85,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@GetMapping("/review/deletePro")
+	@GetMapping("/RvDeletePro")
 	public String deletePro(@RequestParam("rv_number") int rv_number,
 							BindingResult result) {
 		
