@@ -16,18 +16,30 @@ import ezen.store.dao.Bk_DAO;
 public class Bk_Service {
 	
 	@Value("${path.upload}")
-	private String path_upload;
+	private String PathUpload;
 	
 	@Autowired
-	private Bk_DAO bk_DAO;
+	private Bk_DAO BkDAO;
+	
+	//책 일련번호 중복확인 관련 서비스
+	public boolean CheckBkNumExist(int bk_number) {		
+		String bk_writer = BkDAO.CheckBkNumExist(bk_number);		
+		if(bk_writer == null) {
+			return true;
+		}else {
+			return false;		
+		}
 		
+	}
+	
+	//업로드 받은 파일명 관련 서비스
 	@SuppressWarnings("unused")
-	private String saveUploadfile(MultipartFile upload_file) {
+	private String SaveUploadFile(MultipartFile upload_file) {
 		
 		String file_name = upload_file.getOriginalFilename();
 		
 		try {
-			upload_file.transferTo(new File(path_upload + "/" + file_name));  
+			upload_file.transferTo(new File(PathUpload + "/" + file_name));  
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,18 +47,19 @@ public class Bk_Service {
 		
 		return file_name;
 	}
-
-	public void addBk_info(Bk_Bean insert_bk_Bean) {
+	
+	//책 정보 입력, 업로드 이미지 관련 서비스
+	public void addBkInfo(Bk_Bean InsertBkBean) {
 		
-		MultipartFile upload_file = insert_bk_Bean.getUpload_file();
+		MultipartFile upload_file = InsertBkBean.getUpload_file();
 		
 		if(upload_file.getSize() > 0) {			
-			String file_name = saveUploadfile(upload_file);
+			String file_name = SaveUploadFile(upload_file);
 					
-			insert_bk_Bean.setBk_image(file_name);
+			InsertBkBean.setBk_image(file_name);
 		}
 
-		bk_DAO.addBk_info(insert_bk_Bean);
+		BkDAO.addBkInfo(InsertBkBean);
 		
 		}
 		

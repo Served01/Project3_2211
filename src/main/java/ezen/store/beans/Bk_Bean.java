@@ -1,28 +1,61 @@
 package ezen.store.beans;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Bk_Bean {
-
-	@NotBlank
+	
+	@Min(00000001)
+	@Digits(fraction = 0, integer = 8)
 	private int bk_number;
+	
+	@Size(min=1, max=100)
+	@Pattern(regexp = "[a-zsA-Z가-힣]*")
 	private String bk_title;
+	
+	@Size(min=1, max=100)
+	@Pattern(regexp = "[a-zA-Z가-힣]*")
 	private String bk_writer;
+	
+	@Size(min=1, max=50)
+	@Pattern(regexp = "[a-zA-Z가-힣]*")
 	private String bk_publisher;
+	
+	@NotBlank
+	@Pattern(regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$")
 	private String bk_pubdate;
 	private String bk_image;
+	
 	//upload
 	private MultipartFile upload_file;
-	
-	private int bk_local;
-	private int bk_genre;
+	private String bk_local;
+	private String bk_genre;
 	private String bk_infodate;
-	private String bk_detail;
-	private int bk_quantity;
-	private int bk_price;
 	
+	@Size(min=1, max=1000)
+	@NotNull
+	private String bk_detail;
+	
+	@Max(1000000000)
+	private int bk_quantity;
+	
+	@Max(1000000000)
+	private int bk_price;
+	private String bk_title_upper;
+	private String bk_deleted;
+	
+	private boolean bk_numExist;
+	
+	public Bk_Bean() {
+		this.bk_numExist = false;
+	}
+
 	public int getBk_number() {
 		return bk_number;
 	}
@@ -65,16 +98,16 @@ public class Bk_Bean {
 	public void setUpload_file(MultipartFile upload_file) {
 		this.upload_file = upload_file;
 	}
-	public int getBk_local() {
+	public String getBk_local() {
 		return bk_local;
 	}
-	public void setBk_local(int bk_local) {
+	public void setBk_local(String bk_local) {
 		this.bk_local = bk_local;
 	}
-	public int getBk_genre() {
+	public String getBk_genre() {
 		return bk_genre;
 	}
-	public void setBk_genre(int bk_genre) {
+	public void setBk_genre(String bk_genre) {
 		this.bk_genre = bk_genre;
 	}
 	public String getBk_infodate() {
@@ -100,6 +133,24 @@ public class Bk_Bean {
 	}
 	public void setBk_price(int bk_price) {
 		this.bk_price = bk_price;
+	}
+	public String getBk_title_upper() {
+		return bk_title_upper;
+	}
+	public void setBk_title_upper(String bk_title_upper) {
+		this.bk_title_upper = bk_title_upper;
+	}	
+	public String getBk_deleted() {
+		return bk_deleted;
+	}
+	public void setBk_deleted(String bk_deleted) {
+		this.bk_deleted = bk_deleted;
+	}
+	public boolean isBk_numExist() {
+		return bk_numExist;
+	}
+	public void setBk_numExist(boolean bk_numExist) {
+		this.bk_numExist = bk_numExist;
 	}
 	
 }

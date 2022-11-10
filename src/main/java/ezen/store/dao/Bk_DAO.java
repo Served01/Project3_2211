@@ -12,9 +12,15 @@ public class Bk_DAO {
 	@Autowired
 	private Bk_Mapper bk_Mapper;
 	
-	public void addBk_info(Bk_Bean insert_bk_Bean) {
+	//책 일련번호 중복확인 DAO
+	public String CheckBkNumExist(int bk_number){				
+		return bk_Mapper.CheckBkNumExist(bk_number);		
+	}
+	
+	//책 정보 입력 DAO
+	public void addBkInfo(Bk_Bean InsertBkBean) {
 		
-		bk_Mapper.addBk_info(insert_bk_Bean); 
+		bk_Mapper.addBkInfo(InsertBkBean); 
 	}
 
 
