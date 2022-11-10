@@ -23,7 +23,7 @@
       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-    }
+    }f
 
     .input-form {
       max-width: 680px;

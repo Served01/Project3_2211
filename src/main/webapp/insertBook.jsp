@@ -25,7 +25,7 @@
     }
 
     .input-form {
-      max-width: 680px;
+      max-width: 730px;
 
       margin-top: 50px;
       padding: 32px;
@@ -38,133 +38,204 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
+    table{
+ border-right:none;
+
+border-left:none;
+
+border-top:none;
+
+border-bottom:none;
+}
+img {
+  width: 280px;
+  height: 280px;
+  object-fit: fill;
+}
+
+Width:100;
+}
+.id{
+display : inline;
+}
+#id{
+display : inline;
+}
   </style>
 </head>
+ <script>
+ function previewImage(targetObj, View_area) {
+		var preview = document.getElementById(View_area); //div id
+		var ua = window.navigator.userAgent;
 
-<body>
-  <div class="container">
-    <div class="input-form-backgroud row">
+	  //ie일때(IE8 이하에서만 작동)
+		if (ua.indexOf("MSIE") > -1) {
+			targetObj.select();
+			try {
+				var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+				var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
+
+
+				if (ie_preview_error) {
+					preview.removeChild(ie_preview_error); //error가 있으면 delete
+				}
+
+				var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+
+				//이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+				img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
+			} catch (e) {
+				if (!document.getElementById("ie_preview_error_" + View_area)) {
+					var info = document.createElement("<p>");
+					info.id = "ie_preview_error_" + View_area;
+					info.innerHTML = e.name;
+					preview.insertBefore(info, null);
+				}
+			}
+	  //ie가 아닐때(크롬, 사파리, FF)
+		} else {
+			var files = targetObj.files;
+			for ( var i = 0; i < files.length; i++) {
+				var file = files[i];
+				var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+				if (!file.type.match(imageType))
+					continue;
+				var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
+				if (prevImg) {
+					preview.removeChild(prevImg);
+				}
+				var img = document.createElement("img"); 
+				img.id = "prev_" + View_area;
+				img.classList.add("obj");
+				img.file = file;
+				img.style.width = '100%'; 
+				img.style.height = '290px';
+				preview.appendChild(img);
+				if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+					var reader = new FileReader();
+					reader.onloadend = (function(aImg) {
+						return function(e) {
+							aImg.src = e.target.result;
+						};
+					})(img);
+					reader.readAsDataURL(file);
+				} else { // safari is not supported FileReader
+					//alert('not supported FileReader');
+					if (!document.getElementById("sfr_preview_error_"
+							+ View_area)) {
+						var info = document.createElement("p");
+						info.id = "sfr_preview_error_" + View_area;
+						info.innerHTML = "not supported FileReader";
+						preview.insertBefore(info, null);
+					}
+				}
+			}
+		}
+	}
+  
+   
+    </script>
+
+<body style="overflow-y: hidden"></body>
+  
+    <div class="input-form-backgroud row" >
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">책 정보 입력</h4>
-        <form class="validation-form" novalidate>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="name">책 일련번호</label>
-              <input type="number" class="form-control" id="number" placeholder="xxxxxxxxxx" value="" required>
-              <div class="invalid-feedback">
-                일련번호를 입력해 주세요.
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="nickname">책 제목</label>
-              <input type="text" class="form-control" id="title" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 제목을 입력해 주세요.
-              </div>
-            </div>
-          </div>
-          
-          <div class="mb-3">
-              <label for="name">책 저자</label>
-              <input type="text" class="form-control" id="writer" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 저자를 입력해 주세요
-            </div>
-            <div class="mb-3">
-              <label for="name">책 출판사</label>
-              <input type="text" class="form-control" id="publisher" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책 출판사를 입력해 주세요
-            </div>
-            
-             <div class="mb-3">
-              <label for="name">책 출간일</label>
-              <input type="text" class="form-control" id="pubdate" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책 출간일을 입력해 주세요
-            </div>
-         <div class="mb-3">
-              <label for="name">책 이미지</label>
-              <input type="file" class="form-control" id="image" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책 이미지를 선택해주세요
-            </div>
-          
+        <table border="1">
+	<tr align = "center" height="50" width="1500">
+		<td rowspan="7"><div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; dispaly: inline; '></div></td>
+		<td height="20" width="200">일련번호</td>
+		<td height="20" width="200">
+		<div class="input-group">
+                  <input type="text" class="form-control" path="bk_number" onkeypress="resetBk_numExist()"/>
+                  <div class="input-group-append">
+                  <button type="button" class="btn btn-primary" onclick="checkBk_numExist()">중복확인</button>
+                  </div>
+                  </div>
+		</td>
+	</tr>
+	<tr align = "center">
+		<td height="20" width="200">제목</td>
+		<td height="20" width="400"><input type="text" class="form-control" id="title" placeholder="" value="" required></td>
+	</tr>
+	<tr align = "center">
+		<!-- <td> rowspan=6 -->
+		<td height="20" width="200">저자</td>
+		<td height="20" width="400"><input type="text" class="form-control" id="writer" placeholder="" value="" required></td>
+	</tr>
+	<tr align = "center">
+		<!-- <td> rowspan=6 -->
+		<td height="20" width="200">출판사</td>
+		<td height="20" width="400"><input type="text" class="form-control" id="publisher" placeholder="" value="" required></td>
+	</tr>
 
-            <div class="mb-3">
-              <label for="root">책 지역</label>
-              <select class="custom-select d-block w-100" id="root">
+	<tr align = "center">
+		<!-- <td> rowspan=6 -->
+		<td height="20" width="200">지역</td>
+		<td height="20" width="400">
+		 <select class="custom-select d-block w-100" id="root">
                 <option value=""></option>
                 <option>국내</option>
                 <option>해외</option>
               </select>
-              <div class="invalid-feedback">
-                책의 지역을 선택해주세요.
-              </div>
-            </div>
-          
-           <div class="mb-3">
-              <label for="name">책 장르</label>
-              <input type="text" class="form-control" id="genre" placeholder="" value="" required size="10px">
-              <div class="invalid-feedback">
+	
+		</td>
+	</tr>
+	<tr align = "center">
+		<!-- <td> rowspan=6 -->
+		
+		<td height="20" width="200">장르</td>
+		<td height="20" width="400">
+		<select class="custom-select d-block w-100" id="root">
+                <option value=""></option>
+                <option>소설</option>
+                <option>인문</option>
+                <option>취미</option>
+                <option>경제</option>
+                <option>자기개발</option>
+                <option>예술</option>
+                <option>기술</option>
+                <option>잡지</option>
+              </select>
+		 <div class="invalid-feedback">
                 책의 장르를 입력해 주세요.
             </div>
-
-			 <div class="mb-3">
-              <label for="name">책 상세내용</label>
-              <textarea id="detail" class="form-control" id="detail" placeholder="" value="" required style="width:620px;height:200px;" ></textarea>
-              <div class="invalid-feedback">
-                책 상세내용을 입력해 주세요.
-            </div>
-            
-             <div class="mb-3">
-              <label for="name">책 보유 재고</label>
-              <input type="number" class="form-control" id="quantity" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 재고를 입력해 주세요.
-                
-            </div>
-             <div class="mb-3">
-              <label for="name">책 가격</label>
-              <input type="number" class="form-control" id="price" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 가격을 입력해 주세요.
-            </div>
-            
-          <div class="row">
-            
-            </div>
-            <div class="col-md-4 mb-3">
-           
-            </div>
-          </div>
-          <hr class="mb-4">
+		</td>
+	</tr>
+	<tr align = "center">
+		<!-- <td> rowspan=6 -->
+		<td height="20" width="200">수량</td>
+		<td height="20" width="400"><input type="text" onBlur="parseelement(this)" class="form-control" id="publisher" placeholder="" value="" required></td>
+	</tr>
+	<tr align="center">
+		<td  height="20" width="10">
+		  <input type="file" name="profile_pt" id="profile_pt" onchange="previewImage(this,'View_area')">
+		</td>
+		<td height="20" width="200">가격</td>
+		<td height="20" width="400"><input type="text" class="form-control" id="gold" placeholder="" value="" required></td>
+	</tr>
+	
+	<tr align="center">
+		<!-- <td> rowspan=2 -->
+		
+		
+		</td>
+	</tr>
+	<!-- 작성일 sysdate 처리 -->
+	<tr align="center">
+		<td colspan="3" height="200" width="400">
+			<textarea id="detail" class="form-control" id="detail" placeholder="" value="" required style="width:670px;height:200px; resize:none;" ></textarea>
+		</td>
+	</tr>
+	</table>
+	  <hr class="mb-4">
           <div class="mb-4"></div>
           <button class="btn btn-primary btn-lg btn-block" type="submit">입력 완료</button>
           <button class="btn btn-primary btn-lg btn-block" type="submit">뒤로 가기</button>
-        </form>
-      </div>
-    </div>
-    <footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 2022 </p>
-    </footer>
-  </div>
-  <script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  </script>
+	</div>
+	
+     
+ 
 </body>
 
 </html>
