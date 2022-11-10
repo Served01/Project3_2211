@@ -27,6 +27,7 @@ import ezen.store.mapper.Wi_Mapper;
 @EnableWebMvc
 @ComponentScan("ezen.store.controller")
 @ComponentScan("ezen.store.dao")
+@ComponentScan("ezen.store.mapper")
 @ComponentScan("ezen.store.service")
 @PropertySource("/WEB-INF/properties/db.properties")
 public class ServletAppContext implements WebMvcConfigurer{
@@ -104,7 +105,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		}
 		
 		@Bean
-		public MapperFactoryBean<Or_Mapper> getOri_Mapper(SqlSessionFactory factory){
+		public MapperFactoryBean<Or_Mapper> getOr_Mapper(SqlSessionFactory factory){
 			MapperFactoryBean<Or_Mapper> factoryBean = new MapperFactoryBean<Or_Mapper>(Or_Mapper.class);
 			
 			factoryBean.setSqlSessionFactory(factory); 
