@@ -21,14 +21,14 @@ import ezen.store.beans.Rv_Bean;
 import ezen.store.service.Rv_Service;
 
 @Controller
-//controller + responsebody = restcontroller
+@RequestMapping("/review")
 public class Rv_Controller {
 	
 	@Autowired
 	private Rv_Service rvService;
 	
 	
-	@GetMapping("/review/list")
+	@GetMapping("/list")
 	public String list(@RequestParam("rv_bknumber") int rv_bknumber, Model model) {
 		
 		// Review 목록 열기
@@ -51,7 +51,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@PostMapping("/review/insert_pro")
+	@PostMapping("/review/insertPro")
 	public String insertPro(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean,
 							BindingResult result) {
 		
@@ -78,7 +78,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@PostMapping("/review/update_pro")
+	@PostMapping("/review/updatePro")
 	public String updatePro(@ModelAttribute("updateRvBean") Rv_Bean updateRvBean,
 							BindingResult result) {
 		
@@ -92,7 +92,7 @@ public class Rv_Controller {
 	}
 	
 	
-	@GetMapping("/review/delete_pro")
+	@GetMapping("/review/deletePro")
 	public String deletePro(@RequestParam("rv_number") int rv_number,
 							BindingResult result) {
 		
