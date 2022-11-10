@@ -232,11 +232,20 @@ let basket = {
 	    //체크한 장바구니 상품 비우기
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var wi_bknumbers = parseInt(item.getAttribute('value'));
+	        	var wi_mbid = 'admin';
+	        	
+	        	$.ajax({
+	        		url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
+					type: 'get',
+					dataType: 'text'
+				})	        		        	
 	            item.parentElement.parentElement.parentElement.remove();
 	        });
 	        //AJAX 서버 업데이트 전송
-	    
+	    	
 	        //전송 처리 결과가 성공이면
+	        alert('삭제되었습니다.')
 	        this.reCalc();
 	        this.updateUI();
 	    },
@@ -308,8 +317,10 @@ let basket = {
 	    },
 	    delItem: function (wi_bknumbers) {
 	        event.target.parentElement.parentElement.parentElement.remove();
+	        
+	        var wi_mbid = 'admin';
 	        $.ajax({
-				url: '${root}wish/wish_delete/' + wi_bknumbers,
+				url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
 				type: 'get',
 				dataType: 'text',
 			})
@@ -324,7 +335,7 @@ let basket = {
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        
 	        $.ajax({
-				url: '${root}wish/wish_delete/' + wi_bknumbers,
+				url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
 				type: 'get',
 				dataType: 'text',
 			})
@@ -377,7 +388,7 @@ let basket = {
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
 	                <div class="row data">
 	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
 	                        <div class="img"><img src="${str.bk_image }" width="60"></div>
 	                        <div class="pname">
 	                            <span>제목 : ${str.bk_title }</span>
@@ -400,6 +411,7 @@ let basket = {
     
             <div class="right-align basketrowcmd">
             	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>
+            	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">찜목록비우기</a>
             </div>
     

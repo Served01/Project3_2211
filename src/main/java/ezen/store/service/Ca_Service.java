@@ -20,8 +20,8 @@ public class Ca_Service {
 		return ca_DAO.getCartInfo(ca_mbid);
 	}
 	
-	public void delcart(int ca_bknumbers) {
-		ca_DAO.delcart(ca_bknumbers);
+	public void delcart(String ca_mbid,int ca_bknumbers) {
+		ca_DAO.delcart(ca_mbid,ca_bknumbers);
 	}
 	public void delcartAll(String ca_mbid) {
 		ca_DAO.delcartAll(ca_mbid);

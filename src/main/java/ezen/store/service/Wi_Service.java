@@ -22,8 +22,8 @@ public class Wi_Service {
 		return wi_DAO.getWishInfo(wi_mbid);
 	}
 	
-	public void delwish(int wi_bknumbers) {
-		wi_DAO.delwish(wi_bknumbers);
+	public void delwish(String wi_mbid,int wi_bknumbers) {
+		wi_DAO.delwish(wi_mbid,wi_bknumbers);
 	}
 	public void delwishAll(String wi_mbid) {
 		wi_DAO.delwishAll(wi_mbid);

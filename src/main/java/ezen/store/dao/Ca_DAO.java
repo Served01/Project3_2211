@@ -18,8 +18,8 @@ public class Ca_DAO {
 		return ca_Mapper.getCartInfo(ca_mbid);
 	}
 	
-	public void delcart(int ca_bknumbers) {
-		ca_Mapper.delcart(ca_bknumbers);
+	public void delcart(String ca_mbid,int ca_bknumbers) {
+		ca_Mapper.delcart(ca_mbid,ca_bknumbers);
 	}
 	
 	public void delcartAll(String ca_mbid) {

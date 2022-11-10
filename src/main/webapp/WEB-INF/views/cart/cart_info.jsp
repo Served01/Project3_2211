@@ -232,11 +232,19 @@ let basket = {
 	    //체크한 장바구니 상품 비우기
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
+	        	var ca_mbid = 'admin';
+	        	$.ajax({
+					url: '${root}cart/cart_delete/'+ ca_mbid +'/'+ ca_bknumbers,
+					type: 'get',
+					dataType: 'text'
+				})	        		        	
 	            item.parentElement.parentElement.parentElement.remove();
 	        });
 	        //AJAX 서버 업데이트 전송
-	    
+	    	
 	        //전송 처리 결과가 성공이면
+	        alert('삭제되었습니다.')
 	        this.reCalc();
 	        this.updateUI();
 	    },
@@ -309,8 +317,9 @@ let basket = {
 	    delItem: function (ca_bknumbers) {
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        var ca_bknumbers = ca_bknumbers;
+	        var ca_mbid = 'admin';
 	        $.ajax({
-				url: '${root}cart/cart_delete/' + ca_bknumbers,
+				url: '${root}cart/cart_delete/' + ca_mbid +'/'+ ca_bknumbers,
 				type: 'get',
 				dataType: 'text',
 				success: function(){
@@ -361,7 +370,7 @@ let basket = {
         		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
 	                <div class="row data">
 	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
 	                        <div class="img"><img src="${str.bk_image }" width="60"></div>
 	                        <div class="pname">
 	                            <span>제목 : ${str.bk_title }</span>
@@ -389,7 +398,7 @@ let basket = {
             </div>
     
             <div class="right-align basketrowcmd">
-                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제(삭제예정)</a>
+                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
             </div>
     

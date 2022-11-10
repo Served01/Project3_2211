@@ -57,9 +57,10 @@ public class WishController {
 	
 	
 	//restAPI
-	@GetMapping("/wish_delete/{wi_bknumbers}")
-	public String wish_delete(@PathVariable int wi_bknumbers) {
-		wi_Service.delwish(wi_bknumbers) ;
+	@GetMapping("/wish_delete/{wi_mbid}/{wi_bknumbers}")
+	public String wish_delete(@PathVariable String wi_mbid,
+			@PathVariable int wi_bknumbers) {
+		wi_Service.delwish(wi_mbid,wi_bknumbers) ;
 		return null;
 		
 	}

@@ -21,8 +21,8 @@ public interface Ca_Mapper {
 	@Insert("insert into cart_info(ca_mbid,ca_bknumbers) values(#{ca_mbid},#{ca_bknumbers})")
 		void addCartStuff(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers);
 		
-	@Delete("delete from Cart_info where ca_bknumbers = #{ca_bknumbers}")
-		void delcart(int ca_bknumbers);
+	@Delete("delete from Cart_info where ca_mbid = #{ca_mbid} AND ca_bknumbers = #{ca_bknumbers}")
+		void delcart(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers);
 	@Delete("delete from Cart_info where ca_mbid = #{ca_mbid}")
 		void delcartAll(String ca_mbid);
 }

@@ -53,24 +53,12 @@ public class CartController {
 		return null;
 	}
 	
-	//restAPI
-//	@GetMapping("/cart_add")
-//	public String cart_add(@RequestParam("ca_mbid") String ca_mbid,
-//							@RequestParam("ca_bknumbers") int ca_bknumbers) {
-//		ca_Service.addCartStuff(ca_mbid, ca_bknumbers);
-//		return null;
-//	}
-	
-//	@GetMapping("/cart_add/{ca_mbid}")
-//	public String cart_add(@PathVariable String ca_mbid) {
-//		ca_Service.addCartStuff(ca_mbid);
-//		return null;
-//	}
 	
 	//restAPI
-	@GetMapping("/cart_delete/{ca_bknumbers}")
-	public String cart_delete(@PathVariable int ca_bknumbers) {
-		ca_Service.delcart(ca_bknumbers) ;
+	@GetMapping("/cart_delete/{ca_mbid}/{ca_bknumbers}")
+	public String cart_delete(@PathVariable String ca_mbid,
+								@PathVariable int ca_bknumbers) {
+		ca_Service.delcart(ca_mbid,ca_bknumbers) ;
 		return null;
 		
 	}

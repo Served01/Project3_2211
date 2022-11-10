@@ -20,8 +20,8 @@ public class Wi_DAO {
 		return wi_Mapper.getWishInfo(wi_mbid);
 	}
 	
-	public void delwish(int wi_bknumbers) {
-		wi_Mapper.delwish(wi_bknumbers);
+	public void delwish(String wi_mbid,int wi_bknumbers) {
+		wi_Mapper.delwish(wi_mbid,wi_bknumbers);
 	}
 	
 	public void delwishAll(String wi_mbid) {
