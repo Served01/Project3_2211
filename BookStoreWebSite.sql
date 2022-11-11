@@ -93,8 +93,16 @@ insert into order_items values('22FEB105564',70001000,2400,10,1);
 insert into order_items values('22FEB105564',70001000,
                         (select bk_price from book_info where bk_number = 70001000),
                         (select ca_bkcount from  Cart_info where ca_mbid = 'admin' and ca_bknumbers = 70001000),1);
+                        
+select * from ORDER_INFO;
 select * from order_items;
+
+ drop table ORDER_INFO;
  drop table order_items;
+ 
+ 
+ 
+delete from ORDER_INFO where 
  
  
 Cart_info	

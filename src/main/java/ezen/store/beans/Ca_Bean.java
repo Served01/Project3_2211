@@ -14,7 +14,7 @@ public class Ca_Bean {
 	private String bk_price;
 	private int ca_bkcount;
 	
-	
+	private int page;
 	private String or_number;
 	
 	
@@ -84,6 +84,12 @@ public class Ca_Bean {
 	}
 	public void setOr_number(String or_number) {
 		this.or_number = or_number;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
 	}
 	
 	

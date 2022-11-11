@@ -369,7 +369,6 @@ let basket = {
 				
 	    	})
 	    	
-	    	alert('씨발')
 	    	
 	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
@@ -380,7 +379,6 @@ let basket = {
 				})	        		        	
 	           // item.parentElement.parentElement.parentElement.remove();
 	        })
-	    	alert('개씨이발')
 	    	
 	    	//
 	    	//this.orderCreate(or_number,ca_mbid);

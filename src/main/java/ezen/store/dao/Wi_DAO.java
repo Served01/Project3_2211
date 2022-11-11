@@ -31,7 +31,10 @@ public class Wi_DAO {
 	public void addWishStuff(String wi_mbid,int wi_bknumbers) {
 		wi_Mapper.addWishStuff(wi_mbid,wi_bknumbers);
 	}
-//	public void addCartStuff(String ca_mbid) {
-//		ca_Mapper.addCartStuff(ca_mbid);
-//	}
+	
+	public int getContentCnt(String wi_mbid) {
+		return wi_Mapper.getContentCnt(wi_mbid);
+	}
+	
+	
 }

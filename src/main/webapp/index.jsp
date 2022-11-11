@@ -14,7 +14,7 @@
 	<a href="${root}cart/cart_test">카트추가테스트</a>
 	<br>
 	<hr>
-	<a href="${root}wish/wish_info?wi_mbid=admin">위시인포</a>
+	<a href="${root}wish/wish_info?wi_mbid=admin&page=1">위시인포</a>
 	<a href="${root}wish/wish_test">위시추가테스트</a>
 	
 </body>

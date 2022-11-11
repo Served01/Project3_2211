@@ -408,7 +408,10 @@ let basket = {
 	                </div>
         		</c:forEach>
             </div>
-    
+    		
+    		
+    		
+    		
             <div class="right-align basketrowcmd">
             	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>
             	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
@@ -417,6 +420,52 @@ let basket = {
     
     
         </form>
+			<!-- 페이지네이션 -->
+    		<div class="d-none d-md-block">
+				<ul class="pagination justify-content-center">
+					<c:choose>
+						<c:when test="${pageCountBean.prevPage <= 0 }">
+							<li class="page-item disabled">
+								<a href="#" class="page-link">이전</a>
+							</li>
+						</c:when>
+					<c:otherwise>
+						<li class="page-item">
+						<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.prevPage}" class="page-link">이전</a>
+						</li>					
+					</c:otherwise>					
+					</c:choose>
+														
+					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+						<c:choose>
+							<c:when test="$idx == pageCountBean.currentPage">
+							<li class="page-item active">
+								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
+							</li>		
+						</c:when>
+						
+						<c:otherwise>
+							<li class="page-item">
+								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
+							</li>						
+						</c:otherwise>						
+						</c:choose>									
+					</c:forEach>					
 					
+					<c:choose>
+						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
+							<li class="page-item disabled">
+								<a href="#" class="page-link">다음</a>
+							</li>
+						</c:when>
+					
+					<c:otherwise>
+						<li class="page-item">
+							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.nextPage}" class="page-link">다음</a>
+						</li>
+					</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>		
 </body>
 </html>

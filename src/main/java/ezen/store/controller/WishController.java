@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ezen.store.beans.Ca_Bean;
+import ezen.store.beans.PageCountBean;
 import ezen.store.beans.Wi_Bean;
 import ezen.store.service.Ca_Service;
 import ezen.store.service.Wi_Service;
@@ -30,12 +31,19 @@ public class WishController {
 	
 	
 	@GetMapping("/wish_info")
-	public String wish_info(@RequestParam("wi_mbid") String wi_mbid, Model model) {
+	public String wish_info(@RequestParam("wi_mbid") String wi_mbid, 
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
 		
 		List<Wi_Bean> infoWi_Bean = wi_Service.getWishInfo(wi_mbid);
 		model.addAttribute("infoWi_Bean",infoWi_Bean);
+		
+		PageCountBean pageCountBean = wi_Service.getContentCnt(wi_mbid, page);
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		model.addAttribute("page", page);
 		
 		
 		return "wish/wish_info";
