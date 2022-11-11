@@ -60,6 +60,12 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">배송지 추가</h4>
+        <c:if test="${fail == true }">
+					<div class="alert alert-danger">
+						<h3>입력 실패</h3>
+						<p>각 입력을 확인해주세요</p>
+					</div>
+					</c:if>
         <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
             <form:hidden path="dv_id"/>
             <div class="form-group">

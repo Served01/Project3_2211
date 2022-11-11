@@ -7,7 +7,7 @@ public class Dv_Bean {
 	
 	private String dv_id;
 	
-	@Size(min=2, max=50)
+	@Size(min=2, max=10)
 	@Pattern(regexp = "[a-zA-Z가-힣]*")
 	private String dv_name;
 	
