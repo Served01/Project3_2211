@@ -1,7 +1,9 @@
 package ezen.store.service;
 
 import java.io.File;
+import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ezen.store.beans.Bk_Bean;
 import ezen.store.dao.Bk_DAO;
+
 
 @Service
 @PropertySource("/WEB-INF/properties/option.properties")
@@ -62,7 +65,26 @@ public class Bk_Service {
 		BkDAO.addBkInfo(InsertBkBean);
 		
 		}
-		
+	
+	//해당 책 평균 평점
+	public Bk_Bean getBkScore(int bk_number) { 
+		  
+		return BkDAO.getBkScore(bk_number); 
 	}
+	
+	//책 정보 관련 서비스 
+	public Bk_Bean getBkInfo(int bk_number) { 
+		  
+		return BkDAO.getBkInfo(bk_number); 
+	}
+
+	public List<Bk_Bean> getBkList(String bk_local, String bk_genre) {
+		
+		return BkDAO.getBkList(bk_local, bk_genre);
+	}
+
+	
+		
+}
 
 

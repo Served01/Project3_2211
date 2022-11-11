@@ -52,6 +52,8 @@ public class Bk_Bean {
 	
 	private boolean bk_numExist;
 	
+	private int page;
+	
 	public Bk_Bean() {
 		this.bk_numExist = false;
 	}
@@ -151,6 +153,14 @@ public class Bk_Bean {
 	}
 	public void setBk_numExist(boolean bk_numExist) {
 		this.bk_numExist = bk_numExist;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package ezen.store.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +25,22 @@ public class Bk_DAO {
 		
 		bk_Mapper.addBkInfo(InsertBkBean); 
 	}
-
+	
+	//내림차순 책 리스트
+	public List<Bk_Bean> getBkList(String bk_local, String bk_genre){		   
+		return bk_Mapper.getBkList(bk_local, bk_genre); 		  
+	}
+	
+	//해당 책 평점 평균
+	public Bk_Bean getBkScore(int bk_number) {
+		  
+		return bk_Mapper.getBkScore(bk_number); 
+	}
+	 
+	//책 상세정보
+	public Bk_Bean getBkInfo(int bk_number) {
+		  
+		return bk_Mapper.getBkInfo(bk_number); 
+	}
 
 }
