@@ -30,7 +30,21 @@ public class Ca_Service {
 	public void addCartStuff(String ca_mbid,int ca_bknumbers) {
 		ca_DAO.addCartStuff(ca_mbid,ca_bknumbers);
 	}
-//	public void addCartStuff(String ca_mbid) {
-//		ca_DAO.addCartStuff(ca_mbid);
-//	}
+	
+	public void plusBookCount(String ca_mbid,int ca_bknumbers) {
+		ca_DAO.plusBookCount(ca_mbid, ca_bknumbers);
+	}
+	
+	public void minusBookCount(String ca_mbid,int ca_bknumbers) {
+		ca_DAO.minusBookCount(ca_mbid, ca_bknumbers);
+	}
+	
+	public void createOderInfo(String or_number, String ca_mbid) {
+		ca_DAO.createOderInfo(or_number, ca_mbid);
+	}
+	
+	public void insertOderItems(String or_number,int ca_bknumbers,String ca_mbid) {
+		ca_DAO.insertOderItems(or_number, ca_bknumbers,ca_mbid);
+	}
+	
 }

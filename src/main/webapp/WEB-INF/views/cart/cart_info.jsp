@@ -292,10 +292,12 @@ let basket = {
 	        document.querySelector('#sum_p_price').textContent = '합계금액: ' + this.totalPrice.formatNumber() + '원';
 	    },
 	    //개별 수량 변경
-	    changePNum: function (pos) {
+	    changePNum: function (pos,ca_bknumbers) {
 	        var item = document.querySelector('input[name=p_num'+pos+']');
 	        var p_num = parseInt(item.getAttribute('value'));
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
+	        
+	        var ca_mbid = 'admin';
 	        
 	        if (parseInt(newval) < 1 || parseInt(newval) > 99) { return false; }
 
@@ -306,6 +308,22 @@ let basket = {
 	        item.parentElement.parentElement.nextElementSibling.textContent = (newval * price).formatNumber()+"원";
 	        //AJAX 업데이트 전송
 
+	        if (event.target.classList.contains('up') == true){
+	        	$.ajax({
+					url: '${root}cart/cart_plusBookCount/' + ca_mbid +'/'+ ca_bknumbers,
+					type: 'get',
+					dataType: 'text'
+								
+				})
+	        }else if (event.target.classList.contains('down') == true){
+	        	$.ajax({
+					url: '${root}cart/cart_minusBookCount/' + ca_mbid +'/'+ ca_bknumbers,
+					type: 'get',
+					dataType: 'text'
+		
+				})
+	        }
+	        
 	        //전송 처리 결과가 성공이면    
 	        this.reCalc();
 	        this.updateUI();
@@ -318,6 +336,7 @@ let basket = {
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        var ca_bknumbers = ca_bknumbers;
 	        var ca_mbid = 'admin';
+			
 	        $.ajax({
 				url: '${root}cart/cart_delete/' + ca_mbid +'/'+ ca_bknumbers,
 				type: 'get',
@@ -326,12 +345,56 @@ let basket = {
 					alert('삭제되었습니다.')
 				}			
 			})
-	        
-	        
+			 
+	    	
+	    	
 	        this.reCalc();
 	        this.updateUI();
+	    },
+	    //콤마찍고 시작
+	    orderInitiator: function(){
+	    	var ca_mbid = 'admin';
+	    	//주문번호 생성하고
+	    	//var or_number = '연도' +'월' + 난수 6자리;
+	    		
+			
+			var or_number = '19TES666666';
+	    	
+			
+			
+	    	$.ajax({
+				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
+				type: 'get',
+				dataType: 'text'
+				
+	    	})
+	    	
+	    	alert('씨발')
+	    	
+	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
+	        	$.ajax({
+					url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid,
+					type: 'get',
+					dataType: 'text'
+				})	        		        	
+	           // item.parentElement.parentElement.parentElement.remove();
+	        })
+	    	alert('개씨이발')
+	    	
+	    	//
+	    	//this.orderCreate(or_number,ca_mbid);
+	    	//
+	    	//this.orderItems(or_number,ca_mbid);
+	    	
+	    	
+	    	
+	    	//로케이션~ 주문번호 넘겨줌
 	    }
-	}
+	    
+	    
+	    
+	};
 
 	// 숫자 3자리 콤마찍기
 	Number.prototype.formatNumber = function(){
@@ -371,7 +434,7 @@ let basket = {
 	                <div class="row data">
 	                    <div class="subdiv">
 	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        <div class="img"><img src="${str.bk_image }" width="60"></div>
+	                        <div class="img"><img src="${root} + ${str.bk_image }" width="60"></div>
 	                        <div class="pname">
 	                            <span>제목 : ${str.bk_title }</span>
 								<span>저자 : ${str.bk_writer }</span>
@@ -383,12 +446,12 @@ let basket = {
 	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
 	                        <div class="num">
 	                            <div class="updown">
-	                                <input type="text" name="p_num${status.count}" id="p_num${status.count}" size="2" maxlength="4" class="p_num" value="0" onkeyup="javascript:basket.changePNum(${status.count});">
-	                                <span onclick="javascript:basket.changePNum(${status.count});"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-	                                <span onclick="javascript:basket.changePNum(${status.count});"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+	                                <input type="text" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="2" maxlength="4" class="p_num" value="${str.ca_bkcount} " onkeyup="javascript:basket.changePNum(${status.count},${str.bk_number });">
+	                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number });"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+	                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number });"><i class="fas fa-arrow-alt-circle-down down"></i></span>
 	                            </div>
 	                        </div>
-	                        <div class="sum">${str.bk_price }원</div>
+	                        <div class="sum">${str.bk_price*str.ca_bkcount }원</div>
 	                    </div>
 	                    <div class="subdiv">
 	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
@@ -408,7 +471,7 @@ let basket = {
             <div id="goorder" class="">
                 <div class="clear"></div>
                 <div class="buttongroup center-align cmd">
-                    <a href="javascript:void(0);">선택한 상품 주문</a>
+                    <a href="javascript:void(0)" onclick="javascript:basket.orderInitiator();">선택한 상품 주문</a>
                 </div>
             </div>
         </form>

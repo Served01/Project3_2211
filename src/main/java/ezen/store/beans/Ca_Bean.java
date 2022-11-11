@@ -12,9 +12,19 @@ public class Ca_Bean {
 	private String bk_image;
 	private String bk_quantity;
 	private String bk_price;
+	private int ca_bkcount;
+	
+	
+	private String or_number;
 	
 	
 	
+	public int getCa_bkcount() {
+		return ca_bkcount;
+	}
+	public void setCa_bkcount(int ca_bkcount) {
+		this.ca_bkcount = ca_bkcount;
+	}
 	public int getBk_number() {
 		return bk_number;
 	}
@@ -68,6 +78,12 @@ public class Ca_Bean {
 	}
 	public void setBk_price(String bk_price) {
 		this.bk_price = bk_price;
+	}
+	public String getOr_number() {
+		return or_number;
+	}
+	public void setOr_number(String or_number) {
+		this.or_number = or_number;
 	}
 	
 	

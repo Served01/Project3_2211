@@ -59,21 +59,44 @@ create table order_info(
     or_mbid varchar2(20) not null,
         constraint or_mbid_fk foreign key(or_mbid)
             references mb_info(mb_id),
-    or_bknumber number(8) not null,
-        constraint or_bknumber_fk foreign key(or_bknumber)
-            references book_info(bk_number),
-    or_bkprice number(30) not null,
-    or_cacount number(3) not null,
-    or_status number(1) not null,
+
+    or_status number(1) 
+    	default 0 not null,
     or_date date 
         default sysdate not null,
-    or_delivery number(10) not null,
-    or_address varchar2(100) not null
+    or_delivery number(10),
+    or_deliveryCost number (4)
+    	default 3000 not null,
+    or_address varchar2(100) 
 )
 
-insert into ORDER_INFO values('22FEB105564','admin',70001000,2700,1,9,sysdate,12345678,'신림언저리');
+insert into ORDER_INFO values('22FEB105564','admin',1,sysdate,12345678,2500,'신림언저리');
 select * from order_INFO;
+drop table order_info;
 
+
+create table order_items(
+
+    ori_number varchar2(40) not null,
+	constraint ori_number_fk foreign key(ori_number)
+	    references order_info(or_number),
+    ori_bknumber number(8) not null,
+        constraint ori_bknumber_fk foreign key(ori_bknumber)
+            references book_info(bk_number),
+    ori_bkprice number(10),
+    ori_bkdiscount number(3) 
+        default 0 not null,
+    ori_cacount number(3) 
+    	default 1 not null
+  )  
+insert into order_items values('22FEB105564',70001000,2400,10,1);
+insert into order_items values('22FEB105564',70001000,
+                        (select bk_price from book_info where bk_number = 70001000),
+                        (select ca_bkcount from  Cart_info where ca_mbid = 'admin' and ca_bknumbers = 70001000),1);
+select * from order_items;
+ drop table order_items;
+ 
+ 
 Cart_info	
 
 ca_number	장바구니 번호	번호	NUMBER		not null	PK, FK
@@ -85,21 +108,29 @@ create table Cart_info(
 	ca_mbid varchar2(20) not null,
 		constraint ca_mbid_fk foreign key(ca_mbid)
             references mb_info(mb_id),
-    ca_bknumbers number(8)
+    ca_bknumbers number(8) not null,
+    	constraint ca_bknumbers_fk foreign key(ca_bknumbers)
+    		references book_info(bk_number),
+	 ca_bkcount number(3) 
+	    	default 1 not null
+	    		constraint ca_bkcount check (ca_bkcount between 0 and 999)
 )
 select c.ca_mbid,c.ca_bknumbers from cart_info c,Mb_info m
 where c.ca_mbid = 'admin'
 and c.ca_mbid = m.mb_id;
 
+drop table cart_info;
+   
 delete from CART_INFO where ca_bknumbers = 70001000;
 
 
-insert into cart_info values ('admin',70001000);
-insert into cart_info values ('admin',70001001);
-insert into cart_info values ('admin',70001002);
+insert into cart_info(ca_mbid,ca_bknumbers) values ('admin',70001000);
+insert into cart_info(ca_mbid,ca_bknumbers) values ('admin',70001001);
+insert into cart_info(ca_mbid,ca_bknumbers)  values ('admin',70001002);
 insert into cart_info(ca_mbid) values('admin');
 select * from cart_info where ca_mbid = 'admin';
 
+commit
 
 drop table cart_info;
 Wish_info	
