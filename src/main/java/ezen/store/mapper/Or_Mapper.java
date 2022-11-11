@@ -13,7 +13,7 @@ public interface Or_Mapper {
 
 
 	
-	@Select("select or_number,or_mbid,or_bknumber,or_bkprice,or_cacount,or_date, or_delivery, or_address\r\n"
+	@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
 			+ "    from Order_info\r\n"
 			+ "    where or_mbid in (select mb_id\r\n"
 			+ "                        from  Mb_info\r\n"
@@ -31,11 +31,16 @@ public interface Or_Mapper {
 			+ "values(user_seq.nextval, #{or_mbid}, #{or_bknumber}, #{or_bkprice}, "
 			+ "#{or_cacount}, #{or_status}, #{or_date}, #{or_delivery}, #{or_address})")
 		void Or_insert(Or_Bean addOrderDataBean);
-		
-	@Select("select * from Order_info"
-			+ "	where or_mbid = #{or_mbid}")
-		Or_Bean  Or_select(String user_idx);
-	
+		*/
+//	@Select("select * from Order_info\r\n"
+//			+ "where or_number = #{or_number}")
+		@Select("select ori_number, ori_bknumber, ori_bkprice, ori_bkdiscount, ori_cacount\r\n"
+				+ "    from Order_items\r\n"
+				+ "    where ori_number in (select or_number\r\n"
+				+ "                        from  Order_info\r\n"
+				+ "                        where or_number = #{or_number})")
+		List<Or_Bean> OrSelect(String or_number);
+	/*
 	@Select("select user_id, user_name from user_table where user_idx = #{user_idx}")
 		Or_Bean Or_update(int user_idx);
 			

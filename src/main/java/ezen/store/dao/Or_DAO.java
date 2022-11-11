@@ -23,9 +23,10 @@ public class Or_DAO {
 //	}
 	
 	//구매 내역 정보 로드
-//	public void Or_select(String user_idx) {
-//		or_Mapper.Or_select(user_idx);
-//	}
+//	public List<Or_Bean> OrSelect(String or_number) {
+	public List<Or_Bean> OrSelect(String or_number) {
+		return or_Mapper.OrSelect(or_number);
+	}
 	
 	//내역 정보 수정
 //	public void Or_update(int user_idx) {				

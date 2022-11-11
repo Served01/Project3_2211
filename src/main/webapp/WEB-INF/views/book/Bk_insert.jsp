@@ -1,171 +1,295 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:url var='root' value='/'/>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>책 정보 입력 - Bootstrap</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>책 정보 입력 - Bootstrap</title>
 
-  <!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<!-- JS -->	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-  <style>
-    body {
-      min-height: 100vh;
+<style>
+body {
+	min-height: 100vh;
+	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),
+		to(#1d466c));
+	background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+	background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+	background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+	background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+}
 
-      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-    }
+.input-form {
+	max-width: 680px;
+	margin-top: 50px;
+	padding: 32px;
+	background: #fff;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
 
-    .input-form {
-      max-width: 680px;
+table {
+	border-right: none;
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
+}
 
-      margin-top: 50px;
-      padding: 32px;
-
-      background: #fff;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-    }
-  </style>
+img {
+	width: 300px;
+	height: 340px;
+	object-fit: fill;
+}
+</style>
 </head>
+<script>
+function previewImage(targetObj, View_area) {
+		var preview = document.getElementById(View_area); //div id
+		var ua = window.navigator.userAgent;
+
+	  //ie일때(IE8 이하에서만 작동)
+		if (ua.indexOf("MSIE") > -1) {
+			targetObj.select();
+			try {
+				var src = document.selection.createRange().text; // get file full path(IE9, IE10에서 사용 불가)
+				var ie_preview_error = document.getElementById("ie_preview_error_" + View_area);
+
+
+				if (ie_preview_error) {
+					preview.removeChild(ie_preview_error); //error가 있으면 delete
+				}
+
+				var img = document.getElementById(View_area); //이미지가 뿌려질 곳
+
+				//이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
+				img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+src+"', sizingMethod='scale')";
+			} catch (e) {
+				if (!document.getElementById("ie_preview_error_" + View_area)) {
+					var info = document.createElement("<p>");
+					info.id = "ie_preview_error_" + View_area;
+					info.innerHTML = e.name;
+					preview.insertBefore(info, null);
+				}
+			}
+	  //ie가 아닐때(크롬, 사파리, FF)
+		} else {
+			var files = targetObj.files;
+			for ( var i = 0; i < files.length; i++) {
+				var file = files[i];
+				var imageType = /image.*/; //이미지 파일일경우만.. 뿌려준다.
+				if (!file.type.match(imageType))
+					continue;
+				var prevImg = document.getElementById("prev_" + View_area); //이전에 미리보기가 있다면 삭제
+				if (prevImg) {
+					preview.removeChild(prevImg);
+				}
+				var img = document.createElement("img"); 
+				img.id = "prev_" + View_area;
+				img.classList.add("obj");
+				img.file = file;
+				img.style.width = '300px'; 
+				img.style.height = '340px';
+				preview.appendChild(img);
+				if (window.FileReader) { // FireFox, Chrome, Opera 확인.
+					var reader = new FileReader();
+					reader.onloadend = (function(aImg) {
+						return function(e) {
+							aImg.src = e.target.result;
+						};
+					})(img);
+					reader.readAsDataURL(file);
+				} else { // safari is not supported FileReader
+					//alert('not supported FileReader');
+					if (!document.getElementById("sfr_preview_error_"
+							+ View_area)) {
+						var info = document.createElement("p");
+						info.id = "sfr_preview_error_" + View_area;
+						info.innerHTML = "not supported FileReader";
+						preview.insertBefore(info, null);
+					}
+				}
+			}
+		}
+	}
+      
+	function checkBk_numExist(){
+		
+		var bk_number = $("#bk_number").val()
+		
+		if(bk_number.length == 0 || bk_number == 0){
+			alert("일련번호를 입력해 주세요.")
+			return;
+		} else if(bk_number.length < 8){
+			alert("일련번호는 8자리입니다.")
+			return;
+		}
+		
+		$.ajax({
+			url: '${root}book/checkBk_numExist/' + bk_number,
+			type: 'get',
+			dataType: 'text',
+			success: function(result){
+				
+				if(result.trim() == 'true'){
+					alert('사용 할 수 있는 일련번호 입니다.')
+					$("#bk_numExist").val('true')
+				}else{
+					alert('사용 할 수 없는 아이디 입니다.')
+					$("#bk_numExist").val('false')
+					
+				}				
+			}			
+		})
+	}
+		function resetBk_numExist(){
+			$("#bk_numExist").val('false')
+		}
+    </script>
 
 <body>
-<!-- JS -->
-  <div class="container">
-    <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
-        <h4 class="mb-3">책 정보 입력</h4>
-        <form class="validation-form" novalidate>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="name">책 일련번호</label>
-              <input type="number" class="form-control" id="number" placeholder="xxxxxxxxxx" value="" required>
-              <div class="invalid-feedback">
-                일련번호를 입력해 주세요.
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="nickname">책 제목</label>
-              <input type="text" class="form-control" id="title" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 제목을 입력해 주세요.
-              </div>
-            </div>
-          </div>
-          
-          <div class="mb-3">
-              <label for="name">책 저자</label>
-              <input type="text" class="form-control" id="writer" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 저자를 입력해 주세요
-            </div>
-            <div class="mb-3">
-              <label for="name">책 출판사</label>
-              <input type="text" class="form-control" id="publisher" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책 출판사를 입력해 주세요
-            </div>
-            
-             <div class="mb-3">
-              <label for="name">책 출간일</label>
-              <input type="text" class="form-control" id="pubdate" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책 출간일을 입력해 주세요
-            </div>
-         <div class="mb-3">
-              <label for="name">책 이미지</label>
-              <input type="file" class="form-control" id="image" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책 이미지를 선택해주세요
-            </div>
-          
+	<div class="container">
+		<div class="input-form-backgroud row">
+			<div class="input-form col-md-12 mx-auto">
+				<h4 class="mb-3">책 정보 입력</h4>	
+				<form:form class="validation-form" action="${root }book/Bk_insert_pro" method="post" modelAttribute="insert_bk_Bean" enctype="multipart/form-data">		
+				<form:hidden path="bk_numExist"/>
+				<table border="1">
+					<tr align="center" style="height:60; width:1150;">
+						<td rowspan="9" style="width:300px; height:340px;">
+							<div style="width:300px; height:340px;">
+								<div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; dispaly: inline; '>
+							</div>
+							</div>
+						</td>
 
-            <div class="mb-3">
-              <label for="root">책 지역</label>
-              <select class="custom-select d-block w-100" id="root">
-                <option value=""></option>
-                <option>국내</option>
-                <option>해외</option>
-              </select>
-              <div class="invalid-feedback">
-                책의 지역을 선택해주세요.
-              </div>
-            </div>
-          
-           <div class="mb-3">
-              <label for="name">책 장르</label>
-              <input type="text" class="form-control" id="genre" placeholder="" value="" required size="10px">
-              <div class="invalid-feedback">
-                책의 장르를 입력해 주세요.
-            </div>
+					<tr align = "center">
+						<td height="20" width="200">일련번호</td>
+						<td height="20" width="400">
+						<div class="input-group">
+						<form:input class="form-control" path="bk_number" onkeypress="resetBk_numExist()"/>
+						<div class="input-group-append">
+						<form:button type="button" class="btn btn-primary" onclick="checkBk_numExist()">중복확인</form:button>
+						</div>
+						</div>
+						<form:errors path="bk_number" style="color:red"></form:errors>
+						</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">제목</td>
+						<td height="20" width="400">
+						<form:input class="form-control" path="bk_title"/>
+						<form:errors path="bk_title" style="color:red"></form:errors>
+						</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">저자</td>
+						<td height="20" width="400">
+						<form:input class="form-control" path="bk_writer"/>
+						<form:errors path="bk_writer" style="color:red"></form:errors>
+						</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">출판사</td>
+						<td height="20" width="400">
+						<form:input class="form-control" path="bk_publisher"/>
+						<form:errors path="bk_publisher" style="color:red"></form:errors>
+						</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">출간일</td>
+						<td height="20" width="400">
+						<form:input class="form-control" path="bk_pubdate"/>
+						<form:errors path="bk_pubdate" style="color:red"></form:errors>
+						</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">지역</td>
+						<td height="20" width="400">
+              			<form:select class="custom-select d-block w-100" path="bk_local">
+                		<form:option value="1">국내</form:option>
+                		<form:option value="2">해외</form:option>
+              			</form:select>
+              			</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">장르</td>
+						<td height="20" width="400">
+			            <form:select class="custom-select d-block w-100" path="bk_genre">
+			               <form:option value="1">소설</form:option>
+			               <form:option value="2">인문</form:option>
+			               <form:option value="3">취미</form:option>
+			               <form:option value="4">경제</form:option>
+			               <form:option value="5">자기계발</form:option>
+			               <form:option value="6">예술</form:option>
+			               <form:option value="7">기술</form:option>
+			               <form:option value="8">잡지</form:option>
+			             </form:select>
+						</td>
+					</tr>
+					<tr align="center">
+						<td height="20" width="200">재고</td>
+						<td height="20" width="200">
+						<div class="input-group">
+						<form:input class="form-control" path="bk_quantity"/>			
+						<div class="input-group-append" style="text-align:center; align-items : center;">
+						개
+						</div>
+						</div>
+						<form:errors path="bk_quantity" style="color:red"></form:errors>
+						</td>		
+					</tr>
+					<tr align="center">
+						<td height="20" width="10">
+						<form:input type="file" class="form-control" path="upload_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
+						<form:errors path="upload_file" style="color:red"></form:errors>
+						<td height="20" width="200">가격</td>
+						<td height="20" width="400">
+						<div class="input-group">
+						<form:input class="form-control" path="bk_price"/>
+						<div class="input-group-append" style="text-align:center; align-items : center;">
+						원
+						</div>
+						</div>
+						<form:errors path="bk_price" style="color:red"></form:errors>
+						</td>
+					</tr>
+					<tr align="center">
+						<td colspan="4">상세내용
+						</td>
+					</tr>
+					<tr align="center">
+						<td colspan="4" height="200" width="400">
+						<form:textarea class="form-control" path="bk_detail" style="width: 620px; height: 200px; resize: none;"/>
+						<form:errors path="bk_detail" style="color:red"></form:errors>
+						</td>
+					</tr>
+				</table>
+				<hr class="mb-4">
+				<form:button type="submit" class="btn btn-primary btn-lg btn-block">입력완료</form:button>
+				<form:button class="btn btn-primary btn-lg btn-block" href="javascript:window.history.back();">뒤로가기</form:button>
+			</form:form>
+			</div>
+			</div>
+			</div>
 
-			 <div class="mb-3">
-              <label for="name">책 상세내용</label>
-              <input type="textarea" class="form-control" id="detail" placeholder="" value="" required style="width:620px;height:200px;" >
-              <div class="invalid-feedback">
-                책 상세내용을 입력해 주세요.
-            </div>
-            
-             <div class="mb-3">
-              <label for="name">책 보유 재고</label>
-              <input type="number" class="form-control" id="quantity" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 재고를 입력해 주세요.
-                
-            </div>
-             <div class="mb-3">
-              <label for="name">책 가격</label>
-              <input type="number" class="form-control" id="price" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                책의 가격을 입력해 주세요.
-            </div>
-            
-          <div class="row">
-            
-            </div>
-            <div class="col-md-4 mb-3">
-           
-            </div>
-          </div>
-          <hr class="mb-4">
-          <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">입력 완료</button>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">뒤로 가기</button>
-        </form>
-      </div>
-    </div>
-    <footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 2022 </p>
-    </footer>
-  </div>
-  <script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  </script>
 </body>
 
 </html>

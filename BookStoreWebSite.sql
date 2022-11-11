@@ -59,20 +59,56 @@ create table order_info(
     or_mbid varchar2(20) not null,
         constraint or_mbid_fk foreign key(or_mbid)
             references mb_info(mb_id),
+    or_mbname varchar2(12) not null,
+    or_mbtel varchar2(15) not null,
+    or_status varchar2(12) not null,
+    or_date date 
+        default sysdate not null,
+    or_delivery number(10) not null,
+    or_deliveryCost number(4) not null,
+    or_dvname varchar2(100) not null,
+    or_dvtel varchar2(15) not null,
+    or_dvaddress varchar2(100) not null
+)
+
+create table order_items(
+	ori_number varchar2(40) not null,
+		constraint ori_number_fk foreign key(ori_number)
+			references order_info(or_number),
+    ori_bknumber number(8) not null,
+        constraint ori_bknumber_fk foreign key(ori_bknumber)
+            references book_info(bk_number),
+    ori_bkprice number(30) not null,
+    ori_bkdiscount number(3) not null,
+    ori_cacount number(3) not null
+)
+
+insert into ORDER_INFO values('22FEB105564','admin','abc','010-0101-010','배송',sysdate,12345678,4000,'받는이','010-1010-010','신림언저리');
+insert into order_items values('22FEB105564',70001000,2700,10,9);
+insert into order_items values('22FEB105564',70001001,3000,0,2);
+    
+create table order_info(
+    or_number varchar2(40) primary key,
+    or_mbid varchar2(20) not null,
+        constraint or_mbid_fk foreign key(or_mbid)
+            references mb_info(mb_id),
     or_bknumber number(8) not null,
         constraint or_bknumber_fk foreign key(or_bknumber)
             references book_info(bk_number),
     or_bkprice number(30) not null,
     or_cacount number(3) not null,
-    or_status number(1) not null,
+    or_status varchar2(8) not null,
     or_date date 
         default sysdate not null,
     or_delivery number(10) not null,
     or_address varchar2(100) not null
 )
 
-insert into ORDER_INFO values('22FEB105564','admin',70001000,2700,1,9,sysdate,12345678,'신림언저리');
+
 select * from order_INFO;
+select * from order_items;
+
+drop table order_info;
 
 Cart_info	
 

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import ezen.store.beans.Ca_Bean;
 import ezen.store.mapper.Ca_Mapper;
+import ezen.store.mapper.Dv_Mapper;
 import ezen.store.mapper.Or_Mapper;
 import ezen.store.mapper.Wi_Mapper;
 
@@ -105,7 +106,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		}
 		
 		@Bean
-		public MapperFactoryBean<Or_Mapper> getOr_Mapper(SqlSessionFactory factory){
+		public MapperFactoryBean<Or_Mapper> getOrMapper(SqlSessionFactory factory){
 			MapperFactoryBean<Or_Mapper> factoryBean = new MapperFactoryBean<Or_Mapper>(Or_Mapper.class);
 			
 			factoryBean.setSqlSessionFactory(factory); 
@@ -113,6 +114,16 @@ public class ServletAppContext implements WebMvcConfigurer{
 			return factoryBean;
 			
 		}
+		
+		//Dv_Mapper 등록
+				@Bean
+				public MapperFactoryBean<Dv_Mapper> getDv_Mapper(SqlSessionFactory factory){
+					MapperFactoryBean<Dv_Mapper> factoryBean = new MapperFactoryBean<Dv_Mapper>(Dv_Mapper.class);
+					
+					factoryBean.setSqlSessionFactory(factory); 
+					
+					return factoryBean;			
+				}
 		
 		// 두개의 서로다른 properties 설정이 충돌나지 않도록 합니다.
 		@Bean

@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Ca_Bean;
+import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
+import ezen.store.service.Ca_Service;
+import ezen.store.service.Dv_Service;
 import ezen.store.service.Or_Service;
 
 @Controller
@@ -31,20 +34,76 @@ public class OrderController {
 	
 	@Autowired
 	private Or_Service or_Service;
+
+	@Autowired
+	private Dv_Service dv_Service;
+	
+	@Autowired
+	private Ca_Service ca_Service;
 	
 	
 	@GetMapping("/Or_list")
-	public String Or_list(@RequestParam("or_mbid") String or_mbid, Model model) {
+	public String OrList(@RequestParam("or_mbid") String or_mbid,
+			@ModelAttribute("tempinfoOrBean") Or_Bean tempinfoOrBean,Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
+		List<Or_Bean> tempinfoBean = or_Service.getOrderInfo(or_mbid);
 		
-		List<Or_Bean> infoOr_Bean = or_Service.getOrderInfo(or_mbid);
-		model.addAttribute("infoOr_Bean",infoOr_Bean);
+		List<Or_Bean> infoOrBean = or_Service.getOrderInfo(or_mbid);
+		model.addAttribute("infoOrBean", infoOrBean);
+						
+		tempinfoOrBean.setOr_number(infoOrBean.getOr_number());
+			
+		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
+		model.addAttribute("itemsOrBean", itemsOrBean);
 		
 		
 		return "order/Or_list";
 		
 	}
+	
+	@GetMapping("/Or_select")
+	public String OrSelect(@RequestParam("or_mbid") String or_mbid,
+			@RequestParam("or_number") String or_number, Model model) {
+		
+//		model.addAttribute("ca_mbid" , ca_mbid);
+		
+		List<Or_Bean> infoOrBean = or_Service.getOrderInfo(or_mbid);
+		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
+
+		model.addAttribute("infoOrBean", infoOrBean);
+		model.addAttribute("itemsOrBean", itemsOrBean);
+		
+		
+		return "order/Or_select";
+		
+	}
+	
+	@GetMapping("/Or_purchase")
+	public String DvList(@RequestParam("dv_id") String dv_id,
+			@RequestParam("ca_mbid") String ca_mbid, Model model) {
+		
+		List<Dv_Bean> Deliverylist = dv_Service.getDvList(dv_id);
+		model.addAttribute("Deliverylist", Deliverylist);
+		
+		List<Ca_Bean> infoCa_Bean = ca_Service.getCartInfo(ca_mbid);
+		model.addAttribute("infoCa_Bean", infoCa_Bean);
+		
+		return "order/Or_purchase";
+	}
+	
+//	@GetMapping("/Or_select")
+//	public String OrSelect(@RequestParam("or_number") String or_number, Model model) {
+//		
+///		model.addAttribute("ca_mbid" , ca_mbid);
+//		
+	//	List<Or_Bean> detailOrBean = or_Service.OrSelect(or_number);
+	//	model.addAttribute("detailOrBean", detailOrBean);
+	//	
+	//	
+	//	return "order/Or_select";
+		
+//	}
 	
 	
 	/*
@@ -71,8 +130,8 @@ public class OrderController {
 	*/
 	/*
 	@RequestMapping("/purchase")
-	public String confirmId(HttpServletRequest request, @RequestParam("board_info_idx")
-	int board_info_idx,	@RequestParam("content_idx") int content_idx,Model model) {
+	public String purchase(HttpServletRequest request, @RequestParam("mb_id")
+	int mb_id,	@RequestParam("ca_mbid") int ca_mbid, Model model) {
 		
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");

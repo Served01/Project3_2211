@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
-
-	<h2>구매 완료</h2>
-
+	<script type="text/javascript">
+		alert("배송지 작성이 정상적으로 완료되었습니다.")
+		location.href="${root}delivery/Dv_insert"
+	</script>
 </body>
 </html>

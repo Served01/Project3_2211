@@ -22,7 +22,8 @@
 	<a href="${root}wish/wish_test">위시추가테스트</a>
 	<hr>
 	<a href="${root}order/Or_list?or_mbid=admin">오더인포</a>
-	<a href="${root}order/Or_purchase?mb_id=admin&ca_mbid=admin">결제</a>
+	<a href="${root}order/Or_purchase?dv_id=admin&ca_mbid=admin">결제</a>
+	<a href="${root}order/Or_select?or_mbid=admin&or_number=22FEB105564">주문정보</a>
 	<button onclick="location.href='Or_purchase.jsp?mb_id=admin&ca_mbid=admin'">댓글작성</button>
 				
 </body>

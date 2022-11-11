@@ -14,11 +14,16 @@ import ezen.store.dao.Or_DAO;
 public class Or_Service {
 	
 	@Autowired
-	private Or_DAO or_DAO;	
+	private Or_DAO orDAO;	
 	
 	//카트 열람
 		public	List<Or_Bean> getOrderInfo(String or_mbid) {
-			return or_DAO.getOrderInfo(or_mbid);
+			return orDAO.getOrderInfo(or_mbid);
+		}
+		
+//		public	List<Or_Bean> OrSelect(String or_number) {
+		public	List<Or_Bean> OrSelect(String or_number) {
+			return orDAO.OrSelect(or_number);
 		}
 		
 //		public void Or_update(int or_bknumbers) {
