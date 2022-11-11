@@ -15,7 +15,7 @@ public class HomeController {
 	@SuppressWarnings("unused")
 	@Autowired
 	@Lazy
-	private Mb_Bean login_mb_Bean;
+	private Mb_Bean loginMbBean;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {

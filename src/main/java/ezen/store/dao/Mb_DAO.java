@@ -19,50 +19,36 @@ public class Mb_DAO {
 		return mbMapper.checkUserIdExist(mb_id);		
 	}
 	
-	public void addUserInfo(Mb_Bean insert_mb_Bean) {
+	public void addUserInfo(Mb_Bean insertMbBean) {
 		
-		mbMapper.addUserInfo(insert_mb_Bean); 
+		mbMapper.addUserInfo(insertMbBean); 
 	}
-	//濡쒓렇�씤 �젙蹂�
-	public Mb_Bean  getloginUserInfo(Mb_Bean temp_mb_Bean) {
+	//로그인
+	public Mb_Bean  getloginUserInfo(Mb_Bean tempMbBean) {
 		
-		return mbMapper.getloginUserInfo(temp_mb_Bean);
+		return mbMapper.getloginUserInfo(tempMbBean);
 	}
 	
 	// �닔�젙 �븷 �젙蹂�
-	public Mb_Bean getModifyUserInfo(int mb_idx) {				
-		return mbMapper.getModifyUserInfo(mb_idx); 		
+	public Mb_Bean getModifyUserInfo(String mb_id) {				
+		return mbMapper.getModifyUserInfo(mb_id); 		
 	}
 	
 	// 鍮꾨쾲 �닔�젙
-	public void modifyUserInfo(Mb_Bean update_mb_Bean) {
-		mbMapper.modifyUserInfo(update_mb_Bean);
+	public void modifyUserInfo(Mb_Bean updateMbBean) {
+		mbMapper.modifyUserInfo(updateMbBean);
 		
 	}
 	//리스트
-	public List<Mb_Bean> getMbList(int mb_idx){
+	public List<Mb_Bean> getMbList(String mb_id){
 		
-		return mbMapper.getMbList(mb_idx);
+		return mbMapper.getMbList(mb_id);
+	}
+		
+	//상세보기
+	public Mb_Bean getMemberInfo(String mb_id) {
+			
+	return mbMapper.getMemberInfo(mb_id);
+		}
 		
 	}
-
-//	//
-//	public Mb_Bean getListUserInfo(int mb_idx) {				
-//		return mbMapper.getListUserInfo(mb_idx); 		
-//	}
-	//전체보기
-		
-//	public List<Mb_Bean> getMbList(int mb_idx){
-//			
-//	  return mbMapper.getMbList(mb_idx);
-//			
-//		}
-//	
-//  public Mb_Bean getSelectUserInfo(int mb_idx) {
-//		  
-//		  return mbMapper.getSelectUserInfo(mb_idx); 
-//	  }
-//	
-	
-	
-}

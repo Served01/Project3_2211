@@ -21,7 +21,7 @@ public class Mb_Validator implements Validator{
 		String beanName = errors.getObjectName();
 		
 		//로그인시에 체크하므로 loginUserDataBean이므로 아래 내용을 실행하지 않고 통과합니다.
-		if(beanName.equals("insert_mb_Bean") || beanName.equals("update_mb_Bean")) {
+		if(beanName.equals("insertMbBean") || beanName.equals("updateMbBean")) {
 			// 회원가입시에 패스워드 체크에 사용한 부분
 			if(mbBean.getMb_pw().equals(mbBean.getMb_pw2()) == false) {
 				errors.rejectValue("mb_pw", "NotEquals"); 
@@ -30,10 +30,10 @@ public class Mb_Validator implements Validator{
 
 		// 아이디 중복 확인 체크
 		
-		if(beanName.equals("insert_mb_Bean")) {
+		if(beanName.equals("insertMbBean")) {
 		if(mbBean.isMbIdExist() == false) {
 		errors.rejectValue("mb_id", "DontCheckUserIdExist");
-		
+			
 			}
 		}
 		}

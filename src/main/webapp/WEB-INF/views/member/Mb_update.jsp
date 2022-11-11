@@ -7,17 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>미니 프로젝트</title>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<title>Mb_update</title>
 <!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
 
 </head>
 <body>
-<!-- <c:import url="/WEB-INF/views/include/top_menu.jsp"/> -->
+<c:import url="/WEB-INF/views/include/header.jsp"/>
 
 <div class="container" style="margin-top:100px">
 	<div class="row">
@@ -25,7 +25,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${root}member/Mb_update_pro" method="post" modelAttribute="update_mb_Bean">
+					<form:form action="${root}member/Mbupdatepro" method="post" modelAttribute="updateMbBean">
 					<div class="form-group">
 						<form:label path="mb_name">이름</form:label>
 						<form:input path="mb_name" class="form-control" readonly="true"/>
@@ -56,13 +56,11 @@
 					</div>
 					<div class="form-group">
 						<div class="text-right">
-							<form:button class="btn btn-primary">정보수정</form:button>
-							<a href="${root }member/Mb_insert" class="btn btn-danger">회원가입</a>
+							<form:button class="btn btn-primary">수정하기</form:button>
+							<a href="${root }member/Mbinsert" class="btn btn-danger">회원가입</a>
 						</div>
 					</div>
-					<a href="${root }index" class="btn btn-danger">메인으로</a>
 					</form:form>
-					<a href="${root }member/Mb_select" class="btn btn-danger">마이페이지</a>
 				</div>
 			</div>
 		</div>

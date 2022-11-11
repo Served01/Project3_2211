@@ -54,7 +54,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	private TopMenuService topMenuService;
 	
 	@Autowired
-	private Mb_Bean login_mb_Bean;
+	private Mb_Bean loginMbBean;
 	
 	
 	// Controller.
@@ -144,13 +144,13 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		WebMvcConfigurer.super.addInterceptors(registry);	
 		
-		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuService, login_mb_Bean);		
+		TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(topMenuService, loginMbBean);		
 		InterceptorRegistration registration1 = registry.addInterceptor(topMenuInterceptor);
 			
 		registration1.addPathPatterns("/**");		
 		
 		//CheckLoginInterceptor �벑濡� : �젙蹂댁닔�젙, 濡쒓렇�븘�썐
-		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(login_mb_Bean);
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMbBean);
 		
 		InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);
 		

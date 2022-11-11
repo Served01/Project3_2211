@@ -8,7 +8,6 @@ import javax.validation.constraints.Size;
 //�궗�슜�옄 �젙蹂� �뀒�씠釉� 李몄“ 
 public class Mb_Bean {
 
-	private int mb_idx;
 
 	@Size(min = 2, max = 8)
 	@Pattern(regexp = "[a-zA-Z0-9]*")
@@ -25,6 +24,12 @@ public class Mb_Bean {
 	private String mb_tel;
 
 	private Date mb_date;
+	
+	private String mb_deleted;
+	
+	private Date mb_deleted_date;
+	
+	
 
 	private boolean mbIdExist;
 
@@ -108,12 +113,20 @@ public class Mb_Bean {
 		this.mb_date = mb_date;
 	}
 
-	public int getMb_idx() {
-		return mb_idx;
+	public String getMb_deleted() {
+		return mb_deleted;
 	}
 
-	public void setMb_idx(int mb_idx) {
-		this.mb_idx = mb_idx;
+	public void setMb_deleted(String mb_deleted) {
+		this.mb_deleted = mb_deleted;
+	}
+
+	public Date getMb_deleted_date() {
+		return mb_deleted_date;
+	}
+
+	public void setMb_deleted_date(Date mb_deleted_date) {
+		this.mb_deleted_date = mb_deleted_date;
 	}
 
 }

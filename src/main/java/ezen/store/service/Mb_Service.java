@@ -14,8 +14,9 @@ public class Mb_Service {
 	@Autowired
 	private Mb_DAO mbDAO;
 	@Autowired
-	private Mb_Bean login_mb_Bean;
-		
+	private Mb_Bean loginMbBean;
+	
+	//아이디 중복 체크??
 	public boolean checkUserIdExist(String mb_id) {
 		
 		String mb_name = mbDAO.checkUserIdExist(mb_id);
@@ -27,63 +28,66 @@ public class Mb_Service {
 		}			
 	}
 	
-	public void addUserInfo(Mb_Bean insert_mb_Bean) {
+	public void addUserInfo(Mb_Bean insertMbBean) {
 		
-		mbDAO.addUserInfo(insert_mb_Bean); 
+		mbDAO.addUserInfo(insertMbBean); 
 	}
-	//
-	public void  getloginUserInfo(Mb_Bean temp_mb_Bean) {
+	//로그인 정보???
+	public void  getloginUserInfo(Mb_Bean tempMbBean) {
 		//              
-		Mb_Bean temp_mb_Bean2 = mbDAO.getloginUserInfo(temp_mb_Bean);
+		Mb_Bean tempMbBean2 = mbDAO.getloginUserInfo(tempMbBean);
 		
-		if(temp_mb_Bean2 != null) {
-			login_mb_Bean.setMb_idx(temp_mb_Bean2.getMb_idx());
-			login_mb_Bean.setMb_id(temp_mb_Bean2.getMb_id()); 
-			login_mb_Bean.setMb_pw(temp_mb_Bean2.getMb_pw());
-			login_mb_Bean.setMb_name(temp_mb_Bean2.getMb_name()); 
-			login_mb_Bean.setMblogin(true);
+		if(tempMbBean != null) {
+			loginMbBean.setMb_id(tempMbBean2.getMb_id());
+			loginMbBean.setMb_pw(tempMbBean2.getMb_pw());
+			loginMbBean.setMb_name(tempMbBean2.getMb_name()); 
+			loginMbBean.setMblogin(true);
 		}		
 	}
 	
 	//
-	public Mb_Bean getModifyUserInfo(Mb_Bean update_mb_Bean) {	
-		Mb_Bean tempModifyUserDataBean = mbDAO.getModifyUserInfo(login_mb_Bean.getMb_idx());
+	public Mb_Bean getModifyUserInfo(Mb_Bean updateMbBean) {	
+		Mb_Bean tempModifyUserDataBean = mbDAO.getModifyUserInfo(loginMbBean.getMb_id());
 		
-		update_mb_Bean.setMb_id(tempModifyUserDataBean.getMb_id());
-		update_mb_Bean.setMb_idx(tempModifyUserDataBean.getMb_idx());
-		update_mb_Bean.setMb_name(tempModifyUserDataBean.getMb_name()); 		
+		updateMbBean.setMb_id(tempModifyUserDataBean.getMb_id());
+		updateMbBean.setMb_name(tempModifyUserDataBean.getMb_name()); 		
 		
 		return tempModifyUserDataBean; 		
 	}
 	
 	// 鍮꾨쾲 �닔�젙
-	public void modifyUserInfo(Mb_Bean update_mb_Bean) {
-		update_mb_Bean.setMb_idx(login_mb_Bean.getMb_idx()); 
+	public void modifyUserInfo(Mb_Bean updateMbBean) {
+		updateMbBean.setMb_id(loginMbBean.getMb_id()); 
 		
-		mbDAO.modifyUserInfo(update_mb_Bean);
+		mbDAO.modifyUserInfo(updateMbBean);
 		
 	}
 	
 	//
-	public Mb_Bean getListUserInfo(Mb_Bean update_mb_Bean) {	
-		Mb_Bean tempModifyUserDataBean = mbDAO.getModifyUserInfo(login_mb_Bean.getMb_idx());
+	public Mb_Bean getListUserInfo(Mb_Bean updateMbBean) {	
+		Mb_Bean tempModifyUserDataBean = mbDAO.getModifyUserInfo(loginMbBean.getMb_id());
 		
-		update_mb_Bean.setMb_idx(tempModifyUserDataBean.getMb_idx());
-		update_mb_Bean.setMb_id(tempModifyUserDataBean.getMb_id());
-		update_mb_Bean.setMb_name(tempModifyUserDataBean.getMb_name()); 		
-		update_mb_Bean.setMb_email(tempModifyUserDataBean.getMb_name()); 		
-		update_mb_Bean.setMb_tel(tempModifyUserDataBean.getMb_name()); 		
+		updateMbBean.setMb_id(tempModifyUserDataBean.getMb_id());
+		updateMbBean.setMb_name(tempModifyUserDataBean.getMb_name()); 		
+		updateMbBean.setMb_email(tempModifyUserDataBean.getMb_email()); 		
+		updateMbBean.setMb_tel(tempModifyUserDataBean.getMb_tel()); 		
 		
 		return tempModifyUserDataBean; 		
 	}
+	
 	//전체회원 목록 리스트
-		public List<Mb_Bean> getMbList(int mb_idx){
+		public List<Mb_Bean> getMbList(String mb_id){
 		
-		return mbDAO.getMbList(mb_idx);
+		return mbDAO.getMbList(mb_id);
 		
 	}
-	
-	
+		
+	//회원 상세보기
+	public Mb_Bean getMemberInfo(String mb_id) {
+			  
+		 return mbDAO.getMemberInfo(mb_id); 
+	}
+		
 	
 }
 

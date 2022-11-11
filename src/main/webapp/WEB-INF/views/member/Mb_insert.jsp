@@ -16,36 +16,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <style>
-    body {
-      min-height: 100vh;
 
-      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-    }
-
-    .input-form {
-      max-width: 680px;
-
-      margin-top: 80px;
-      padding: 32px;
-
-      background: #fff;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-    }
-    h4{
-    text-align :center;
-    }
-     h2{
-    text-align :center;
-    }
   </style>
   <!-- Bootstrap CSS -->
 <!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
@@ -53,38 +24,6 @@
 <!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
-
-<!--   <style> -->
-<!-- /*     body { */ -->
-<!-- /*       min-height: 100vh; */ -->
-
-<!--       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c)); -->
-<!--       background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); -->
-<!--       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); -->
-<!--       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); -->
-<!--       background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); -->
-<!--     } -->
-
-<!--     .input-form { -->
-<!--       max-width: 680px; -->
-
-<!--       margin-top: 80px; -->
-<!--       padding: 32px; -->
-
-<!--       background: #fff; -->
-<!--       -webkit-border-radius: 10px; -->
-<!--       -moz-border-radius: 10px; -->
-<!--       border-radius: 10px; -->
-<!--       -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); -->
-<!--       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15); -->
-<!--       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15) -->
-<!--     } -->
-<!--     h4{ -->
-<!--     text-align :center; -->
-<!--     } -->
-<!--      h2{ -->
-<!--     text-align :center; -->
-<!--     } -->
 
 </head>
 
@@ -99,7 +38,6 @@
 		}
 		
 		$.ajax({
-			//url: '${root}user/checkUserIdExist()' + user_id,
 			url: '${root}member/checkUserIdExist/' + mb_id,
 			type: 'get',
 			dataType: 'text',
@@ -125,15 +63,15 @@
   <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <a href="#" onclick="location.href='insertBook.jsp'"><h2><i class="fa-solid fa-book"></i>Ezen Book Store</h2></a> 
+        <a href="#" onclick="location.href='index.jsp'"><h2><i class="fa-solid fa-book"></i>Ezen Book Store</h2></a> 
         <br>
         <h4 class="mb-3">회원가입</h4>
-        <form:form action="${root }member/Mb_insert_pro" method="post" modelAttribute="insert_mb_Bean">
+        <form:form action="${root }member/Mbinsertpro" method="post" modelAttribute="insertMbBean">
           <form:hidden path="mbIdExist"/>
             <div class="col-md-6 mb-3">
           <div class="row"></div></div>
             <div class="form-group">
-							<label for="mb_id">아이디</label>
+							<form:label path="mb_id">아이디</form:label>
 							<div class="input-group">
 								<form:input path="mb_id" class="form-control" onkeypress="resetUserIdExist()"/>
 								<form:errors path="mb_id" style="color:red"/>
@@ -142,27 +80,16 @@
 								</div>
 							</div>
 						</div>
-            <div class="col-md-6 mb-3">
             <div class="form-group">
 					<form:label path="mb_pw">비밀번호</form:label>
 					<form:input type="password" path="mb_pw" class="form-control"/>
 					<form:errors path="mb_pw" style="color:red"/>
-					</div>
-              <div class="invalid-feedback">
-                비밀번호를 입력해주세요.
-              </div>
             </div>
-            <div class="col-md-6 mb-3">
             <div class="form-group">
 					<form:label path="mb_pw2">비밀번호 확인</form:label>
 					<form:input type="password" path="mb_pw2" class="form-control"/>
 					<form:errors path="mb_pw2" style="color:red"/>
-					</div>
-              <div class="invalid-feedback">
-                비밀번호를 한번 더 입력해주세요.
-              </div>
-            </div>
-       		
+            </div>    		
           <div class="form-group">
 					<form:label path="mb_name">이름</form:label>
 					<form:input path="mb_name" class="form-control"/>
@@ -171,7 +98,6 @@
               <div class="invalid-feedback">
                 이름을 입력해주세요.
             </div>
-            
                <div class="mb-3">
                <div class="form-group">
 							<form:label path="mb_email">이메일</form:label>
@@ -181,11 +107,10 @@
             <div class="invalid-feedback">
               이메일을 입력해주세요.
             </div>
-
           <div class="mb-3">
           <div class="form-group">
 							<form:label path="mb_tel">연락처</form:label>
-							<form:input type="tel" path="mb_tel" class="form-control"/>
+							<form:input type="tel" placeholder="010-1234-5678 형식으로 입력해주세요." path="mb_tel" class="form-control"/>
 							<form:errors path="mb_tel" style="color:red"/>
 						</div>
             <div class="invalid-feedback">
@@ -193,10 +118,8 @@
             </div>
           </div>
           <div class="row">
-            
             </div>
             <div class="col-md-4 mb-3">
-           
             </div>
           </div>
           

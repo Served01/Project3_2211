@@ -12,17 +12,17 @@ import ezen.store.beans.Mb_Bean;
 public class CheckLoginInterceptor implements HandlerInterceptor{
 
 	// 처리대상 
-	private Mb_Bean login_mb_Bean;
+	private Mb_Bean loginMbBean;
 	
-	public CheckLoginInterceptor(Mb_Bean login_mb_Bean) {
-		this.login_mb_Bean = login_mb_Bean;		
+	public CheckLoginInterceptor(Mb_Bean loginMbBean) {
+		this.loginMbBean = loginMbBean;		
 	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		if(login_mb_Bean.isMblogin() == false) {
+		if(loginMbBean.isMblogin() == false) {
 			String contextPath = request.getContextPath();
 			
 			response.sendRedirect(contextPath + "/member/Mb_not_login");

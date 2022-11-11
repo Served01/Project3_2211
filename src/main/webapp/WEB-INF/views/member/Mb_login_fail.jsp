@@ -10,7 +10,7 @@
 <body>
 	<script type="text/javascript">
 		alert("로그인을 실패 하였습니다.")
-		location.href="${root}member/Mb_login?fail=true"
+		location.href="${root}member/Mblogin?fail=true"
 	</script>
 </body>
 </html>

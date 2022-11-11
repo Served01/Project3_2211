@@ -10,7 +10,7 @@
 <body>
 	<script type="text/javascript">
 		alert("회원 가입이 정상적으로 완료되었습니다.")
-		location.href="${root}member/Mb_login"
+		location.href="${root}member/Mblogin"
 	</script>
 </body>
 </html>

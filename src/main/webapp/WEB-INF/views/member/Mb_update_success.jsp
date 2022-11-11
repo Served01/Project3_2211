@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("비밀번호 수정을 성공 하였습니다.")
+		alert("회원정보 수정을 성공 하였습니다!.")
 		location.href="${root}index"
 	</script>
 </body>

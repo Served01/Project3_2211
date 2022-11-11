@@ -48,16 +48,15 @@ public class BoardUploadService {
 		if(upload_file.getSize() > 0) {			
 			String file_name = saveUploadfile(upload_file);
 					
-			writeContentDataBean.setContent_file(file_name); 
-			
+			writeContentDataBean.setContent_file(file_name);
 		}
+	}
 		
 		//login �긽�깭 泥댄겕�븯�뿬 upload
-		writeContentDataBean.setContent_write_idx(login_mb_Bean.getMb_idx()); 
-		
-		boardDAO.addContentInfo(writeContentDataBean); 
-	}
-	
+//		writeContentDataBean.setContent_write_idx(login_mb_Bean.getMb_id()); 
+//		
+//		boardDAO.addContentInfo(writeContentDataBean); 
+//	}
 	//
 	public String getBoardInfoName(int board_info_idx) {	
 		

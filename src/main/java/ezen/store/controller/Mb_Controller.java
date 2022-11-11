@@ -29,30 +29,42 @@ public class Mb_Controller {
 	private Mb_Service mbService;
 	@SuppressWarnings("unused")
 	@Autowired
-	private Mb_Bean insert_mb_Bean;
+	private Mb_Bean insertMbBean;
 	
 	@Autowired
-	private Mb_Bean login_mb_Bean;
+	private Mb_Bean loginMbBean;
 	
 	@SuppressWarnings("unused")
 	@Autowired
-	private Mb_Bean temp_mb_Bean;
+	private Mb_Bean tempMbBean;
 	
-	@GetMapping("/list")
-	public String list(@RequestParam("mb_idx") int mb_idx, Model model) {
+	//회원 전체목록 컨트롤
+	@GetMapping("/Mblist")
+	public String Mblist(@RequestParam("mb_id") String mb_id, Model model) {
 		
-		model.addAttribute("mb_idx", mb_idx);
+		model.addAttribute("mb_id", mb_id);
 		
-		List<Mb_Bean> memberlist = mbService.getMbList(mb_idx);
+		List<Mb_Bean> memberlist = mbService.getMbList(mb_id);
 		model.addAttribute("memberlist", memberlist);
 		
 		return "member/Mb_list";
 	}
 	
-	
+	//회원 상세보기
+	@GetMapping("/Mbselect")
+	public String Mbselect(@RequestParam("mb_id") String mb_id, Model model) {
 		
-	@GetMapping("/Mb_login")
-	public String Mb_login(@ModelAttribute("temp_mb_Bean") Mb_Bean temp_mb_Bean,
+		model.addAttribute("mb_id", mb_id);
+		
+		Mb_Bean mbBean = mbService.getMemberInfo(mb_id);
+		model.addAttribute("mbBean", mbBean);
+		
+		return "member/Mb_select";
+	}
+	
+	
+	@GetMapping("/Mblogin")
+	public String Mblogin(@ModelAttribute("tempMbBean") Mb_Bean tempMbBean,
 						@RequestParam(value="fail", defaultValue = "false") boolean fail, Model model){
 			
 			model.addAttribute("fail", fail);
@@ -60,62 +72,63 @@ public class Mb_Controller {
 			//�븘吏곸� 濡쒓렇�씤�븯吏� �븡�븯�쑝誘�濡� false濡� �꽕�젙
 			//loginUserDataBean.setUserlogin(false);
 			
-			model.addAttribute("temp_mb_Bean", temp_mb_Bean);
+			model.addAttribute("tempMbBean", tempMbBean);
 			return "member/Mb_login";			
 		}
 			
-	@PostMapping("/Mb_login_pro")
-	public String Mb_login_pro(@Validated@ModelAttribute("temp_mb_Bean") Mb_Bean temp_mb_Bean, BindingResult result) {
+	@PostMapping("/Mbloginpro")
+	public String Mbloginpro(@Validated@ModelAttribute("tempMbBean") Mb_Bean tempMbBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "member/Mb_login";
 		}
 			
-		mbService.getloginUserInfo(temp_mb_Bean);
+		mbService.getloginUserInfo(tempMbBean);
 		
-		if(login_mb_Bean.isMblogin() == true) {
-			login_mb_Bean.setMblogin(true);
+		if(loginMbBean.isMblogin() == true) {
+			loginMbBean.setMblogin(true);
 			return "member/Mb_login_success";
 		}else {
-			login_mb_Bean.setMblogin(false);
+			loginMbBean.setMblogin(false);
 			return "member/Mb_login_fail";	
 		}
 	}
 	
-	@GetMapping("/Mb_insert")
-	public String Mb_insert(@ModelAttribute("insert_mb_Bean") Mb_Bean insert_mb_Bean) {
+	@GetMapping("/Mbinsert")
+	public String Mbinsert(@ModelAttribute("insertMbBean") Mb_Bean insertMbBean) {
 		
 		return "member/Mb_insert";
 	}
 	
-	@PostMapping("/Mb_insert_pro")
-	public String Mb_insert_pro(@Validated@ModelAttribute("insert_mb_Bean") Mb_Bean insert_mb_Bean, BindingResult result) {
+	@PostMapping("/Mbinsertpro")
+	public String Mbinsertpro(@Validated@ModelAttribute("insertMbBean") Mb_Bean insertMbBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "member/Mb_insert";
 		}			
 		
-		mbService.addUserInfo(insert_mb_Bean);
+		mbService.addUserInfo(insertMbBean);
 		
 		return "member/Mb_insert_success";
 	}
 	
-	@GetMapping("/Mb_update")
-	public String Mb_update(@ModelAttribute("update_mb_Bean") Mb_Bean update_mb_Bean) {
+	@GetMapping("/Mbupdate")
+	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
 		
-		mbService.getModifyUserInfo(update_mb_Bean);
+		mbService.getModifyUserInfo(updateMbBean);
 		
 		return "member/Mb_update";
 	}
 	
-	@PostMapping("/Mb_update_pro")
-	public String Mb_update_pro(@Validated@ModelAttribute("update_mb_Bean") Mb_Bean update_mb_Bean, BindingResult result) {
+	//회원정보 수정 프로세스
+	@PostMapping("/Mbupdatepro")
+	public String Mbupdatepro(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "member/Mb_update_pro";
 		}			
-		
-		mbService.modifyUserInfo(update_mb_Bean);
+	//회원정보 수정 성공페이지	
+		mbService.modifyUserInfo(updateMbBean);
 		
 		return "member/Mb_update_success";
 	}
@@ -123,16 +136,16 @@ public class Mb_Controller {
 	
 	
 	
-	@GetMapping("/Mb_logout")
-	public String Mb_logout() {
+	@GetMapping("/Mblogout")
+	public String Mblogout() {
 		
-		login_mb_Bean.setMblogin(false);   
+		loginMbBean.setMblogin(false);   
 	
 		return "member/Mb_logout";
 	}
 	
-	@GetMapping("/Mb_not_login")
-	public String not_login() {
+	@GetMapping("/Mbnotlogin")
+	public String notlogin() {
 			
 		return "member/Mb_not_login";
 	}
@@ -143,16 +156,7 @@ public class Mb_Controller {
 		Mb_Validator validator = new Mb_Validator();
 		binder.addValidators(validator); 
 	}
-	
-//	
-//	@GetMapping("/Mb_list")
-//	public String Mb_list(@ModelAttribute("update_mb_Bean") Mb_Bean update_mb_Bean) {
-//		
-//		mbService.getListUserInfo(update_mb_Bean);
-//		
-//		return "member/Mb_list";
-//	}
-	
+
 	
 }
 
