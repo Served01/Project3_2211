@@ -21,17 +21,22 @@ public class Dv_Service {
 	}
 	
 	//insert
-	public void addDvInfo(Dv_Bean insertDv_Bean) {
-		dv_DAO.addDvInfo(insertDv_Bean);
+	public void addDvInfo(Dv_Bean InsertDvBean) {
+		dv_DAO.addDvInfo(InsertDvBean);
 	}			
 	
 	//update
-	public Dv_Bean updateDv_Bean(String dv_id) {
-		return dv_DAO.updateDv_Bean(dv_id);
+	public Dv_Bean UpdateDvBean(String dv_id) {
+		return dv_DAO.UpdateDvBean(dv_id);
 	}
 	
-	public void updateDvInfo(Dv_Bean updateDv_Bean) {
-		dv_DAO.updateDvInfo(updateDv_Bean);
+	public void UpdateDvInfo(Dv_Bean UpdateDvBean) {
+		dv_DAO.UpdateDvInfo(UpdateDvBean);
+	}
+	
+	//delete
+	public void DeleteDvInfo(String dv_id) {
+		dv_DAO.DeleteDvInfo(dv_id);
 	}
 	
 }

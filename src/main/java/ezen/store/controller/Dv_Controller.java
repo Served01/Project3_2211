@@ -21,43 +21,56 @@ public class Dv_Controller {
 	private Dv_Service dv_Service;
 	
 	//Dv_list
-	@GetMapping("/delivery/Dv_list")
-	public String list(@RequestParam("dv_id") String dv_id, Model model) {
+	@GetMapping("/delivery/DvList")
+	public String DvList(@RequestParam("dv_id") String dv_id, Model model) {
 		
-		List<Dv_Bean> deliverylist = dv_Service.getDvList(dv_id);
-		model.addAttribute("deliverylist", deliverylist);
+		List<Dv_Bean> Deliverylist = dv_Service.getDvList(dv_id);
+		model.addAttribute("Deliverylist", Deliverylist);
 		
 		return "delivery/Dv_list";
 	}
+	
+	
 	//Dv_insert
-	@GetMapping("/delivery/Dv_insert")
-	public String insert(@ModelAttribute("insertDv_Bean") Dv_Bean insertDv_Bean) {
+	@GetMapping("/delivery/DvInsert")
+	public String DvInsert(@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean) {
 				
 		return "delivery/Dv_insert";
 	}
 	
-	@PostMapping("/delivery/Dv_insert_pro")
-	public String Dv_insert_pro(@Validated@ModelAttribute("insertDv_Bean") Dv_Bean insertDv_Bean) {
+	@PostMapping("/delivery/DvInsertPro")
+	public String DvInsertPro(@Validated@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean) {
 				
-		dv_Service.addDvInfo(insertDv_Bean);
+		dv_Service.addDvInfo(InsertDvBean);
 		
 		return "delivery/Dv_insert_success";
 	}
+	
+	
 	//Dv_update
-	@GetMapping("/delivery/Dv_update")
-	public String update(@RequestParam("dv_id") String dv_id, Model model) {
+	@GetMapping("/delivery/DvUpdate")
+	public String DvUpdate(@RequestParam("dv_id") String dv_id, Model model) {
 		
-		Dv_Bean updateDv_Bean = dv_Service.updateDv_Bean(dv_id);
-		model.addAttribute("updateDv_Bean", updateDv_Bean);
+		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(dv_id);
+		model.addAttribute("UpdateDvBean", UpdateDvBean);
 		
 		return "delivery/Dv_update";
 	}
 	
-	@PostMapping("/delivery/Dv_update_pro")
-	public String Dv_update_pro(@ModelAttribute("updateDv_Bean") Dv_Bean updateDv_Bean) {
+	@PostMapping("/delivery/DvUpdatePro")
+	public String DvUpdatePro(@Validated@ModelAttribute("updateDvBean") Dv_Bean UpdateDvBean) {
 		
-		dv_Service.updateDvInfo(updateDv_Bean);
+		dv_Service.UpdateDvInfo(UpdateDvBean);
 		return "delivery/Dv_update_success";
+	}
+	
+	//Dv_delete
+	@GetMapping("/delivery/DvDelete")
+	public String DvDelete(@RequestParam("dv_id") String dv_id) {
+		
+		dv_Service.DeleteDvInfo(dv_id);
+		
+		return "delivery/Dv_delete";
 	}
 
 }

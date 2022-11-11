@@ -60,7 +60,7 @@
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">배송지 추가</h4>
-        <form:form action="${root}delivery/Dv_insert_pro" method="post" modelAttribute="insertDv_Bean">          
+        <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
             <form:hidden path="dv_id"/>
             <div class="form-group">
               <form:label path="dv_name">이름</form:label>
@@ -95,7 +95,7 @@
           <hr class="mb-4">
           <div class="hi">
           <form:button class="btn btn-dark" type="submit">입력 완료</form:button>
-          <form:button class="btn btn-dark" onclick="location.href='inputshippingAddress.jsp'">뒤로 가기</form:button>
+          <form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
           </div>
         </form:form>
       </div>

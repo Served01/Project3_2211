@@ -10,7 +10,7 @@
 <title>배송지 수정</title>
 </head>
 <body>
-	<form:form action="${root }delivery/Dv_update_pro" method="post" modelAttribute="updateDv_Bean">
+	<form:form action="${root }delivery/DvUpdatePro" method="post" modelAttribute="UpdateDvBean">
 		<form:hidden path="dv_id"/>
 		<div>
 			<form:label path="dv_name">이름</form:label>

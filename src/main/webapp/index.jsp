@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="${root}delivery/Dv_list?dv_id='hyun3'">list</a>	
+	<a href="${root}delivery/DvList?dv_id='hyun3'">list</a>	
+	<a href="${root}delivery/DvInsert?dv_id='hyun3'">insert</a>		
+	<a href="${root}delivery/DvUpdate?dv_id='hyun3'">update</a>	
+	<a href="${root}delivery/DvDelete?dv_id='hyun3'">delete</a>	
 </body>
 </html>
