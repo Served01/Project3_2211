@@ -20,21 +20,26 @@
 		<!-- 기능 확인을 위한 임시 줄 -->  
 			<div>
 				<form:label path="rv_id">작성자</form:label>
-				<form:input path="rv_id"></form:input>
+				<form:input path="rv_id" readonly="true"/><br>
 				<form:errors path="rv_id" style="color:red"></form:errors>
 			</div>
 			<div>
-				<form:label path="rv_score">리뷰 평점</form:label>
-				<form:input path="rv_score"></form:input>
+				<form:label path="rv_score">리뷰 평점</form:label><br>
+				<form:radiobutton path="rv_score" value="0" label="0점"/><br>
+				<form:radiobutton path="rv_score" value="1" label="1점"/><br>
+				<form:radiobutton path="rv_score" value="2" label="2점"/><br>
+				<form:radiobutton path="rv_score" value="3" label="3점"/><br>
+				<form:radiobutton path="rv_score" value="4" label="4점"/><br>
+				<form:radiobutton path="rv_score" value="5" label="5점"/><br>
 				<form:errors path="rv_score" style="color:red"></form:errors>
 			</div>
 			<div>
-				<form:label path="rv_content">리뷰 내용</form:label>
-				<form:textarea path="rv_content" rows="10" style="resize:none"></form:textarea>
+				<form:label path="rv_content">리뷰 내용</form:label><br>
+				<form:textarea path="rv_content" cols="50" rows="10" style="resize:none"></form:textarea><br>
 				<form:errors path="rv_content" style="color:red"></form:errors>
 			</div>
 			<div>
-				<form:button>작성하기</form:button>
+				<form:button type="submit">작성하기</form:button>
 			</div>					
 		</form:form>
 					

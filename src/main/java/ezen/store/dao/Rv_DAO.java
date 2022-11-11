@@ -29,9 +29,9 @@ public class Rv_DAO {
 	}
 	
 	// 수정 대상 리뷰 정보 불러오기
-	public Rv_Bean updatecheckRvBean(int rv_number) {
+	public Rv_Bean updateCheckRvBean(int rv_number) {
 		
-		return rvMapper.updatecheckRvBean(rv_number);
+		return rvMapper.updateCheckRvBean(rv_number);
 		
 	}
 	

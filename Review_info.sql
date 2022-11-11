@@ -5,7 +5,7 @@ rv_bknumber number(8) not null,
 rv_id varchar2(20) not null,
 rv_date date not null,
 rv_score number(1) not null,
-rv_content varchar2(1000) null,
+rv_content varchar2(1500) null,
 rv_deleted varchar2(7) not null
 );
 
@@ -17,6 +17,12 @@ insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_con
 	values(review_seq.nextval, 22020001, 'hyun2', sysdate, 5, '내용2', '0');
 insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_content, rv_deleted)
 	values(review_seq.nextval, 22020001, 'hyun3', sysdate, 3, '내용3', '0');
+insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_content, rv_deleted)
+	values(review_seq.nextval, 22020001, 'hyun4', sysdate, 4, '내용4', '0');
+insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_content, rv_deleted)
+	values(review_seq.nextval, 22020001, 'hyun5', sysdate, 5, '내용5', '0');
+insert into REVIEW_DATA(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_content, rv_deleted)
+	values(review_seq.nextval, 22020001, 'hyun6', sysdate, 3, '내용6', '0');
 	
 commit;
 

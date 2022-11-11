@@ -29,9 +29,9 @@ public class Rv_Service {
 	}
 	
 	//수정 리뷰 정보 불러오기
-	public Rv_Bean updatecheckRvBean(int rv_number) {
+	public Rv_Bean updateCheckRvBean(int rv_number) {
 		
-		return rvDAO.updatecheckRvBean(rv_number);
+		return rvDAO.updateCheckRvBean(rv_number);
 		
 	}
 	

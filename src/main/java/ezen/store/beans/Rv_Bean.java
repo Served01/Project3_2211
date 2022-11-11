@@ -1,13 +1,32 @@
 package ezen.store.beans;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Rv_Bean {
 	
 	private int rv_number;
+	
 	private int rv_bknumber;
+	
+	@NotBlank
+	@Pattern(regexp="[a-zA-Z1-9]{2,20}")
 	private String rv_id;
+	
+	
 	private String rv_date;
+	
+	@Min(0)
+	@Max(5)
 	private int rv_score;
+	
+	// 한글은 UTF-8 기준으로 3바이트를 차지한다. 영어는 1바이트를 차지한다.
+	@Size(min=0, max=1500)
 	private String rv_content;
+	
 	private String rv_deleted;
 	
 	public int getRv_number() {
