@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Rv_Mapper;
 
 //Spring MVC
@@ -81,15 +83,26 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factory;		
 	}
 		
-	//Query 실행을 위한 객체를 관리(Mapper 관리)
+	//Review 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
 	@Bean
-	public MapperFactoryBean<Rv_Mapper> getMapperFactoryBean(SqlSessionFactory factory){
+	public MapperFactoryBean<Rv_Mapper> getRvMapperFactoryBean(SqlSessionFactory factory){
 		
-		MapperFactoryBean<Rv_Mapper> factoryBean = new MapperFactoryBean<Rv_Mapper>(Rv_Mapper.class);
+		MapperFactoryBean<Rv_Mapper> rvfactoryBean = new MapperFactoryBean<Rv_Mapper>(Rv_Mapper.class);
 			
-		factoryBean.setSqlSessionFactory(factory); 
+		rvfactoryBean.setSqlSessionFactory(factory); 
 			
-		return factoryBean;
+		return rvfactoryBean;
+	}
+	
+	//Book 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
+	@Bean
+	public MapperFactoryBean<Bk_Mapper> getBkMapperFactoryBean(SqlSessionFactory factory){
+			
+		MapperFactoryBean<Bk_Mapper> bkfactoryBean = new MapperFactoryBean<Bk_Mapper>(Bk_Mapper.class);
+				
+		bkfactoryBean.setSqlSessionFactory(factory); 
+				
+		return bkfactoryBean;
 	}
 	
 	// 두개의 서로다른 properties 설정이 충돌나지 않도록 합니다.
@@ -115,6 +128,13 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		WebMvcConfigurer.super.addInterceptors(registry);	
 		
+	}
+	
+	// 스탠다드서블릿멀티파트리졸버 등록 (upload/download 용도)
+	@Bean
+	public StandardServletMultipartResolver multipartResolver() {
+				
+		return new StandardServletMultipartResolver();
 	}
 }
 
