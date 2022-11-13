@@ -19,7 +19,10 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 import ezen.store.mapper.Bk_Mapper;
+import ezen.store.mapper.Ca_Mapper;
+import ezen.store.mapper.Dv_Mapper;
 import ezen.store.mapper.Rv_Mapper;
+import ezen.store.mapper.Wi_Mapper;
 
 //Spring MVC
 @Configuration
@@ -104,6 +107,40 @@ public class ServletAppContext implements WebMvcConfigurer{
 				
 		return bkfactoryBean;
 	}
+	
+	//Delivery 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
+	@Bean
+	public MapperFactoryBean<Dv_Mapper> getDvMapperFactoryBean(SqlSessionFactory factory){
+		
+		MapperFactoryBean<Dv_Mapper> dvfactoryBean = new MapperFactoryBean<Dv_Mapper>(Dv_Mapper.class);
+				
+		dvfactoryBean.setSqlSessionFactory(factory); 
+				
+		return dvfactoryBean;			
+	}
+	
+	//Cart 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
+	@Bean
+	public MapperFactoryBean<Ca_Mapper> getCaMapperFactoryBean(SqlSessionFactory factory){
+			
+		MapperFactoryBean<Ca_Mapper> cafactoryBean = new MapperFactoryBean<Ca_Mapper>(Ca_Mapper.class);
+					
+		cafactoryBean.setSqlSessionFactory(factory); 
+					
+		return cafactoryBean;			
+	}
+		
+	//Wish 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
+	@Bean
+	public MapperFactoryBean<Wi_Mapper> getWiMapperFactoryBean(SqlSessionFactory factory){
+			
+		MapperFactoryBean<Wi_Mapper> wifactoryBean = new MapperFactoryBean<Wi_Mapper>(Wi_Mapper.class);
+					
+		wifactoryBean.setSqlSessionFactory(factory); 
+					
+		return wifactoryBean;			
+	}
+	
 	
 	// 두개의 서로다른 properties 설정이 충돌나지 않도록 합니다.
 	@Bean

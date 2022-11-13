@@ -17,6 +17,20 @@
 <a href="${root }book/BkInsert">BkInsert</a>
 <a href='${root }book/BkList?bk_local=해외&bk_genre=인문'>해외 인문 리스트</a>
 
+<h3>Delivery 기능</h3>
+<a href="${root}delivery/DvList?dv_id='hyun3'">list</a>	
+<a href="${root}delivery/DvInsert?dv_id='hyun3'">insert</a>		
+<a href="${root}delivery/DvUpdate?dv_id='hyun3'">update</a>	
+<a href="${root}delivery/DvDelete?dv_id='hyun3'">delete</a>	
+
+<h3>Cart 기능</h3>
+<a href="${root}cart/cart_info?ca_mbid=admin">카트인포</a>
+<a href="${root}cart/cart_test">카트추가테스트</a>
+
+<h3>Wish 기능</h3>
+<a href="${root}wish/wish_info?wi_mbid=admin&page=1">위시인포</a>
+<a href="${root}wish/wish_test">위시추가테스트</a>
+
 
 </body>
 </html>
