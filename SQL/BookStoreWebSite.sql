@@ -56,13 +56,13 @@ create table Book_info(
     bk_genre VARCHAR2(50) not null,
     bk_infodate date 
         default sysdate not null,
-    bk_detail VARCHAR2(1500) not null,
+    bk_detail VARCHAR2(3000) not null,
     bk_quantity number(10) not null,
     bk_price number(10) not null,
     bk_title_upper varchar2(100) not null,
     bk_deleted varchar2(7) 
         default '0' not null
-)
+);
 
 -- bk_number 규칙
 -- 년도 4자리 + 랜덤숫자 순서대로 4자리(0001, 0002, 0003...)
@@ -135,7 +135,7 @@ create table Cart_info(
 	 ca_bkcount number(3) 
 	    	default 1 null
 	    		constraint ca_bkcount check (ca_bkcount between 1 and 999)
-)
+);
   
 insert into cart_info(ca_mbid,ca_bknumbers) values ('hyun1',20220001);
 insert into cart_info(ca_mbid,ca_bknumbers) values ('hyun1',20220002);
@@ -152,7 +152,7 @@ create table Wish_info(
     wi_bknumbers number(8) not null,
     	constraint wi_bknumbers_fk foreign key(wi_bknumbers)
     		references book_info(bk_number)
-)
+);
 
 insert into Wish_info values('hyun1',20220004);
 insert into Wish_info values('hyun1',20220005);
@@ -171,12 +171,12 @@ create table order_info(
     or_mbname varchar2(12) null,
     or_mbtel varchar2(15) null,
     or_status varchar2(12)
-    	default '0' null,
+    	default '0' not null,
     or_date date 
-        default sysdate null,
+        default sysdate not null,
     or_delivery number(10) null,
     or_deliveryCost number (4)
-    	default 3000 null,
+    	default 3000 not null,
     or_dvname varchar2(100) null,
     or_dvtel varchar2(15) null,
     or_dvaddress varchar2(100) null
@@ -203,11 +203,11 @@ create table order_items(
     ori_bknumber number(8) not null,
         constraint ori_bknumber_fk foreign key(ori_bknumber)
             references book_info(bk_number),
-    ori_bkprice number(10) null,
+    ori_bkprice number(10) not null,
     ori_bkdiscount number(3) 
-        default 0 null,
+        default 0 not null,
     ori_bkcount number(3) 
-    	default 1 null
+    	default 1 not null
   ) ;
 
 alter table order_items add constraint ori_number_fk foreign key(ori_number)
@@ -233,8 +233,6 @@ drop table order_items;
 
 commit;
 
-drop table book_info;
-
 drop table order_items;
 
 drop table order_info;
@@ -251,5 +249,6 @@ drop table book_info;
 
 drop table member_info;
 
+commit;
 
 
