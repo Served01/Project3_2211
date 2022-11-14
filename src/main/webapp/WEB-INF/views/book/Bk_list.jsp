@@ -18,7 +18,7 @@ bk_genre = ${bk_genre }
 		<div>
 		<a href='${root }book/BkSelect?bk_local=${str1.bk_local}&bk_genre=${str1.bk_genre}'>${str1.bk_title}</a>
 		<div>
-						<img src="${root }upload/${ReadBkBean.bk_image}" width="100%"/>						
+						<img src="${root }upload/${str1.bk_image}" width="100%"/>						
 		</div>
 		<p >${str1.bk_number}</p>
 		<p >${str1.bk_writer}</p>

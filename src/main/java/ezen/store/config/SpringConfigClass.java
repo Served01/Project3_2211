@@ -36,8 +36,8 @@ public class SpringConfigClass extends AbstractAnnotationConfigDispatcherServlet
 	protected void customizeRegistration(Dynamic registration) {
 		super.customizeRegistration(registration);
 		
-		//																	10MB 사이즈의 크기를 지닌 이미지 저장
-		MultipartConfigElement configElement = new MultipartConfigElement(null, 1024*1024*5, 1024*1024*10, 0);
+		//										            				10MB 사이즈의 크기를 지닌 이미지 저장
+		MultipartConfigElement configElement = new MultipartConfigElement(null, 1024*1024*100, 1024*1024*200, 0);
 		registration.setMultipartConfig(configElement); 
 	}
 	

@@ -39,8 +39,4 @@ public interface Bk_Mapper {
 			+ "where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
 		Bk_Bean getBkInfo(int bk_number);
 	
-	//
-	@Select("select count(*) from Book_info"
-			+ "where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
-	int getBkCnt(int bk_number);
 }

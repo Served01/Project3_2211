@@ -14,6 +14,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -91,6 +92,15 @@ public class ServletAppContext implements WebMvcConfigurer{
 			factoryBean.setSqlSessionFactory(factory); 
 			
 			return factoryBean;
+			
+		}
+		
+		// Secure Coding
+		// 모든 요청 주소는 무조건 인터셉터를 통과하도록 해야 합니다.(/**) 
+		
+		public void addInterceptors(InterceptorRegistry registry) {
+			
+			WebMvcConfigurer.super.addInterceptors(registry);
 			
 		}
 		
