@@ -11,11 +11,11 @@
 <body>
 
 <h3>Review 기능</h3>
-<a href='${root }Review/RvList?rv_id=wslim&rv_bknumber=22020001'>Rv_list</a>
+<a href='${root }Review/RvList?rv_id=hyun1&rv_bknumber=20220001'>Rv_list</a>
 
 <h3>Book 기능</h3>
 <a href="${root }book/BkInsert">BkInsert</a>
-<a href='${root }book/BkList?bk_local=해외&bk_genre=인문'>해외 인문 리스트</a>
+<a href='${root }book/BkList?bk_local=국내&bk_genre=인문'>국내 인문 리스트</a>
 
 <h3>Delivery 기능</h3>
 <a href="${root}delivery/DvList?dv_id='hyun3'">list</a>	
@@ -30,6 +30,8 @@
 <h3>Wish 기능</h3>
 <a href="${root}wish/wish_info?wi_mbid=admin&page=1">위시인포</a>
 <a href="${root}wish/wish_test">위시추가테스트</a>
+
+<h3>Member 기능</h3>
 
 
 </body>

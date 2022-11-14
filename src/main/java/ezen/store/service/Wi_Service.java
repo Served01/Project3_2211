@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.PageCountBean;
 import ezen.store.beans.Wi_Bean;
-import ezen.store.dao.Ca_DAO;
 import ezen.store.dao.Wi_DAO;
 @Service
 @PropertySource("/WEB-INF/properties/option.properties")

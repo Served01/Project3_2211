@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
+
 import ezen.store.beans.Bk_Bean;
 
 public interface Bk_Mapper {
@@ -37,8 +39,4 @@ public interface Bk_Mapper {
 			+ "where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
 		Bk_Bean getBkInfo(int bk_number);
 	
-	//
-	@Select("select count(*) from Book_info"
-			+ "where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
-	int getBkCnt(int bk_number);
 }

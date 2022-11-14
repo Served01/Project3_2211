@@ -4,7 +4,6 @@ public class Wi_Bean {
 	
 	private String wi_mbid;
 	private	int wi_bknumbers;
-	
 	private int bk_number;
 	private String bk_title;
 	private String bk_writer;

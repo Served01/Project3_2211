@@ -14,9 +14,11 @@ import ezen.store.dao.Bk_DAO;
 
 
 @Service
-
+@PropertySource("/WEB-INF/properties/option.properties")
 public class Bk_Service {
 	
+	@Value("${path.upload}")
+	private String PathUpload;
 	
 	@Autowired
 	private Bk_DAO BkDAO;
@@ -38,7 +40,7 @@ public class Bk_Service {
 		String file_name = upload_file.getOriginalFilename();
 		
 		try {
-			upload_file.transferTo(new File("\\resources\\" + file_name));  
+			upload_file.transferTo(new File(PathUpload + "/" + file_name));  
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,7 +75,6 @@ public class Bk_Service {
 		  
 		return BkDAO.getBkInfo(bk_number); 
 	}
-	
 
 	public List<Bk_Bean> getBkList(String bk_local, String bk_genre) {
 		

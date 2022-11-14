@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Wi_Bean;
 
 public interface Wi_Mapper {

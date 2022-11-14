@@ -3,8 +3,6 @@ package ezen.store.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,15 +18,11 @@ import ezen.store.service.Bk_Service;
 
 
 @Controller
-@PropertySource("/WEB-INF/properties/option.properties")
 @RequestMapping("/book")
 public class Bk_Controller {
 
 	@Autowired
 	private Bk_Service BkService;
-	
-	@Value("${path.upload}")
-	private String PathUpload;
 
 	// 책정보 입력 컨트롤러
 	@GetMapping("/BkInsert")
@@ -57,7 +51,6 @@ public class Bk_Controller {
 		
 		model.addAttribute("bk_local", bk_local);
 		model.addAttribute("bk_genre", bk_genre);
-		model.addAttribute("PathUpload", PathUpload);
 
 		List<Bk_Bean> BkList = BkService.getBkList(bk_local, bk_genre);
 		model.addAttribute("BkList", BkList);

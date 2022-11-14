@@ -21,9 +21,9 @@ public class Bk_Validator implements Validator{
 		if(beanName.equals("InsertBkBean")) {
 			if(bk_Bean.isBk_numExist() == false) {
 				errors.rejectValue("bk_number", "DontCheckBk_numExist");
+					}
 				}
-			}
 		
 	}
 
-}
+	}
