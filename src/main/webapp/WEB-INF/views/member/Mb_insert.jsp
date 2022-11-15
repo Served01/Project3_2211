@@ -56,9 +56,9 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
-				<a href="#" onclick="location.href='index.jsp'"><h2>
-						<i class="fa-solid fa-book"></i>Ezen Book Store
-					</h2></a> <br>
+				<a href="#" onclick="location.href='index.jsp'">
+					<i class="fa-solid fa-book"></i>Ezen Book Store
+				</a><br>
 				<h4 class="mb-3">회원가입</h4>
 				<form:form action="${root }member/Mbinsertpro" method="post"
 					modelAttribute="insertMbBean">

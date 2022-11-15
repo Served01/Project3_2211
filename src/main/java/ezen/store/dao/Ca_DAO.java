@@ -39,7 +39,9 @@ public class Ca_DAO {
 	public void minusBookCount(String ca_mbid,int ca_bknumbers) {
 		ca_Mapper.minusBookCount(ca_mbid, ca_bknumbers);
 	}
-	
+	public void setBookCount(String ca_mbid,int ca_bknumbers,int newval) {
+		ca_Mapper.setBookCount(ca_mbid, ca_bknumbers,newval);
+	}
 	//oder
 	public void createOderInfo(String or_number, String ca_mbid) {
 		ca_Mapper.createOderInfo(or_number, ca_mbid);

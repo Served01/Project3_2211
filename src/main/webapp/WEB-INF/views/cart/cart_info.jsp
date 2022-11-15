@@ -1,3 +1,6 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
@@ -292,14 +295,14 @@ let basket = {
 	        document.querySelector('#sum_p_price').textContent = '합계금액: ' + this.totalPrice.formatNumber() + '원';
 	    },
 	    //개별 수량 변경
-	    changePNum: function (pos,ca_bknumbers) {
+	    changePNum: function (pos,ca_bknumbers,bk_quantity) {
 	        var item = document.querySelector('input[name=p_num'+pos+']');
 	        var p_num = parseInt(item.getAttribute('value'));
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
 	        
 	        var ca_mbid = 'admin';
 	        
-	        if (parseInt(newval) < 1 || parseInt(newval) > 99) { return false; }
+	        if (parseInt(newval) < 1 || parseInt(newval) > bk_quantity) { return false; }
 
 	        item.setAttribute('value', newval);
 	        item.value = newval;
@@ -323,6 +326,43 @@ let basket = {
 		
 				})
 	        }
+	        
+	        //전송 처리 결과가 성공이면    
+	        this.reCalc();
+	        this.updateUI();
+	    },
+	    changeKeyupPNum: function (pos,ca_bknumbers,bk_quantity) {
+	    	
+	        var item = document.querySelector('input[name=p_num'+pos+']');
+	        
+	        var p_num = parseInt(item.getAttribute('value'));
+	        
+	        
+	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
+	        
+	        var ca_mbid = 'admin';
+	        
+	        if (newval < 1 || newval > bk_quantity) { 
+	        	alert("재고가 부족합니다.");
+	        	item.setAttribute('value', p_num);
+		        item.value = p_num;
+	        	return false; 
+	        	}
+	        
+	        item.setAttribute('value', newval);
+	        item.value = newval;
+
+	        var price = item.parentElement.parentElement.previousElementSibling.firstElementChild.getAttribute('value');
+	        item.parentElement.parentElement.nextElementSibling.textContent = (newval * price).formatNumber()+"원";
+	        //AJAX 업데이트 전송
+
+	       
+	        	$.ajax({
+					url: '${root}cart/cart_setBookCount/' + ca_mbid +'/'+ ca_bknumbers +'/'+newval,
+					type: 'get',
+					dataType: 'text'
+	        	})			
+				
 	        
 	        //전송 처리 결과가 성공이면    
 	        this.reCalc();
@@ -353,41 +393,91 @@ let basket = {
 	    },
 	    //콤마찍고 시작
 	    orderInitiator: function(){
+	    	<%java.util.Date today = new java.util.Date();
+			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
+			String todayString = formatTime.format(today); %>
 	    	var ca_mbid = 'admin';
-	    	//주문번호 생성하고
-	    	//var or_number = '연도' +'월' + 난수 6자리;
 	    		
 			
-			var or_number = '19TES666666';
+			var or_number1 = this.calOrderNum1();
+			var or_number2 = this.calOrderNum2();
+			
+			this.orderCreate(or_number1,ca_mbid);
+			setTimeout(this.orderItems(or_number1,ca_mbid), 100);
+			
+	    		
 	    	
-			
-			
+	    	
+	    	
+	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
+	    },
+	    orderCreate: function(or_number1,ca_mbid){
 	    	$.ajax({
-				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
+				url: '${root}cart/cart_createOderInfo/' + or_number1 +'/'+ ca_mbid,
 				type: 'get',
 				dataType: 'text'
 				
 	    	})
-	    	
-	    	
+	    },
+	    orderItems: function(or_number1,ca_mbid){
 	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
-	        	$.ajax({
-					url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid,
-					type: 'get',
-					dataType: 'text'
-				})	        		        	
+	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
+	        	if (ca_bkcount != 0){
+	        		$.ajax({
+						url: '${root}cart/cart_insertOderItems/'+ or_number1 +'/'+ ca_bknumbers + '/' + ca_mbid,
+						type: 'get',
+						dataType: 'text'
+					})		
+	        	}
+	        	        		        	
 	           // item.parentElement.parentElement.parentElement.remove();
 	        })
-	    	
-	    	//
-	    	//this.orderCreate(or_number,ca_mbid);
-	    	//
-	    	//this.orderItems(or_number,ca_mbid);
+	    },
+	    //주문번호생성로직
+	    calOrderNum1: function(){
 	    	
 	    	
+		    <%
+		    
+			String orderNum1;
+			Random rnd1 =new Random();
+			StringBuffer buf1 =new StringBuffer();
+				
+				for(int i=0;i<6;i++){
+				    if(rnd1.nextBoolean()){
+				        buf1.append((char)((int)(rnd1.nextInt(26))+65));
+				    }else{
+				        buf1.append((rnd1.nextInt(10)));
+				    }
+				}
+				
+				orderNum1 = todayString+buf1;
+	    	%>
+	   	return '<%=orderNum1%>' ;
+    	
 	    	
-	    	//로케이션~ 주문번호 넘겨줌
+	    },
+	    calOrderNum2: function(){
+		    <%
+		    
+			String orderNum2;
+			Random rnd2 =new Random();
+			StringBuffer buf2 =new StringBuffer();
+				
+				for(int i=0;i<6;i++){
+				    if(rnd2.nextBoolean()){
+				        buf2.append((char)((int)(rnd2.nextInt(26))+65));
+				    }else{
+				        buf2.append((rnd2.nextInt(10)));
+				    }
+				}
+				
+				orderNum2 = todayString+buf2;
+	    	%>
+	   	return '<%=orderNum2%>' ;
+    	
+	    	
 	    }
 	    
 	    
@@ -431,7 +521,14 @@ let basket = {
         		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
 	                <div class="row data">
 	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                    	<c:choose>
+	                    		<c:when test="${str.bk_quantity != 0}">
+			                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        	</c:otherwise>
+	                        </c:choose>
 	                        <div class="img"><img src="${root} + ${str.bk_image }" width="60"></div>
 	                        <div class="pname">
 	                            <span>제목 : ${str.bk_title }</span>
@@ -441,15 +538,28 @@ let basket = {
 	                        </div>
 	                    </div>
 	                    <div class="subdiv">
-	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
-	                        <div class="num">
-	                            <div class="updown">
-	                                <input type="text" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="2" maxlength="4" class="p_num" value="${str.ca_bkcount} " onkeyup="javascript:basket.changePNum(${status.count},${str.bk_number });">
-	                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number });"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-	                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number });"><i class="fas fa-arrow-alt-circle-down down"></i></span>
-	                            </div>
-	                        </div>
-	                        <div class="sum">${str.bk_price*str.ca_bkcount }원</div>
+	                    	<c:choose>
+	                    		<c:when test="${str.bk_quantity != 0}">
+			                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+			                        <div class="num">
+			                            <div class="updown">
+			                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="2" maxlength="2" class="p_num"   value="${str.ca_bkcount} " onkeyup="javascript:basket.changeKeyupPNum(${status.count},${str.bk_number },${str.bk_quantity });">
+			                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"><i class="fas fa-arrow-alt-circle-up up"></i></span>
+			                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+			                            </div>
+			                        </div>
+			                        <div class="sum">${str.bk_price*str.ca_bkcount }원</div>
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+			                        <div class="num">
+			                            <div class="updown">
+			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly >재고가없습니다</input>
+			                            </div>
+			                        </div>
+			                        <div class="sum">0원</div>
+	                        	</c:otherwise>
+	                        </c:choose>
 	                    </div>
 	                    <div class="subdiv">
 	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>

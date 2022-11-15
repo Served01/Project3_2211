@@ -15,9 +15,9 @@
 
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto">
-			<a href="#" onclick="location.href='index'"><h2>
+			<a href="#" onclick="location.href='index'">
 					<i class="fa-solid fa-book"></i>Ezen Book Store
-				</h2></a> <br>
+				</a> <br>
 			<h4 class="mb-3">회원 목록 보기 화면 - 마이 페이지(관리자)</h4>
 			<table border="1">
 				<tr align="center">

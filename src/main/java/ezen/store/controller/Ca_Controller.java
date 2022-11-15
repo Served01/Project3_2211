@@ -79,7 +79,14 @@ public class Ca_Controller {
 								@PathVariable int ca_bknumbers) {
 		ca_Service.minusBookCount(ca_mbid,ca_bknumbers) ;
 		return null;
-		
+	}
+	
+	@GetMapping("/cart_setBookCount/{ca_mbid}/{ca_bknumbers}/{newval}")
+	public String cart_setBookCount(@PathVariable String ca_mbid,
+								@PathVariable int ca_bknumbers,
+								@PathVariable int newval) {
+		ca_Service.setBookCount(ca_mbid,ca_bknumbers,newval) ;
+		return null;
 	}
 	
 	@GetMapping("/cart_createOderInfo/{or_number}/{ca_mbid}")

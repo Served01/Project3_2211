@@ -26,7 +26,6 @@ public interface Wi_Mapper {
 		
 	@Delete("delete from Wish_info where wi_bknumbers = #{wi_bknumbers}")
 		void delwish(@Param("wi_mbid") String wi_mbid,@Param("wi_bknumbers")int wi_bknumbers);
-	
 	@Delete("delete from Wish_info where wi_mbid = #{wi_mbid}")
 		void delwishAll(String wi_mbid);
 }

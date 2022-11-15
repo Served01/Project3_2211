@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.session.RowBounds;
-
 import ezen.store.beans.Bk_Bean;
 
 public interface Bk_Mapper {
@@ -33,7 +31,7 @@ public interface Bk_Mapper {
 			+ " and b.bk_genre = #{bk_genre}"
 			+ " group by b.bk_title, b.bk_image, b.bk_number, b.bk_writer, b.bk_publisher, to_char(b.bk_pubdate, 'YYYY-MM-DD'),"
 			+ " b.bk_local, b.bk_genre, b.bk_quantity, b.bk_price")
-		List<Bk_Bean> getBkList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+	List<Bk_Bean> getBkList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
 	
 	
 	//해당 책에 있는 리뷰 평점을 추출하여 가져와 평균을 냅니다.

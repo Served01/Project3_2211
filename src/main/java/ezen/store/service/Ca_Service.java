@@ -39,6 +39,10 @@ public class Ca_Service {
 		ca_DAO.minusBookCount(ca_mbid, ca_bknumbers);
 	}
 	
+	public void setBookCount(String ca_mbid,int ca_bknumbers,int newval) {
+		ca_DAO.setBookCount(ca_mbid, ca_bknumbers,newval);
+	}
+	
 	public void createOderInfo(String or_number, String ca_mbid) {
 		ca_DAO.createOderInfo(or_number, ca_mbid);
 	}

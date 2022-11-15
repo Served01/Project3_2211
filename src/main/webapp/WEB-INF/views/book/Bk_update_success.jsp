@@ -10,7 +10,7 @@
 </head>
 <body>
 	<script>
-		alert("책 정보 입력에 성공하였습니다.")
+		alert("책 정보 수정에 성공하였습니다.")
 	</script>
 </body>
 </html>
