@@ -20,7 +20,6 @@
 	        
 	        
 	        <table>
-		<input type="text" id="or_mbid" name="or_mbid" class="form-control" value="${orBean.or_mbid }" disabled="disabled"/>
 		<tr>
 			<td>주문 번호 : ${orBean.or_number }</td>
 		</tr>
@@ -64,6 +63,12 @@
     	</tr>
 		<tr>
     		<td>책 번호: ${oriBean.ori_bknumber }</td>
+		</tr>
+		<tr>
+    		<td>책 제목: <a href="${root}book/Bk_select?bk_number=${oriBean.ori_bknumber }">${oriBean.bk_title }</a></td>
+    	</tr>
+		<tr>
+			<td>${oriBean.bk_image }</td>
     	</tr>
 		<tr>
     		<td>구매 가격: ${oriBean.ori_bkprice }</td>

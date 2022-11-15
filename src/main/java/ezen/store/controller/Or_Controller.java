@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Ca_Bean;
@@ -89,12 +90,13 @@ public class Or_Controller {
 		
 		String or_number = "";
 		
-		if(infoOrBean.size() != 0) {
-		or_number = infoOrBean.get(0).getOr_number();
-		}
+//		if(infoOrBean.size() != 0) {
+//		or_number = infoOrBean.get(0).getOr_number();
+//		}
 		
 		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
 		model.addAttribute("itemsOrBean", itemsOrBean);
+		
 		
 		return "order/Or_list";
 		
@@ -104,13 +106,14 @@ public class Or_Controller {
 	
 	
 	//주문 상세 정보 출력
-	@GetMapping("/Or_select")
+//	@GetMapping("/Or_select")
+	@RequestMapping(value="/Or_select", method = {RequestMethod.GET, RequestMethod.POST})
 	public String OrSelect(@RequestParam("or_mbid") String or_mbid,
 			@RequestParam("or_number") String or_number, Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
 		
-		Or_Bean infoOrBean = or_Service.getOrderInfo(or_mbid, or_number);
+		List<Or_Bean> infoOrBean = or_Service.getOrInfo(or_mbid, or_number);
 		
 		//String or_number = infoOrBean.get(0).getOr_number();
 		
@@ -126,10 +129,11 @@ public class Or_Controller {
 	
 	
 	//결제 진행 페이지
-	/*
+	
 	@GetMapping("/Or_purchase")
 	public String Orpurchase(@RequestParam("dv_id") String dv_id,
-			@RequestParam("ca_mbid") String ca_mbid, Model model) {
+			@RequestParam("ca_mbid") String ca_mbid,
+			@RequestParam("or_mbid") String or_mbid, Model model) {
 		
 		List<Dv_Bean> Deliverylist = dv_Service.getDvList(dv_id);
 		model.addAttribute("Deliverylist", Deliverylist);
@@ -137,10 +141,13 @@ public class Or_Controller {
 		List<Ca_Bean> infoCa_Bean = ca_Service.getCartInfo(ca_mbid);
 		model.addAttribute("infoCa_Bean", infoCa_Bean);
 		
+		List<Or_Bean> infoOr_Bean = or_Service.getOrInfo(or_mbid, or_mbid);
+		model.addAttribute("infoOr_Bean", infoOr_Bean);
+		
 		return "order/Or_purchase";
 	}
 	
-	*/
+	
 	
 	
 //	@GetMapping("/Or_select")

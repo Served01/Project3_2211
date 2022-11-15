@@ -30,11 +30,18 @@ public class Or_Service {
 		public	List<Or_Bean> OrList(String or_mbid) {
 			return or_DAO.OrList(or_mbid);
 		}
-
 		
-		public	Or_Bean getOrderInfo(String or_mbid, String or_number) {
+		
+		String or_mbid = "or_mbid";
+		String or_number = "or_number";
+		
+		public List<Or_Bean> getOrInfo(String or_mbid, String or_number){
 			return or_DAO.getOrInfo(or_mbid, or_number);
 		}
+		
+//		public	List<Or_Bean> getOrInfo(String or_number) {
+	//		return or_DAO.getOrInfo(or_number);
+		//}
 		public	List<Or_Bean> OrSelect(String or_number) {
 			return or_DAO.OrSelect(or_number);
 		}

@@ -3,6 +3,7 @@ package ezen.store.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -10,8 +11,7 @@ import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Or_Bean;
 
 public interface Or_Mapper {
-
-
+	
 	
 		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
 			+ "    from order_info\r\n"
@@ -37,16 +37,19 @@ public interface Or_Mapper {
 		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
 				+ "    from order_info\r\n"
 				+ "    where or_mbid in (select mb_id\r\n"
-				+ "                        from  Member_info\r\n"
-				+ "                        where mb_id = #{or_mbid}\r\n"
-				+ "							and or_number = #{or_number})")
-		Or_Bean getOrInfo(String or_mbid, String or_number);
+				+ "			             from  Member_info\r\n"
+				+ "	                       where mb_id = #{or_mbid})\r\n"
+				+ "		and or_number = #{or_number}")
+		List<Or_Bean> getOrInfo (@Param("or_mbid") String or_mbid, @Param("or_number") String or_number);
+	//	@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
+	//			+ "    from order_info\r\n"
+	//			+ "    where or_number = #{or_number}")
+	//	List<Or_Bean> getOrInfo(String or_number);
 			
-		@Select("select ori_number, ori_bknumber, ori_bkprice, ori_bkdiscount, ori_bkcount\r\n"
-				+ "    from order_items\r\n"
-				+ "    where ori_number in (select or_number\r\n"
-				+ "                        from  Order_info\r\n"
-				+ "                        where or_number = #{or_number})")
+		@Select("select ori.ori_number, bk.bk_title, bk.bk_image, ori.ori_bknumber, ori.ori_bkprice, ori.ori_bkdiscount, ori.ori_bkcount\r\n"
+				+ "    from order_items ori, book_info bk\r\n"
+				+ "    where ori_number in (select or_number from Order_info where or_number = #{or_number})"
+				+ "		and ori.ori_bknumber = bk.bk_number")
 		List<Or_Bean> OrSelect(String or_number);
 		
 //		@Select("select or.or_number, or.or_mbid, or.or_mbname, or.or_mbtel, or.or_status, or.or_date, or.or_delivery, or.or_deliveryCost, or.or_dvname, or.or_dvtel, or.or_dvaddress,\r\n"

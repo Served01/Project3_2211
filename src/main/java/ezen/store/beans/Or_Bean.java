@@ -21,11 +21,18 @@ public class Or_Bean {
 	private int ori_bkdiscount;
 	private int ori_bkcount;
 	
+	private int bk_number;
 	private String bk_title;
 	private String bk_writer;
 	private String bk_publisher;
 	private String bk_image;
+	private String bk_quantity;
+	private String bk_price;
 	
+	private String dv_id;
+	private String dv_name;
+	private String dv_tel;
+	private String dv_address;
 	
 	public String getOr_number() {
 		return or_number;
@@ -93,6 +100,7 @@ public class Or_Bean {
 	public void setOr_dvaddress(String or_dvaddress) {
 		this.or_dvaddress = or_dvaddress;
 	}
+	
 	public String getOri_number() {
 		return ori_number;
 	}
@@ -124,6 +132,12 @@ public class Or_Bean {
 		this.ori_bkcount = ori_bkcount;
 	}
 	
+	public int getBk_number() {
+		return bk_number;
+	}
+	public void setBk_number(int bk_number) {
+		this.bk_number = bk_number;
+	}
 	public String getBk_title() {
 		return bk_title;
 	}
@@ -148,6 +162,42 @@ public class Or_Bean {
 	public void setBk_image(String bk_image) {
 		this.bk_image = bk_image;
 	}
-
+	public String getBk_quantity() {
+		return bk_quantity;
+	}
+	public void setBk_quantity(String bk_quantity) {
+		this.bk_quantity = bk_quantity;
+	}
+	public String getBk_price() {
+		return bk_price;
+	}
+	public void setBk_price(String bk_price) {
+		this.bk_price = bk_price;
+	}
+	
+	public String getDv_id() {
+		return dv_id;
+	}
+	public void setDv_id(String dv_id) {
+		this.dv_id = dv_id;
+	}
+	public String getDv_name() {
+		return dv_name;
+	}
+	public void setDv_name(String dv_name) {
+		this.dv_name = dv_name;
+	}
+	public String getDv_tel() {
+		return dv_tel;
+	}
+	public void setDv_tel(String dv_tel) {
+		this.dv_tel = dv_tel;
+	}
+	public String getDv_address() {
+		return dv_address;
+	}
+	public void setDv_address(String dv_address) {
+		this.dv_address = dv_address;
+	}
 	
 }

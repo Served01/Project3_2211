@@ -1,7 +1,9 @@
 package ezen.store.dao;
 
 import java.util.List;
+import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,12 +25,16 @@ public class Or_DAO {
 //	}
 	
 	//구매 내역 정보 로드
-	public	Or_Bean getOrInfo(String or_mbid, String or_number) {
-		return or_Mapper.getOrInfo(or_mbid, or_number);
-	}
+//	public	List<Or_Bean> getOrInfo(String or_number) {
+	//	return or_Mapper.getOrInfo(or_number);
+//	}
 	public List<Or_Bean> OrSelect(String or_number) {
 		return or_Mapper.OrSelect(or_number);
 	}
+	
+	public List<Or_Bean> getOrInfo(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number){
+		return or_Mapper.getOrInfo(or_mbid, or_number);
+	};
 	
 	//내역 정보 수정
 //	public void Or_update(int user_idx) {				

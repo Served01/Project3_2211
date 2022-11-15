@@ -23,7 +23,7 @@
 	            </tr>
 	            <tr>
 	            	<td>주문번호 <a href="${root}order/Or_select?or_mbid=${orBean.or_mbid }&or_number=${orBean.or_number }">${orBean.or_number }</a></td>
-				</tr>
+				</tr> 
 	            <tr>
 					<td>구매날짜 ${orBean.or_date }</td>
 				</tr>
@@ -33,7 +33,10 @@
 	            <tr>
 					<td>배송지 ${orBean.or_dvaddress }</td>
 				</tr>
-			<c:forEach var="oriBean" items="${itemsOrBean}" varStatus="status">
+				<tr>
+					<td>배송 상태: ${orBean.or_status }</td>
+				</tr>
+			<%-- <c:forEach var="oriBean" items="${itemsOrBean}" varStatus="status">
 				<table class="table">
 				<tr>
 					<td>주문번호 ${oriBean.ori_number }</td>
@@ -54,8 +57,9 @@
 					<td>구매개수 ${oriBean.ori_bkcount }</td>
 				</tr>
 				</table>
-				</c:forEach>
+				</c:forEach> --%>	
 		</table>
+			
 	</c:forEach>
 </form>
 
