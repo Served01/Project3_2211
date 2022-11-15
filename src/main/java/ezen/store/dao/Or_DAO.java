@@ -14,8 +14,8 @@ public class Or_DAO {
 	@Autowired
 	private Or_Mapper or_Mapper;
 		
-	public	List<Or_Bean> getOrderInfo(String or_mbid) {
-		return or_Mapper.getOrderInfo(or_mbid);
+	public	List<Or_Bean> OrList(String or_mbid) {
+		return or_Mapper.OrList(or_mbid);
 	}
 	
 //	public void Or_insert(Or_Bean addOrderDataBean) {
@@ -23,7 +23,9 @@ public class Or_DAO {
 //	}
 	
 	//구매 내역 정보 로드
-//	public List<Or_Bean> OrSelect(String or_number) {
+	public	Or_Bean getOrInfo(String or_mbid, String or_number) {
+		return or_Mapper.getOrInfo(or_mbid, or_number);
+	}
 	public List<Or_Bean> OrSelect(String or_number) {
 		return or_Mapper.OrSelect(or_number);
 	}
@@ -36,4 +38,11 @@ public class Or_DAO {
 //	public void Or_insert(String or_mbid, int or_bknumbers) {
 //		or_Mapper.Or_insert(or_mbid, or_bknumbers); 
 //	}
+	
+	
+	/*
+	public int getContentCnt(String or_mbid) {
+		return or_Mapper.getContentCnt(or_mbid);
+	}
+	*/
 }

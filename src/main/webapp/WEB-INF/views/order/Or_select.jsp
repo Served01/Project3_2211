@@ -16,17 +16,65 @@
 <body>
 
 <form name="orderdetail" id="orderdetail" method="post" class="orderdetail">
-	<c:forEach var="orBean" items="${DetailOrBean}" varStatus="status">
+	<c:forEach var="orBean" items="${infoOrBean}" varStatus="status">
 	        
+	        
+	        <table>
 		<input type="text" id="or_mbid" name="or_mbid" class="form-control" value="${orBean.or_mbid }" disabled="disabled"/>
-		<th>아이디 : ${orBean.or_mbid }</th>	
-		<th>책번호 : ${orBean.or_bknumber }</th>
-		<th>구매가격: ${orBean.or_bkprice }</th>
-		<th>구매개수: ${orBean.or_cacount }</th>
-		<th>구매날짜: ${orBean.or_date }</th>
-		<th>송장번호: ${orBean.or_delivery }</th>
-		<th>배송지: ${orBean.or_address }</th>
-	           	                  	
+		<tr>
+			<td>주문 번호 : ${orBean.or_number }</td>
+		</tr>
+		<tr>
+			<td>아이디 : ${orBean.or_mbid }</td>
+		</tr>
+		<tr>	
+			<td>구매자 이름 : ${orBean.or_mbname }</td>
+		</tr>
+		<tr>
+			<td>구매자 연락처: ${orBean.or_mbtel }</td>
+		</tr>
+		<tr>
+			<td>배송 상태: ${orBean.or_status }</td>
+		</tr>
+		<tr>
+			<td>구매날짜: ${orBean.or_date }</td>
+		</tr>
+		<tr>
+			<td>송장번호: ${orBean.or_delivery }</td>
+		</tr>
+		<tr>
+			<td>배송비: ${orBean.or_deliveryCost }</td>
+		</tr>
+		<tr>
+			<td>받는 사람: ${orBean.or_dvname }</td>
+		</tr>
+		<tr>
+			<td>받는 사람 연락처: ${orBean.or_dvtel }</td>
+		</tr>
+		<tr>
+			<td>배송지: ${orBean.or_dvaddress }</td>
+		</tr>
+	           	 </table>                 	
+    </c:forEach>
+    <hr>
+    <c:forEach var="oriBean" items="${itemsOrBean }" varStatus="status">
+    <table>
+    	<tr>
+    		<td>주문 번호: ${oriBean.ori_number }</td>
+    	</tr>
+		<tr>
+    		<td>책 번호: ${oriBean.ori_bknumber }</td>
+    	</tr>
+		<tr>
+    		<td>구매 가격: ${oriBean.ori_bkprice }</td>
+    	</tr>
+		<tr>
+    		<td>할인율: ${oriBean.ori_bkdiscount }</td>
+    	</tr>
+		<tr>
+    		<td>구매 개수: ${oriBean.ori_bkcount }</td>
+    	</tr>
+    </table>
     </c:forEach>
             
 </form>

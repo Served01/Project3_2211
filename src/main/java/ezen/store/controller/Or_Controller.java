@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.PageCountBean;
 import ezen.store.service.Ca_Service;
 import ezen.store.service.Dv_Service;
 import ezen.store.service.Or_Service;
 
 @Controller
 @RequestMapping("/order")
-public class OrderController {
+public class Or_Controller {
 
 	/* @GetMapping("/main")
 	 * @ : Annotation 을 이용한다는 것은 비지니스 로직에만 개발자가 전념하도록 유도하는 것 입니다.
@@ -41,6 +42,18 @@ public class OrderController {
 	@Autowired
 	private Ca_Service ca_Service;
 	
+	/*
+	@RequestMapping(value="URL이 들어가는 자리")
+	public void MemberInfo( @RequestBody HashMap<String, Object> params ) throws Exception {
+	//데이터를 담아줄 map 생성 
+	HashMap< String , Object > map = new HashMap< String , Object >(); 
+	//일반 파라미터는 map에 그대로 
+	put map.put( "site" , params.get( "site" ) );
+	//배열 파라미터는 list에 put하고 그 list를 map에 put 
+	List<Map<String,Object>> memberList = (List<Map<String, Object>>) params.get("login_data"); 
+	map.put( "memberList" , memberList); }
+	
+	
 	
 	@GetMapping("/Or_list")
 	public String OrList(@RequestParam("or_mbid") String or_mbid,
@@ -51,8 +64,8 @@ public class OrderController {
 		
 		List<Or_Bean> infoOrBean = or_Service.getOrderInfo(or_mbid);
 		model.addAttribute("infoOrBean", infoOrBean);
-						
-		tempinfoOrBean.setOr_number(infoOrBean.getOr_number());
+		
+		String or_number = infoOrBean.setOr_number(tempinfoOrBean.getOr_number());
 			
 		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
 		model.addAttribute("itemsOrBean", itemsOrBean);
@@ -61,14 +74,46 @@ public class OrderController {
 		return "order/Or_list";
 		
 	}
+	*/
 	
+	
+	//주문 목록 출력
+	@GetMapping("/Or_list")
+	public String OrList(@RequestParam("or_mbid") String or_mbid, 
+			Model model) {
+		
+//		model.addAttribute("ca_mbid" , ca_mbid);
+		
+		List<Or_Bean> infoOrBean = or_Service.OrList(or_mbid);
+		model.addAttribute("infoOrBean", infoOrBean);
+		
+		String or_number = "";
+		
+		if(infoOrBean.size() != 0) {
+		or_number = infoOrBean.get(0).getOr_number();
+		}
+		
+		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
+		model.addAttribute("itemsOrBean", itemsOrBean);
+		
+		return "order/Or_list";
+		
+	}
+	
+	
+	
+	
+	//주문 상세 정보 출력
 	@GetMapping("/Or_select")
 	public String OrSelect(@RequestParam("or_mbid") String or_mbid,
 			@RequestParam("or_number") String or_number, Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
 		
-		List<Or_Bean> infoOrBean = or_Service.getOrderInfo(or_mbid);
+		Or_Bean infoOrBean = or_Service.getOrderInfo(or_mbid, or_number);
+		
+		//String or_number = infoOrBean.get(0).getOr_number();
+		
 		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
 
 		model.addAttribute("infoOrBean", infoOrBean);
@@ -79,8 +124,11 @@ public class OrderController {
 		
 	}
 	
+	
+	//결제 진행 페이지
+	/*
 	@GetMapping("/Or_purchase")
-	public String DvList(@RequestParam("dv_id") String dv_id,
+	public String Orpurchase(@RequestParam("dv_id") String dv_id,
 			@RequestParam("ca_mbid") String ca_mbid, Model model) {
 		
 		List<Dv_Bean> Deliverylist = dv_Service.getDvList(dv_id);
@@ -91,6 +139,9 @@ public class OrderController {
 		
 		return "order/Or_purchase";
 	}
+	
+	*/
+	
 	
 //	@GetMapping("/Or_select")
 //	public String OrSelect(@RequestParam("or_number") String or_number, Model model) {

@@ -13,12 +13,12 @@ public interface Or_Mapper {
 
 
 	
-	@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
-			+ "    from Order_info\r\n"
+		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
+			+ "    from order_info\r\n"
 			+ "    where or_mbid in (select mb_id\r\n"
-			+ "                        from  Mb_info\r\n"
+			+ "                        from  Member_info\r\n"
 			+ "                        where mb_id = #{or_mbid})")
-		List<Or_Bean> getOrderInfo(String or_mbid);
+		List<Or_Bean> OrList(String or_mbid);
 		
 //	@Insert("insert into Order_info(or_number, or_mbid, or_bknumber, or_bkprice, "
 //			+ "or_cacount, or_status, or_date, or_delivery, or_address)"
@@ -34,12 +34,29 @@ public interface Or_Mapper {
 		*/
 //	@Select("select * from Order_info\r\n"
 //			+ "where or_number = #{or_number}")
-		@Select("select ori_number, ori_bknumber, ori_bkprice, ori_bkdiscount, ori_cacount\r\n"
-				+ "    from Order_items\r\n"
+		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
+				+ "    from order_info\r\n"
+				+ "    where or_mbid in (select mb_id\r\n"
+				+ "                        from  Member_info\r\n"
+				+ "                        where mb_id = #{or_mbid}\r\n"
+				+ "							and or_number = #{or_number})")
+		Or_Bean getOrInfo(String or_mbid, String or_number);
+			
+		@Select("select ori_number, ori_bknumber, ori_bkprice, ori_bkdiscount, ori_bkcount\r\n"
+				+ "    from order_items\r\n"
 				+ "    where ori_number in (select or_number\r\n"
 				+ "                        from  Order_info\r\n"
 				+ "                        where or_number = #{or_number})")
 		List<Or_Bean> OrSelect(String or_number);
+		
+//		@Select("select or.or_number, or.or_mbid, or.or_mbname, or.or_mbtel, or.or_status, or.or_date, or.or_delivery, or.or_deliveryCost, or.or_dvname, or.or_dvtel, or.or_dvaddress,\r\n"
+//				+ "	 	ori.ori_bknumber, ori.ori_bkprice, ori.ori_bkdiscount, ori.ori_bkcount"
+//				+ "		from order_info or, order_items ori\r\n"
+//				+ "		where or.or_mbid = #{or_mbid}"
+//				+ "		and or.or_number = #{or_number}"
+//				+ "		and or.or_number = ori.ori_number")
+//		List<Or_Bean> OrSelect(String or_mbid, String or_number);
+		
 	/*
 	@Select("select user_id, user_name from user_table where user_idx = #{user_idx}")
 		Or_Bean Or_update(int user_idx);
@@ -49,4 +66,10 @@ public interface Or_Mapper {
 	
 	
 		*/
+		
+	
+	/*
+	@Select("select count(*) from order_info where or_mbid = #{or_mbid}")
+	int getContentCnt(String or_mbid);
+	*/
 }

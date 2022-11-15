@@ -19,7 +19,7 @@ public class Or_Bean {
 	private int ori_bknumber;
 	private int ori_bkprice;
 	private int ori_bkdiscount;
-	private int ori_cacount;
+	private int ori_bkcount;
 	
 	private String bk_title;
 	private String bk_writer;
@@ -117,12 +117,13 @@ public class Or_Bean {
 	public void setOri_bkdiscount(int ori_bkdiscount) {
 		this.ori_bkdiscount = ori_bkdiscount;
 	}
-	public int getOri_cacount() {
-		return ori_cacount;
+	public int getOri_bkcount() {
+		return ori_bkcount;
 	}
-	public void setOri_cacount(int ori_cacount) {
-		this.ori_cacount = ori_cacount;
+	public void setOri_bkcount(int ori_bkcount) {
+		this.ori_bkcount = ori_bkcount;
 	}
+	
 	public String getBk_title() {
 		return bk_title;
 	}

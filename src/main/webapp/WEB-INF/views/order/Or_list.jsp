@@ -22,7 +22,7 @@
 	            	<td>주문번호 ${orBean.or_number }</td>
 	            </tr>
 	            <tr>
-	            	<td>주문번호 <a href="${root}order/Or_select?or_number=${orBean.or_number }">${orBean.or_number }</a></td>
+	            	<td>주문번호 <a href="${root}order/Or_select?or_mbid=${orBean.or_mbid }&or_number=${orBean.or_number }">${orBean.or_number }</a></td>
 				</tr>
 	            <tr>
 					<td>구매날짜 ${orBean.or_date }</td>
@@ -34,11 +34,15 @@
 					<td>배송지 ${orBean.or_dvaddress }</td>
 				</tr>
 			<c:forEach var="oriBean" items="${itemsOrBean}" varStatus="status">
+				<table class="table">
+				<tr>
+					<td>주문번호 ${oriBean.ori_number }</td>
+				</tr>
 				<tr>
 					<td>책번호 ${oriBean.ori_bknumber }</td>
 				</tr>
 	            <tr>
-					<td>책번호<a href="${root}book/Bk_select?bknumber=${orBean.or_bknumber }">${orBean.or_bknumber }</a></td>
+					<td>책번호<a href="${root}book/Bk_select?bknumber=${oori_bknumberiBean.r }">${oriBean.ori_bknumber }</a></td>
 				</tr>
 	            <tr>
 					<td>구매가격 ${oriBean.ori_bkprice }</td>
@@ -47,9 +51,10 @@
 					<td>할인율 ${oriBean.ori_bkdiscount }
 				</tr>
 	            <tr>
-					<td>구매개수 ${oriBean.ori_cacount }</td>
+					<td>구매개수 ${oriBean.ori_bkcount }</td>
 				</tr>
-			</c:forEach>    	
+				</table>
+				</c:forEach>
 		</table>
 	</c:forEach>
 </form>

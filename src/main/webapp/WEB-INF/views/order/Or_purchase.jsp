@@ -14,7 +14,9 @@
 	<select id="orDelivery" name="orDelivery">
 		<option value="">배송지</option>
 			<c:forEach var="dvBean" items="${Deliverylist }">
+				<c:if test="${dvBean.dv_id ne null}">
 				<option value="${dvBean.dv_id }, ${dvBean.dv_name }, ${dvBean.dv_tel }, ${dvBean.dv_address }">${dvBean.dv_id }, ${dvBean.dv_name }, ${dvBean.dv_tel }, ${dvBean.dv_address }</option>
+				</c:if>
 			</c:forEach>
 	</select>
 
