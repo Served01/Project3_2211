@@ -21,7 +21,8 @@
 
 <script type="text/javascript" src="./js/header.js" ></script> 
   </head>
-  <style>
+      <style>
+      
   body{
   font-family: 'Black Han Sans', sans-serif;
   
@@ -63,7 +64,7 @@
 				<ul  style="background-color:white"class="primary-navigation-ul horizontal-mega-menu">
 					<li class="buddha-menu-item primary-navigation-li">
 						<a href="https://product.kyobobook.co.kr/category/KOR/01" href="/collections/brands" aria-label="Brands" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="" style="color:black">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
-						<ul class="mm-submenu tree">
+						<ul style="background-color:white"; class="mm-submenu tree">
 							<li a href="https://product.kyobobook.co.kr/category/KOR/01" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;"><a href="https://product.kyobobook.co.kr/category/KOR/01" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a></li>
 							<li data-href="/collections/brand-adam-equipment" href="/collections/brand-adam-equipment" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;"><a data-href="/collections/brand-adam-equipment" href="/collections/brand-adam-equipment" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">인문</a></li>
 							<li data-href="/collections/brand-environmental-express" href="/collections/brand-environmental-express" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;"><a data-href="/collections/brand-environmental-express" href="/collections/brand-environmental-express" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">취미</a></li>

@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원정보 삭제 jsp</title>
+  <title>회원 비밀번호 확인 화면</title>
   <script src="https://kit.fontawesome.com/ece1cdce53.js" crossorigin="anonymous"></script>
 
   <!-- Bootstrap CSS -->
@@ -45,19 +45,9 @@
      h2{
     text-align :center;
     }
-    
-     .hi{
- text-align:center;
- }
-   button{
-    text-align:center;
-    display:block;
-    margin:auto;
-    }
-   .hi{
+    .hi{
    text-align:center;
    } 
-    
   </style>
 </head>
 
@@ -67,35 +57,33 @@
       <div class="input-form col-md-12 mx-auto">
         <a href="#" onclick="location.href='insertBook.jsp'"><h2><i class="fa-solid fa-book"></i>Ezen Book Store</h2></a>  
         <br>
-        <h4 class="mb-3">회원정보 삭제</h4>
+        <h4 class="mb-3">비밀번호 확인</h4>
         <form class="validation-form" novalidate>
-                
-          <div class="mb-3">
-              <label for="name">아이디</label>
-              <input type="text" class="form-control" id="id" placeholder="" value="" required>
+          
+             <div class="mb-3">
+              <label for="name">이름</label>
+              <input type="text" class="form-control" id="name" placeholder="" value="" required>
               <div class="invalid-feedback">
-                아이디를 입력해주세요.
-            </div>
+                아이디를 입력해 주세요.
+              </div>
+     
              <div class="mb-3">
               <label for="nickname">비밀번호</label>
               <input type="password" class="form-control" id="nickname" placeholder="" value="" required>
               <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div>
-          
-          <hr class="mb-4">
-       
-          <div class="mb-4"></div>
- 			<div class="hi">
-          <button class="btn btn-dark" type="submit">삭제하기</button>
-          <button class="btn btn-dark" onclick="location.href='inputshippingAddress.jsp'">뒤로 가기</button>
-        </div>
+            </div>
+          </div>
+         <hr class="mb-4">
+         <div class="hi">
+          <button class="btn btn-dark" type="submit">확인</button>
+          <button class="btn btn-dark" type="submit">뒤로 가기</button>
+          </div>
         </form>
       </div>
     </div>
-  <footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 2022 </p>
-    </footer>
+  
   </div>
   <script>
     window.addEventListener('load', () => {

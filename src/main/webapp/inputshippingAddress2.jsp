@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원정보 삭제 jsp</title>
+  <title>회원 정보 보기 화면 - 마이페이지</title>
   <script src="https://kit.fontawesome.com/ece1cdce53.js" crossorigin="anonymous"></script>
 
   <!-- Bootstrap CSS -->
@@ -45,57 +45,31 @@
      h2{
     text-align :center;
     }
-    
-     .hi{
- text-align:center;
- }
-   button{
-    text-align:center;
-    display:block;
-    margin:auto;
-    }
-   .hi{
-   text-align:center;
-   } 
-    
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="input-form-backgroud row">
-      <div class="input-form col-md-12 mx-auto">
-        <a href="#" onclick="location.href='insertBook.jsp'"><h2><i class="fa-solid fa-book"></i>Ezen Book Store</h2></a>  
-        <br>
-        <h4 class="mb-3">회원정보 삭제</h4>
-        <form class="validation-form" novalidate>
-                
-          <div class="mb-3">
-              <label for="name">아이디</label>
-              <input type="text" class="form-control" id="id" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                아이디를 입력해주세요.
-            </div>
-             <div class="mb-3">
-              <label for="nickname">비밀번호</label>
-              <input type="password" class="form-control" id="nickname" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                비밀번호를 입력해주세요.
-              </div>
-          
-          <hr class="mb-4">
-       
-          <div class="mb-4"></div>
- 			<div class="hi">
-          <button class="btn btn-dark" type="submit">삭제하기</button>
-          <button class="btn btn-dark" onclick="location.href='inputshippingAddress.jsp'">뒤로 가기</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  <footer class="my-3 text-center text-small">
+<div class="container" align="center">
+	<div class="input-form col-md-12 mx-auto">	
+          <table border="1">
+		<tr align="center">
+			<td height="20" width="150">배송지</td>
+			<td height="20" width="300">서울특별시 성북구 안암동 35-35</td>
+		</tr>
+	   </table>
+	   <div class="mb-4"></div>
+				<button class="btn btn-dark" onclick="location.href='inputshippingAddresspro.jsp'">배송지 추가</button>
+				<button class="btn btn-dark" onclick="location.href='mainSession.jsp?center=mbDeleteform.jsp&mb_id='">배송지 삭제</button>
+				
+		
+		
+<footer class="my-3 text-center text-small">
       <p class="mb-1">&copy; 2022 </p>
     </footer>
+</div>
+
+</div>
+   
   </div>
   <script>
     window.addEventListener('load', () => {

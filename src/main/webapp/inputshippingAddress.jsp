@@ -89,22 +89,7 @@
           <button class="btn btn-dark" onclick="location.href='mbmodify.jsp'">수정</button>
           <button class="btn btn-dark" type="submit">삭제</button>
           <button class="btn btn-dark" type="submit">메인 화면</button>
-          <hr class="mb-4">
-          <table border="1">
-		<tr align="center">
-			<td height="20" width="150">배송지</td>
-			<td height="20" width="300">서울특별시 성북구 안암동 35-35</td>
-		</tr>
-	   </table>
-	   <div class="mb-4"></div>
-				<button class="btn btn-dark" onclick="location.href='inputshippingAddresspro.jsp'">배송지 추가</button>
-				<button class="btn btn-dark" onclick="location.href='mainSession.jsp?center=mbDeleteform.jsp&mb_id='">배송지 삭제</button>
-				
-		
-		
-<footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 2022 </p>
-    </footer>
+        
 </div>
 
 </div>
