@@ -52,7 +52,7 @@ public class Bk_Bean {
 	
 	private boolean bk_numExist;
 	
-	private int page;
+	private double avg_score;
 	
 	public Bk_Bean() {
 		this.bk_numExist = false;
@@ -155,12 +155,13 @@ public class Bk_Bean {
 		this.bk_numExist = bk_numExist;
 	}
 
-	public int getPage() {
-		return page;
+	public double getAvg_score() {
+		return avg_score;
 	}
 
-	public void setPage(int page) {
-		this.page = page;
+	public void setAvg_score(double avg_score) {
+		this.avg_score = avg_score;
 	}
+
 	
 }

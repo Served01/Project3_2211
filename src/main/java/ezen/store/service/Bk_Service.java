@@ -76,13 +76,12 @@ public class Bk_Service {
 		  
 		return BkDAO.getBkInfo(bk_number); 
 	}
-
+	
+	//
 	public List<Bk_Bean> getBkList(String bk_local, String bk_genre) {
 		
 		return BkDAO.getBkList(bk_local, bk_genre);
-	}
-
-	
+	}	
 		
 }
 

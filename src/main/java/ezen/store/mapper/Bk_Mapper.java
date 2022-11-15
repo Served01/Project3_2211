@@ -23,20 +23,28 @@ public interface Bk_Mapper {
 
 	void addBkInfo(Bk_Bean InsertBkBean);
 	
-	//책 정보를 지역, 그리고 장르로 추출하여 가져와 날짜별로 내림차순 정렬하여 출력합니다.
-	@Select("select * from book_info where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
-	List<Bk_Bean> getBkList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+	//책 정보를 지역, 그리고 장르로 추출하여 가져와 출력합니다.
+	@Select("select b.bk_title, b.bk_image, avg(r.rv_score) as avg_score, b.bk_number,"
+			+ " b.bk_writer, b.bk_publisher, to_char(b.bk_pubdate, 'YYYY-MM-DD') as bk_pubdate,"
+			+ " b.bk_local, b.bk_genre, b.bk_quantity, b.bk_price"
+			+ " from Book_info b, Review_info r"
+			+ " where b.bk_number = r.rv_bknumber"
+			+ " and b.bk_local = #{bk_local}"
+			+ " and b.bk_genre = #{bk_genre}"
+			+ " group by b.bk_title, b.bk_image, b.bk_number, b.bk_writer, b.bk_publisher, to_char(b.bk_pubdate, 'YYYY-MM-DD'),"
+			+ " b.bk_local, b.bk_genre, b.bk_quantity, b.bk_price")
+		List<Bk_Bean> getBkList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+	
 	
 	//해당 책에 있는 리뷰 평점을 추출하여 가져와 평균을 냅니다.
-	@Select("select avg(r.rv_score) as rv_score"
-			+ "from Bk_info b, Rv_info r"
-			+ "where b.Bk_number = r.rv_bknumber"
-			+ "and b.bk_number = #{bk_number}")	
+	@Select("select avg(r.rv_score) as avg_score"
+			+ " from Book_info b, Review_info r"
+			+ " where b.bk_number = r.rv_bknumber"
+			+ " and b.bk_number = #{bk_number}")
 		Bk_Bean getBkScore(int bk_number);
 	
 	//책 정보를 추출하여 가져옵니다.
-	@Select("select * from book_info"
-			+ "where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
+	@Select("select * from Book_info where bk_number = #{bk_number}")
 		Bk_Bean getBkInfo(int bk_number);
 	
 }
