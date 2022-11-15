@@ -82,6 +82,20 @@ public class Bk_Service {
 		return BkDAO.getBkList(bk_local, bk_genre);
 	}	
 		
+	//책 정보 수정
+	public void updateBook(Bk_Bean updateBkBean) {
+		
+		MultipartFile upload_file = updateBkBean.getUpload_file();
+		
+		if(upload_file.getSize() > 0) {			
+			String file_name = SaveUploadFile(upload_file);
+					
+			updateBkBean.setBk_image(file_name);
+		}
+
+		BkDAO.updateBook(updateBkBean);
+		
+	}
 }
 
 

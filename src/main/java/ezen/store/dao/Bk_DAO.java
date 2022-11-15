@@ -41,5 +41,10 @@ public class Bk_DAO {
 		  
 		return bk_Mapper.getBkInfo(bk_number); 
 	}
+	
+	//책 정보 수정
+	public void updateBook(Bk_Bean updateBkBean) {
+		bk_Mapper.updateBkBean(updateBkBean);
+	}
 
 }

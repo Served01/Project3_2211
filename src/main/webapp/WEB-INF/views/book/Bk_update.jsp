@@ -156,9 +156,9 @@ function previewImage(targetObj, View_area) {
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto" style="margin-top:50px">
-				<h4 class="mb-3" align="center">책 정보 입력</h4>
-				<form:form class="validation-form" action="${root }book/BkInsertPro" method="post" modelAttribute="InsertBkBean" enctype="multipart/form-data">		
-				<form:hidden path="bk_numExist"/>
+				<h4 class="mb-3" align="center">책 정보 수정</h4>
+				<form:form class="validation-form" action="${root }book/BkUpdatePro" method="post" modelAttribute="updateBkBean" enctype="multipart/form-data">		
+				
 				<table border="1">
 					<tr align="center" style="height:60; width:1150;">
 						<td rowspan="9" style="width:500px; height:600px;">
@@ -172,10 +172,7 @@ function previewImage(targetObj, View_area) {
 						<td height="70" width="200">일련번호</td>
 						<td height="20" width="400">
 						<div class="input-group">
-						<form:input class="form-control" path="bk_number" onkeypress="ResetBkNumExist()"/>
-						<div class="input-group-append">
-						<form:button type="button" class="btn btn-dark" onclick="CheckBkNumExist()">중복확인</form:button>
-						</div>
+						<form:input class="form-control" path="bk_number" readonly="true"/>
 						</div>
 						<form:errors path="bk_number" style="color:red"></form:errors>
 						</td>
@@ -272,7 +269,7 @@ function previewImage(targetObj, View_area) {
 				</table>
 				<hr class="mb-4">
 				<div class="hi">
-				<form:button type="submit" class="btn btn-dark">입력완료</form:button>
+				<form:button type="submit" class="btn btn-dark">수정완료</form:button>
 				<form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
 				</div>
 			</form:form>

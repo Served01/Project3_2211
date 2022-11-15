@@ -112,6 +112,7 @@ document.getElementById("my_sum").innerHTML=sum_;
 				<p>
 				<p><a href="#" class="btn btn-info">도서주문 &raquo;</a> 
 				<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
+				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-info">책정보수정 &raquo;</a> 
 				<input class="btn btn-info" type="reset" value="찜하기">
 				<input class="btn btn-info" type="reset" value="장바구니">
 			</div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Bk_Bean;
+import ezen.store.beans.Rv_Bean;
 import ezen.store.service.Bk_Service;
 
 
@@ -72,6 +73,31 @@ public class Bk_Controller {
 		 model.addAttribute("ReadBkBean", ReadBkBean);
 		 
 		return "book/Bk_select";
+	}
+	
+	// 책정보 수정 페이지 컨트롤러
+	@GetMapping("/BkUpdate")
+	public String bkUpdate(@RequestParam("bk_number") int bk_number,
+							Model model) {
+		
+		Bk_Bean updateBkBean = BkService.getBkInfo(bk_number);
+		model.addAttribute("updateBkBean", updateBkBean);
+		
+		
+		return "book/Bk_update";
+	}
+
+	// 책정보 수정 기능 컨트롤러
+	@PostMapping("/BkUpdatePro")
+	public String bkUpdatePro(@Validated @ModelAttribute("updateBkBean") Bk_Bean updateBkBean, BindingResult result) {
+		
+		if (result.hasErrors()) {
+		return "book/Bk_update";
+		}
+		
+		BkService.updateBook(updateBkBean);
+		
+		return "book/Bk_update_success";
 	}
 
 }

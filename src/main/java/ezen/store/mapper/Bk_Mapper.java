@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import ezen.store.beans.Bk_Bean;
 
 public interface Bk_Mapper {
@@ -45,4 +47,10 @@ public interface Bk_Mapper {
 	@Select("select * from Book_info where bk_number = #{bk_number}")
 		Bk_Bean getBkInfo(int bk_number);
 	
+	//책 정보를 수정합니다.
+	@Update("update Book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},"
+			+ "bk_image=#{bk_image, jdbcType=VARCHAR}, bk_local=#{bk_local}, bk_genre=#{bk_genre}, bk_infodate=sysdate, bk_detail=#{bk_detail},"
+			+ "bk_quantity=#{bk_quantity}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted='0'"
+			+ "where bk_number=#{bk_number}")
+	void updateBkBean(Bk_Bean updateBkBean);
 }
