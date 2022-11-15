@@ -4,6 +4,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -18,9 +20,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+import ezen.store.beans.Mb_Bean;
+import ezen.store.interceptor.LoginInterceptor;
 import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Ca_Mapper;
 import ezen.store.mapper.Dv_Mapper;
+import ezen.store.mapper.Mb_Mapper;
 import ezen.store.mapper.Rv_Mapper;
 import ezen.store.mapper.Wi_Mapper;
 
@@ -45,6 +50,9 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Value("${db.password}") // 1234
 	private String db_password;
+	
+	@Autowired
+	private Mb_Bean loginShowBean;
 	
 	// Controller
 	@Override
@@ -84,6 +92,17 @@ public class ServletAppContext implements WebMvcConfigurer{
 		SqlSessionFactory factory = fSessionFactory.getObject(); 
 					
 		return factory;		
+	}
+	
+	//Review 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
+	@Bean
+	public MapperFactoryBean<Mb_Mapper> getMbMapperFactoryBean(SqlSessionFactory factory){
+		
+		MapperFactoryBean<Mb_Mapper> mbfactoryBean = new MapperFactoryBean<Mb_Mapper>(Mb_Mapper.class);
+	
+		mbfactoryBean.setSqlSessionFactory(factory); 
+	
+		return mbfactoryBean;
 	}
 		
 	//Review 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
@@ -160,19 +179,37 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return res; 
 	}	
 	
-	//Interceptor 설정
-	public void addInterceptors(InterceptorRegistry registry) {
-		
-		WebMvcConfigurer.super.addInterceptors(registry);	
-		
-	}
-	
 	// 스탠다드서블릿멀티파트리졸버 등록 (upload/download 용도)
 	@Bean
 	public StandardServletMultipartResolver multipartResolver() {
 				
 		return new StandardServletMultipartResolver();
 	}
+	
+	// 로그인 인터셉터
+	public void addInterceptor1(InterceptorRegistry registry) {
+		
+		WebMvcConfigurer.super.addInterceptors(registry);	
+		
+		LoginInterceptor loginInterceptor = new LoginInterceptor(loginShowBean);		
+		InterceptorRegistration registration1 = registry.addInterceptor(loginInterceptor);
+			
+		registration1.addPathPatterns("/**");		
+			
+	}
+	
+	// 로그인 여부 인터셉터
+	/*public void addInterceptor2(InterceptorRegistry registry) {
+		
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMbBean);
+		
+		InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);
+		
+		registration2.addPathPatterns("/member/Mb_update", "/member/Mb_logout", "/board/*");
+		registration2.excludePathPatterns("/board/main");
+		
+	}*/	
+	
 }
 
 

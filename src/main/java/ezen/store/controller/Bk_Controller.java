@@ -46,12 +46,13 @@ public class Bk_Controller {
 
 	@GetMapping("/BkList")
 	public String BkList(@RequestParam("bk_local") String bk_local, 
-			@RequestParam("bk_genre") String bk_genre, Model model) {
+			@RequestParam("bk_genre") String bk_genre,
+			Model model) {
 
 		
 		model.addAttribute("bk_local", bk_local);
 		model.addAttribute("bk_genre", bk_genre);
-
+		
 		List<Bk_Bean> BkList = BkService.getBkList(bk_local, bk_genre);
 		model.addAttribute("BkList", BkList);
 		
@@ -59,22 +60,18 @@ public class Bk_Controller {
 	}
 
 	@GetMapping("/BkSelect")
-	public String BkSelect(@RequestParam("bk_local") String bk_local, @RequestParam("bk_genre") String bk_genre,
-			@RequestParam("bk_number") int bk_number,
-			Model model) {
+	public String BkSelect(@RequestParam("bk_number") int bk_number,
+							Model model) {
+		 
+		 model.addAttribute("bk_number", bk_number);
 
-		model.addAttribute("bk_local", bk_local);
-		model.addAttribute("bk_genre", bk_genre);
-		model.addAttribute("bk_number", bk_number);
+		 Bk_Bean ReadScoreBean = BkService.getBkScore(bk_number);
+		 model.addAttribute("ReadScoreBean", ReadScoreBean);
 
-		/*
-		 * Bk_Bean ReadScoreBean = BkService.getBkScore(bk_number);
-		 * model.addAttribute("ReadScoreBean", ReadScoreBean);
-		 */
 		 Bk_Bean ReadBkBean = BkService.getBkInfo(bk_number);
 		 model.addAttribute("ReadBkBean", ReadBkBean);
 		 
-		return "book/Bk_Select";
+		return "book/Bk_select";
 	}
 
 }

@@ -72,9 +72,9 @@
 		</tbody>
 	</table>
 	<div class="mb-4">
-				<a href="${root}delivery/DvInsert?Dv_info=${Dv_info}&dv_id='hyun3'" class="btn btn-dark">배송지 추가</a>
-				<a href="${root}delivery/DvUpdate?Dv_info=${Dv_info}&dv_id='hyun3'" class="btn btn-dark">배송지 수정</a>
-				<a href="${root}delivery/DvDelete?Dv_info=${Dv_info}&dv_id='hyun3'" class="btn btn-dark">배송지 삭제</a>
+				<a href="${root}delivery/DvInsert?Delivery_info=${Delivery_info}&dv_id='hyun3'" class="btn btn-dark">배송지 추가</a>
+				<a href="${root}delivery/DvUpdate?Delivery_info=${Delivery_info}&dv_id='hyun3'" class="btn btn-dark">배송지 수정</a>
+				<a href="${root}delivery/DvDelete?Delivery_info=${Delivery_info}&dv_id='hyun3'" class="btn btn-dark">배송지 삭제</a>
 				
 	</div>					
 		
