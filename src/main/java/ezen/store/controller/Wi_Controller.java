@@ -21,7 +21,7 @@ import ezen.store.service.Wi_Service;
 
 @Controller
 @RequestMapping("/wish")
-public class WishController {
+public class Wi_Controller {
 	
 	@Autowired
 	private Wi_Service wi_Service;

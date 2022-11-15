@@ -33,20 +33,20 @@
 <body>
 	<form action="#" method="get">
 		<input type="hidden" name="wi_mbid" id="wi_mbid" value='admin'>
-		<input type="hidden" name="wi_bknumbers" id="wi_bknumbers" value='70001000'>
-		<button type="button" onclick="javascript:addwish('admin','70001000')">1번추가</button>
+		<input type="hidden" name="wi_bknumbers" id="wi_bknumbers" value='20220001'>
+		<button type="button" onclick="javascript:addwish('admin','20220001')">1번추가</button>
 	</form>
 	
 	<form action="#" method="get">
 		<input type="hidden" name="wi_mbid" id="wi_mbid" value='admin'>
-		<input type="hidden" name="wi_bknumbers" id="wi_bknumbers" value='70001001'>
-		<button type="button" onclick="javascript:addwish('admin','70001001')">2번추가</button>
+		<input type="hidden" name="wi_bknumbers" id="wi_bknumbers" value='20220002'>
+		<button type="button" onclick="javascript:addwish('admin','20220002')">2번추가</button>
 	</form>
 		
 	<form action="#" method="get">
 		<input type="hidden" name="wi_mbid" id="wi_mbid" value='admin'>
-		<input type="hidden" name="wi_bknumbers" id="wi_bknumbers" value='70001002'>
-		<button type=button onclick="javascript:addwish('admin','70001002')">3번추가</button>
+		<input type="hidden" name="wi_bknumbers" id="wi_bknumbers" value='20220003'>
+		<button type=button onclick="javascript:addwish('admin','20220003')">3번추가</button>
 	</form>
 </body>
 </html>

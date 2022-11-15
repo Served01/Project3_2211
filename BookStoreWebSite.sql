@@ -15,6 +15,7 @@ create table Mb_info(
 insert into mb_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('admin',12345678,'test','test@gmail.com','010-1234-4567');
 select * from mb_info;
 
+drop table Mb_info;
 
 
 
@@ -29,7 +30,7 @@ create table Dv_info(
 
 insert into dv_info values('admin','house','010-7894-1234','신림언저리');
 select * from DV_INFO;
-
+drop table DV_INFO;
 create table Book_info(
     bk_number number(8) primary key,
     bk_title VARCHAR2(100) not null,
@@ -50,8 +51,20 @@ create table Book_info(
 insert into BOOK_INFO values(70001000,'엄준식','아무무','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
 insert into BOOK_INFO values(70001001,'준식엄','안은우','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
 insert into BOOK_INFO values(70001002,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-select * from BOOK_INFO;
+insert into BOOK_INFO values(70001003,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001004,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001005,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001006,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001007,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001008,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001009,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001010,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001011,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001012,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+insert into BOOK_INFO values(70001013,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
 
+select * from BOOK_INFO;
+drop table BOOK_INFO;
 
 
 create table order_info(
@@ -86,7 +99,7 @@ create table order_items(
     ori_bkprice number(10),
     ori_bkdiscount number(3) 
         default 0 not null,
-    ori_cacount number(3) 
+    ori_bkcount number(3) 
     	default 1 not null
   )  
 insert into order_items values('22FEB105564',70001000,2400,10,1);
@@ -100,6 +113,7 @@ select * from order_items;
  drop table ORDER_INFO;
  drop table order_items;
  
+
  
  
 delete from ORDER_INFO where 
@@ -157,7 +171,19 @@ create table Wish_info(
     		references book_info(bk_number)
 )
 
-insert into Wish_info values('admin',70001000);
+insert into Wish_info values('admin',70001002);
+insert into Wish_info values('admin',70001003);
+insert into Wish_info values('admin',70001004);
+insert into Wish_info values('admin',70001005);
+insert into Wish_info values('admin',70001006);
+insert into Wish_info values('admin',70001007);
+insert into Wish_info values('admin',70001008);
+insert into Wish_info values('admin',70001009);
+insert into Wish_info values('admin',70001010);
+insert into Wish_info values('admin',70001011);
+insert into Wish_info values('admin',70001012);
+insert into Wish_info values('admin',70001013);
+
 select * from wish_info;
 
 drop table Wish_info;
