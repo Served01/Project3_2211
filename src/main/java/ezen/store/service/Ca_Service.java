@@ -15,6 +15,18 @@ public class Ca_Service {
 	@Autowired
 	private Ca_DAO ca_DAO;
 	
+	
+	public boolean checkOrderNumExist(String or_number) {
+		String or_num = ca_DAO.checkOrderNumExist(or_number);
+		if(or_num == null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
 	//카트 열람
 	public	List<Ca_Bean> getCartInfo(String ca_mbid) {
 		return ca_DAO.getCartInfo(ca_mbid);

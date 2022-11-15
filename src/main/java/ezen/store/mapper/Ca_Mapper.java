@@ -34,14 +34,10 @@ public interface Ca_Mapper {
 		void minusBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers);
 	
 	@Update("update cart_info set ca_bkcount = #{ca_bkcount} where ca_mbid = #{ca_mbid} and ca_bknumbers = #{ca_bknumbers}")
-	void setBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_bkcount") int newval);
+		void setBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_bkcount") int newval);
 	
 	@Insert("insert into order_info(or_number,or_mbid) values(#{or_number},#{ca_mbid})")
 		void createOderInfo(@Param("or_number")String or_number,@Param("ca_mbid") String ca_mbid);
-	
-	
-	
-	
 	
 	
 	@Insert("insert into order_items(ori_number, ori_bknumber, ori_bkprice,ori_bkdiscount,ori_bkcount) values(#{or_number},\r\n"
@@ -50,4 +46,7 @@ public interface Ca_Mapper {
 			+ "0,\r\n"
 			+ "(select ca_bkcount from CART_INFO where ca_mbid=#{ca_mbid} and ca_bknumbers = #{ca_bknumbers}))")
 		void insertOderItems(@Param("or_number")String or_number,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_mbid") String ca_mbid);
+	
+	@Select("select or_number from order_info where or_number = #{or_number}")
+		String checkOrderNumExist(String or_number);
 }

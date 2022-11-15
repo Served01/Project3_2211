@@ -17,8 +17,19 @@ public class Ca_Bean {
 	private int page;
 	private String or_number;
 	
+	private boolean orderNumExist;
 	
 	
+	public Ca_Bean() {
+		this.orderNumExist = false;
+	}
+
+	public boolean isOrderNumExist() {
+		return orderNumExist;
+	}
+	public void setOrderNumExist(boolean orderNumExist) {
+		this.orderNumExist = orderNumExist;
+	}
 	public int getCa_bkcount() {
 		return ca_bkcount;
 	}

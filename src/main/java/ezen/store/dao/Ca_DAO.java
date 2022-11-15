@@ -14,6 +14,10 @@ public class Ca_DAO {
 	@Autowired
 	private Ca_Mapper ca_Mapper;
 	
+	public String checkOrderNumExist(String or_number) {
+		return ca_Mapper.checkOrderNumExist(or_number);
+	}
+	
 	public	List<Ca_Bean> getCartInfo(String ca_mbid) {
 		return ca_Mapper.getCartInfo(ca_mbid);
 	}

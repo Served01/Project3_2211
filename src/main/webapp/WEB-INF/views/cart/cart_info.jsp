@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>미니 프로젝트</title>
+<title>장바구니</title>
 <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -303,7 +303,7 @@ let basket = {
 	        var ca_mbid = 'admin';
 	        
 	        if (parseInt(newval) < 1 || parseInt(newval) > bk_quantity) { return false; }
-
+	        
 	        item.setAttribute('value', newval);
 	        item.value = newval;
 
@@ -398,34 +398,57 @@ let basket = {
 			String todayString = formatTime.format(today); %>
 	    	var ca_mbid = 'admin';
 	    		
-			
+	    	
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
+			$.ajax({
+				url: '${root}cart/cart_checkOrderNumber/' + or_number1,
+				type: 'get',
+				dataType: 'text',
+				success: function(result){
+					
+					if(result.trim() == 'true'){
+						$("#orderNumExist").val('true')
+					}else{
+						$("#orderNumExist").val('false')
+					}				
+				}			
+			})
 			
-			this.orderCreate(or_number1,ca_mbid);
-			setTimeout(this.orderItems(or_number1,ca_mbid), 100);
+			//var orderNumExist = $("#orderNumExist").val();
 			
+			var item = document.querySelector('input[name=orderNumExist]');
+	    	var orderNumExist = item.getAttribute('value');
+			
+			
+			if(orderNumExist == true){
+				this.orderCreate(or_number1,ca_mbid);
+				setTimeout(this.orderItems(or_number1,ca_mbid), 100);
+			}else if(orderNumExist == false){
+				this.orderCreate(or_number2,ca_mbid);
+				setTimeout(this.orderItems(or_number2,ca_mbid), 100);
+			}
 	    		
 	    	
 	    	
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number1,ca_mbid){
+	    orderCreate: function(or_number,ca_mbid){
 	    	$.ajax({
-				url: '${root}cart/cart_createOderInfo/' + or_number1 +'/'+ ca_mbid,
+				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
 				dataType: 'text'
 				
 	    	})
 	    },
-	    orderItems: function(or_number1,ca_mbid){
+	    orderItems: function(or_number,ca_mbid){
 	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
 	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
 	        	if (ca_bkcount != 0){
 	        		$.ajax({
-						url: '${root}cart/cart_insertOderItems/'+ or_number1 +'/'+ ca_bknumbers + '/' + ca_mbid,
+						url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid,
 						type: 'get',
 						dataType: 'text'
 					})		
@@ -500,6 +523,7 @@ let basket = {
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
             <input type="hidden" name="cmd" value="order">
+            <input type="hidden" id="orderNumExist" name="orderNumExist" value="false">
             <div class="basketdiv" id="basket">
                 <div class="row head">
                     <div class="subdiv">
