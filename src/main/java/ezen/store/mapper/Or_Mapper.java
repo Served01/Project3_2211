@@ -12,7 +12,7 @@ import ezen.store.beans.Or_Bean;
 
 public interface Or_Mapper {
 	
-	
+		//주문 목록 출력
 		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
 			+ "    from order_info\r\n"
 			+ "    where or_mbid in (select mb_id\r\n"
@@ -34,6 +34,8 @@ public interface Or_Mapper {
 		*/
 //	@Select("select * from Order_info\r\n"
 //			+ "where or_number = #{or_number}")
+		
+		//주문 상세 정보 출력
 		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
 				+ "    from order_info\r\n"
 				+ "    where or_mbid in (select mb_id\r\n"
@@ -41,11 +43,7 @@ public interface Or_Mapper {
 				+ "	                       where mb_id = #{or_mbid})\r\n"
 				+ "		and or_number = #{or_number}")
 		List<Or_Bean> getOrInfo (@Param("or_mbid") String or_mbid, @Param("or_number") String or_number);
-	//	@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
-	//			+ "    from order_info\r\n"
-	//			+ "    where or_number = #{or_number}")
-	//	List<Or_Bean> getOrInfo(String or_number);
-			
+
 		@Select("select ori.ori_number, bk.bk_title, bk.bk_image, ori.ori_bknumber, ori.ori_bkprice, ori.ori_bkdiscount, ori.ori_bkcount\r\n"
 				+ "    from order_items ori, book_info bk\r\n"
 				+ "    where ori_number in (select or_number from Order_info where or_number = #{or_number})"
@@ -60,7 +58,23 @@ public interface Or_Mapper {
 //				+ "		and or.or_number = ori.ori_number")
 //		List<Or_Bean> OrSelect(String or_mbid, String or_number);
 		
-	/*
+		//주문 확정
+		@Update("update order_info set or_status = '준비중', or_dvname = #{or_dvname}, or_dvtel = #{or_dvtel}, or_dvaddress = #{or_dvaddress}, or_date = sysdate\r\n"
+				+ "		where or_mbid = #{or_mbid}\r\n"
+				+ "		and or_number = #{or_number}")
+		List<Or_Bean> OrPurchase(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number);
+		
+		//주문 상황 수정
+//		@Update("update order_info set or_status = #{or_status}\r\n"
+//				+ "		where or_mbid = #{or_mbid}\r\n"
+//				+ "		and or_number = #{or_number}")
+//		List<Or_Bean> OrAfter(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number, @Param("or_status") String or_status);
+		@Update("update order_info set or_status = #{or_status}\r\n"
+				+ "		where or_mbid = #{or_mbid}\r\n"
+				+ "		and or_number = #{or_number}")
+		void OrAfter(Or_Bean updateOrBean);
+		
+		/*
 	@Select("select user_id, user_name from user_table where user_idx = #{user_idx}")
 		Or_Bean Or_update(int user_idx);
 			

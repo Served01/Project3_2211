@@ -47,6 +47,17 @@ public class Or_Service {
 		}
 		
 		
+		public List<Or_Bean> OrPurchase(String or_mbid, String or_number){
+			return or_DAO.OrPurchase(or_mbid, or_number);
+		}
+		
+//		public List<Or_Bean> OrAfter(String or_mbid, String or_number, String or_status){
+//			return or_DAO.OrAfter(or_mbid, or_number, or_status);
+//		}
+		
+		public void OrAfter(Or_Bean updateOrBean) {
+			or_DAO.OrAfter(updateOrBean);
+		}
 		
 //		public void Or_update(int or_bknumbers) {
 //			or_DAO.Or_update(or_bknumbers);

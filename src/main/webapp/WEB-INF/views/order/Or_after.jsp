@@ -71,7 +71,24 @@
     	</tr>
     </table>
     </c:forEach>
-            
+    
+    <form:form action="${root }order/Or_afterPro" method="post" modelAttribute="OrInsert">
+		
+        <div class="form-group">
+        			<form:select path="or_status">
+        				<form:option value="교환" label="교환"/>
+        				<form:option value="환불" label="환불"/>
+        				<form:option value="취소" label="취소"/>
+        			</form:select>
+        </div>
+        
+        
+        
+        
+            <form:button class="form-control" type="submit">구매 확정</form:button>
+    <form:button class="form-control" href="javascript:window.history.back();">뒤로가기</form:button>
+    
+</form:form>
 </form>
 
 </body>

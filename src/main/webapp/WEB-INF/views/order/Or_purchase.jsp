@@ -14,17 +14,17 @@
 	<form:form action="${root }order/Or_purchasePro" method="post" modelAttribute="OrInsert">
 		<div class="form-group">
 			<form:label path="or_dvname">받는 사람</form:label>
-					<form:input path="or_dvname" class="form-control" onkeypress="resetUserIdExist()"/>
+					<form:input path="or_dvname" class="form-control"/>
 					<form:errors path="or_dvname" style="color:red"/>
 		</div>
 		<div class="form-group">
 					<form:label path="or_dvtel">연락처</form:label>
-					<form:input type="password" path="or_dvtel" class="form-control"/>
+					<form:input path="or_dvtel" class="form-control"/>
 					<form:errors path="or_dvtel" style="color:red"/>
         </div>
         <div class="form-group">
 					<form:label path="or_dvaddress">주소</form:label>
-					<form:input type="password" path="or_dvaddress" class="form-control"/>
+					<form:input path="or_dvaddress" class="form-control"/>
 					<form:errors path="or_dvaddress" style="color:red"/>
         </div>
         <form:hidden path="or_status" value="준비중"/>

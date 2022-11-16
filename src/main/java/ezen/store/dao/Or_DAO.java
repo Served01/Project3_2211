@@ -36,6 +36,17 @@ public class Or_DAO {
 		return or_Mapper.getOrInfo(or_mbid, or_number);
 	};
 	
+	public List<Or_Bean> OrPurchase(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number){
+		return or_Mapper.OrPurchase(or_mbid, or_number);
+	}
+	
+	
+	public void OrAfter(Or_Bean updateOrBean) {
+		or_Mapper.OrAfter(updateOrBean);
+	}
+//	public List<Or_Bean> OrAfter(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number, @Param("or_status") String or_status){
+//		return or_Mapper.OrAfter(or_mbid, or_number, or_status);
+//	}
 	//내역 정보 수정
 //	public void Or_update(int user_idx) {				
 //		or_Mapper.Or_update(user_idx); 		
