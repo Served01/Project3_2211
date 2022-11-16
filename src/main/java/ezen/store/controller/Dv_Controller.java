@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,8 +40,11 @@ public class Dv_Controller {
 	}
 	
 	@PostMapping("/delivery/DvInsertPro")
-	public String DvInsertPro(@Validated@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean) {
-				
+	public String DvInsertPro(@Validated@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "delivery/Dv_insert";
+			}
 		dv_Service.addDvInfo(InsertDvBean);
 		
 		return "delivery/Dv_insert_success";
@@ -49,26 +53,31 @@ public class Dv_Controller {
 	
 	//Dv_update
 	@GetMapping("/delivery/DvUpdate")
-	public String DvUpdate(@RequestParam("dv_id") String dv_id, Model model) {
+	public String DvUpdate(@RequestParam("dv_id") String dv_id, @RequestParam("dv_nick") String dv_nick, Model model) {
 		
-		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(dv_id);
+		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(dv_id, dv_nick);
 		model.addAttribute("UpdateDvBean", UpdateDvBean);
 		
 		return "delivery/Dv_update";
 	}
 	
 	@PostMapping("/delivery/DvUpdatePro")
-	public String DvUpdatePro(@Validated@ModelAttribute("updateDvBean") Dv_Bean UpdateDvBean) {
+	public String DvUpdatePro(@Validated@ModelAttribute("UpdateDvBean") Dv_Bean UpdateDvBean, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "delivery/Dv_update";
+		}
 		
 		dv_Service.UpdateDvInfo(UpdateDvBean);
+		
 		return "delivery/Dv_update_success";
 	}
 	
 	//Dv_delete
 	@GetMapping("/delivery/DvDelete")
-	public String DvDelete(@RequestParam("dv_id") String dv_id) {
+	public String DvDelete(@RequestParam("dv_id") String dv_id, @RequestParam("dv_nick") String dv_nick) {
 		
-		dv_Service.DeleteDvInfo(dv_id);
+		dv_Service.DeleteDvInfo(dv_id, dv_nick);
 		
 		return "delivery/Dv_delete";
 	}

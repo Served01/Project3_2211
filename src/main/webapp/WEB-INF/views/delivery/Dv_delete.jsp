@@ -11,7 +11,7 @@
 <body>
 	<script type="text/javascript">
 		alert("데이터가 삭제 되었습니다.")
-		//location.href='${root}delivery/main?board_info_idx=${Dv_info}'
+		location.href="${root}delivery/DvList?dv_id=hyun3"
 	</script>
 	
 </body>
