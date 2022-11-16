@@ -159,8 +159,8 @@ public class Bk_Bean {
 		return avg_score;
 	}
 
-	public void setAvg_score(double avg_score) {
-		this.avg_score = avg_score;
+	public double setAvg_score(double avg_score) {
+		return this.avg_score = avg_score;
 	}
 
 	

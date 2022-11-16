@@ -89,7 +89,7 @@ document.getElementById("my_sum").innerHTML=sum_;
 			<div class="col-md-4">
 				<img style="width: 320px; height: 360px; padding-right: 0px; margin-right: 0px;" src="${root }upload/${ReadBkBean.bk_image}"/>
 				<div style="left: 75px; width: 150px; top: 10px;" class="input-group">
-					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${ReadScoreBean.avg_score}/5 점</div>
+					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${ReadScore}/5.0 점</div>
 				</div>
 			</div>
 			<div class="col-md-8">

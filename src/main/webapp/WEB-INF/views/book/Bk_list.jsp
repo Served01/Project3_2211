@@ -11,7 +11,8 @@
 <title>도서 목록</title>
 </head>
 <body>
-<c:forEach var="bl" items="${BkList}">	
+<h2>${bk_local } -> ${bk_genre }</h2>
+<c:forEach var="bl" items="${bkListBean}">	
 		<div>
 		<a href='${root }book/BkSelect?bk_number=${bl.bk_number}'>${bl.bk_title}</a>
 		<div>
