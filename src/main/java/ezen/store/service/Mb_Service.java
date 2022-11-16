@@ -45,17 +45,13 @@ public class Mb_Service {
 		}		
 	}
 	
-	//
-	public Mb_Bean getModifyUserInfo(Mb_Bean updateMbBean) {	
-		Mb_Bean tempModifyUserDataBean = mbDAO.getModifyUserInfo(loginMbBean.getMb_id());
-		
-		updateMbBean.setMb_id(tempModifyUserDataBean.getMb_id());
-		updateMbBean.setMb_name(tempModifyUserDataBean.getMb_name()); 		
-		
-		return tempModifyUserDataBean; 		
+	//회원정보 수정
+	public Mb_Bean getModifyUserInfo(String mb_id) {	
+			
+		return mbDAO.getModifyUserInfo(mb_id); 		
 	}
 	
-	// 
+	// 회원정보 수정
 	public void modifyUserInfo(Mb_Bean updateMbBean) {
 		updateMbBean.setMb_id(loginMbBean.getMb_id()); 
 		
@@ -63,7 +59,26 @@ public class Mb_Service {
 		
 	}
 	
-	//
+	//회원정보 삭제(임시삭제)
+	public Mb_Bean getDeleteUserInfo(Mb_Bean deleteMbBean) {	
+		Mb_Bean tempDeleteUserDataBean = mbDAO.getDeleteUserInfo(loginMbBean.getMb_id());
+		
+		deleteMbBean.setMb_id(tempDeleteUserDataBean.getMb_id());
+		deleteMbBean.setMb_name(tempDeleteUserDataBean.getMb_name()); 		
+		deleteMbBean.setMb_deleted(tempDeleteUserDataBean.getMb_deleted()); 		
+		
+		return tempDeleteUserDataBean; 		
+	}
+	
+	// 회원정보 삭제 가져오기 (임시삭제)
+	public void deleteUserInfo(Mb_Bean deleteMbBean) {
+		deleteMbBean.setMb_id(loginMbBean.getMb_id()); 
+		
+		mbDAO.deleteUserInfo(deleteMbBean);
+		
+	}
+	
+	//회원리스트 가져오기
 	public Mb_Bean getListUserInfo(Mb_Bean updateMbBean) {	
 		Mb_Bean tempModifyUserDataBean = mbDAO.getModifyUserInfo(loginMbBean.getMb_id());
 		

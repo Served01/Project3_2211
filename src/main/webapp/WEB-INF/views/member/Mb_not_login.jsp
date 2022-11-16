@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Mb_not_login</title>
 </head>
 <body>
 
 	<script type="text/javascript">
 		alert("로그인 해주세요.")
-		location.href = "${root}member/Mb_login"
+		location.href = "${root}member/Mblogin"
 	</script>
 
 </body>

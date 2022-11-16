@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url var='root' value='/' />
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<title>회원 정보 보기 화면 - 마이페이지</title>
+<title>Mb_select</title>
 <head>
 </head>
 <body>
 
-        <h4 class="mb-3">회원 정보 보기 화면 - 마이 페이지</h4>
+<!--         <h4 class="mb-3">회원 정보 보기 화면 - 마이 페이지</h4> -->
 <!-- 			<table border="1"> -->
+			<h2>회원정보 상세보기</h2>
 						<div class="form-group">
 						<label for="mb_id">아이디</label>
 						<input type="text" id="mb_id" name="mb_id" class="form-control" value="${mbBean.mb_id }" disabled="disabled"/>
@@ -29,8 +32,8 @@
 <!-- 		</table> -->
           <div class="mb-4"></div>
           <button class="btn btn-dark" onclick="location.href='Mbupdate'">수정</button>
-          <button class="btn btn-dark" onclick="location.href='Mbupdate'">삭제</button>
-          <button class="btn btn-dark" onclick="location.href='index'">메인 화면</button>
+          <button class="btn btn-dark" onclick="location.href='Mbdelete'">삭제</button>
+          <a href="${root }index" class="btn btn-danger">메인화면</a>
 
 </body>
 </html>

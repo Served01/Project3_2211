@@ -11,15 +11,20 @@ public class Mb_Bean {
 	@Size(min = 2, max = 8)
 	@Pattern(regexp = "[a-zA-Z0-9]*")
 	private String mb_id;
-
+	
+	@Size(min = 2, max = 20)
 	private String mb_name;
-
+	
+	@Size(min = 8, max = 15)
 	private String mb_pw;
 
+	@Size(min = 8, max = 15)
 	private String mb_pw2;
 
+	@Size(min = 1, max = 30)
 	private String mb_email;
-
+	
+	@Size(min = 1, max = 30)
 	private String mb_tel;
 
 	private Date mb_date;
@@ -29,9 +34,13 @@ public class Mb_Bean {
 	private Date mb_deleted_date;
 	
 	
-
+	//아이디용
 	private boolean mbIdExist;
-
+	
+	//비번용
+	private boolean mbIdExist2;
+	
+	//로그인용
 	private boolean mblogin;
 
 	public String getMb_id() {
@@ -89,12 +98,14 @@ public class Mb_Bean {
 	
 	public Mb_Bean() {
 		this.mbIdExist = false;
+		this.mbIdExist2 = false;
 		this.mblogin = false;
 	}
 
 	public void setMbIdExist(boolean mbIdExist) {
 		this.mbIdExist = mbIdExist;
 	}
+
 
 	public boolean isMblogin() {
 		return mblogin;
@@ -128,5 +139,11 @@ public class Mb_Bean {
 		this.mb_deleted_date = mb_deleted_date;
 	}
 
+	public boolean isMbIdExist2() {
+		return mbIdExist2;
+	}
+	public void setMbIdExist2(boolean mbIdExist2) {
+		this.mbIdExist2 = mbIdExist2;
+	}
 }
 

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<title>회원가입 화면 샘플 - Bootstrap</title>
+<title>Mb_insert</title>
 <!-- <script src="https://kit.fontawesome.com/ece1cdce53.js" crossorigin="anonymous"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <link rel="stylesheet" -->
@@ -53,13 +53,13 @@
 </script>
 
 <body>
-	<div class="container">
-		<div class="input-form-backgroud row">
-			<div class="input-form col-md-12 mx-auto">
-				<a href="#" onclick="location.href='index.jsp'">
-					<i class="fa-solid fa-book"></i>Ezen Book Store
-				</a><br>
-				<h4 class="mb-3">회원가입</h4>
+<!-- 	<div class="container"> -->
+<!-- 		<div class="input-form-backgroud row"> -->
+<!-- 			<div class="input-form col-md-12 mx-auto"> -->
+<!-- 				<a href="#" onclick="location.href='index.jsp'"><h2> -->
+<!-- 						<i class="fa-solid fa-book"></i>Ezen Book Store -->
+<!-- 					</h2></a> <br> -->
+				<h2 class="mb-3">회원가입</h2>
 				<form:form action="${root }member/Mbinsertpro" method="post"
 					modelAttribute="insertMbBean">
 					<form:hidden path="mbIdExist" />
@@ -74,7 +74,7 @@
 							<form:errors path="mb_id" style="color:red" />
 							<div class="input-group-append">
 								<form:button type="button" class="btn btn-primary"
-									onclick="checkUserIdExist()">중복확인</form:button>
+ 									onclick="checkUserIdExist()">중복확인</form:button>
 							</div>
 						</div>
 					</div>
@@ -120,8 +120,8 @@
 							for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 					</div>
 					<div class="mb-4"></div>
-					<button class="btn btn-primary btn-lg btn-block" type="submit">가입
-						완료</button>
+					<button class="btn btn-primary btn-lg btn-block" type="submit">가입완료</button>
+					<a href="${root }index">메인으로</a>
 				</form:form>
 			</div>
 		</div>

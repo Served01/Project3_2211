@@ -20,6 +20,12 @@ public class Mb_DAO {
 		return mbMapper.checkUserIdExist(mb_id);		
 	}
 	
+	//패스워드 체크
+	public String checkUserIdExist2(String mb_id){
+		
+		return mbMapper.checkUserIdExist2(mb_id);		
+	}
+	
 	//회원가입
 	public void addUserInfo(Mb_Bean insertMbBean) {
 		
@@ -41,6 +47,17 @@ public class Mb_DAO {
 		mbMapper.modifyUserInfo(updateMbBean);
 		
 	}
+	
+	//삭제할 회원정보(임시삭제) 
+	public Mb_Bean getDeleteUserInfo(String mb_id) {				
+		return mbMapper.getDeleteUserInfo(mb_id); 		
+	}
+	
+	//회원정보 삭제(임시삭제)
+	public void deleteUserInfo(Mb_Bean deleteMbBean) {
+		mbMapper.deleteUserInfo(deleteMbBean);
+		
+	}
 	//회원 리스트
 	public List<Mb_Bean> getMbList(String mb_id){
 		
@@ -51,6 +68,7 @@ public class Mb_DAO {
 	public Mb_Bean getMemberInfo(String mb_id) {
 			
 	return mbMapper.getMemberInfo(mb_id);
-		}
-		
 	}
+	
+		
+}

@@ -116,9 +116,11 @@ public class Mb_Controller {
 	
 	//회원정보 수정 컨트롤
 	@GetMapping("/Mbupdate")
-	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
+	public String Mbupdate(@RequestParam("mb_id") String mb_id, Model model) {
 		
-		mbService.getModifyUserInfo(updateMbBean);
+		Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id);
+		
+		model.addAttribute("updateMbBean",updateMbBean);
 		
 		return "member/Mb_update";
 	}
@@ -128,8 +130,8 @@ public class Mb_Controller {
 	public String Mbupdatepro(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "member/Mb_update_pro";
-	}
+			return "member/Mb_update";
+		}
 		
 	//회원정보 수정 성공페이지	
 		mbService.modifyUserInfo(updateMbBean);
@@ -153,13 +155,34 @@ public class Mb_Controller {
 		return "member/Mb_not_login";
 	}
 	
+	//회원정보 삭제 컨트롤(수정하여 임시삭제)
+	@GetMapping("/Mbdelete")
+	public String Mbdelete(@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean) {
+		
+		mbService.getDeleteUserInfo(deleteMbBean);
+		
+		return "member/Mb_delete";
+	}
+	
+	//회원정보 삭제 컨트롤 프로(수정하여 임시삭제)
+	@PostMapping("/Mbdeletepro")
+	public String Mbdeletepro(@Validated@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "member/Mb_delete";
+	}
+		//회원정보 삭제(임시삭제) 성공페이지	
+		mbService.deleteUserInfo(deleteMbBean);
+		
+		return "member/Mb_delete_success";
+	}	
+		
 	//password check routine
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		Mb_Validator validator = new Mb_Validator();
 		binder.addValidators(validator); 
 	}
-
 	
-}
 
+}

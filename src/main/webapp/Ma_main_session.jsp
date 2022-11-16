@@ -37,11 +37,15 @@ Wish select, insert, delete 기능 O (Wish는 update 기능이 없음)
 <a href="${root}wish/wish_test">위시추가테스트</a>
 
 <h3>Member 기능</h3>
-Member list, select 기능 O
+Member list, select, insert 기능 O
 <a href="${root }member/Mblist?mb_id=admin" class="nav-link">전체회원목록</a>
 <a href='${root }member/Mbselect?mb_id=admin'>마이페이지</a>
 <a href="${root }member/Mbupdate?mb_id=admin" class="nav-link">정보수정</a>
+<a href="${root }member/Mbdelete?mb_id=admin" class="nav-link">삭제(임시삭제)</a>
+<a href="${root }member/Mblogout" class="nav-link">로그아웃</a>
+<a href="${root }member/Mblogin" class="nav-link">로그인</a>
 <a href="${root }member/Mbinsert" class="nav-link">회원가입</a>
+
 
 </body>
 </html>
