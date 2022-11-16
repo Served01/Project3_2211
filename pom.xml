@@ -1,10 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
 	https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>JavaSpring</groupId>
-	<artifactId>JavaSpring</artifactId>
+	<groupId>Project3_bookstoreWebsite</groupId>
+	<artifactId>Project3_bookstoreWebsite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
@@ -40,7 +38,6 @@
 		<org.mybatis-version>2.0.6</org.mybatis-version>
 		<com.fasterxml.jackson.core-version>2.12.1</com.fasterxml.jackson.core-version>
 		<com.oracle.database.jdbc-version>11.2.0.4</com.oracle.database.jdbc-version>
-		
 	</properties>
 	<repositories>
 		<repository>
@@ -58,7 +55,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${javax.servlet-version}</version>
-			<scope>provided</scope> 
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
@@ -139,39 +136,49 @@
 
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
 		<dependency>
-		    <groupId>javax.validation</groupId>
-		    <artifactId>validation-api</artifactId>
-		    <version>2.0.1.Final</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
 		<dependency>
-		    <groupId>org.hibernate.validator</groupId>
-		    <artifactId>hibernate-validator</artifactId>
-		    <version>6.2.0.Final</version>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.0.Final</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.bval/bval-jsr303 -->
 		<dependency>
-		    <groupId>org.apache.bval</groupId>
-		    <artifactId>bval-jsr303</artifactId>
-		    <version>0.5</version>
+			<groupId>org.apache.bval</groupId>
+			<artifactId>bval-jsr303</artifactId>
+			<version>0.5</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.bval/bval-jsr -->
 		<dependency>
-		    <groupId>org.apache.bval</groupId>
-		    <artifactId>bval-jsr</artifactId>
-		    <version>2.0.5</version>
+			<groupId>org.apache.bval</groupId>
+			<artifactId>bval-jsr</artifactId>
+			<version>2.0.5</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
 		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-validator</artifactId>
-		    <version>6.2.1.Final</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.1.Final</version>
 		</dependency>
-
-
-
+		
+		<!--11월16일 추가함 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!--11월16일 -->
 
 	</dependencies>
-
+	
 </project>

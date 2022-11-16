@@ -27,6 +27,7 @@ public class Mb_Controller {
 	@SuppressWarnings("unused")
 	@Autowired
 	private Mb_Service mbService;
+	
 	@SuppressWarnings("unused")
 	@Autowired
 	private Mb_Bean insertMbBean;
@@ -50,7 +51,7 @@ public class Mb_Controller {
 		return "member/Mb_list";
 	}
 	
-	//회원 상세보기
+	//회원 상세보기 컨트롤
 	@GetMapping("/Mbselect")
 	public String Mbselect(@RequestParam("mb_id") String mb_id, Model model) {
 		
@@ -62,20 +63,21 @@ public class Mb_Controller {
 		return "member/Mb_select";
 	}
 	
-	
+	//로그인 컨트롤
 	@GetMapping("/Mblogin")
 	public String Mblogin(@ModelAttribute("tempMbBean") Mb_Bean tempMbBean,
 						@RequestParam(value="fail", defaultValue = "false") boolean fail, Model model){
 			
 			model.addAttribute("fail", fail);
 
-			//�븘吏곸� 濡쒓렇�씤�븯吏� �븡�븯�쑝誘�濡� false濡� �꽕�젙
-			//loginUserDataBean.setUserlogin(false);
+			//아직은 로그인하지 않았으므로 false로 설정
+			//loginMbBean.setMblogin(false);			
 			
 			model.addAttribute("tempMbBean", tempMbBean);
 			return "member/Mb_login";			
-		}
-			
+	}
+		
+	//로그인 컨트롤 프로
 	@PostMapping("/Mbloginpro")
 	public String Mbloginpro(@Validated@ModelAttribute("tempMbBean") Mb_Bean tempMbBean, BindingResult result) {
 		
@@ -94,12 +96,14 @@ public class Mb_Controller {
 		}
 	}
 	
+	//회원가입 컨트롤
 	@GetMapping("/Mbinsert")
 	public String Mbinsert(@ModelAttribute("insertMbBean") Mb_Bean insertMbBean) {
 		
 		return "member/Mb_insert";
 	}
 	
+	//회원가입 컨트롤 프로
 	@PostMapping("/Mbinsertpro")
 	public String Mbinsertpro(@Validated@ModelAttribute("insertMbBean") Mb_Bean insertMbBean, BindingResult result) {
 		
@@ -112,43 +116,81 @@ public class Mb_Controller {
 		return "member/Mb_insert_success";
 	}
 	
-	@GetMapping("/Mbupdate")
-	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
+		//회원정보(수정) 컨트롤 (단위 테스트용)
+		@GetMapping("/Mbupdate")
+		public String Mbupdate(@RequestParam("mb_id") String mb_id, Model model ) {
 		
-		mbService.getModifyUserInfo(updateMbBean);
+			Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id);
 		
-		return "member/Mb_update";
+			model.addAttribute("updateMbBean",updateMbBean);
+		
+			return "member/Mb_update";
 	}
 	
-	//회원정보 수정 프로세스
+		//회원정보 수정 컨트롤 (원본)
+//		@GetMapping("/Mbupdate")
+//		public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
+//		
+//			mbService.getModifyUserInfo(updateMbBean);
+//		
+//			return "member/Mb_update";
+//		}
+	
+	//회원정보 수정 컨트롤 프로
 	@PostMapping("/Mbupdatepro")
 	public String Mbupdatepro(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "member/Mb_update_pro";
-		}			
-	//회원정보 수정 성공페이지	
+			return "member/Mb_update";
+	}
+		
+	//회원정보 수정 성공페이지		
 		mbService.modifyUserInfo(updateMbBean);
 		
 		return "member/Mb_update_success";
 	}
 	
 	
-	
-	
-	@GetMapping("/Mblogout")
-	public String Mblogout() {
+	//회원정보 삭제 컨트롤(수정하여 임시삭제)
+	@GetMapping("/Mbdelete")
+	public String Mbdelete(@RequestParam("") String mb_id, Model model) {
+		Mb_Bean deleteMbBean = mbService.getDeleteUserInfo(mb_id);
 		
-		loginMbBean.setMblogin(false);   
-	
-		return "member/Mb_logout";
+		model.addAttribute("deleteMbBean", deleteMbBean);
+		
+		return "member/Mb_delete";
+//		
+//		
+//		mbService.getDeleteUserInfo(deleteMbBean);
+//		
+//		return "member/Mb_delete";
 	}
 	
-	@GetMapping("/Mbnotlogin")
-	public String notlogin() {
-			
-		return "member/Mb_not_login";
+	//회원정보 삭제 컨트롤 프로(수정하여 임시삭제 프로)
+	@PostMapping("/Mbdeletepro")
+	public String Mbdeletepro(@Validated@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "member/Mb_delete";
 	}
+		//회원정보 삭제(임시삭제) 성공페이지	
+		mbService.deleteUserInfo(deleteMbBean);
+		
+		return "member/Mb_delete_success";
+	}
+	
+	//회원정보 삭제 컨트롤 프로(수정하여 임시삭제)
+//	@PostMapping("/Mbdeletepro")
+//	public String Mbdeletepro(@Validated@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean, BindingResult result) {
+//		
+//		if(result.hasErrors()) {
+//			return "member/Mb_delete";
+//		}
+//		//회원정보 삭제(임시삭제) 성공페이지	
+//		mbService.deleteUserInfo(deleteMbBean);
+//		
+//		return "member/Mb_delete_success";
+//	}	
 		
 	//password check routine
 	@InitBinder
@@ -157,6 +199,20 @@ public class Mb_Controller {
 		binder.addValidators(validator); 
 	}
 
+	//로그아웃 컨트롤
+	@GetMapping("/Mblogout")
+	public String Mblogout() {
+		
+		loginMbBean.setMblogin(false);
 	
-}
+		return "member/Mb_logout";
+	}
+	
+	//로그인 확인 컨트롤
+	@GetMapping("/Mbnotlogin")
+	public String notlogin() {
+			
+		return "member/Mb_not_login";
+	}
 
+}

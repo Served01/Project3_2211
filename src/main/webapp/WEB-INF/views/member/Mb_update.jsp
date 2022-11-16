@@ -7,32 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <title>Mb_update</title>
 <!-- Bootstrap CDN -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script> -->
 
 </head>
 <body>
-<c:import url="/WEB-INF/views/include/header.jsp"/>
 
-<div class="container" style="margin-top:100px">
-	<div class="row">
+<h2>회원정보 수정</h2>
+
+<!-- <div class="container" style="margin-top:100px"> -->
+<!-- 	<div class="row"> -->
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
 					<form:form action="${root}member/Mbupdatepro" method="post" modelAttribute="updateMbBean">
 					<div class="form-group">
-						<form:label path="mb_name">이름</form:label>
-						<form:input path="mb_name" class="form-control" readonly="true"/>
-					</div>
-					<div class="form-group">
 						<form:label path="mb_id">아이디</form:label>
 						<form:input path="mb_id" class="form-control" readonly="true"/>
+					</div>
+					<div class="form-group">
+						<form:label path="mb_name">이름</form:label>
+						<form:input type="text" path="mb_name" class="form-control"/>
+						<form:errors path="mb_name" style="color:red"/>
 					</div>
 					<div class="form-group">
 						<form:label path="mb_pw">변경할 비밀번호</form:label>
@@ -67,7 +64,5 @@
 		<div class="col-sm-3"></div>
 	</div>
 </div>
-<!--<c:import url="/WEB-INF/views/include/footer_menu.jsp"/> -->
-
 </body>
 </html>

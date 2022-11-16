@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url var='root' value='/'/>  
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url var='root' value='/' />
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,51 +9,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>index.jsp</title>
 <!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	
-<%-- <c:import url="/WEB-INF/views/include/top_menu.jsp"/> --%>
-<c:import url="/WEB-INF/views/include/header.jsp"/>
 
-<!-- 게시판 미리보기 부분 -->
-<div class="container" style="margin-top:100px">
-<!-- 	<div class="row"> -->
-<%-- 		<c:forEach var="sub_list" items="${list }" varStatus="idx">  --%>
-<!-- 			<div class="col-lg-6" style="margin-top:20px"> -->
-<!-- 			<div class="card shadow"> -->
-<!-- 				<div class="card-body"> -->
-<%-- 					<h4 class="card-title">${board_list[idx.index].board_info_name }</h4> --%>
-<!-- 					<table class="table table-hover" id='board_list'> -->
-<!-- 						<thead> -->
-<!-- 							<tr> -->
-<!-- 								<th class="text-center w-25">글번호</th> -->
-<!-- 								<th>제목</th> -->
-<!-- 								<th class="text-center w-25 d-none d-xl-table-cell">작성날짜</th> -->
-<!-- 							</tr> -->
-<!-- 						</thead> -->
-<!-- 						<tbody> -->
-<%-- 							<c:forEach var="str" items="${sub_list }"> --%>
-<!-- 								<tr> -->
-<%-- 									<td class="text-center">${str.content_idx }</td> --%>
-<%-- 									<th><a href="${root}board/read?board_info_idx=${board_list[idx.index].board_info_idx}&content_idx=${str.content_idx}&page=1">${str.content_subject }</a></th> --%>
-<%-- 									<td class="text-center d-none d-md-table-cell">${str.content_date }</td>						 --%>
-<!-- 								</tr> -->
-<%-- 							</c:forEach> --%>
-<!-- 						</tbody> -->
-<!-- 					</table>					 -->
-<%-- 					<a href="${root }board/main?board_info_idx=${board_list[idx.index].board_info_idx}" class="btn btn-primary">더보기</a> --%>
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<%-- 		</c:forEach> --%>
-<!-- 	</div> -->
-</div>	
-<%-- <c:import url="/WEB-INF/views/include/footer_menu.jsp"/> --%>
-<c:import url="/WEB-INF/views/include/footer.jsp"/>
+	<h2>회원정보 시스템</h2>
+<%-- 	<c:choose> --%>
+<%-- 		<c:when test="${loginShowBean.mblogin == true }"> --%>
+			<a href="${root }member/Mblist?mb_id=admin" class="nav-link">[전체회원목록]</a>
+			<a href='${root }member/Mbselect?mb_id=${loginShowBean.mb_id}'>마이페이지(원본)</a>
+			<a href='${root }member/Mbselect?mb_id=admin'>[마이페이지]</a>
+			<a href="${root }member/Mbupdate" class="nav-link">정보수정(원본)</a>
+			<a href="${root }member/Mbupdate?mb_id=admin" class="nav-link">[정보수정]</a>
+			<a href="${root }member/Mbdelete?mb_id=admin" class="nav-link">[삭제(임시삭제)]</a>
+			<a href="${root }member/Mblogout" class="nav-link">[로그아웃]</a>
+<%-- 		</c:when> --%>
+<%-- 		<c:otherwise> --%>
+			<a href="${root }member/Mblogin" class="nav-link">[로그인]</a>
+			<a href="${root }member/Mbinsert" class="nav-link">[회원가입]</a>
+<%-- 		</c:otherwise> --%>
+<%-- 	</c:choose> --%>
+
 </body>
 </html>
 

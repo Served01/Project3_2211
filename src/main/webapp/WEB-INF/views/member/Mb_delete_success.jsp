@@ -5,11 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mb_login_success</title>
+<title>Mb_delete_success</title>
 </head>
 <body>
+	<h1>회원정보 삭제(임시삭제) 완료</h1>
 	<script type="text/javascript">
-		alert("로그인을 성공 하였습니다.")
+		alert("회원정보 삭제(임시삭제)를 성공 하였습니다!.")
 		location.href="${root}index"
 	</script>
 </body>

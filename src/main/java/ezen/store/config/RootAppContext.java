@@ -9,8 +9,8 @@ import ezen.store.beans.Mb_Bean;
 @Configuration
 public class RootAppContext {
 	
-	//login.jsp�뿉�꽌 �떎猷⑤뒗 �뜲�씠�꽣瑜� loginUserDataBean 媛앹껜�뿉 ���옣�븷 �삁�젙 �엯�땲�떎.
-	// 洹몃━怨�, login.jsp�뿉�꽌 �떎猷� �떎�젣 鍮덉� tempUserDataBean�씠�씪怨� �꽕�젙�븯怨� �궗�슜 �삁�젙�엯�땲�떎.
+	  //Mb_login.jsp에서 다루는 데이터를 loginMbBean 객체에 저장할 예정 입니다.
+	  // 그리고, Mb_login.jsp에서 다룰 실제 빈은 tempMbBean이라고 설정하고 사용 예정입니다.
 	  @Bean("loginMbBean")
 	  @SessionScope public Mb_Bean loginMbBean() { 
 		  return new Mb_Bean(); 
