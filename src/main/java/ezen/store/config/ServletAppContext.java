@@ -59,6 +59,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 		registry.addResourceHandler("/**").addResourceLocations("/resources/");
 	}
+
 	//데이터베이스 접속 정보 관리하는 빈 등록
 		@Bean
 		public BasicDataSource dataSource() {

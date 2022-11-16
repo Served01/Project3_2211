@@ -89,7 +89,12 @@ document.getElementById("my_sum").innerHTML=sum_;
 			<div class="col-md-4">
 				<img style="width: 320px; height: 360px; padding-right: 0px; margin-right: 0px;" src="${root }upload/${ReadBkBean.bk_image}"/>
 				<div style="left: 75px; width: 150px; top: 10px;" class="input-group">
-					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${ReadScoreBean.avg_score}/5 점</div>
+				<c:if test="${ReadScore != 0}">
+					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${ReadScore}/5.0 점</div>
+				</c:if>
+				<c:if test="${ReadScore == 0.0}">
+					<div><h5>등록된 평점이 없습니다.</h5></div>
+				</c:if>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -114,6 +119,8 @@ document.getElementById("my_sum").innerHTML=sum_;
 				<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
 				<input class="btn btn-info" type="reset" value="찜하기">
 				<input class="btn btn-info" type="reset" value="장바구니">
+				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
+				<a href='${root }book/BkDeletePro?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">삭제 &raquo;</a>	
 			</div>
 		</div>
 		<hr>

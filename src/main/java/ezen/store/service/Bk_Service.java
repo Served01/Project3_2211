@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import ezen.store.beans.Bk_Bean;
+import ezen.store.beans.Bk_Number;
 import ezen.store.dao.Bk_DAO;
 
 
@@ -66,22 +67,45 @@ public class Bk_Service {
 		}
 	
 	//해당 책 평균 평점
-	public Bk_Bean getBkScore(int bk_number) { 
-		  
-		return BkDAO.getBkScore(bk_number); 
-	}
-	
-	//책 정보 관련 서비스 
-	public Bk_Bean getBkInfo(int bk_number) { 
-		  
-		return BkDAO.getBkInfo(bk_number); 
-	}
-	
-	//
-	public List<Bk_Bean> getBkList(String bk_local, String bk_genre) {
+		public double getBkScore(int bk_number) { 
+			  
+			return BkDAO.getBkScore(bk_number); 
+		}
 		
-		return BkDAO.getBkList(bk_local, bk_genre);
-	}	
+		//책 정보 관련 서비스 
+		public Bk_Bean getBkInfo(int bk_number) { 
+			  
+			return BkDAO.getBkInfo(bk_number); 
+		}
+		
+		//책 리스트를 위한 책번호 리스트
+		public List<Bk_Number> getBkNumList(String bk_local, String bk_genre){
+			
+			return BkDAO.getBkNumList(bk_local, bk_genre);
+			
+		}
+			
+		//책 정보 수정
+		public void updateBook(Bk_Bean updateBkBean) {
+			
+			MultipartFile upload_file = updateBkBean.getUpload_file();
+			
+			if(upload_file.getSize() > 0) {			
+				String file_name = SaveUploadFile(upload_file);
+						
+				updateBkBean.setBk_image(file_name);
+			}
+
+			BkDAO.updateBook(updateBkBean);
+			
+		}
+	
+		//책 정보 삭제
+		public void deleteBook(int bk_number) {
+	
+			BkDAO.deleteBook(bk_number);
+			
+		}
 		
 }
 

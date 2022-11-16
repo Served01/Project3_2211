@@ -16,11 +16,11 @@ public class Bk_Bean {
 	private int bk_number;
 	
 	@Size(min=1, max=100)
-	@Pattern(regexp = "[a-zsA-Z가-힣]*")
+	@Pattern(regexp = "[0-9ㄱ-ㅎa-zsA-Z가-힣]*")
 	private String bk_title;
 	
 	@Size(min=1, max=100)
-	@Pattern(regexp = "[a-zA-Z가-힣]*")
+	@Pattern(regexp = "[0-9ㄱ-ㅎa-zsA-Z가-힣]*")
 	private String bk_writer;
 	
 	@Size(min=1, max=50)
