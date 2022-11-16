@@ -39,6 +39,12 @@ public class Ca_Service {
 		ca_DAO.delcartAll(ca_mbid);
 	}
 	
+	public void delPreOrder(String ca_mbid) {
+		ca_DAO.delPreOrder(ca_mbid);
+	}
+	public void delPreOrderItems(String ca_mbid) {
+		ca_DAO.delPreOrderItems(ca_mbid);
+	}
 	public void addCartStuff(String ca_mbid,int ca_bknumbers) {
 		ca_DAO.addCartStuff(ca_mbid,ca_bknumbers);
 	}

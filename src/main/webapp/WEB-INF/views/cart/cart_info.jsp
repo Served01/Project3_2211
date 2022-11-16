@@ -79,6 +79,7 @@
     .basketdiv .row.data > div > div {
         height: 60px;
         line-height: 60px;
+        padding: 0px 0;
     }
         .basketdiv .data .num .updown {
             color: #0075ff;
@@ -145,13 +146,13 @@
         width: 100px;
     }
 
-.buttongroup {
-    padding: 11px 0;
-    margin: 50px 0;
-}
-.narrowbuttongroup{
-    margin: 15px 0;
-}
+	.buttongroup {
+	    padding: 11px 0;
+	    margin: 50px 0;
+	}
+	.narrowbuttongroup{
+	    margin: 15px 0;
+	}
     .buttongroup.center {
         text-align: center;
     }
@@ -220,9 +221,10 @@
 }
 
 .orderform .p_num {
-    text-align: right;
-    width: 40px;
-    font-size: 1em;
+    text-align: center;
+    width: 35px;
+    height: 45px;
+    font-size: 0.78em;
 }
 
 </style>
@@ -396,38 +398,40 @@ let basket = {
 	    	<%java.util.Date today = new java.util.Date();
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
-	    	var ca_mbid = 'admin';
+			
+			var ca_mbid = 'admin';
 	    		
-	    	
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
-			$.ajax({
-				url: '${root}cart/cart_checkOrderNumber/' + or_number1,
-				type: 'get',
-				dataType: 'text',
-				success: function(result){
-					
-					if(result.trim() == 'true'){
-						$("#orderNumExist").val('true')
-					}else{
-						$("#orderNumExist").val('false')
-					}				
-				}			
-			})
 			
-			//var orderNumExist = $("#orderNumExist").val();
+			var orderNumExist = this.orderNumExist(or_number1);
 			
-			var item = document.querySelector('input[name=orderNumExist]');
-	    	var orderNumExist = item.getAttribute('value');
+	    	this.delPreOrderItems(ca_mbid);
+	    	setTimeout(this.delPreOrder(ca_mbid),300);
+	    	
+	    	
 			
 			
-			if(orderNumExist == true){
+			
+	    	//var orderNumExist = $("#orderNumExist").val();
+			
+	    	
+			
+	    	
+	    	
+	    	
+	    	if(orderNumExist == 'true'){
 				this.orderCreate(or_number1,ca_mbid);
-				setTimeout(this.orderItems(or_number1,ca_mbid), 100);
-			}else if(orderNumExist == false){
+				setTimeout(this.orderItems(or_number1,ca_mbid), 300);
+			}else if(orderNumExist == 'false'){
 				this.orderCreate(or_number2,ca_mbid);
-				setTimeout(this.orderItems(or_number2,ca_mbid), 100);
+				setTimeout(this.orderItems(or_number2,ca_mbid), 300);
 			}
+	    	
+	    	//document.write(orderNumExist);
+	    	
+	    	//setTimeout(this.getOrderNumExist(ca_mbid,or_number1,or_number2),300);
+			
 	    		
 	    	
 	    	
@@ -456,6 +460,53 @@ let basket = {
 	        	        		        	
 	           // item.parentElement.parentElement.parentElement.remove();
 	        })
+	    },
+	    delPreOrder: function(ca_mbid){
+	    	$.ajax({
+				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
+				type: 'get',
+				dataType: 'text'
+			})
+	    },
+	    delPreOrderItems: function(ca_mbid){
+	    	$.ajax({
+				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
+				type: 'get',
+				dataType: 'text'
+			})
+	    },
+	    orderNumExist: function(or_number1){
+	    	var orderNumExist;
+	    	$.ajax({
+				url: '${root}cart/cart_checkOrderNumber/' + or_number1,
+				async: false,
+				type: 'get',
+				dataType: 'text',
+				success: function(result){
+					
+					if(result.trim() == 'true'){
+						$("#orderNumExist").val('true')
+						orderNumExist = 'true';
+					}else{
+						$("#orderNumExist").val('false')
+						orderNumExist = 'false';
+					}				
+				}			
+			})
+	    	
+			return orderNumExist;
+	    },
+	   
+	    delPreOrder: function(ca_mbid){
+	    	$.ajax({
+				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
+				type: 'get',
+				dataType: 'text'
+			})
+	    },
+		priceComma: function(bk_price){
+			var price = bk_price.toLocaleString('ko-KR');
+			document.write(price + '원');
 	    },
 	    //주문번호생성로직
 	    calOrderNum1: function(){
@@ -553,8 +604,8 @@ let basket = {
 	                        		<div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
 	                        	</c:otherwise>
 	                        </c:choose>
-	                        <div class="img"><img src="${root} + ${str.bk_image }" width="60"></div>
-	                        <div class="pname">
+	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
+	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
 	                            <span>제목 : ${str.bk_title }</span>
 								<span>저자 : ${str.bk_writer }</span>
 					        	<span>출판사 : ${str.bk_publisher }</span>
@@ -564,21 +615,27 @@ let basket = {
 	                    <div class="subdiv">
 	                    	<c:choose>
 	                    		<c:when test="${str.bk_quantity != 0}">
-			                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+			                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
+			                        	<script>javascript:basket.priceComma(${str.bk_price })</script>
+									</div>
 			                        <div class="num">
 			                            <div class="updown">
-			                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="2" maxlength="2" class="p_num"   value="${str.ca_bkcount} " onkeyup="javascript:basket.changeKeyupPNum(${status.count},${str.bk_number },${str.bk_quantity });">
-			                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"><i class="fas fa-arrow-alt-circle-up up"></i></span>
-			                                <span onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"><i class="fas fa-arrow-alt-circle-down down"></i></span>
+			                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="p_num${status.count}" id="p_num${status.count}" size="2" maxlength="2" class="p_num"   value="${str.ca_bkcount} " onkeyup="javascript:basket.changeKeyupPNum(${status.count},${str.bk_number },${str.bk_quantity });">
+			                                <span class="fas fa-arrow-alt-circle-up up" onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"></span>
+			                                <span class="fas fa-arrow-alt-circle-down down" onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"></span>
 			                            </div>
 			                        </div>
-			                        <div class="sum">${str.bk_price*str.ca_bkcount }원</div>
+			                        <div class="sum">
+			                        	<script>javascript:basket.priceComma(${str.bk_price*str.ca_bkcount})</script>
+			                        </div>
 	                        	</c:when>
 	                        	<c:otherwise>
-	                        		<div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+	                        		<div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
+	                        		<script>javascript:basket.priceComma(${str.bk_price })</script>
+	                        		</div>
 			                        <div class="num">
 			                            <div class="updown">
-			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly >재고가없습니다</input>
+			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4></input>
 			                            </div>
 			                        </div>
 			                        <div class="sum">0원</div>

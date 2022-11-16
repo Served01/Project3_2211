@@ -229,7 +229,7 @@ insert into order_items (ori_number, ori_bknumber, ori_bkprice, ori_bkcount)
     values('22NOVZXY002',20220003,
             (select bk_price from book_info where bk_number = 20220001), 2);
 insert into order_items (ori_number, ori_bknumber, ori_bkprice, ori_bkcount)
-    values('22NOVZXY002',20220004,
+    values('22Nov037KW7',20220004,
             (select bk_price from book_info where bk_number = 20220002), 2);
 select * from ORDER_INFO;
 select * from order_items;
@@ -239,6 +239,9 @@ insert into order_items values('22vor333444',
 (select bk_price from book_info where bk_number = 20220001),
 0,
 (select ca_bkcount from CART_INFO where ca_mbid='admin' and ca_bknumbers = 20220001));
+
+delete from order_items where ori_number in (select or_number from order_info where or_mbid = 'admin' and or_status = '결제중')
+select or_number from order_info where or_mbid = 'admin' and or_status = '결제중';
 
 drop table ORDER_INFO;
 drop table order_items;

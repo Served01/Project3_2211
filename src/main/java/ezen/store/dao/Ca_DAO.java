@@ -29,7 +29,13 @@ public class Ca_DAO {
 	public void delcartAll(String ca_mbid) {
 		ca_Mapper.delcartAll(ca_mbid);
 	}
-	
+	//주문전 결제안한 주문삭제
+	public void delPreOrder(String ca_mbid) {
+		ca_Mapper.delPreOrder(ca_mbid);
+	}
+	public void delPreOrderItems(String ca_mbid) {
+		ca_Mapper.delPreOrderItems(ca_mbid);
+	}
 	//장바구니추가
 	public void addCartStuff(String ca_mbid,int ca_bknumbers) {
 		ca_Mapper.addCartStuff(ca_mbid,ca_bknumbers);

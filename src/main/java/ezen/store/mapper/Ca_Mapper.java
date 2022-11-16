@@ -27,6 +27,13 @@ public interface Ca_Mapper {
 	@Delete("delete from Cart_info where ca_mbid = #{ca_mbid}")
 		void delcartAll(String ca_mbid);
 	
+	@Delete("delete from order_info where or_mbid in #{ca_mbid} And or_status = '결제중'")
+		void delPreOrder(String ca_mbid);
+	
+	@Delete("delete from order_items where ori_number in (select or_number from order_info where or_mbid = #{ca_mbid}"
+			+ "and or_status = '결제중')")
+		void delPreOrderItems(String ca_mbid);
+	
 	@Update("update cart_info set ca_bkcount = ca_bkcount + 1 where ca_mbid = #{ca_mbid} and ca_bknumbers = #{ca_bknumbers}")
 		void plusBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers);
 	
