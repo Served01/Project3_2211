@@ -69,30 +69,21 @@
         <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
             <form:hidden path="dv_id"/>
             <div class="form-group">
+              <form:label path="dv_nick">닉넴임</form:label>
+              <form:input path="dv_nick" class="form-control"/>
+            </div>
+            <div class="form-group">
               <form:label path="dv_name">이름</form:label>
               <form:input path="dv_name" class="form-control"/>
             </div>
-              <div class="invalid-feedback">
-                이름을 입력해 주세요.
-              </div>
             <div class="form-group">
               <form:label path="dv_tel">연락처</form:label>
-              <form:input path="dv_tel" class="form-control"/>
-              <div class="invalid-feedback">
-                연락처를 입력해 주세요.
-              </div>                      
+              <form:input path="dv_tel" class="form-control"/>                                 
            <div class="form-group">
               <form:label path="dv_address">배송지</form:label>
-              <form:input path="dv_address" class="form-control"/>
-              <div class="invalid-feedback">
-                배송지를 입력해 주세요
-              </div>
-              
-           </div>
-            
-            
+              <form:input path="dv_address" class="form-control"/>                  
+           </div>         
           <div class="row">
-            
             </div>
             <div class="col-md-4 mb-3">
            

@@ -43,6 +43,5 @@ public class LoginInterceptor implements HandlerInterceptor{
 //		 request.setAttribute("login_mb_Bean", login_mb_Bean); 
 //		 return; 
 //	    }
-//}
 
 }

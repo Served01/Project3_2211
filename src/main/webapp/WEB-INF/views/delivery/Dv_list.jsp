@@ -56,6 +56,7 @@
 			<tr>
 				<th class="text-center d-none d-md-table-cell">아이디</th>
 				<th class="text-center d-none d-md-table-cell">이름</th>
+				<th class="text-center d-none d-md-table-cell">닉네임</th>
 				<th class="text-center d-none d-md-table-cell">전화번호</th>
 				<th class="w-50">배송지</th>
 			</tr>
@@ -65,16 +66,20 @@
 			<tr>
 				<td height="20" width="150">${dvl.dv_id }</td>
 				<td height="20" width="150">${dvl.dv_name }</td>
+				<td height="20" width="150">${dvl.dv_nick }</td>
 				<td height="20" width="150">${dvl.dv_tel }</td>
 				<td height="20" width="300">${dvl.dv_address }</td>
+			</tr>
+			<tr>
+				<td><a href="${root}delivery/DvUpdate?dv_id=${dvl.dv_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 수정</a></td>
+				<td><a href="${root}delivery/DvDelete?dv_id=${dvl.dv_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 삭제</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div class="mb-4">
-				<a href="${root}delivery/DvInsert?Delivery_info=${Delivery_info}&dv_id='hyun3'" class="btn btn-dark">배송지 추가</a>
-				<a href="${root}delivery/DvUpdate?Delivery_info=${Delivery_info}&dv_id='hyun3'" class="btn btn-dark">배송지 수정</a>
-				<a href="${root}delivery/DvDelete?Delivery_info=${Delivery_info}&dv_id='hyun3'" class="btn btn-dark">배송지 삭제</a>
+				<a href="${root}delivery/DvInsert?Delivery_info=${Delivery_info}&dv_id=hyun3" class="btn btn-dark">배송지 추가</a>
+				
 				
 	</div>					
 		

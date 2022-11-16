@@ -26,8 +26,8 @@ public class Dv_Service {
 	}			
 	
 	//update
-	public Dv_Bean UpdateDvBean(String dv_id) {
-		return dv_DAO.UpdateDvBean(dv_id);
+	public Dv_Bean UpdateDvBean(String dv_id, String dv_nick) {
+		return dv_DAO.UpdateDvBean(dv_id, dv_nick);
 	}
 	
 	public void UpdateDvInfo(Dv_Bean UpdateDvBean) {
@@ -35,8 +35,8 @@ public class Dv_Service {
 	}
 	
 	//delete
-	public void DeleteDvInfo(String dv_id) {
-		dv_DAO.DeleteDvInfo(dv_id);
+	public void DeleteDvInfo(String dv_id, String dv_nick) {
+		dv_DAO.DeleteDvInfo(dv_id, dv_nick);
 	}
 	
 }

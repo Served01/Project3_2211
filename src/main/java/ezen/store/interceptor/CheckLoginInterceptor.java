@@ -25,7 +25,7 @@ public class CheckLoginInterceptor implements HandlerInterceptor{
 		if(loginMbBean.isMblogin() == false) {
 			String contextPath = request.getContextPath();
 			
-			response.sendRedirect(contextPath + "/member/Mb_not_login");
+			response.sendRedirect(contextPath + "/member/Mbnotlogin");
 		
 			return false;
 		}

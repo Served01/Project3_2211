@@ -26,20 +26,22 @@ drop table delivery_info;
 
 create table Delivery_info(
     dv_id varchar2(20) not null,
+    dv_nick varchar2(20) not null,
     dv_name varchar2(12) not null,
     dv_tel varchar2(15) not null,
-    dv_address varchar2(100) not null
+    dv_address varchar2(1000) not null,
+    dv_pk varchar2(100)primary key
 );
 
 
 
 commit;
 
-insert into Delivery_info values('admin','admin','010-7894-1234','신림언저리0');
-insert into Delivery_info values('hyun1','house1','010-7894-1234','신림언저리1');
-insert into Delivery_info values('hyun2','house2','010-7894-1234','신림언저리2');
-insert into Delivery_info values('hyun3','house3','010-7894-1234','신림언저리3');
-insert into Delivery_info values('hyun4','house4','010-7894-1234','신림언저리4');
+insert into Delivery_info values('hyun3','집','house0','010-7894-1234','신림언저리0','hyun3.집');
+insert into Delivery_info values('hyun3','회사','house1','010-7894-1234','신림언저리1','hyun3.회사');
+insert into Delivery_info values('hyun3','편의점','house2','010-7894-1234','신림언저리2','hyun3.편의점');
+insert into Delivery_info values('hyun3','학원','house3','010-7894-1234','신림언저리3','hyun3.학원');
+insert into Delivery_info values('hyun3','망할','house4','010-7894-1234','신림언저리4','hyun3.망할');
 
 select * from Delivery_info;
 

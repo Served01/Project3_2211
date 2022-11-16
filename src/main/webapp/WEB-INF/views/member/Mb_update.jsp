@@ -15,20 +15,21 @@
 
 <h2>회원정보 수정</h2>
 
-<div class="container" style="margin-top:100px">
-	<div class="row">
+<!-- <div class="container" style="margin-top:100px"> -->
+<!-- 	<div class="row"> -->
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
 					<form:form action="${root}member/Mbupdatepro" method="post" modelAttribute="updateMbBean">
 					<div class="form-group">
-						<form:label path="mb_name">이름</form:label>
-						<form:input path="mb_name" class="form-control" readonly="true"/>
-					</div>
-					<div class="form-group">
 						<form:label path="mb_id">아이디</form:label>
 						<form:input path="mb_id" class="form-control" readonly="true"/>
+					</div>
+					<div class="form-group">
+						<form:label path="mb_name">이름</form:label>
+						<form:input type="text" path="mb_name" class="form-control"/>
+						<form:errors path="mb_name" style="color:red"/>
 					</div>
 					<div class="form-group">
 						<form:label path="mb_pw">변경할 비밀번호</form:label>

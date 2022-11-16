@@ -25,8 +25,8 @@ public class Dv_DAO {
 	}
 	
 	//delivery 수정
-	public Dv_Bean UpdateDvBean(String dv_id) {
-		return dv_Mapper.UpdateDvBean(dv_id);
+	public Dv_Bean UpdateDvBean(String dv_id, String dv_nick) {
+		return dv_Mapper.UpdateDvBean(dv_id,dv_nick);
 	}
 	
 	public void UpdateDvInfo(Dv_Bean UpdateDvBean) {
@@ -34,8 +34,8 @@ public class Dv_DAO {
 	}
 	
 	//delivery 삭제 기능
-	public void DeleteDvInfo(String dv_id) {
-		dv_Mapper.DeleteDvInfo(dv_id);
+	public void DeleteDvInfo(String dv_id, String dv_nick) {
+		dv_Mapper.DeleteDvInfo(dv_id, dv_nick);
 	}
 	
 }

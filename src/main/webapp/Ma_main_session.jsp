@@ -38,6 +38,8 @@ Member list, select, insert 기능 O<br>
 <a href="${root }member/Mblist?mb_id=admin" class="nav-link">전체회원목록</a>
 <a href='${root }member/Mbselect?mb_id=admin'>마이페이지</a>
 <a href="${root }member/Mbinsert" class="nav-link">회원가입</a>
+<a href="${root }member/Mbupdate?mb_id=admin" class="nav-link">[정보수정]</a>
+<a href="${root }member/Mbdelete?mb_id=admin" class="nav-link">[삭제(임시삭제)]</a>
 
 <h3>Order 기능</h3>
 Order list, select 기능 O<br>
