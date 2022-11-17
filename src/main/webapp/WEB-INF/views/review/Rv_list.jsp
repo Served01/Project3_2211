@@ -13,7 +13,7 @@
 <body>
 
 <!-- 게시글 리스트 -->
-<div style="margin-top:100px">
+
 		
 			<table>
 				<thead>
@@ -31,7 +31,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="rvl" items="${reviewlist }">
+					<c:forEach var="rvl" items="${reviewlist }" varStatus="status">
+					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent }">
 					<tr>
 						<td>${rvl.rv_number }</td>
 						<td>${rvl.rv_bknumber }</td>
@@ -45,48 +46,33 @@
 						<td><a href='${root }Review/RvUpdate?rv_number=${rvl.rv_number }&rv_id=${rvl.rv_id }&rv_bknumber=${rvl.rv_bknumber}'>댓글수정</a></td>
 						<td><a href="${root }Review/RvDeletePro?rv_number=${rvl.rv_number }&rv_id=${rvl.rv_id }&rv_bknumber=${rvl.rv_bknumber}">댓글삭제</a></td>
 					</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
 			
 			<!-- 페이지네이션 -->
-    		<div>
-				<ul>
-													
-					<c:forEach var="idx" begin="${pageCountBean.minPage }" end="${pageCountBean.maxPage }">
-						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
+    		<div class="d-none d-md-block">
+				<ul class="pagination justify-content-center">
+					
+						<li class="page-item">
+						<a href="${root}Review/RvList?rv_id=${rv_id}&rv_bknumber=${rv_bknumber }&page=1" class="page-link">처음</a>
+						</li>					
+														
+					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
 							<li class="page-item active">
-								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" >${idx}</a>
+								<a href="${root}Review/RvList?rv_id=${rv_id}&rv_bknumber=${rv_bknumber }&page=${idx}" class="page-link">${idx}</a>
 							</li>		
-						</c:when>
-						
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" >${idx}</a>
-							</li>						
-						</c:otherwise>						
-						</c:choose>									
+												
 					</c:forEach>					
 					
-					<c:choose>
-						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
-							<li class="page-item disabled">
-								<a href="#" class="page-link">다음</a>
-							</li>
-						</c:when>
-					
-					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.nextPage}" class="page-link">다음</a>
+							<a href="${root}Review/RvList?rv_id=${rv_id}&rv_bknumber=${rv_bknumber }&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
 						</li>
-					</c:otherwise>
-					</c:choose>
+					
 				</ul>
-			</div>		
-
-			
-		</div>
+			</div>	
 
 </body>
 </html>

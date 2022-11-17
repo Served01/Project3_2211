@@ -26,22 +26,23 @@ public class Rv_Controller {
 	
 	// 리뷰 리스트
 	@GetMapping("/RvList")
-	public String list(@RequestParam("rv_id") String rv_id,
+	public String list(
+					   @RequestParam("rv_id") String rv_id,
 					   @RequestParam("rv_bknumber") int rv_bknumber, 
-					   @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+					   @RequestParam(value="page", defaultValue="1") int page,
 					   Model model) {
-		
-		int cntReview = rvService.getCntReview(rv_bknumber);
-		
-		PageCountBean pageBean = PageCountBean
 		
 		// Review 목록 열기
 		model.addAttribute("rv_bknumber", rv_bknumber);
 		model.addAttribute("rv_id", rv_id);
 		
-		List<Rv_Bean> reviewlist = rvService.getRvList(rv_bknumber, cntReview);
+		List<Rv_Bean> reviewlist = rvService.getRvList(rv_bknumber);
 		model.addAttribute("reviewlist", reviewlist);
 		
+		PageCountBean pageCountBean = rvService.getContentCnt(rv_bknumber, page);
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		model.addAttribute("page", page);
 		
 		return "review/Rv_list";
 	}

@@ -17,8 +17,9 @@ public interface Wi_Mapper {
 			+ "    where bk_number in (select wi_bknumbers\r\n"
 			+ "                        from  Wish_info\r\n"
 			+ "                        where wi_mbid = #{wi_mbid})")
-		List<Wi_Bean> getWishInfo(String wi_mbid);
-		//페이지네이션
+	List<Wi_Bean> getWishInfo(String wi_mbid);
+	
+	//페이지네이션
 	@Select("select count(*) from wish_info where wi_mbid = #{wi_mbid}")
 		int getContentCnt(String wi_mbid);
 		
@@ -27,6 +28,7 @@ public interface Wi_Mapper {
 		
 	@Delete("delete from Wish_info where wi_bknumbers = #{wi_bknumbers}")
 		void delwish(@Param("wi_mbid") String wi_mbid,@Param("wi_bknumbers")int wi_bknumbers);
+	
 	@Delete("delete from Wish_info where wi_mbid = #{wi_mbid}")
 		void delwishAll(String wi_mbid);
 }

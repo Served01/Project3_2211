@@ -3,8 +3,10 @@ package ezen.store.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import ezen.store.beans.PageCountBean;
 import ezen.store.beans.Rv_Bean;
 import ezen.store.dao.Rv_DAO;
 
@@ -14,9 +16,19 @@ public class Rv_Service {
 	@Autowired
 	private Rv_DAO rvDAO;
 	
-	public int getCntReview(int rv_bknumber) {
+	@Value("${page.rvlistcnt}")
+	private int page_listcnt;  
+	//페이지
+	@Value("${page.rvpagButtonCnt}")
+	private int page_pageButtonCnt;
+	
+	public PageCountBean getContentCnt(int rv_bknumber, int currentPage) {
 		
-		return rvDAO.getCntReview(rv_bknumber);
+		int content_cnt = rvDAO.getCntReview(rv_bknumber);
+		
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
+		return pageCountBean;
 		
 	}
 	

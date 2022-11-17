@@ -20,17 +20,14 @@ public class Wi_Controller {
 	
 	@Autowired
 	private Wi_Service wi_Service;
-	
-//	@Autowired
-//	private Ca_Bean addStuff;
-	
-	
+
 	@GetMapping("/wish_info")
-	public String wish_info(@RequestParam("wi_mbid") String wi_mbid, 
+	public String wish_info(
+			@RequestParam("wi_mbid") String wi_mbid, 
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			Model model) {
 		
-//		model.addAttribute("ca_mbid" , ca_mbid);
+		model.addAttribute("wi_mbid", wi_mbid);
 		
 		List<Wi_Bean> infoWi_Bean = wi_Service.getWishInfo(wi_mbid);
 		model.addAttribute("infoWi_Bean",infoWi_Bean);

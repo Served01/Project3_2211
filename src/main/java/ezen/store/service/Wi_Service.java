@@ -17,10 +17,10 @@ public class Wi_Service {
 	@Autowired
 	private Wi_DAO Wi_DAO;
 	
-	@Value("${page.listcnt}")
+	@Value("${page.wilistcnt}")
 	private int page_listcnt;  
 	//페이지
-	@Value("${page.pagButtonCnt}")
+	@Value("${page.wipagButtonCnt}")
 	private int page_pageButtonCnt;
 	
 	
@@ -44,6 +44,7 @@ public class Wi_Service {
 		int content_cnt = Wi_DAO.getContentCnt(wi_mbid);
 		
 		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
 		return pageCountBean;
 	}
 	
