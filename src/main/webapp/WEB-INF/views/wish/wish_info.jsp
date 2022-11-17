@@ -422,48 +422,23 @@ let basket = {
 			<!-- 페이지네이션 -->
     		<div class="d-none d-md-block">
 				<ul class="pagination justify-content-center">
-					<c:choose>
-						<c:when test="${pageCountBean.prevPage <= 0 }">
-							<li class="page-item disabled">
-								<a href="#" class="page-link">이전</a>
-							</li>
-						</c:when>
-					<c:otherwise>
+					
 						<li class="page-item">
-						<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.prevPage}" class="page-link">이전</a>
+						<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="page-link">처음</a>
 						</li>					
-					</c:otherwise>					
-					</c:choose>
 														
 					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
-						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
+					
 							<li class="page-item active">
 								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
 							</li>		
-						</c:when>
-						
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
-							</li>						
-						</c:otherwise>						
-						</c:choose>									
+												
 					</c:forEach>					
 					
-					<c:choose>
-						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
-							<li class="page-item disabled">
-								<a href="#" class="page-link">다음</a>
-							</li>
-						</c:when>
-					
-					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.nextPage}" class="page-link">다음</a>
+							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
 						</li>
-					</c:otherwise>
-					</c:choose>
+					
 				</ul>
 			</div>		
 </body>
