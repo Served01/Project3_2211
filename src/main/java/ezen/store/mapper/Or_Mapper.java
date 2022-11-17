@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import ezen.store.beans.Ca_Bean;
+import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
 
 public interface Or_Mapper {
@@ -17,7 +18,8 @@ public interface Or_Mapper {
 			+ "    from order_info\r\n"
 			+ "    where or_mbid in (select mb_id\r\n"
 			+ "                        from  Member_info\r\n"
-			+ "                        where mb_id = #{or_mbid})")
+			+ "                        where mb_id = #{or_mbid})"
+			+ "		order by or_date")
 		List<Or_Bean> OrList(String or_mbid);
 		
 //	@Insert("insert into Order_info(or_number, or_mbid, or_bknumber, or_bkprice, "
@@ -62,7 +64,7 @@ public interface Or_Mapper {
 		@Update("update order_info set or_status = '준비중', or_dvname = #{or_dvname}, or_dvtel = #{or_dvtel}, or_dvaddress = #{or_dvaddress}, or_date = sysdate\r\n"
 				+ "		where or_mbid = #{or_mbid}\r\n"
 				+ "		and or_number = #{or_number}")
-		List<Or_Bean> OrPurchase(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number);
+		List<Or_Bean> OrUpdatePurchase(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number);
 		
 		//주문 상황 수정
 //		@Update("update order_info set or_status = #{or_status}\r\n"
@@ -72,8 +74,21 @@ public interface Or_Mapper {
 		@Update("update order_info set or_status = #{or_status}\r\n"
 				+ "		where or_mbid = #{or_mbid}\r\n"
 				+ "		and or_number = #{or_number}")
-		void OrAfter(Or_Bean updateOrBean);
+		void OrUpdateAfter(Or_Bean updateOrBean);
 		
+		@Update("update order_info set or_mbname = #{or_mbname}, or_mbtel = #{or_mbtel}, or_status = #{or_status}, or_date = #{or_date}, or_delivery = #{or_delivery}, or_dvname = #{or_dvname}, or_dvtel = #{or_dvtel}, or_dvaddress = #{or_dvaddress}" 
+				+"		where or_mbid = #{or_mbid}"
+				+"		and or_number = #{or_number}")
+		void UpdateOrInfo(Or_Bean UpdateOrBean);
+		
+		@Select("select or_number, or_mbid, or_mbname, or_mbtel, or_status, or_date, or_delivery, or_deliveryCost, or_dvname, or_dvtel, or_dvaddress\r\n"
+				+ "    from order_info\r\n"
+				+ "    where or_mbid in (select mb_id\r\n"
+				+ "			             from  Member_info\r\n"
+				+ "	                       where mb_id = #{or_mbid})\r\n"
+				+ "		and or_number = #{or_number}")
+		Or_Bean UpdateOrBean (@Param("or_mbid") String or_mbid, @Param("or_number") String or_number);
+
 		/*
 	@Select("select user_id, user_name from user_table where user_idx = #{user_idx}")
 		Or_Bean Or_update(int user_idx);

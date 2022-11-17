@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Dv_Bean;
-import ezen.store.beans.Mb_Bean;
 import ezen.store.beans.Or_Bean;
 import ezen.store.beans.PageCountBean;
 import ezen.store.service.Ca_Service;
@@ -56,26 +55,6 @@ public class Or_Controller {
 	map.put( "memberList" , memberList); }
 	
 	
-	
-	@GetMapping("/Or_list")
-	public String OrList(@RequestParam("or_mbid") String or_mbid,
-			@ModelAttribute("tempinfoOrBean") Or_Bean tempinfoOrBean,Model model) {
-		
-//		model.addAttribute("ca_mbid" , ca_mbid);
-		List<Or_Bean> tempinfoBean = or_Service.getOrderInfo(or_mbid);
-		
-		List<Or_Bean> infoOrBean = or_Service.getOrderInfo(or_mbid);
-		model.addAttribute("infoOrBean", infoOrBean);
-		
-		String or_number = infoOrBean.setOr_number(tempinfoOrBean.getOr_number());
-			
-		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
-		model.addAttribute("itemsOrBean", itemsOrBean);
-		
-		
-		return "order/Or_list";
-		
-	}
 	*/
 	
 	
@@ -141,10 +120,10 @@ public class Or_Controller {
 		model.addAttribute("Deliverylist", listDvBean);
 		
 		List<Ca_Bean> infoCaBean = ca_Service.getCartInfo(ca_mbid);
-		model.addAttribute("infoCa_Bean", infoCaBean);
+		model.addAttribute("infoCaBean", infoCaBean);
 		
 		List<Or_Bean> infoOrBean = or_Service.getOrInfo(or_mbid, or_number);
-		model.addAttribute("infoOr_Bean", infoOrBean);
+		model.addAttribute("infoOrBean", infoOrBean);
 		
 		
 		
@@ -158,24 +137,58 @@ public class Or_Controller {
 			@RequestParam("or_status") String or_status,
 			@RequestParam("dv_id") String dv_id, Model model) {
 		
-		List<Or_Bean> purOrBean = or_Service.OrPurchase(or_mbid, or_number);
+		List<Or_Bean> purOrBean = or_Service.OrUpdatePurchase(or_mbid, or_number);
 		model.addAttribute("purOrBean", purOrBean);
 		
 		return "order/Or_purchasePro";
 	}
 	
-	
+	/*
 	@GetMapping("/Or_after")
 	public String Orafter(@RequestParam("or_mbid") String or_mbid,
 			@RequestParam("or_number") String or_number,
-			@RequestParam("or_status") String or_status,
+			
 			Model model) {
 		
-		List<Or_Bean> infoOrBean = or_Service.getOrInfo(or_mbid, or_number);
+		List<Or_Bean> updateOrBean = or_Service.getOrInfo(or_mbid, or_number);
+		model.addAttribute("updateOrBean", updateOrBean);
+		
+		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
+		model.addAttribute("itemsOrBean", itemsOrBean);
+		
 		
 		return "order/Or_after";
 	}
+	*/
+	
+	
+	//주문 A/S (Book 재고수 변경 필요)
+	@GetMapping("/Or_after")
+	public String Orafter(@RequestParam("or_mbid") String or_mbid,
+			@RequestParam("or_number") String or_number,
+			Model model) {
+		
+		Or_Bean updateOrBean = or_Service.UpdateOrBean(or_mbid, or_number);
+		model.addAttribute("updateOrBean", updateOrBean);
+		
+		
+		return "order/Or_after";
+	}
+	
+	@PostMapping("/Or_afterPro")
+	public String OrafterPro(@ModelAttribute("updateOrBean") Or_Bean updateOrBean, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "order/Or_after";
+		}
+		
+		or_Service.OrUpdateAfter(updateOrBean);
+		
+		return "order/Or_aftersuccess";
+	}
+	
 	/*
+	
 	@GetMapping("/Or_afterPro")
 	public String OrafterPro(@RequestParam("or_mbid") String or_mbid,
 			@RequestParam("or_number") String or_number,
@@ -197,17 +210,6 @@ public class Or_Controller {
 	}
 	*/
 	
-	@GetMapping("/Or_afterPro")
-	public String OrafterPro(@Validated@ModelAttribute("updateOrBean") Or_Bean updateOrBean, BindingResult result) {
-		
-		if(result.hasErrors()) {
-			return "order/Or_after";
-		}
-		
-		or_Service.OrAfter(updateOrBean);
-		
-		return "order/Or_aftersuccess";
-	}
 	
 //	@GetMapping("/Or_select")
 //	public String OrSelect(@RequestParam("or_number") String or_number, Model model) {

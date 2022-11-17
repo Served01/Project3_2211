@@ -53,9 +53,14 @@
 		<tr>
 			<td>배송지: ${orBean.or_dvaddress }</td>
 		</tr>
+		<tr>
+    		<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?or_mbid=${orBean.or_mbid }&or_number=${orBean.or_number }'">주문 변경</button>
+			<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_list?or_mbid=${orBean.or_mbid }'">주문 목록</button>      
+    	</tr>
 	           	 </table>                 	
     </c:forEach>
     <hr>
+    <h3>주문 품목</h3>
     <c:forEach var="oriBean" items="${itemsOrBean }" varStatus="status">
     <table>
     	<tr>
@@ -79,10 +84,10 @@
 		<tr>
     		<td>구매 개수: ${oriBean.ori_bkcount }</td>
     	</tr>
+    	
     </table>
     </c:forEach>
-            
-</form>
+		</form>
         
 <%-- <div class="container" style="margin-top:100px">
 	<div class="row">

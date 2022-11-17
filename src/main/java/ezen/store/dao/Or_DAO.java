@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Or_Bean;
 import ezen.store.mapper.Or_Mapper;
@@ -36,14 +37,24 @@ public class Or_DAO {
 		return or_Mapper.getOrInfo(or_mbid, or_number);
 	};
 	
-	public List<Or_Bean> OrPurchase(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number){
-		return or_Mapper.OrPurchase(or_mbid, or_number);
+	public List<Or_Bean> OrUpdatePurchase(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number){
+		return or_Mapper.OrUpdatePurchase(or_mbid, or_number);
 	}
 	
 	
-	public void OrAfter(Or_Bean updateOrBean) {
-		or_Mapper.OrAfter(updateOrBean);
+	public void OrUpdateAfter(Or_Bean updateOrBean) {
+		or_Mapper.OrUpdateAfter(updateOrBean);
 	}
+	
+	public void UpdateOrInfo(Or_Bean updateOrBean) {
+		or_Mapper.UpdateOrInfo(updateOrBean);
+	}
+	public Or_Bean UpdateOrBean(String or_mbid, String or_number) {
+		return or_Mapper.UpdateOrBean(or_mbid, or_number);
+	}
+//	public void UpdateOrBean(String or_mbid, String or_number) {
+//		or_Mapper.UpdateOrInfo(or_mbid, or_number);
+//	}
 //	public List<Or_Bean> OrAfter(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number, @Param("or_status") String or_status){
 //		return or_Mapper.OrAfter(or_mbid, or_number, or_status);
 //	}
