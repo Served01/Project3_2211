@@ -4,10 +4,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
-<title>책 리스트(관리자)</title>
+<title>책 리스트</title>
 </head>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+body{
+ width:1800px;
+}
 .content_inner{
 display:flex;	
 }
@@ -27,6 +30,7 @@ display:block;
 }
 .aside_wrap{
 width: 600px;
+height:1000px;
 padding-left:300px;
 }
     .hi{
@@ -43,7 +47,7 @@ padding-left:300px;
 	<jsp:include page="header.jsp" />
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container">
-			<h1 class="display-5">책 리스트(관리자)</h1>
+			<h1 class="display-5">책 리스트</h1>
 		</div>
 	</div>
 <div class="input-group">
@@ -61,7 +65,7 @@ padding-left:300px;
     </aside>
 
 
-	<div class="container">
+	<div class="container" >
 		
 		<div class="row">
 		<div class="content_inner"></div>
@@ -78,9 +82,9 @@ padding-left:300px;
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
 				<p href="#"
-					class="btn btn-secondary" role="button">수정 &raquo;</p><br>
+					class="btn btn-secondary" role="button">찜 하기 &raquo;</p><br>
 					<p href="#"
-					class="btn btn-secondary" role="button">삭제 &raquo;</p>
+					class="btn btn-secondary" role="button">장바구니 &raquo;</p>
 					
 			</div>
 		</div>
@@ -101,9 +105,9 @@ padding-left:300px;
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
 				<p href="#"
-					class="btn btn-secondary" role="button">수정 &raquo;</p><br>
+					class="btn btn-secondary" role="button">찜하기 &raquo;</p><br>
 					<p href="#"
-					class="btn btn-secondary" role="button">삭제 &raquo;</p>
+					class="btn btn-secondary" role="button">장바구니 &raquo;</p>
 					
 			</div>
 		</div>

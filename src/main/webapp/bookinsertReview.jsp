@@ -33,9 +33,9 @@
     margin:auto;
     }
     
-      .hi{
-   text-align:center;
-   } 
+	      .hi{
+	   text-align:center;
+	   } 
   #hiyo {
   width: 300px;
   margin-left: auto;
