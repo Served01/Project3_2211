@@ -14,6 +14,12 @@ public class Rv_DAO {
 	@Autowired
 	private Rv_Mapper rvMapper;
 	
+	// 리뷰 리스트 갯수
+	public int getCntReview(int rv_bknumber) {
+		
+		return rvMapper.getCntReview(rv_bknumber);
+	}
+	
 	// 리뷰 리스트
 	public List<Rv_Bean> getRvList(int rv_bknumber){
 		

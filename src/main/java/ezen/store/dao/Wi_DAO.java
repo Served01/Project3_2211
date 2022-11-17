@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Wi_Bean;
+import ezen.store.mapper.Ca_Mapper;
 import ezen.store.mapper.Wi_Mapper;
 
 @Repository

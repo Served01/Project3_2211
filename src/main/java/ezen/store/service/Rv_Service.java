@@ -14,6 +14,12 @@ public class Rv_Service {
 	@Autowired
 	private Rv_DAO rvDAO;
 	
+	public int getCntReview(int rv_bknumber) {
+		
+		return rvDAO.getCntReview(rv_bknumber);
+		
+	}
+	
 	//리뷰 리스트
 	public List<Rv_Bean> getRvList(int rv_bknumber){
 		

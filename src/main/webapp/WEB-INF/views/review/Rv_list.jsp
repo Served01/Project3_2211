@@ -49,20 +49,42 @@
 				</tbody>
 			</table>
 			
-			<div>
-				<ul >
-					<li >
-						<a href="#">이전</a>
-					</li>
-					<li >
-						<a href="#">다음</a>
-					</li>
+			<!-- 페이지네이션 -->
+    		<div>
+				<ul>
+													
+					<c:forEach var="idx" begin="${pageCountBean.minPage }" end="${pageCountBean.maxPage }">
+						<c:choose>
+							<c:when test="$idx == pageCountBean.currentPage">
+							<li class="page-item active">
+								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" >${idx}</a>
+							</li>		
+						</c:when>
+						
+						<c:otherwise>
+							<li class="page-item">
+								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" >${idx}</a>
+							</li>						
+						</c:otherwise>						
+						</c:choose>									
+					</c:forEach>					
+					
+					<c:choose>
+						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
+							<li class="page-item disabled">
+								<a href="#" class="page-link">다음</a>
+							</li>
+						</c:when>
+					
+					<c:otherwise>
+						<li class="page-item">
+							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.nextPage}" class="page-link">다음</a>
+						</li>
+					</c:otherwise>
+					</c:choose>
 				</ul>
-			</div>
-			
-			<div>
-				<a href="#">글쓰기</a>
-			</div>
+			</div>		
+
 			
 		</div>
 

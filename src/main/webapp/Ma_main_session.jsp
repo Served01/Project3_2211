@@ -20,7 +20,7 @@ Book insert, update, list, select 기능 O<br>
 <a href='${root }book/BkList?bk_local=국내&bk_genre=인문'>국내 인문 리스트</a>
 
 <h3>Delivery 기능</h3>
-Delivery list 기능 O<br>
+Delivery list, delete 기능 O<br>
 <a href="${root}delivery/DvList?dv_id=hyun3">list</a>	
 
 <h3>Cart 기능</h3>
@@ -34,7 +34,7 @@ Wish select, insert, delete 기능 O (Wish는 update 기능이 없음)<br>
 <a href="${root}wish/wish_test">위시추가테스트</a>
 
 <h3>Member 기능</h3>
-Member list, select, insert 기능 O<br>
+Member list, select, insert, update, delete 기능 O<br>
 <a href="${root }member/Mblist?mb_id=admin" class="nav-link">전체회원목록</a>
 <a href='${root }member/Mbselect?mb_id=admin'>마이페이지</a>
 <a href="${root }member/Mbinsert" class="nav-link">회원가입</a>

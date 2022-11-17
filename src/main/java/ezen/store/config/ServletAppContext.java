@@ -161,6 +161,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return wifactoryBean;			
 	}
 	
+	
 	//Order 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
 	@Bean
 	public MapperFactoryBean<Or_Mapper> getOrMapperFactoryBean(SqlSessionFactory factory){

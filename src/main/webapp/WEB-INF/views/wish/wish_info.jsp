@@ -386,6 +386,7 @@ let basket = {
                     <div class="split"></div>
                 </div>
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
+        			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	                <div class="row data">
 	                    <div class="subdiv">
 	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
@@ -406,11 +407,9 @@ let basket = {
 	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
 	                    </div>
 	                </div>
+	                </c:if>
         		</c:forEach>
             </div>
-    		
-    		
-    		
     		
             <div class="right-align basketrowcmd">
             	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>

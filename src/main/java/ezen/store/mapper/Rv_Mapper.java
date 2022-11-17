@@ -10,6 +10,11 @@ import ezen.store.beans.Rv_Bean;
 
 public interface Rv_Mapper {
 
+	
+	//리뷰 리스트 개수를 가져오는 SQL문
+	@Select("select count(*) from Review_info where rv_bknumber = #{rv_bknumber} and rv_deleted = '0'")
+	int getCntReview(int rv_bknumber);
+		
 	//리뷰 리스트를 가져오는 SQL문
 	@Select("select * from Review_info where rv_bknumber = #{rv_bknumber} and rv_deleted = '0'")
 	List<Rv_Bean> getRvList(int rv_bknumber);
