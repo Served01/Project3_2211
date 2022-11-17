@@ -98,6 +98,13 @@ public class Bk_Service {
 		BkDAO.updateBook(updateBkBean);
 		
 	}
+	
+	//책 정보 삭제
+	public void deleteBook(int bk_number) {
+		
+		BkDAO.deleteBook(bk_number);
+			
+	}
 }
 
 

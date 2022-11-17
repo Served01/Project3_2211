@@ -43,4 +43,10 @@ public interface Bk_Mapper {
 	//책 지역과 장르에 맞는 책들의 책번호 리스트
 	@Select("select bk_number from Book_info where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
 	List<Bk_Number> getBkNumList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+	
+	//책 정보를 삭제 처리(수정)합니다.
+	@Update("update Book_info set bk_deleted='deleted'"
+			+ "where bk_number=#{bk_number}")
+	void deleteBkBean(int bk_number);
+		
 }

@@ -25,7 +25,21 @@ public class Bk_Controller {
 
 	@Autowired
 	private Bk_Service BkService;
+	
+	// header
+	@GetMapping("/header")
+	public String header() {
 
+		return "include/header";
+	}
+	
+	// footer
+	@GetMapping("/footer")
+	public String footer() {
+
+		return "include/footer";
+	}
+		
 	// 책정보 입력 컨트롤러
 	@GetMapping("/BkInsert")
 	public String BkInsert(@ModelAttribute("InsertBkBean") Bk_Bean InsertBkBean) {
@@ -79,6 +93,7 @@ public class Bk_Controller {
 		return "book/Bk_list";
 	}
 
+	// 책 상세정보
 	@GetMapping("/BkSelect")
 	public String BkSelect(@RequestParam("bk_number") int bk_number,
 							Model model) {
@@ -118,5 +133,20 @@ public class Bk_Controller {
 		
 		return "book/Bk_update_success";
 	}
+	
+	// 책정보 삭제(수정) 기능 컨트롤러
+		@GetMapping("/BkDeletePro")
+		public String bkDeletePro(@ModelAttribute("bk_number") int bk_number,
+								BindingResult result) {		
+			
+			BkService.deleteBook(bk_number);
+			
+			if(result.hasErrors()) {
+			return "book/Bk_delete_fail";
+			}
+			
+			return "book/Bk_delete_success";
+		}
+
 
 }

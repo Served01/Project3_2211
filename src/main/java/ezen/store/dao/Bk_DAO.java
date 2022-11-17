@@ -48,4 +48,9 @@ public class Bk_DAO {
 		return bk_Mapper.getBkNumList(bk_local, bk_genre);
 		
 	}
+	
+	//책 정보 삭제(수정)
+	public void deleteBook(int bk_number) {
+		bk_Mapper.deleteBkBean(bk_number);
+	}
 }
