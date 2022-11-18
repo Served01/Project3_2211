@@ -2,7 +2,6 @@ package ezen.store.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +13,11 @@ public class Dv_DAO {
 	
 	@Autowired
 	private Dv_Mapper dv_Mapper;
+	
+	//중복확인
+	public String CheckDvNick(String dv_nick){				
+		return dv_Mapper.CheckDvNick(dv_nick);
+	}	
 	
 	//delivery 리스트
 	public List<Dv_Bean> getDvList(String dv_id){

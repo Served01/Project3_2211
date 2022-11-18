@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
   <style>
     body {
       min-height: 100vh;
@@ -54,34 +58,67 @@
  }
   </style>
 </head>
-
+<script>
+	function CheckDvNick(){
+				
+		var dv_nick = $("#dv_nick").val()
+		
+		if(dv_nick.length == 0){
+			alert("닉네임를 입력해 주세요.")
+			return;
+		}
+		
+		$.ajax({
+			url: '${root}delivery/CheckDvNick/' + dv_nick,
+			type: 'get',
+			dataType: 'text',
+			success: function(result){
+				
+				if(result.trim() == 'true'){
+					alert('사용 할 수 있는 아이디 입니다.')
+					$("#dv_nickExist").val('true')
+				}else{
+					alert('사용 할 수 없는 아이디 입니다.')
+					$("#dv_nickExist").val('false')
+					
+				}				
+			}			
+		})
+	}
+	function ResetDvNick(){
+		$("#dv_nickExist").val('false')
+	}
+</script>
 <body>
 
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">배송지 추가</h4>
-        <c:if test="${fail == true }">
-					<div class="alert alert-danger">
-						<h3>입력 실패</h3>
-						<p>각 입력을 확인해주세요</p>
-					</div>
-					</c:if>
         <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
-            <form:hidden path="dv_id"/>
+            <form:hidden path="dv_id" value="hyun3"/>
             <div class="form-group">
-              <form:label path="dv_nick">닉넴임</form:label>
-              <form:input path="dv_nick" class="form-control"/>
+              <form:label path="dv_nick">닉네임</form:label>
+              <div class="input-group">
+              <form:input path="dv_nick" class="form-control"/>             
+              <div class="input-group-append">
+			  	<form:button type="button" class="btn btn-dark" onclick="CheckDvNick()">중복확인</form:button>
+			  </div>
+			  </div>
+			  <form:errors path="dv_nick" style="color:red"/>
             </div>
             <div class="form-group">
               <form:label path="dv_name">이름</form:label>
               <form:input path="dv_name" class="form-control"/>
+              <form:errors path="dv_name" style="color:red"/>
             </div>
             <div class="form-group">
               <form:label path="dv_tel">연락처</form:label>
-              <form:input path="dv_tel" class="form-control"/>                                 
+              <form:input path="dv_tel" class="form-control" placeholder="xx(x)-xxx(x)-xxxx"/> 
+              <form:errors path="dv_tel" style="color:red"/>                                
            <div class="form-group">
               <form:label path="dv_address">배송지</form:label>
-              <form:input path="dv_address" class="form-control"/>                  
+              <form:input path="dv_address" class="form-control"/>   
+              <form:errors path="dv_address" style="color:red"/>               
            </div>         
           <div class="row">
             </div>
@@ -92,28 +129,12 @@
           <hr class="mb-4">
           <div class="hi">
           <form:button class="btn btn-dark" type="submit">입력 완료</form:button>
-          <form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
           </div>
         </form:form>
       </div>
     </div>
   
-  <script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  </script>
+ 
 </body>
 
 </html>

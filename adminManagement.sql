@@ -26,11 +26,11 @@ select * from delivery_info;
 
 create table Delivery_info(
     dv_id varchar2(20) not null,
-    dv_nick varchar2(20) not null,
-    dv_name varchar2(12) not null,
+    dv_nick varchar2(80) not null,
+    dv_name varchar2(40) not null,
     dv_tel varchar2(15) not null,
     dv_address varchar2(1000) not null,
-    dv_pk varchar2(100)primary key
+    dv_pk varchar2(105)primary key
 );
 
 

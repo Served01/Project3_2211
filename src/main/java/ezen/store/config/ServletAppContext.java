@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -86,12 +88,22 @@ public class ServletAppContext implements WebMvcConfigurer{
 			return factoryBean;			
 		}
 		
-	// 스탠다드서블릿멀티파트리졸버 등록 (upload/download 용도)
+		// 두개의 서로다른 properties 설정이 충돌나지 않도록 합니다.
 		@Bean
-		public StandardServletMultipartResolver multipartResolver() {
-			
-			return new StandardServletMultipartResolver();
+		public static PropertySourcesPlaceholderConfigurer PropertySourcesPlaceholderConfigurer() {
+			return new PropertySourcesPlaceholderConfigurer();
 		}
+		
+		//메시지 등록
+		@Bean
+		public ReloadableResourceBundleMessageSource messageSource() {
+			ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+			
+			res.setBasenames("/WEB-INF/properties/error_message");
+			
+			return res; 
+		}
+
 }
 
 

@@ -14,6 +14,17 @@ public class Dv_Service {
 	@Autowired
 	private Dv_DAO dv_DAO;
 	
+	//중복확인 관련
+	public boolean CheckDvNick(String dv_nick) {		
+		String dv_id = dv_DAO.CheckDvNick(dv_nick);		
+			if(dv_id == null) {
+				return true;
+			}else {
+				return false;		
+			}
+			
+		}
+	
 	//select
 	public List<Dv_Bean> getDvList(String dv_id){
 		

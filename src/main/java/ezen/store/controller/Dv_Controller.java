@@ -40,15 +40,19 @@ public class Dv_Controller {
 	}
 	
 	@PostMapping("/delivery/DvInsertPro")
-	public String DvInsertPro(@Validated@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean, BindingResult result) {
+	public String DvInsertPro(@Validated@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean,
+							BindingResult result) {
 		
 		if(result.hasErrors()) {
-			return "delivery/Dv_insert";
+			return "/delivery/Dv_insert";
 			}
+		
 		dv_Service.addDvInfo(InsertDvBean);
 		
 		return "delivery/Dv_insert_success";
 	}
+	
+	
 	
 	
 	//Dv_update
@@ -81,6 +85,7 @@ public class Dv_Controller {
 		
 		return "delivery/Dv_delete";
 	}
-
+	
+	
 }
 
