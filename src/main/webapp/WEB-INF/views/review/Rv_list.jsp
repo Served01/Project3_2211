@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url var='root' value='/'/>
 <!DOCTYPE html>
 <html>
@@ -51,7 +51,9 @@
 <!--  <div class="container">
 	<div class="info">-->
 		<h1 style="text-align:center">리뷰 목록</h1>
-
+		<p align="right">
+			<button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvInsert?rv_id=${rv_id }&rv_bknumber=${rv_bknumber}'">리뷰 등록</button>
+		<p>
 		<div class="reviews">
 			<table class="table">
 				<thead>

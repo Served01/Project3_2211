@@ -34,7 +34,7 @@ list, select, insert, update 주요 기능 완성<br>
 진행도:<br>
 list, insert, update, delete 주요 기능 완성<br>
 게시판 형태 적용<br>
-<a href='${root }Review/RvList?rv_id=hyun1&rv_bknumber=20220001'>Rv_list</a>
+* 리뷰 기능은 book 기능을 이용하여 확인 가능<br>
 
 <h3>5. Order 기능</h3>
 진행도:<br>

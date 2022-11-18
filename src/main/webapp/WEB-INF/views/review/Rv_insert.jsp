@@ -16,7 +16,7 @@
 			 파일이나 이미지를 이용할 때 쓰는 multipart/form-data, 그리고 text/plain 방식이 있다.-->
 		<!-- multipart/form-data는 함부로 쓰면 안된다. 전송할때 인코딩을 하여 보내는 방식이 아니고 이 인코딩 방식을
 			  MultipartFile 기능이 관리를 해주기 때문에 같이 쓰는 경우가 아니면 그냥 enctype을 지워야 된다.-->
-		<form:hidden path="rv_bknumber"/> 
+		<form:hidden path="rv_bknumber"/>
 		<!-- 기능 확인을 위한 임시 줄 -->  
 			<div>
 				<form:label path="rv_id">작성자</form:label>

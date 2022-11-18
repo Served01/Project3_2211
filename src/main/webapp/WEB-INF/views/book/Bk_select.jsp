@@ -123,7 +123,7 @@
 	</div>
 	
 	<c:import url = "/Review/RvList">
-		<c:param name="rv_id" value="hyun1"/>
+		<c:param name="rv_id" value="${ReadBkBean}"/>
 		<c:param name="rv_bknumber" value="${ReadBkBean.bk_number }"/>
 	</c:import>
 	
