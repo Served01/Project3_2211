@@ -26,7 +26,7 @@ import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Ca_Mapper;
 import ezen.store.mapper.Dv_Mapper;
 import ezen.store.mapper.Mb_Mapper;
-import ezen.store.mapper.Or_Mapper;
+//import ezen.store.mapper.Or_Mapper;
 import ezen.store.mapper.Rv_Mapper;
 import ezen.store.mapper.Wi_Mapper;
 
@@ -163,7 +163,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	
 	//Order 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
-	@Bean
+	/*@Bean
 	public MapperFactoryBean<Or_Mapper> getOrMapperFactoryBean(SqlSessionFactory factory){
 			
 		MapperFactoryBean<Or_Mapper> orfactoryBean = new MapperFactoryBean<Or_Mapper>(Or_Mapper.class);
@@ -172,7 +172,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		return orfactoryBean;
 	}
-	
+	*/
 	
 	// 두개의 서로다른 properties 설정이 충돌나지 않도록 합니다.
 	@Bean

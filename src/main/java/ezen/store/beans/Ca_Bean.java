@@ -2,10 +2,9 @@ package ezen.store.beans;
 
 public class Ca_Bean {
 	
-	private String ca_mbid;
-	private	int ca_bknumbers;
+	private String mb_id;
 	
-	private int bk_number;
+	private	int bk_number;
 	private String bk_title;
 	private String bk_writer;
 	private String bk_publisher;
@@ -16,32 +15,17 @@ public class Ca_Bean {
 	
 	private int page;
 	private String or_number;
-	
-	
-	
-	public int getCa_bkcount() {
-		return ca_bkcount;
+	public String getMb_id() {
+		return mb_id;
 	}
-	public void setCa_bkcount(int ca_bkcount) {
-		this.ca_bkcount = ca_bkcount;
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
 	}
 	public int getBk_number() {
 		return bk_number;
 	}
 	public void setBk_number(int bk_number) {
 		this.bk_number = bk_number;
-	}
-	public String getCa_mbid() {
-		return ca_mbid;
-	}
-	public void setCa_mbid(String ca_mbid) {
-		this.ca_mbid = ca_mbid;
-	}
-	public int getCa_bknumbers() {
-		return ca_bknumbers;
-	}
-	public void setCa_bknumbers(int ca_bknumbers) {
-		this.ca_bknumbers = ca_bknumbers;
 	}
 	public String getBk_title() {
 		return bk_title;
@@ -79,11 +63,11 @@ public class Ca_Bean {
 	public void setBk_price(String bk_price) {
 		this.bk_price = bk_price;
 	}
-	public String getOr_number() {
-		return or_number;
+	public int getCa_bkcount() {
+		return ca_bkcount;
 	}
-	public void setOr_number(String or_number) {
-		this.or_number = or_number;
+	public void setCa_bkcount(int ca_bkcount) {
+		this.ca_bkcount = ca_bkcount;
 	}
 	public int getPage() {
 		return page;
@@ -91,6 +75,16 @@ public class Ca_Bean {
 	public void setPage(int page) {
 		this.page = page;
 	}
+	public String getOr_number() {
+		return or_number;
+	}
+	public void setOr_number(String or_number) {
+		this.or_number = or_number;
+	}
+	
+	
+	
+	
 	
 	
 	

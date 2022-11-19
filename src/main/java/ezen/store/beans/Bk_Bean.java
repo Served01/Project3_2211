@@ -15,21 +15,22 @@ public class Bk_Bean {
 	@Digits(fraction = 0, integer = 8)
 	private int bk_number;
 	
-	@Size(min=1, max=100)
+	@Size(min=1, max=150)
 	@Pattern(regexp = "[a-zsA-Z가-힣]*")
 	private String bk_title;
 	
-	@Size(min=1, max=100)
+	@Size(min=1, max=90)
 	@Pattern(regexp = "[a-zA-Z가-힣]*")
 	private String bk_writer;
 	
-	@Size(min=1, max=50)
+	@Size(min=1, max=60)
 	@Pattern(regexp = "[a-zA-Z가-힣]*")
 	private String bk_publisher;
 	
 	@NotBlank
-	@Pattern(regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$")
+	//@Pattern(regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$")
 	private String bk_pubdate;
+	
 	private String bk_image;
 	
 	//upload
@@ -38,7 +39,7 @@ public class Bk_Bean {
 	private String bk_genre;
 	private String bk_infodate;
 	
-	@Size(min=1, max=1000)
+	@Size(min=1, max=1500)
 	@NotNull
 	private String bk_detail;
 	
@@ -47,7 +48,9 @@ public class Bk_Bean {
 	
 	@Max(1000000000)
 	private int bk_price;
+	
 	private String bk_title_upper;
+	
 	private String bk_deleted;
 	
 	private boolean bk_numExist;

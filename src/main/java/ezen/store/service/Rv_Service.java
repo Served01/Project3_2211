@@ -22,9 +22,9 @@ public class Rv_Service {
 	@Value("${page.rvpagButtonCnt}")
 	private int page_pageButtonCnt;
 	
-	public PageCountBean getContentCnt(int rv_bknumber, int currentPage) {
+	public PageCountBean getContentCnt(int bk_number, int currentPage) {
 		
-		int content_cnt = rvDAO.getCntReview(rv_bknumber);
+		int content_cnt = rvDAO.getCntReview(bk_number);
 		
 		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
 		
@@ -33,9 +33,9 @@ public class Rv_Service {
 	}
 	
 	//리뷰 리스트
-	public List<Rv_Bean> getRvList(int rv_bknumber){
+	public List<Rv_Bean> getRvList(int bk_number){
 		
-		return rvDAO.getRvList(rv_bknumber);
+		return rvDAO.getRvList(bk_number);
 		
 	}
 	

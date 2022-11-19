@@ -17,10 +17,10 @@
 		<!-- multipart/form-data는 함부로 쓰면 안된다. 전송할때 인코딩을 하여 보내는 방식이 아니고 이 인코딩 방식을
 			  MultipartFile 기능이 관리를 해주기 때문에 같이 쓰는 경우가 아니면 그냥 enctype을 지워야 된다.-->
 		
-		<form:hidden path="rv_number"/>
+		<form:hidden path="bk_number"/>
 			<div>
-				<form:label path="rv_id">작성자</form:label>
-				<form:input path="rv_id" readonly="true"/>
+				<form:label path="mb_id">작성자</form:label>
+				<form:input path="mb_id" readonly="true"/>
 			</div>
 			<div>
 				<form:label path="rv_score">리뷰 평점</form:label><br>

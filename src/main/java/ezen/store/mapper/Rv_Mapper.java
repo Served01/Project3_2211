@@ -12,16 +12,16 @@ public interface Rv_Mapper {
 
 	
 	//리뷰 리스트 개수를 가져오는 SQL문
-	@Select("select count(*) from Review_info where rv_bknumber = #{rv_bknumber} and rv_deleted = '0'")
-	int getCntReview(int rv_bknumber);
+	@Select("select count(*) from Review_info where bk_number = #{bk_number} and rv_deleted = '0'")
+	int getCntReview(int bk_number);
 		
 	//리뷰 리스트를 가져오는 SQL문
-	@Select("select * from Review_info where rv_bknumber = #{rv_bknumber} and rv_deleted = '0'")
-	List<Rv_Bean> getRvList(int rv_bknumber);
+	@Select("select * from Review_info where bk_number = #{bk_number} and rv_deleted = '0'")
+	List<Rv_Bean> getRvList(int bk_number);
 	
 	//리뷰를 입력하는 SQL문
-	@Insert("insert into Review_info(rv_number, rv_bknumber, rv_id, rv_date, rv_score, rv_content, rv_deleted)"
-			+ "values(review_seq.nextval, #{rv_bknumber}, #{rv_id}, sysdate, #{rv_score}, #{rv_content}, 0)")
+	@Insert("insert into Review_info(rv_number, bk_number, mb_id, rv_date, rv_score, rv_content, rv_deleted)"
+			+ "values(review_seq.nextval, #{bk_number}, #{mb_id}, sysdate, #{rv_score}, #{rv_content}, 0)")
 	void insertReview(Rv_Bean insertRvBean);
 	
 	//수정을 하기 위한 리뷰 정보를 가져오는 SQL문

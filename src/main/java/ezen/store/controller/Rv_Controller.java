@@ -1,5 +1,6 @@
 package ezen.store.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +28,19 @@ public class Rv_Controller {
 	// 리뷰 리스트
 	@GetMapping("/RvList")
 	public String list(
-					   @RequestParam("rv_id") String rv_id,
-					   @RequestParam("rv_bknumber") int rv_bknumber, 
+					   @RequestParam("mb_id") String mb_id,
+					   @RequestParam("bk_number") int bk_number, 
 					   @RequestParam(value="page", defaultValue="1") int page,
 					   Model model) {
 		
 		// Review 목록 열기
-		model.addAttribute("rv_bknumber", rv_bknumber);
-		model.addAttribute("rv_id", rv_id);
+		model.addAttribute("bk_number", bk_number);
+		model.addAttribute("mb_id", mb_id);
 		
-		List<Rv_Bean> reviewlist = rvService.getRvList(rv_bknumber);
+		List<Rv_Bean> reviewlist = rvService.getRvList(bk_number);
 		model.addAttribute("reviewlist", reviewlist);
 		
-		PageCountBean pageCountBean = rvService.getContentCnt(rv_bknumber, page);
+		PageCountBean pageCountBean = rvService.getContentCnt(bk_number, page);
 		model.addAttribute("pageCountBean", pageCountBean);
 		
 		model.addAttribute("page", page);
@@ -51,12 +52,12 @@ public class Rv_Controller {
 	@GetMapping("/RvInsert")
 	//여기서 ModelAttribute로 Rv_Bean을 설정하면 Rv_Bean을 이어 받는데 여기서는 이어 받는게 없으므로 아무것도 없는 상태로 Rv_insert페이지로 반환함
 	public String insert(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean,
-						 @RequestParam("rv_bknumber") int rv_bknumber,
-						 @RequestParam("rv_id") String rv_id, Model model) {
+						 @RequestParam("bk_number") int bk_number,
+						 @RequestParam("mb_id") String mb_id, Model model) {
 		
 		// insert 페이지 열기
-		model.addAttribute("rv_bknumber", rv_bknumber);
-		model.addAttribute("rv_id", rv_id);
+		model.addAttribute("bk_number", bk_number);
+		model.addAttribute("mb_id", mb_id);
 		
 		return "review/Rv_insert";
 	}
@@ -105,10 +106,10 @@ public class Rv_Controller {
 	
 	// 리뷰 delete 기능
 	@GetMapping("/RvDeletePro")
-	public String deletePro(@ModelAttribute("rv_number") int rv_number,
+	public String deletePro(@ModelAttribute("deleteRvBean") Rv_Bean deleteRvBean,
 							BindingResult result) {
 		
-		rvService.deleteReview(rv_number);
+		rvService.deleteReview(deleteRvBean.getRv_number());
 		
 		if(result.hasErrors()) {
 		return "review/Rv_delete_fail";
@@ -116,6 +117,7 @@ public class Rv_Controller {
 		
 		return "review/Rv_delete_success";
 	}
+	
 	
 	
 }

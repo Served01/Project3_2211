@@ -15,15 +15,15 @@ public class Rv_DAO {
 	private Rv_Mapper rvMapper;
 	
 	// 리뷰 리스트 갯수
-	public int getCntReview(int rv_bknumber) {
+	public int getCntReview(int bk_number) {
 		
-		return rvMapper.getCntReview(rv_bknumber);
+		return rvMapper.getCntReview(bk_number);
 	}
 	
 	// 리뷰 리스트
-	public List<Rv_Bean> getRvList(int rv_bknumber){
+	public List<Rv_Bean> getRvList(int bk_number){
 		
-		return rvMapper.getRvList(rv_bknumber);
+		return rvMapper.getRvList(bk_number);
 		
 	}
 
