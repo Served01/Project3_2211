@@ -200,7 +200,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	}
 	
 	// 로그인 인터셉터
-	public void addInterceptor1(InterceptorRegistry registry) {
+	/*public void addInterceptor1(InterceptorRegistry registry) {
 		
 		WebMvcConfigurer.super.addInterceptors(registry);	
 		

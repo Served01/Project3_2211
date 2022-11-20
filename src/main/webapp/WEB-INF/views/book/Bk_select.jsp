@@ -9,77 +9,75 @@
 <link rel="Stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <title>도서 상세 정보</title>
-	<style>
-		.star-ratings {
-		  color: #aaa9a9; 
-		  position: relative;
-		  unicode-bidi: bidi-override;
-		  width: max-content;
-		  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-		  -webkit-text-stroke-width: 1.3px;
-		  -webkit-text-stroke-color: #2b2a29;
-		}
-		 
-		.star-ratings-fill {
-		  color: #fff58c;
-		  padding: 0;
-		  position: absolute;
-		  z-index: 1;
-		  display: flex;
-		  top: 0;
-		  left: 0;
-		  overflow: hidden;
-		  -webkit-text-fill-color: gold;
-		}
-		 
-		.star-ratings-base {
-		  z-index: 0;
-		  padding: 0;
-		}
-	</style>
+<style>
+.star-ratings {
+  color: #aaa9a9; 
+  position: relative;
+  unicode-bidi: bidi-override;
+  width: max-content;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: #2b2a29;
+}
+ 
+.star-ratings-fill {
+  color: #fff58c;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: gold;
+}
+ 
+.star-ratings-base {
+  z-index: 0;
+  padding: 0;
+}
+</style>
 </head>
-
 <body onload="init();">
-	<script>
-		var sell_price;
-		var amount;
-		
-		function init () {
-		    sell_price = document.form.sell_price.value;
-		    amount = document.form.amount.value;
-		    document.form.sum.value = sell_price;
-		    change();
-		}
-		
-		function add () {
-		    hm = document.form.amount;
-		    hm.value ++ ;
-		
-		    var sum_ = parseInt(hm.value) * sell_price;
-		document.getElementById("my_sum").innerHTML=sum_;
-		}
-		
-		function del () {
-		    hm = document.form.amount;
-		        if (hm.value > 1) {
-		            hm.value -- ;
-		            var sum_ = parseInt(hm.value) * sell_price;
-		document.getElementById("my_sum").innerHTML=sum_;	
-		        }
-		}
-		
-		function change () {
-		    hm = document.form.amount;
-		
-		        if (hm.value < 0) {	
-		            hm.value = 0;
-		        }
-		    var sum_ = parseInt(hm.value) * sell_price;
-		document.getElementById("my_sum").innerHTML=sum_;
-		} 
-	</script>
-	
-	<c:import url = "/book/header"></c:import>
+<script>
+
+var sell_price;
+var amount;
+
+function init () {
+    sell_price = document.form.sell_price.value;
+    amount = document.form.amount.value;
+    document.form.sum.value = sell_price;
+    change();
+}
+
+function add () {
+    hm = document.form.amount;
+    hm.value ++ ;
+
+    var sum_ = parseInt(hm.value) * sell_price;
+document.getElementById("my_sum").innerHTML=sum_;
+}
+
+function del () {
+    hm = document.form.amount;
+        if (hm.value > 1) {
+            hm.value -- ;
+            var sum_ = parseInt(hm.value) * sell_price;
+document.getElementById("my_sum").innerHTML=sum_;	
+        }
+}
+
+function change () {
+    hm = document.form.amount;
+
+        if (hm.value < 0) {	
+            hm.value = 0;
+        }
+    var sum_ = parseInt(hm.value) * sell_price;
+document.getElementById("my_sum").innerHTML=sum_;
+} 
+</script>
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container">
 			<h1 class="display-4">도서 정보</h1>
@@ -91,44 +89,42 @@
 			<div class="col-md-4">
 				<img style="width: 320px; height: 360px; padding-right: 0px; margin-right: 0px;" src="${root }upload/${ReadBkBean.bk_image}"/>
 				<div style="left: 75px; width: 150px; top: 10px;" class="input-group">
+				<c:if test="${ReadScore != 0}">
 					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${ReadScore}/5.0 점</div>
+				</c:if>
+				<c:if test="${ReadScore == 0.0}">
+					<div><h5>등록된 평점이 없습니다.</h5></div>
+				</c:if>
 				</div>
 			</div>
 			<div class="col-md-8">
 				<h3><b>${ReadBkBean.bk_title}</b></h3>
-					<p>${ReadBkBean.bk_detail }
-					<p><b>저자</b> : ${ReadBkBean.bk_writer }
-					<p><b>출판사</b> : ${ReadBkBean.bk_publisher }
-					<p><b>출간일</b> : ${ReadBkBean.bk_pubdate }
-					<p><b>지역</b> : ${ReadBkBean.bk_local }
-					<p><b>장르</b> : ${ReadBkBean.bk_genre }
-					<p><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
+				<p>${ReadBkBean.bk_detail }
+				<p><b>저자</b> : ${ReadBkBean.bk_writer }
+				<p><b>출판사</b> : ${ReadBkBean.bk_publisher }
+				<p><b>출간일</b> : ${ReadBkBean.bk_pubdate }
+				<p><b>지역</b> : ${ReadBkBean.bk_local }
+				<p><b>장르</b> : ${ReadBkBean.bk_genre }
+				<p><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
 				<form name="form" method="get">
-					<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">
-					<input type="text" name="amount" value="1" size="3" onchange="change();"> 
-					<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
-					<input type="hidden" name="sum" size="11" readonly>
-					<p>
-					<div class="input-group"><b>금액</b>&nbsp;:&nbsp;<span class="input-group-append" id="my_sum">원</span><b>원</b></div>
+				<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">
+				<input type="text" name="amount" value="1" size="3" onchange="change();"> 
+				<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"><br>
+				<input type="hidden" name="sum" size="11" readonly>
+				<p>
+				<div class="input-group"><b>금액</b>&nbsp;:&nbsp;<span class="input-group-append" id="my_sum">원</span><b>원</b></div>
 				</form>
-					<p>
-					<p><a href="#" class="btn btn-info">도서주문 &raquo;</a> 
-					<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
-					<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-info">책정보수정 &raquo;</a> 
-					<input class="btn btn-info" type="reset" value="찜하기">
-					<input class="btn btn-info" type="reset" value="장바구니">
+				<p>
+				<p><a href="#" class="btn btn-info">도서주문 &raquo;</a> 
+				<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
+				<input class="btn btn-info" type="reset" value="찜하기">
+				<input class="btn btn-info" type="reset" value="장바구니">
+				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
+				<a href='${root }book/BkDeletePro?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">삭제 &raquo;</a>	
 			</div>
 		</div>
 		<hr>
 	</div>
 	
-	<c:import url = "/Review/RvList">
-		<c:param name="rv_id" value="${ReadBkBean}"/>
-		<c:param name="rv_bknumber" value="${ReadBkBean.bk_number }"/>
-	</c:import>
-	
-	<c:import url = "/book/footer"></c:import>
-		
-
 </body>
 </html>

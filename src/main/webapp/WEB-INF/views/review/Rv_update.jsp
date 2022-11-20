@@ -18,6 +18,7 @@
 			  MultipartFile 기능이 관리를 해주기 때문에 같이 쓰는 경우가 아니면 그냥 enctype을 지워야 된다.-->
 		
 		<form:hidden path="bk_number"/>
+		<form:hidden path="rv_number"/>
 			<div>
 				<form:label path="mb_id">작성자</form:label>
 				<form:input path="mb_id" readonly="true"/>

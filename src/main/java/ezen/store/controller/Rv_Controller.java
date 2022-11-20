@@ -1,6 +1,5 @@
 package ezen.store.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

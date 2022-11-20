@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import ezen.store.service.Bk_Service;
+import ezen.store.service.Dv_Service;
 import ezen.store.service.Mb_Service;
 
 // html형태의 데이터가 아니라면 사용합니다. 아니라면 json으로 처리를 합니다.
@@ -37,6 +38,25 @@ public class RestApiController {
 		
 	}
 	
+	@GetMapping("/member/checkUserIdExist2/{mb_pw}")
+	public String restApiControll2(@PathVariable String mb_pw) {
+		
+		boolean chk = mbSevice.checkUserIdExist(mb_pw);
+		
+		return chk + "";
+		
+	}
 	
+	
+	@Autowired
+	private Dv_Service dv_Service;
+	
+	@GetMapping("/delivery/CheckDvNick/{dv_nick}")
+	public String restApiControll1(@PathVariable String dv_nick) {
+		
+		boolean chk = dv_Service.CheckDvNick(dv_nick);
+		
+		return chk + "";
+	}
 	
 }

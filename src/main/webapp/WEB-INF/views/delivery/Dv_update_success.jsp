@@ -11,7 +11,7 @@
 <body>
 	<script type="text/javascript">
 		alert("배송지 수정이 정상적으로 완료되었습니다.")
-		location.href="${root}delivery/DvList?dv_id=hyun3"
+		location.href="${root}delivery/DvList?mb_id=hyun3"
 	</script>
 </body>
 </body>

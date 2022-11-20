@@ -7,9 +7,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+ <!-- Webpage Title -->
+        <title>책 리뷰공간</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+        <style>
+        
+    button{
+    text-align:center;
+    display:block;
+    margin:auto;
+    }
+    
+      .hi{
+   text-align:center;
+   } 
+  #hiyo {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+        </style>
+   </head>
+
 <body>
+
 
 	<form:form action="${root }Review/RvInsertPro" method="post" modelAttribute="insertRvBean">
 		<!-- enctype은 post방식일때만 쓰는 것으로 기본값인 application/x-www-form-urlencoded,

@@ -8,14 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mb_insert</title>
-<!-- <script src="https://kit.fontawesome.com/ece1cdce53.js" crossorigin="anonymous"></script> -->
+<script src="https://kit.fontawesome.com/ece1cdce53.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
-<!-- 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" -->
-<!-- 	crossorigin="anonymous"> -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 <style>
 </style>
 <!-- Bootstrap CSS -->
@@ -53,13 +53,14 @@
 </script>
 
 <body>
-<!-- 	<div class="container"> -->
-<!-- 		<div class="input-form-backgroud row"> -->
-<!-- 			<div class="input-form col-md-12 mx-auto"> -->
-<!-- 				<a href="#" onclick="location.href='index.jsp'"><h2> -->
-<!-- 						<i class="fa-solid fa-book"></i>Ezen Book Store -->
-<!-- 					</h2></a> <br> -->
-				<h2 class="mb-3">회원가입</h2>
+<%-- <c:import url="/WEB-INF/views/include/header.jsp"/> --%>
+	<div class="container">
+		<div class="input-form-backgroud row">
+			<div class="input-form col-md-5 mx-auto">
+				<a href="#" onclick="location.href='index'"><h2>
+						<i class="fa-solid fa-book"></i>Ezen Book Store
+					</h2></a> <br>
+				<h3 class="mb-3">회원가입</h3>
 				<form:form action="${root }member/Mbinsertpro" method="post"
 					modelAttribute="insertMbBean">
 					<form:hidden path="mbIdExist" />
@@ -93,14 +94,12 @@
 						<form:input path="mb_name" class="form-control" />
 						<form:errors path="mb_name" style="color:red" />
 					</div>
-					<div class="invalid-feedback">이름을 입력해주세요.</div>
 					<div class="mb-3">
 						<div class="form-group">
 							<form:label path="mb_email">이메일</form:label>
 							<form:input type="email" path="mb_email" class="form-control" />
 							<form:errors path="mb_email" style="color:red" />
 						</div>
-						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 						<div class="mb-3">
 							<div class="form-group">
 								<form:label path="mb_tel">연락처</form:label>
@@ -108,7 +107,6 @@
 									path="mb_tel" class="form-control" />
 								<form:errors path="mb_tel" style="color:red" />
 							</div>
-							<div class="invalid-feedback">전화번호를 입력해주세요.</div>
 						</div>
 						<div class="row"></div>
 						<div class="col-md-4 mb-3"></div>
@@ -126,5 +124,6 @@
 			</div>
 		</div>
 	</div>
+<%-- <c:import url="/WEB-INF/views/include/footer.jsp"/> --%>
 </body>
 </html>
