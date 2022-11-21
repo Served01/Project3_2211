@@ -25,15 +25,17 @@
 
 <h3>3. Book 기능</h3>
 <a href="${root }book/BkInsert">BkInsert</a>
-<a href='${root }book/BkList?bk_local=국내&bk_genre=인문'>국내 인문 리스트</a>
+<a href='${root }book/BkList?bk_local=국내&bk_genre=인문&mb_id=hyun1'>국내 인문 리스트</a>
 
 <h3>4. Review 기능</h3>
 게시판 형태 적용<br>
-<a href="${root}Review/RvList?mb_id=hyun1&bk_number=20220001">list</a>
+<a href="${root}Review/RvList?mb_id=hyun1&bk_number=20220002">list</a>
 
 <h3>5. Order 기능</h3>
-<a href="${root}order/Or_list?or_mbid=hyun1">주문 목록</a>
-<a href="${root}order/Or_select?or_mbid=hyun1&or_number=22NOVABC001">주문 상세</a>
+<a href="${root}order/Or_list?mb_id=hyun1">주문 목록</a>
+<a href="${root}order/Or_purchase?mb_id=admin">결제</a>
+<a href="${root}order/Or_select?mb_id=hyun1&or_number=22NOVABC001">주문 상세</a>
+<button onclick="location.href='Or_purchase.jsp?mb_id=admin'">결제?</button>
 
 <h3>6. Cart 기능</h3>
 <a href="${root}cart/cart_info?ca_mbid=admin">카트인포</a>

@@ -76,6 +76,7 @@
     .basketdiv .row.data > div > div {
         height: 60px;
         line-height: 60px;
+        padding: 0px 0;
     }
         .basketdiv .data .num .updown {
             color: #0075ff;
@@ -142,13 +143,13 @@
         width: 100px;
     }
 
-.buttongroup {
-    padding: 11px 0;
-    margin: 50px 0;
-}
-.narrowbuttongroup{
-    margin: 15px 0;
-}
+	.buttongroup {
+	    padding: 11px 0;
+	    margin: 50px 0;
+	}
+	.narrowbuttongroup{
+	    margin: 15px 0;
+	}
     .buttongroup.center {
         text-align: center;
     }
@@ -217,9 +218,10 @@
 }
 
 .orderform .p_num {
-    text-align: right;
-    width: 40px;
-    font-size: 1em;
+    text-align: center;
+    width: 35px;
+    height: 45px;
+    font-size: 0.78em;
 }
 
 </style>
@@ -350,6 +352,10 @@ let basket = {
 	        
 	        this.reCalc();
 	        this.updateUI();
+	    },
+		priceComma: function(bk_price){
+			var price = bk_price.toLocaleString('ko-KR');
+			document.write(price + '원');
 	    }
 	}
 
@@ -390,8 +396,8 @@ let basket = {
 	                <div class="row data">
 	                    <div class="subdiv">
 	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        <div class="img"><img src="${str.bk_image }" width="60"></div>
-	                        <div class="pname">
+	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
+	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
 	                            <span>제목 : ${str.bk_title }</span>
 								<span>저자 : ${str.bk_writer }</span>
 					        	<span>출판사 : ${str.bk_publisher }</span>
@@ -399,7 +405,9 @@ let basket = {
 	                        </div>
 	                    </div>
 	                    <div class="subdiv">
-	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
+								<script>javascript:basket.priceComma(${str.bk_price })</script>
+							</div>
                        		<div class="sendcart"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
 	                    </div>
 	                   

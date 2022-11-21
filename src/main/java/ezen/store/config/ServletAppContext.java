@@ -4,7 +4,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,21 +11,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
-import ezen.store.beans.Mb_Bean;
-import ezen.store.interceptor.LoginInterceptor;
 import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Ca_Mapper;
 import ezen.store.mapper.Dv_Mapper;
 import ezen.store.mapper.Mb_Mapper;
-//import ezen.store.mapper.Or_Mapper;
+import ezen.store.mapper.Or_Mapper;
 import ezen.store.mapper.Rv_Mapper;
 import ezen.store.mapper.Wi_Mapper;
 
@@ -51,9 +46,6 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	@Value("${db.password}") // 1234
 	private String db_password;
-	
-	@Autowired
-	private Mb_Bean loginShowBean;
 	
 	// Controller
 	@Override
@@ -163,7 +155,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	
 	
 	//Order 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
-	/*@Bean
+	@Bean
 	public MapperFactoryBean<Or_Mapper> getOrMapperFactoryBean(SqlSessionFactory factory){
 			
 		MapperFactoryBean<Or_Mapper> orfactoryBean = new MapperFactoryBean<Or_Mapper>(Or_Mapper.class);
@@ -172,7 +164,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		return orfactoryBean;
 	}
-	*/
+	
 	
 	// 두개의 서로다른 properties 설정이 충돌나지 않도록 합니다.
 	@Bean

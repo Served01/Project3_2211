@@ -15,6 +15,18 @@ public class Ca_Service {
 	@Autowired
 	private Ca_DAO ca_DAO;
 	
+	
+	public boolean checkOrderNumExist(String or_number) {
+		String or_num = ca_DAO.checkOrderNumExist(or_number);
+		if(or_num == null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
 	//카트 열람
 	public	List<Ca_Bean> getCartInfo(String ca_mbid) {
 		return ca_DAO.getCartInfo(ca_mbid);
@@ -27,6 +39,12 @@ public class Ca_Service {
 		ca_DAO.delcartAll(ca_mbid);
 	}
 	
+	public void delPreOrder(String ca_mbid) {
+		ca_DAO.delPreOrder(ca_mbid);
+	}
+	public void delPreOrderItems(String ca_mbid) {
+		ca_DAO.delPreOrderItems(ca_mbid);
+	}
 	public void addCartStuff(String ca_mbid,int ca_bknumbers) {
 		ca_DAO.addCartStuff(ca_mbid,ca_bknumbers);
 	}
@@ -50,5 +68,7 @@ public class Ca_Service {
 	public void insertOderItems(String or_number,int ca_bknumbers,String ca_mbid) {
 		ca_DAO.insertOderItems(or_number, ca_bknumbers,ca_mbid);
 	}
-	
+	public void insertOderItem(String or_number,int ca_bknumbers,String ca_mbid,int ca_bkcount) {
+		ca_DAO.insertOderItem(or_number, ca_bknumbers,ca_mbid,ca_bkcount);
+	}
 }

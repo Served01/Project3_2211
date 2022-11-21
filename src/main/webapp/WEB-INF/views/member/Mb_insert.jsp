@@ -57,7 +57,8 @@
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-5 mx-auto">
-				<a href="#" onclick="location.href='index'"><h2>
+				<a href="#" onclick="location.href='index'">
+				<h2>
 						<i class="fa-solid fa-book"></i>Ezen Book Store
 					</h2></a> <br>
 				<h3 class="mb-3">회원가입</h3>

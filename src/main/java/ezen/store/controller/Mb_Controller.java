@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Mb_Bean;
-import ezen.store.dao.Mb_DAO;
 import ezen.store.service.Mb_Service;
 import ezen.store.validator.Mb_Validator;
 
@@ -25,7 +23,6 @@ import ezen.store.validator.Mb_Validator;
 @RequestMapping("/member")
 public class Mb_Controller {
 
-	@SuppressWarnings("unused")
 	@Autowired
 	private Mb_Service mbService;
 

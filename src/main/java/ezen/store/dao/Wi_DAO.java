@@ -2,6 +2,7 @@ package ezen.store.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +37,8 @@ public class Wi_DAO {
 		return wi_Mapper.getContentCnt(wi_mbid);
 	}
 	
+	public String checkWishHeart(String wi_mbid,int wi_bknumbers) {
+		return wi_Mapper.checkWishHeart(wi_mbid, wi_bknumbers);
+	}
 	
 }

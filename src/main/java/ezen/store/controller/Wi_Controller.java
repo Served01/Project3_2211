@@ -47,29 +47,5 @@ public class Wi_Controller {
 	}
 	
 	
-	//restAPI
-	@GetMapping("/wish_add/{wi_mbid}/{wi_bknumbers}")
-	public String wish_add(@PathVariable String wi_mbid,
-							@PathVariable int wi_bknumbers) {
-		wi_Service.addWishStuff(wi_mbid, wi_bknumbers);
-		return null;
-	}
-	
-	
-	//restAPI
-	@GetMapping("/wish_delete/{wi_mbid}/{wi_bknumbers}")
-	public String wish_delete(@PathVariable String wi_mbid,
-			@PathVariable int wi_bknumbers) {
-		wi_Service.delwish(wi_mbid,wi_bknumbers) ;
-		return null;
-		
-	}
-	//restAPI
-	@GetMapping("/wish_deleteAll/{wi_mbid}")
-	public String wish_deleteAll(@PathVariable String wi_mbid) {
-		wi_Service.delwishAll(wi_mbid);
-		return null;
-		
-	}
 	
 }

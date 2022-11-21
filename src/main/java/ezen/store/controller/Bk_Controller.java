@@ -51,10 +51,12 @@ public class Bk_Controller {
 	public String BkList(
 			@RequestParam("bk_local") String bk_local, 
 			@RequestParam("bk_genre") String bk_genre,
+			@RequestParam("mb_id") String mb_id,
 			Model model) {
 
 		model.addAttribute("bk_local", bk_local);
 		model.addAttribute("bk_genre", bk_genre);
+		model.addAttribute("mb_id", mb_id);
 		
 		List<Bk_Number> bkNumList = BkService.getBkNumList(bk_local, bk_genre);
 		

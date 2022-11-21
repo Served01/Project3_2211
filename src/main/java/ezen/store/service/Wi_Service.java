@@ -47,5 +47,15 @@ public class Wi_Service {
 		
 		return pageCountBean;
 	}
+	public boolean checkWishHeart(String wi_mbid,int wi_bknumbers) {
+		String wi_cul = Wi_DAO.checkWishHeart(wi_mbid, wi_bknumbers);
+		if(wi_cul == null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+		
+	}
 	
 }

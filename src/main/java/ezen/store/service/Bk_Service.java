@@ -36,7 +36,6 @@ public class Bk_Service {
 	}
 	
 	//업로드 받은 파일명 관련 서비스
-	@SuppressWarnings("unused")
 	private String SaveUploadFile(MultipartFile upload_file) {
 		
 		String file_name = upload_file.getOriginalFilename();

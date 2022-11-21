@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Mb_Bean;
 import ezen.store.mapper.Mb_Mapper;
 
