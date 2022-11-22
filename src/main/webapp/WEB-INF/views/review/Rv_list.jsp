@@ -77,6 +77,7 @@
 <!--  <div class="container">
 	<div class="info">-->
 		<h1 style="text-align:center">리뷰 목록</h1>
+		<button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root}Review/RvInsert?bk_number=${bk_number }&mb_id=${mb_id }'">등록</button>
 		<div class="reviews">
 			<table class="table">
 				<thead>

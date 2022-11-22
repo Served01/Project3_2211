@@ -61,9 +61,9 @@ public class Mb_DAO {
 	}
 	
 	//수정할 회원정보 가져오기
-	public Mb_Bean getModifyUserInfo(Mb_Bean updateMbBean) {
+	public Mb_Bean getModifyUserInfo(String mb_id) {
 		
-		return mbMapper.getModifyUserInfo(updateMbBean);
+		return mbMapper.getModifyUserInfo(mb_id);
 	}
 
 }

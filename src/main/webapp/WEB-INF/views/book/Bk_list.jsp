@@ -82,7 +82,7 @@ padding-left:300px;
 				</h4>
 		</div>
 			<div class="col-md-7">
-				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}&mb_id=${mb_id}'><b>${bl.bk_title}</b></a>
+				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}&mb_id=${mb_id}&updateSelect=0'><b>${bl.bk_title}</b></a>
 				<p>${bl.bk_writer} | ${bl.bk_publisher} | ${bl.bk_pubdate} 출시 
 				<p><b>${bl.bk_price} 원 | 재고 : ${bl.bk_quantity}권</b>
 				<p style="padding-top: 20px">

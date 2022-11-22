@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
 import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Bk_Number;
 
@@ -28,11 +29,12 @@ public interface Bk_Mapper {
 		double getBkScore(int bk_number);
 		
 		//책 정보를 추출하여 가져옵니다.
-		@Select("select * from Book_info where bk_number = #{bk_number}")
+		@Select("select bk_number, bk_title, bk_writer, bk_publisher, to_char(bk_pubdate, 'YYYY-MM-DD') as bk_pubdate, bk_image, bk_local, bk_genre, bk_infodate,"
+				+ " bk_detail, bk_quantity, bk_price, bk_title_upper, bk_deleted from Book_info where bk_number = #{bk_number}")
 		Bk_Bean getBkInfo(int bk_number);
 		
 		//책 정보를 수정합니다.
-		@Update("update Book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=to_char(#{bk_pubdate}, 'YYYY-MM-DD'),"
+		@Update("update Book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},"
 				+ "bk_image=#{bk_image, jdbcType=VARCHAR}, bk_local=#{bk_local}, bk_genre=#{bk_genre}, bk_infodate=sysdate, bk_detail=#{bk_detail},"
 				+ "bk_quantity=#{bk_quantity}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted='0'"
 				+ "where bk_number=#{bk_number}")
@@ -46,5 +48,7 @@ public interface Bk_Mapper {
 		@Update("update Book_info set bk_deleted='deleted'"
 				+ "where bk_number=#{bk_number}")
 		void deleteBkBean(int bk_number);
-	
+		
+		@Select("select * form Book_info where bk_title like '%'||#{keyword}||'%'")
+		List<Bk_Bean> selectOne(String keyword);
 }

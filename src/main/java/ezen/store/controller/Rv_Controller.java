@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import ezen.store.beans.PageCountBean;
 import ezen.store.beans.Rv_Bean;
 import ezen.store.service.Rv_Service;
@@ -56,8 +54,8 @@ public class Rv_Controller {
 						 @RequestParam("mb_id") String mb_id, Model model) {
 		
 		// insert 페이지 열기
-		model.addAttribute("bk_number", bk_number);
-		model.addAttribute("mb_id", mb_id);
+		insertRvBean.setMb_id(mb_id);
+		insertRvBean.setBk_number(bk_number);
 		
 		return "review/Rv_insert";
 	}

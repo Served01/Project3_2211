@@ -115,14 +115,23 @@ public class Mb_Controller {
 		return "member/Mb_insert_success";
 	}
 
-	// 회원정보 수정 컨트롤
+	// 회원정보 수정 컨트롤 (단위 테스트용)
 	@GetMapping("/Mbupdate")
 	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
-
-		mbService.getMbInfo(updateMbBean);
-
+		
+		mbService.getModifyUserInfo(updateMbBean);
+		
 		return "member/Mb_update";
 	}
+	
+//	// 회원정보 수정 컨트롤
+//	@GetMapping("/Mbupdate")
+//	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
+//
+//		mbService.getMbInfo(updateMbBean);
+//
+//		return "member/Mb_update";
+//	}
 
 	// 회원정보 수정 컨트롤 프로
 	@PostMapping("/Mbupdatepro")

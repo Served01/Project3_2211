@@ -11,7 +11,7 @@
 <!-- Bootstrap CDN -->
 </head>
 <body>
-	<c:import url="/WEB-INF/views/include/header.jsp" />
+	<c:import url="/Main/header"></c:import>
 	<h2>회원정보 삭제(임시삭제 구현)</h2>
 	<div class="container" style="margin-top: 100px">
 		<div class="row">
@@ -47,6 +47,6 @@
 			<div class="col-sm-3"></div>
 		</div>
 	</div>
-
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

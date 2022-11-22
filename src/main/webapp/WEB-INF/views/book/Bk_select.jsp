@@ -78,6 +78,7 @@ function change () {
 document.getElementById("my_sum").innerHTML=sum_;
 } 
 </script>
+<c:import url="/Main/header"></c:import>
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container">
 			<h1 class="display-4">도서 정보</h1>
@@ -125,11 +126,19 @@ document.getElementById("my_sum").innerHTML=sum_;
 		</div>
 		<hr>
 	</div>
+	<%if(Integer.parseInt(request.getParameter("updateSelect"))==0) {%>
+	<c:import url="/Review/RvInsert">
+	</c:import>
+	<%} else{ %>
+	<c:import url="/Review/RvUpdate">
+		
+	</c:import>
+	<%} %>
 	<c:import url="/Review/RvList">
-		<c:param name="mb_id" value="${mb_id }"/>
-		<c:param name="bk_number" value="${bk_number }"/>
+		
 	</c:import>
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
 	
+	<c:import url="/Main/footer"></c:import>
 </body>
 </html>

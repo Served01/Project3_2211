@@ -12,12 +12,12 @@
 </style>
 </head>
 <body>
-<c:import url="/WEB-INF/views/include/header.jsp"/>
+<c:import url="/Main/header"></c:import>
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto">
-			<a href="#" onclick="location.href='index'"><h2>
-					<i class="fa-solid fa-book"></i>Ezen Book Store
-				</h2></a> <br>
+			<a href="#" onclick="location.href='index'">
+					<i class="fa-solid fa-book">Ezen Book Store</i>
+				</a> <br>
 			<h4 class="mb-3">회원목록 보기화면(관리자)</h4>
 			<table border="1">
 				<tr align="center">
@@ -49,5 +49,6 @@
 		</div>
 	</div>
 	
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

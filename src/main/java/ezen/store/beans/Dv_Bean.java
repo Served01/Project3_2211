@@ -17,7 +17,7 @@ public class Dv_Bean {
 	private String dv_tel;
 	
 	@Size(min=2, max=3000)
-	@Pattern(regexp = "[0-9a-zA-Z가-힣]*")
+	
 	private String dv_address;
 	private String dv_pk;
 	private boolean dv_numExist;
@@ -25,7 +25,7 @@ public class Dv_Bean {
 	public Dv_Bean() {
 		this.dv_numExist = false;
 	}
-	//생성파일
+	//생성 입력
 	public String getMb_id() {
 		return mb_id;
 	}

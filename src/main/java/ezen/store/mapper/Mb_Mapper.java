@@ -45,7 +45,7 @@ public interface Mb_Mapper {
 	
 	// �쉶�썝�젙蹂� �긽�꽭蹂닿린 SQL 援щЦ
 	@Select("select mb_id from Member_info where mb_id = #{mb_id}")
-	Mb_Bean getModifyUserInfo(@Param("mb_id") Mb_Bean updateMbBean);
+	Mb_Bean getModifyUserInfo(String mb_id);
 	
 	// �쉶�썝�젙蹂� �긽�꽭蹂닿린 SQL 援щЦ
 	@Select("select * from Member_info where mb_id = #{mb_id} and mb_pw={mb_pw}")

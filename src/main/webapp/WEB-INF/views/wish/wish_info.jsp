@@ -395,7 +395,7 @@ let basket = {
         			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	                <div class="row data">
 	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
 	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
 	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
 	                            <span>제목 : ${str.bk_title }</span>

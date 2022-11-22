@@ -52,9 +52,6 @@ public class Dv_Controller {
 		return "delivery/Dv_insert_success";
 	}
 	
-	
-	
-	
 	//Dv_update
 	@GetMapping("/delivery/DvUpdate")
 	public String DvUpdate(@RequestParam("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick, Model model) {
