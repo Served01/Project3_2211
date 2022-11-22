@@ -45,30 +45,30 @@
    </head>
     <body>
         <div class="container">
-            <div class="info" style="margin-left:150px;width:900px">
+            <div class="info" style="margin-left:150px;width:800px">
                 <h1 style="text-align:center">리뷰 목록</h1>
                <div class="reviews">
-	                <table class="table">
-	                    <thead>
-	                    <tr>
-	                        <th scope="col">작성자</th>
-	                        <th scope="col">작성일</th>
-	                        <th scope="col">내용</th>
-	                        <th></th>
-	                        <th></th>
-	                        </tr>
-	                    </thead>
-	                    <tbody id="reviews-box">
-	                    <tr>
-	                        <td style="padding-top:18px; height:15px; align-items : center;">석숭이</td>
-	                        <td style="padding-top:18px; height:15px;align-items : center;">2022-11-11</td>
-	                        <td style="padding-top:18px; height:15px;align-items : center;">완전 열심히 하시는 모습이 보기 좋네요.</td>
-	                        <th><button style="float:right;" class="btn btn-dark" type="submit">수정</button></th>
-	                        <th><button class="btn btn-dark" type="submit">삭제</button></th>
-	                        			
-	                        </tr>
-	                    </tbody>
-	                   </table>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성일</th>
+                        <th scope="col">내용</th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="reviews-box">
+                    <tr>
+                        <td style="padding-top:18px; height:15px; align-items : center;">석숭이</td>
+                        <td style="padding-top:18px; height:15px;align-items : center;">2022-11-11</td>
+                        <td style="padding-top:18px; height:15px;align-items : center;">완전 열심히 하시는 모습이 보기 좋네요.</td>
+                        <th><button style="float:right;" class="btn btn-dark" type="submit">수정</button></th>
+                        <th><button class="btn btn-dark" type="submit">삭제</button></th>
+                        			
+                        </tr>
+                    </tbody>
+                   </table>
                 <hr style="margin-top: -1em">
             </div>
             <div class="hi">

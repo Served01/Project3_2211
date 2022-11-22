@@ -4,15 +4,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
-<title>책 리스트(관리자)</title>
+<title>책 리스트</title>
 </head>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
-.main{
-
-width:1800px;
-height:	1500px;
-
+body{
+ width:1800px;
 }
 .content_inner{
 display:flex;	
@@ -33,6 +30,7 @@ display:block;
 }
 .aside_wrap{
 width: 600px;
+height:1000px;
 padding-left:300px;
 }
     .hi{
@@ -46,11 +44,10 @@ padding-left:300px;
 
 </style>
 <body>
-<div class="main" >
 	<jsp:include page="header.jsp" />
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container">
-			<h1 class="display-5">책 리스트(관리자)</h1>
+			<h1 class="display-5">책 리스트</h1>
 		</div>
 	</div>
 <div class="input-group">
@@ -68,12 +65,12 @@ padding-left:300px;
     </aside>
 
 
-	<div class="container">
+	<div class="container" >
 		
 		<div class="row">
 		<div class="content_inner"></div>
 			<div class="col-md-3" align="center">	
-				<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791161571379.jpg" style="width:127px;height:190px;">
+				<img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791161571379.jpg" style="width: 50%">
 				<h4 style="text-align:center"><p><b>평점</b> : ★★★★★</p></h4>
 			</div>
 			<div class="input-group-append">
@@ -85,9 +82,9 @@ padding-left:300px;
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
 				<p href="#"
-					class="btn btn-secondary" role="button">수정 &raquo;</p><br>
+					class="btn btn-secondary" role="button">찜 하기 &raquo;</p><br>
 					<p href="#"
-					class="btn btn-secondary" role="button">삭제 &raquo;</p>
+					class="btn btn-secondary" role="button">장바구니 &raquo;</p>
 					
 			</div>
 		</div>
@@ -108,9 +105,9 @@ padding-left:300px;
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
 				<p href="#"
-					class="btn btn-secondary" role="button">수정 &raquo;</p><br>
+					class="btn btn-secondary" role="button">찜하기 &raquo;</p><br>
 					<p href="#"
-					class="btn btn-secondary" role="button">삭제 &raquo;</p>
+					class="btn btn-secondary" role="button">장바구니 &raquo;</p>
 					
 			</div>
 		</div>
@@ -130,8 +127,6 @@ padding-left:300px;
 						<li class="page-item"><a class="page-link" href="#">Next</a></li>
 					</ul>	
 					</div>
-					</div>
 	<jsp:include page="footer.jsp" />
-	
 </body>
 </html>
