@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class Dv_Bean {
 	
-	private String dv_id;
+	private String mb_id;
 	@Size(min=2, max=20)
 	private String dv_nick;
 	@Size(min=2, max=10)
@@ -17,7 +17,6 @@ public class Dv_Bean {
 	private String dv_tel;
 	
 	@Size(min=2, max=3000)
-	@Pattern(regexp = "[0-9a-zA-Z가-힣]*")
 	private String dv_address;
 	private String dv_pk;
 	private boolean dv_numExist;
@@ -26,11 +25,11 @@ public class Dv_Bean {
 		this.dv_numExist = false;
 	}
 	//생성 입력
-	public String getDv_id() {
-		return dv_id;
+	public String getMb_id() {
+		return mb_id;
 	}
-	public void setDv_id(String dv_id) {
-		this.dv_id = dv_id;
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
 	}	
 	public String getDv_nick() {
 		return dv_nick;

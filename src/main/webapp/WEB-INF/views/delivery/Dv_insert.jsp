@@ -95,7 +95,7 @@
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">배송지 추가</h4>
         <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
-            <form:hidden path="dv_id" value="hyun3"/>
+            <form:hidden path="mb_id" value="${loginShowBean.mb_id}"/>
             <div class="form-group">
               <form:label path="dv_nick">닉네임</form:label>
               <div class="input-group">

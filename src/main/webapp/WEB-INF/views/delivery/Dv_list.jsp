@@ -49,6 +49,7 @@
   </style>
 </head>
 <body>
+
 <div class="container" align="center">
 <div class="input-form col-md-12 mx-auto">	
 	<table class="table table-hover" id='dv_list'>
@@ -64,22 +65,22 @@
 		<tbody>
 			<c:forEach var="dvl" items="${Deliverylist }">
 			<tr>
-				<td height="20" width="150">${dvl.dv_id }</td>
+				<td height="20" width="150">${dvl.mb_id }</td>
 				<td height="20" width="150">${dvl.dv_name }</td>
 				<td height="20" width="150">${dvl.dv_nick }</td>
 				<td height="20" width="150">${dvl.dv_tel }</td>
 				<td height="20" width="300">${dvl.dv_address }</td>
 			</tr>
 			<tr>
-				<td><a href="${root}delivery/DvUpdate?dv_id=${dvl.dv_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 수정</a></td>
-				<td><a href="${root}delivery/DvDelete?dv_id=${dvl.dv_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 삭제</a></td>
+				<td><a href="${root}delivery/DvUpdate?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 수정</a></td>
+				<td><a href="${root}delivery/DvDelete?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 삭제</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div class="mb-4">
-				<a href="${root}delivery/DvInsert?Delivery_info=${Delivery_info}&dv_id=hyun3" class="btn btn-dark">배송지 추가</a>
-				
+				<a href="${root}delivery/DvInsert?mb_id=${loginShowBean.mb_id}" class="btn btn-dark">배송지 추가</a>
+				<a href="${root }index" class="btn btn-dark">메인화면</a>
 				
 	</div>					
 		
@@ -105,5 +106,7 @@
       });
     }, false);
   </script>
+  
+ 
 </body>
 </html>

@@ -19,7 +19,7 @@ public class Dv_Validator implements Validator{
 		// 아이디 중복 확인 체크
 		if(beanName.equals("InsertBkBean")) {
 			if(dv_Bean.isDv_numExist() == false) {
-				errors.rejectValue("dv_id", "DontCheckDv_nickExist");
+				errors.rejectValue("mb_id", "DontCheckDv_nickExist");
 					}
 				}
 		

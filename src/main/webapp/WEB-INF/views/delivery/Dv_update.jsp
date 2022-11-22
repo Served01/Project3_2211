@@ -62,7 +62,7 @@
       <div class="input-form col-md-12 mx-auto">
               <h4 class="mb-3">배송지 수정</h4>
 	<form:form action="${root }delivery/DvUpdatePro" method="post" modelAttribute="UpdateDvBean">
-		<form:hidden path="dv_id"/>
+		<form:hidden path="mb_id"/>
 		<form:hidden path="dv_pk"/>
 		 <div class="form-group">
 			<form:label path="dv_nick">닉네임</form:label>

@@ -23,9 +23,9 @@ public class Dv_Controller {
 	
 	//Dv_list
 	@GetMapping("/delivery/DvList")
-	public String DvList(@RequestParam("dv_id") String dv_id, Model model) {
-		
-		List<Dv_Bean> Deliverylist = dv_Service.getDvList(dv_id);
+	public String DvList(@RequestParam("mb_id") String mb_id, Model model) {
+				
+		List<Dv_Bean> Deliverylist = dv_Service.getDvList(mb_id);
 		model.addAttribute("Deliverylist", Deliverylist);
 		
 		return "delivery/Dv_list";
@@ -52,14 +52,11 @@ public class Dv_Controller {
 		return "delivery/Dv_insert_success";
 	}
 	
-	
-	
-	
 	//Dv_update
 	@GetMapping("/delivery/DvUpdate")
-	public String DvUpdate(@RequestParam("dv_id") String dv_id, @RequestParam("dv_nick") String dv_nick, Model model) {
+	public String DvUpdate(@RequestParam("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick, Model model) {
 		
-		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(dv_id, dv_nick);
+		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(mb_id, dv_nick);
 		model.addAttribute("UpdateDvBean", UpdateDvBean);
 		
 		return "delivery/Dv_update";
@@ -79,9 +76,9 @@ public class Dv_Controller {
 	
 	//Dv_delete
 	@GetMapping("/delivery/DvDelete")
-	public String DvDelete(@RequestParam("dv_id") String dv_id, @RequestParam("dv_nick") String dv_nick) {
+	public String DvDelete(@RequestParam("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick) {
 		
-		dv_Service.DeleteDvInfo(dv_id, dv_nick);
+		dv_Service.DeleteDvInfo(mb_id, dv_nick);
 		
 		return "delivery/Dv_delete";
 	}
