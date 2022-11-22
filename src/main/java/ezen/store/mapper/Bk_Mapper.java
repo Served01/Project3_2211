@@ -12,7 +12,7 @@ import ezen.store.beans.Bk_Number;
 
 public interface Bk_Mapper {
 	
-	//일련번호 중복확인 sql
+		//일련번호 중복확인 sql
 		@Select("select * from Book_info where bk_number = #{bk_number}")
 		String CheckBkNumExist(int Bk_number);
 		
@@ -27,6 +27,10 @@ public interface Bk_Mapper {
 		//해당 책에 있는 리뷰 평점을 추출하여 가져와 평균을 냅니다.
 		@Select("select nvl(avg(rv_score), 0) as avg_score from Review_info where bk_number = #{bk_number}")
 		double getBkScore(int bk_number);
+		
+		//책 리스트 개수를 가져오는 SQL문
+		@Select("select count(*) from Book_info where bk_local = #{bk_local} and bk_genre = #{bk_genre} and bk_deleted = '0'")
+		int getCntBook(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
 		
 		//책 정보를 추출하여 가져옵니다.
 		@Select("select bk_number, bk_title, bk_writer, bk_publisher, to_char(bk_pubdate, 'YYYY-MM-DD') as bk_pubdate, bk_image, bk_local, bk_genre, bk_infodate,"

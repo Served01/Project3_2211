@@ -13,7 +13,7 @@
 	<script>
 		
 		alert("리뷰 작성에 성공하였습니다.")
-		location.replace("${root}Review/RvList?mb_id=${insertRvBean.mb_id}&bk_number=${insertRvBean.bk_number}")
+		location.replace("${root}book/BkSelect?mb_id=${insertRvBean.mb_id}&bk_number=${insertRvBean.bk_number}")
 		
 	</script>
 </body>

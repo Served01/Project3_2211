@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Bk_Number;
+import ezen.store.beans.PageCountBean;
 import ezen.store.service.Bk_Service;
 
 
@@ -52,6 +53,7 @@ public class Bk_Controller {
 			@RequestParam("bk_local") String bk_local, 
 			@RequestParam("bk_genre") String bk_genre,
 			@RequestParam("mb_id") String mb_id,
+			@RequestParam(value="page", defaultValue="1") int page,
 			Model model) {
 
 		model.addAttribute("bk_local", bk_local);
@@ -78,11 +80,17 @@ public class Bk_Controller {
 		
 		model.addAttribute("bkListBean", bkListBean);
 		
+		PageCountBean pageCountBean = BkService.getContentCnt(bk_local, bk_genre, page);
+		
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		
 		return "book/Bk_list";
 	}
 
 	@GetMapping("/BkSelect")
 	public String BkSelect(@RequestParam("bk_number") int bk_number,
+						   @RequestParam(value="page", defaultValue="1") int page,
 							Model model) {
 		 
 		 model.addAttribute("bk_number", bk_number);
@@ -92,6 +100,8 @@ public class Bk_Controller {
 
 		 Bk_Bean ReadBkBean = BkService.getBkInfo(bk_number);
 		 model.addAttribute("ReadBkBean", ReadBkBean);
+		 
+		 model.addAttribute("page", page);
 		 
 		return "book/Bk_select";
 	}

@@ -15,7 +15,7 @@ public class Bk_DAO {
 	@Autowired
 	private Bk_Mapper bk_Mapper;
 	
-	//책 일련번호 중복확인 DAO
+		//책 일련번호 중복확인 DAO
 		public String CheckBkNumExist(int bk_number){				
 			return bk_Mapper.CheckBkNumExist(bk_number);		
 		}
@@ -47,6 +47,11 @@ public class Bk_DAO {
 			
 			return bk_Mapper.getBkNumList(bk_local, bk_genre);
 			
+		}
+		
+		//책 리스트 갯수
+		public int getCntBook(String bk_local, String bk_genre) {
+			return bk_Mapper.getCntBook(bk_local, bk_genre);
 		}
 	
 		//책 정보 삭제(수정)

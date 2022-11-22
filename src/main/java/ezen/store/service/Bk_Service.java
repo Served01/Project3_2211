@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Bk_Number;
+import ezen.store.beans.PageCountBean;
 import ezen.store.dao.Bk_DAO;
 
 
@@ -21,9 +22,24 @@ public class Bk_Service {
 	@Value("${path.upload}")
 	private String PathUpload;
 	
+	@Value("${page.bklistcnt}")
+	private int page_listcnt;  
+	//페이지
+	@Value("${page.bkpagButtonCnt}")
+	private int page_pageButtonCnt;
+	
 	@Autowired
 	private Bk_DAO BkDAO;
 	
+	//책 리스트 갯수
+	public PageCountBean getContentCnt(String bk_local, String bk_genre, int currentPage) {
+		
+		int content_cnt = BkDAO.getCntBook(bk_local, bk_genre);
+		
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
+		return pageCountBean;
+	}
 	//책 일련번호 중복확인 관련 서비스
 	public boolean CheckBkNumExist(int bk_number) {		
 		String bk_writer = BkDAO.CheckBkNumExist(bk_number);		

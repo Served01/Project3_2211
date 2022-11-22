@@ -43,7 +43,7 @@ padding-left:300px;
 
 </style>
 <body>
-<c:import url="/WEB-INF/views/include/header.jsp"/>
+<c:import url="/Main/header"></c:import>
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container">
 			<h1 class="display-5">책 리스트</h1>
@@ -63,8 +63,9 @@ padding-left:300px;
             <li>취미/실용/스포츠</li>
         </ul>
     </aside>
-	<c:forEach var="bl" items="${bkListBean}">
+	<c:forEach var="bl" items="${bkListBean}" varStatus="status">
 		<c:if test="${bl.bk_deleted != 'deleted'}">
+		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	<div class="input-group-append">
 	<div class="container">
 		<div class="row">
@@ -82,7 +83,7 @@ padding-left:300px;
 				</h4>
 		</div>
 			<div class="col-md-7">
-				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}&mb_id=${mb_id}&updateSelect=0'><b>${bl.bk_title}</b></a>
+				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}&mb_id=${mb_id}'><b>${bl.bk_title}</b></a>
 				<p>${bl.bk_writer} | ${bl.bk_publisher} | ${bl.bk_pubdate} 출시 
 				<p><b>${bl.bk_price} 원 | 재고 : ${bl.bk_quantity}권</b>
 				<p style="padding-top: 20px">
@@ -98,21 +99,35 @@ padding-left:300px;
 		</div>
 		<hr>
 		</c:if>
+		</c:if>
+		count: '${status.count}'
+		first: '${pageCountBean.firstContent }'
+		last: '${pageCountBean.lastContent }'
 	</c:forEach>
 	</div>
-	
-	<div class="hi">
+	<!-- 페이지네이션 -->
+    		<div class=hi>
             	<ul id="hiyo" class="pagination">
-						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>	
-					</div>
-<c:import url="/WEB-INF/views/include/footer.jsp"/>		
+					
+					<li class="page-item">
+						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
+					</li>					
+														
+				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+					<li class="page-item active">
+						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
+					</li>		
+												
+				</c:forEach>					
+					
+					<li class="page-item">
+						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+					</li>
+					
+				</ul>
+			</div>	
+<c:import url="/Main/footer"></c:import>	
 
 </body>
 </html>

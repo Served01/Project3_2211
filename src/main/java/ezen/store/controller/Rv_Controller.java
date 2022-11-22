@@ -41,7 +41,6 @@ public class Rv_Controller {
 		PageCountBean pageCountBean = rvService.getContentCnt(bk_number, page);
 		model.addAttribute("pageCountBean", pageCountBean);
 		
-		model.addAttribute("page", page);
 		
 		return "review/Rv_list";
 	}

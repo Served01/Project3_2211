@@ -117,7 +117,6 @@ document.getElementById("my_sum").innerHTML=sum_;
 				</form>
 				<p>
 				<p><a href="#" class="btn btn-info">도서주문 &raquo;</a> 
-				<a href="./books.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
 				<input class="btn btn-info" type="reset" value="찜하기">
 				<input class="btn btn-info" type="reset" value="장바구니">
 				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
@@ -126,19 +125,14 @@ document.getElementById("my_sum").innerHTML=sum_;
 		</div>
 		<hr>
 	</div>
-	<%if(Integer.parseInt(request.getParameter("updateSelect"))==0) {%>
+	
 	<c:import url="/Review/RvInsert">
 	</c:import>
-	<%} else{ %>
-	<c:import url="/Review/RvUpdate">
-		
-	</c:import>
-	<%} %>
+	
 	<c:import url="/Review/RvList">
-		
 	</c:import>
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
-	
+	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
 	<c:import url="/Main/footer"></c:import>
 </body>
 </html>

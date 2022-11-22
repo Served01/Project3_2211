@@ -49,26 +49,6 @@
 </head>
 <script>
     
-     	//수정 버튼
-     	
-        function updateRv(rv_number, mb_id, bk_number){
-     		
-     		$.ajax({
-     			type:"get",
-     			url: "/Review/RvUpdate",
-     			dataType: "text",
-     			data: {
-     				"rv_number" : rv_number
-     				,"mb_id" : mb_id
-     				,"bk_number" : bk_number
-     				
-     			}
-     			
-     		})
-     		
-     	};
-     	
-     	//삭제 버튼
      	
      
      </script>
@@ -77,7 +57,6 @@
 <!--  <div class="container">
 	<div class="info">-->
 		<h1 style="text-align:center">리뷰 목록</h1>
-		<button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root}Review/RvInsert?bk_number=${bk_number }&mb_id=${mb_id }'">등록</button>
 		<div class="reviews">
 			<table class="table">
 				<thead>
@@ -89,14 +68,14 @@
 				</thead>
 				<tbody id="reviews-box">
 					<c:forEach var="rvl" items="${reviewlist }" varStatus="status">
-					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent }">
+					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 					
 					<tr>
 					
 						<td>${rvl.mb_id }</td>
 						<td>${rvl.rv_date }</td>
 						<td>${rvl.rv_content }</td>	
-						<th><button type="button" style="float:right" class="btn btn-dark" onclick="javascript:updateRv(${rvl.rv_number},'${rvl.mb_id }',${rvl.bk_number })">수정</button></th>
+						<th><button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvUpdate?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">수정</button></th>
                         <th><button type="button" class="btn btn-dark" onclick="location.href='${root }Review/RvDeletePro?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">삭제</button></th>			
 					
 					</tr>
@@ -112,19 +91,19 @@
             	<ul id="hiyo" class="pagination">
 					
 					<li class="page-item">
-						<a href="${root}Review/RvList?mb_id=${mb_id}&bk_number=${bk_number }&page=1" class="page-link">First</a>
+						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=1" class="page-link">First</a>
 					</li>					
 														
 				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 					<li class="page-item active">
-						<a href="javascript:history.pushState(null, null, '${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=${idx}')" class="page-link">${idx}</a>
+						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=${idx}" class="page-link">${idx}</a>
 					</li>		
 												
 				</c:forEach>					
 					
 					<li class="page-item">
-						<a href="${root}Review/RvList?mb_id=${mb_id}&bk_number=${bk_number }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>
