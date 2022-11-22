@@ -1,9 +1,13 @@
 package ezen.store.dao;
 
 import java.util.List;
+import java.util.HashMap;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import ezen.store.beans.Or_Bean;
 import ezen.store.mapper.Or_Mapper;
 
@@ -38,8 +42,9 @@ public class Or_DAO {
 	};
 	
 	//update
-	public List<Or_Bean> OrUpdatePurchase(@Param("mb_id") String mb_id, @Param("or_number") String or_number){
-		return or_Mapper.OrUpdatePurchase(mb_id, or_number);
+	public void UpdateOrPurchase(Or_Bean updateOrPurchase){
+		or_Mapper.UpdateOrPurchase(updateOrPurchase);
+		//return or_Mapper.OrUpdatePurchase(mb_id, or_number);
 	}
 	
 	public void OrUpdateAfter(Or_Bean updateOrBean) {

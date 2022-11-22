@@ -3,10 +3,12 @@ package ezen.store.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.PageCountBean;
 import ezen.store.dao.Or_DAO;
 
 @Service
@@ -44,8 +46,9 @@ public class Or_Service {
 		
 		
 		//주문 결제 
-		public List<Or_Bean> OrUpdatePurchase(String mb_id, String or_number){
-			return or_DAO.OrUpdatePurchase(mb_id, or_number);
+		public void UpdateOrPurchase(Or_Bean updateOrPurchase){
+			or_DAO.UpdateOrPurchase(updateOrPurchase);
+			//return or_DAO.OrUpdatePurchase(mb_id, or_number);
 		}
 		
 //		public List<Or_Bean> OrAfter(String or_mbid, String or_number, String or_status){

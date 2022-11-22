@@ -2,10 +2,13 @@ package ezen.store.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import ezen.store.beans.Ca_Bean;
+import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
 
 public interface Or_Mapper {
@@ -60,7 +63,8 @@ public interface Or_Mapper {
 		@Update("update order_info set or_status = '준비중', dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}, or_date = sysdate\r\n"
 				+ "		where mb_id = #{mb_id}\r\n"
 				+ "		and or_number = #{or_number}")
-		List<Or_Bean> OrUpdatePurchase(@Param("mb_id") String mb_id, @Param("or_number") String or_number);
+		void UpdateOrPurchase(Or_Bean updateOrPurchase);
+		//List<Or_Bean> OrUpdatePurchase(@Param("mb_id") String mb_id, @Param("or_number") String or_number);
 		
 		//주문 상황 수정
 //		@Update("update order_info set or_status = #{or_status}\r\n"
@@ -102,7 +106,7 @@ public interface Or_Mapper {
 //				+ "		bk_quantity=bk_quantity+#{ori_bkcount}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted=#{bk_deleted}"
 //				+ "		where bk_number = #{ori_bknumber}")
 		@Update("update bk_info set bk_number = #{bk_number}, bk_quantity = bk_quantity + #{ori_bkcount}\r\n"
-				+ "		and bk_number = #{bk_number}")
+				+ "		where bk_number in (select bk_number from Order_items where bk_number = #{bk_number}")
 		void OriUpdateAfter(List<Or_Bean> updateOriBean);
 		
 		

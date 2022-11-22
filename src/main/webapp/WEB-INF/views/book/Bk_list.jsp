@@ -42,6 +42,72 @@ padding-left:300px;
    } 
 
 </style>
+<script>
+let wish = {
+		switchWishHeart : function(bk_number,su) {
+			//alert("헤이!");
+			//alert(a_memberNo);
+			
+			var mb_id = 'admin';
+			
+			
+			var imgsrc = $("#wish"+su).attr("src");
+			var culsrc = imgsrc.split('-');
+			
+			if (culsrc[1] == null){
+				//여기다가 찜추가
+				$.ajax({
+				url: '${root}wish/wish_add/' + mb_id +'/'+ bk_number,
+				type: 'get',
+				dataType: 'text',
+				success : function(result) {
+					if(result=="true") {
+						$("#wish"+su).attr("src","${root }imgs/heart-fill.svg");
+					}
+				}
+				})
+				
+			}else{
+				//여기다가 찜삭제
+				$.ajax({
+					url: '${root}wish/wish_delete/' + mb_id +'/'+ bk_number,
+					type: 'get',
+					dataType: 'text',
+					success : function(result) {
+						if(result=="true") {
+							$("#wish"+su).attr("src","${root }imgs/heart.svg");
+						}
+					}
+					})
+				
+			}
+			
+			
+		},
+		checkWishHeart : function(bk_number,su){
+			
+			var mb_id = 'admin';
+			
+			
+			$.ajax({
+				url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
+				type : "GET",
+				dataType : "text",
+				error : function(e) {
+					alert("안됨1");
+					//alert(e);
+				},
+				success : function(result) {
+					if(result.trim()=="true") {
+						$("#wish"+su).attr("src","${root }imgs/heart.svg");
+					} else if(result.trim()=="false") {
+						$("#wish"+su).attr("src","${root }imgs/heart-fill.svg");
+					}
+				}
+			});
+		}
+	};
+</script>
 <body>
 <c:import url="/Main/header"></c:import>
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
@@ -75,7 +141,9 @@ padding-left:300px;
 			</div>
 				<h4 style="text-align:center">
 					<c:if test="${bl.avg_score != 0}">
-					<p>평점 : ${bl.avg_score}
+						<c:set var = "string1" value = "${bl.avg_score}"/>
+      					<c:set var = "string2" value = "${fn:substring(string1, 0, 3)}" />
+					<p>평점 : ${string2}
 					</c:if>
 					<c:if test="${bl.avg_score == 0.0}">
 					<p>등록된 평점이 없습니다.</p>
@@ -84,11 +152,19 @@ padding-left:300px;
 		</div>
 			<div class="col-md-7">
 				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}&mb_id=${mb_id}'><b>${bl.bk_title}</b></a>
+				<!--  like button  -->
+				<script>
+					$(document).ready(function(){
+						setTimeout(wish.checkWishHeart(${bl.bk_number},${status.count}), 200);
+					})
+				</script>
+				<img src="${root }imgs/heart.svg"  id="wish${status.count }"  onclick="javascript:wish.switchWishHeart(${bl.bk_number},${status.count})"/>
+				
 				<p>${bl.bk_writer} | ${bl.bk_publisher} | ${bl.bk_pubdate} 출시 
 				<p><b>${bl.bk_price} 원 | 재고 : ${bl.bk_quantity}권</b>
 				<p style="padding-top: 20px">
-				<c:set var = "string1" value = "${bl.bk_detail}"/>
-      			<c:set var = "string2" value = "${fn:substring(string1, 0, 30)}" />
+				<c:set var = "string3" value = "${bl.bk_detail}"/>
+      			<c:set var = "string4" value = "${fn:substring(string3, 0, 30)}" />
       			${string2}...
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
@@ -100,9 +176,6 @@ padding-left:300px;
 		<hr>
 		</c:if>
 		</c:if>
-		count: '${status.count}'
-		first: '${pageCountBean.firstContent }'
-		last: '${pageCountBean.lastContent }'
 	</c:forEach>
 	</div>
 	<!-- 페이지네이션 -->

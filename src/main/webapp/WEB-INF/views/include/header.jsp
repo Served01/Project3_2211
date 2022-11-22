@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url var='root' value='/'/>
 <!doctype html>
@@ -20,17 +19,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 
-
-
-<script src="${pageContext.request.contextPath}/js/header.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js" ></script> 
   </head>
-      <style>     
-  body{
-  
-  
-  }
+      <style>
+ 
   </style>
+ 
   <body>
+  <div style="width:1900px;">
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand">Ezen Book Store</a>
@@ -114,7 +110,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 
       
   </body>

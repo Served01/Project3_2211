@@ -53,10 +53,9 @@
      
      </script>
 <body>
-
-<!--  <div class="container">
-	<div class="info">-->
-		<h1 style="text-align:center">리뷰 목록</h1>
+<div class="container">
+            <div class="info" style="margin-left:150px;width:900px">
+                <h1 style="text-align:center">리뷰 목록</h1>
 		<div class="reviews">
 			<table class="table">
 				<thead>
@@ -64,6 +63,8 @@
                         <th scope="col">작성자</th>
                         <th scope="col">작성일</th>
                         <th scope="col">내용</th>
+                        <th></th>
+	                    <th></th>
                     </tr>
 				</thead>
 				<tbody id="reviews-box">
@@ -71,10 +72,10 @@
 					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 					
 					<tr>
-					
-						<td>${rvl.mb_id }</td>
-						<td>${rvl.rv_date }</td>
-						<td>${rvl.rv_content }</td>	
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.mb_id }</td>
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_date }</td>
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_content }</td>	
+						
 						<th><button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvUpdate?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">수정</button></th>
                         <th><button type="button" class="btn btn-dark" onclick="location.href='${root }Review/RvDeletePro?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">삭제</button></th>			
 					
@@ -84,7 +85,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
+			<hr style="margin-top: -1em">
+            </div>
 			
 			<!-- 페이지네이션 -->
     		<div class=hi>
@@ -108,6 +110,7 @@
 					
 				</ul>
 			</div>	
-
+		</div>
+	</div>
 </body>
 </html>

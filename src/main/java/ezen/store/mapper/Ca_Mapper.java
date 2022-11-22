@@ -12,7 +12,7 @@ import ezen.store.beans.Ca_Bean;
 
 public interface Ca_Mapper {
 	
-	@Select("select a.bk_number,bk_title,bk_writer,bk_publisher,bk_image,bk_quantity,bk_price,b.ca_bkcount\r\n"
+	@Select("select DISTINCT a.bk_number,bk_title,bk_writer,bk_publisher,bk_image,bk_quantity,bk_price,b.ca_bkcount\r\n"
 			+ "    from book_info a,(select bk_number,ca_bkcount\r\n"
 			+ "                        from  Cart_info\r\n"
 			+ "                        where mb_id = #{ca_bmid}) b\r\n"
@@ -34,24 +34,24 @@ public interface Ca_Mapper {
 			+ "and or_status = '결제중')")
 		void delPreOrderItems(String ca_mbid);
 	
-	@Update("update cart_info set ca_bkcount = ca_bkcount + 1 where mb_id = #{ca_mbid} and ca_bknumbers = #{ca_bknumbers}")
+	@Update("update cart_info set ca_bkcount = ca_bkcount + 1 where mb_id = #{ca_mbid} and bk_number = #{ca_bknumbers}")
 		void plusBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers);
 	
-	@Update("update cart_info set ca_bkcount = ca_bkcount - 1 where mb_id = #{ca_mbid} and ca_bknumbers = #{ca_bknumbers}")
+	@Update("update cart_info set ca_bkcount = ca_bkcount - 1 where mb_id = #{ca_mbid} and bk_number = #{ca_bknumbers}")
 		void minusBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers);
 	
-	@Update("update cart_info set ca_bkcount = #{ca_bkcount} where mb_id = #{ca_mbid} and ca_bknumbers = #{ca_bknumbers}")
+	@Update("update cart_info set ca_bkcount = #{ca_bkcount} where mb_id = #{ca_mbid} and bk_number = #{ca_bknumbers}")
 		void setBookCount(@Param("ca_mbid") String ca_mbid,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_bkcount") int newval);
 	
 	@Insert("insert into order_info(or_number,mb_id) values(#{or_number},#{ca_mbid})")
 		void createOderInfo(@Param("or_number")String or_number,@Param("ca_mbid") String ca_mbid);
 	
 	
-	@Insert("insert into order_items(or_number, bk_number, bk_price,ori_bkdiscount,ori_bkcount) values(#{or_number},\r\n"
-			+ "#{ca_bknumbers},\r\n"
-			+ "(select bk_price from book_info where bk_number = #{ca_bknumbers}),\r\n"
-			+ "0,\r\n"
-			+ "(select ca_bkcount from CART_INFO where mb_id=#{ca_mbid} and bk_number = #{ca_bknumbers}))")
+	@Insert("insert into order_items(or_number, bk_number, bk_price,ori_bkdiscount,ori_bkcount) values(#{or_number},"
+			+ "#{ca_bknumbers},"
+			+ "(select bk_price from book_info where bk_number = #{ca_bknumbers}),"
+			+ "0,"
+			+ "(select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id=#{ca_mbid} and bk_number=#{ca_bknumbers})))")
 		void insertOderItems(@Param("or_number")String or_number,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_mbid") String ca_mbid);
 	
 	@Insert("insert into order_items(or_number, bk_number, bk_price,ori_bkdiscount,ori_bkcount) values(#{or_number},\r\n"
