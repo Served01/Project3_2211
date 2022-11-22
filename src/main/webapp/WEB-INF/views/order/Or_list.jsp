@@ -16,15 +16,16 @@
 <body>
 
 <form name="orderlist" id="orderlist" method="post" class="orderlist">
-
+	
 	<c:forEach var="orBean" items="${infoOrBean}" varStatus="status">
 			
 		<table class="table">
+		<c:if test="${orBean.or_status ne '0'}">
 				<tr>
 	            	<td>주문번호 ${orBean.or_number }</td>
 	            </tr>
 	            <tr>
-	            	<td>주문번호 <a href="${root}order/Or_select?or_mbid=${orBean.or_mbid }&or_number=${orBean.or_number }">${orBean.or_number }</a></td>
+	            	<td>주문번호 <a href="${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }">${orBean.or_number }</a></td>
 				</tr> 
 	            <tr>
 					<td>구매날짜 ${orBean.or_date }</td>
@@ -33,14 +34,15 @@
 					<td>송장번호 ${orBean.or_delivery }</td>
 				</tr>
 	            <tr>
-					<td>배송지 ${orBean.or_dvaddress }</td>
+					<td>배송지 ${orBean.dv_address }</td>
 				</tr>
 				<tr>
 					<td>배송 상태: ${orBean.or_status }</td>
 				</tr>
 				<tr>
-					<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?or_mbid=${orBean.or_mbid }&or_number=${orBean.or_number }'">주문 변경</button>
+					<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
 				</tr>
+			</c:if>
 			<%-- <c:forEach var="oriBean" items="${itemsOrBean}" varStatus="status">
 				<table class="table">
 				<tr>

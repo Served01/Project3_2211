@@ -21,10 +21,10 @@
 	<a href="${root}wish/wish_info?wi_mbid=admin">위시인포</a>
 	<a href="${root}wish/wish_test">위시추가테스트</a>
 	<hr>
-	<a href="${root}order/Or_list?or_mbid=hyun1">주문 목록</a>
-	<a href="${root}order/Or_purchase?dv_id=admin&ca_mbid=admin">결제</a>
-	<a href="${root}order/Or_select?or_mbid=hyun1&or_number=22NOVABC001">주문 상세</a>
-	<button onclick="location.href='Or_purchase.jsp?mb_id=admin&ca_mbid=admin'">결제?</button>
+	<a href="${root}order/Or_list?mb_id=hyun1">주문 목록</a>
+	<a href="${root}order/Or_purchase?mb_id=hyun1&or_number=22NOVABC001">결제</a>
+	<a href="${root}order/Or_select?mb_id=hyun1&or_number=22NOVABC001">주문 상세</a>
+	<button onclick="location.href='Or_purchase.jsp?mb_id=hyun1&or_number=22NOVABC001'">결제?</button>
 				
 </body>
 </html>

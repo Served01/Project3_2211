@@ -26,35 +26,36 @@ public class Or_Service {
 	private int page_pageButtonCnt;
 	*/
 	
-	//카트 열람
-		public	List<Or_Bean> OrList(String or_mbid) {
-			return or_DAO.OrList(or_mbid);
+		//주문 목록 select
+		public	List<Or_Bean> OrList(String mb_id) {
+			return or_DAO.OrList(mb_id);
 		}
 		
 		
-		String or_mbid = "or_mbid";
+		String mb_id = "mb_id";
 		String or_number = "or_number";
 		
-		public List<Or_Bean> getOrInfo(String or_mbid, String or_number){
-			return or_DAO.getOrInfo(or_mbid, or_number);
+		//주문 열람 select
+		public List<Or_Bean> getOrInfo(String mb_id, String or_number){
+			return or_DAO.getOrInfo(mb_id, or_number);
 		}
 		
-//		public	List<Or_Bean> getOrInfo(String or_number) {
-	//		return or_DAO.getOrInfo(or_number);
-		//}
 		public	List<Or_Bean> OrSelect(String or_number) {
 			return or_DAO.OrSelect(or_number);
 		}
 		
 		
-		public List<Or_Bean> OrUpdatePurchase(String or_mbid, String or_number){
-			return or_DAO.OrUpdatePurchase(or_mbid, or_number);
+		//주문 결제 
+		public void UpdateOrPurchase(Or_Bean updateOrPurchase){
+			or_DAO.UpdateOrPurchase(updateOrPurchase);
+			//return or_DAO.OrUpdatePurchase(mb_id, or_number);
 		}
 		
 //		public List<Or_Bean> OrAfter(String or_mbid, String or_number, String or_status){
 //			return or_DAO.OrAfter(or_mbid, or_number, or_status);
 //		}
 		
+		//주문 변경 update
 		public void OrUpdateAfter(Or_Bean updateOrBean) {
 			or_DAO.OrUpdateAfter(updateOrBean);
 		}
@@ -62,8 +63,17 @@ public class Or_Service {
 		public void UpdateOrInfo(Or_Bean updateOrBean) {
 			or_DAO.UpdateOrInfo(updateOrBean);
 		}
-		public Or_Bean UpdateOrBean(String or_mbid, String or_number) {
-			return or_DAO.UpdateOrBean(or_mbid, or_number);
+		public Or_Bean UpdateOrBean(String mb_id, String or_number) {
+			return or_DAO.UpdateOrBean(mb_id, or_number);
+		}
+		
+		public List<Or_Bean> UpdateOriBean(String or_number) {
+			return or_DAO.UpdateOriBean(or_number);
+		}
+		
+		public void OriUpdateAfter(List<Or_Bean> updateOriBean) {
+			or_DAO.OriUpdateAfter(updateOriBean);
+			
 		}
 		
 //		public void Or_update(int or_bknumbers) {

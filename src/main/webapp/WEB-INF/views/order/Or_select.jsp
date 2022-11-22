@@ -24,13 +24,13 @@
 			<td>주문 번호 : ${orBean.or_number }</td>
 		</tr>
 		<tr>
-			<td>아이디 : ${orBean.or_mbid }</td>
+			<td>아이디 : ${orBean.mb_id }</td>
 		</tr>
 		<tr>	
-			<td>구매자 이름 : ${orBean.or_mbname }</td>
+			<td>구매자 이름 : ${orBean.mb_name }</td>
 		</tr>
 		<tr>
-			<td>구매자 연락처: ${orBean.or_mbtel }</td>
+			<td>구매자 연락처: ${orBean.mb_tel }</td>
 		</tr>
 		<tr>
 			<td>배송 상태: ${orBean.or_status }</td>
@@ -45,17 +45,17 @@
 			<td>배송비: ${orBean.or_deliveryCost }</td>
 		</tr>
 		<tr>
-			<td>받는 사람: ${orBean.or_dvname }</td>
+			<td>받는 사람: ${orBean.dv_name }</td>
 		</tr>
 		<tr>
-			<td>받는 사람 연락처: ${orBean.or_dvtel }</td>
+			<td>받는 사람 연락처: ${orBean.dv_tel }</td>
 		</tr>
 		<tr>
-			<td>배송지: ${orBean.or_dvaddress }</td>
+			<td>배송지: ${orBean.dv_address }</td>
 		</tr>
 		<tr>
-    		<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?or_mbid=${orBean.or_mbid }&or_number=${orBean.or_number }'">주문 변경</button>
-			<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_list?or_mbid=${orBean.or_mbid }'">주문 목록</button>      
+    		<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+			<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_list?mb_id=${orBean.mb_id }'">주문 목록</button>      
     	</tr>
 	           	 </table>                 	
     </c:forEach>
@@ -64,19 +64,19 @@
     <c:forEach var="oriBean" items="${itemsOrBean }" varStatus="status">
     <table>
     	<tr>
-    		<td>주문 번호: ${oriBean.ori_number }</td>
+    		<td>주문 번호: ${oriBean.or_number }</td>
     	</tr>
 		<tr>
-    		<td>책 번호: ${oriBean.ori_bknumber }</td>
+    		<td>책 번호: ${oriBean.bk_number }</td>
 		</tr>
 		<tr>
-    		<td>책 제목: <a href="${root}book/Bk_select?bk_number=${oriBean.ori_bknumber }">${oriBean.bk_title }</a></td>
+    		<td>책 제목: <a href="${root}book/Bk_select?bk_number=${oriBean.bk_number }">${oriBean.bk_title }</a></td>
     	</tr>
 		<tr>
 			<td>${oriBean.bk_image }</td>
     	</tr>
 		<tr>
-    		<td>구매 가격: ${oriBean.ori_bkprice }</td>
+    		<td>구매 가격: ${oriBean.bk_price }</td>
     	</tr>
 		<tr>
     		<td>할인율: ${oriBean.ori_bkdiscount }</td>

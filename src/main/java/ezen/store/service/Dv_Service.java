@@ -14,10 +14,21 @@ public class Dv_Service {
 	@Autowired
 	private Dv_DAO dv_DAO;
 	
+	//중복확인 관련
+	public boolean CheckDvNick(String dv_nick) {		
+		String mb_id = dv_DAO.CheckDvNick(dv_nick);		
+			if(mb_id == null) {
+				return true;
+			}else {
+				return false;		
+			}
+			
+		}
+	
 	//select
-	public List<Dv_Bean> getDvList(String dv_id){
+	public List<Dv_Bean> getDvList(String mb_id){
 		
-		return dv_DAO.getDvList(dv_id);		
+		return dv_DAO.getDvList(mb_id);		
 	}
 	
 	//insert
@@ -26,8 +37,8 @@ public class Dv_Service {
 	}			
 	
 	//update
-	public Dv_Bean UpdateDvBean(String dv_id) {
-		return dv_DAO.UpdateDvBean(dv_id);
+	public Dv_Bean UpdateDvBean(String mb_id, String dv_nick) {
+		return dv_DAO.UpdateDvBean(mb_id, dv_nick);
 	}
 	
 	public void UpdateDvInfo(Dv_Bean UpdateDvBean) {
@@ -35,8 +46,8 @@ public class Dv_Service {
 	}
 	
 	//delete
-	public void DeleteDvInfo(String dv_id) {
-		dv_DAO.DeleteDvInfo(dv_id);
+	public void DeleteDvInfo(String mb_id, String dv_nick) {
+		dv_DAO.DeleteDvInfo(mb_id, dv_nick);
 	}
 	
 }

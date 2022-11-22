@@ -18,12 +18,15 @@ public interface Wi_Mapper {
 			+ "                        from  Wish_info\r\n"
 			+ "                        where wi_mbid = #{wi_mbid})")
 		List<Wi_Bean> getWishInfo(String wi_mbid);
-
+		//페이지네이션
+	@Select("select count(*) from wish_info where wi_mbid = #{wi_mbid}")
+		int getContentCnt(String wi_mbid);
+		
 	@Insert("insert into Wish_info(wi_mbid,wi_bknumbers) values(#{wi_mbid},#{wi_bknumbers})")
 		void addWishStuff(@Param("wi_mbid") String wi_mbid,@Param("wi_bknumbers")int wi_bknumbers);
 		
 	@Delete("delete from Wish_info where wi_bknumbers = #{wi_bknumbers}")
-		void delwish(int wi_bknumbers);
+		void delwish(@Param("wi_mbid") String wi_mbid,@Param("wi_bknumbers")int wi_bknumbers);
 	@Delete("delete from Wish_info where wi_mbid = #{wi_mbid}")
 		void delwishAll(String wi_mbid);
 }
