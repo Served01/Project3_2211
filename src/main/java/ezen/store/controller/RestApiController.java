@@ -24,4 +24,13 @@ public class RestApiController {
 		
 	}
 	
+	@GetMapping("/member/checkUserIdExist2/{mb_pw}")
+	public String restApiControll2(@PathVariable String mb_pw) {
+		
+		boolean chk = mbSevice.checkUserIdExist(mb_pw);
+		
+		return chk + "";
+		
+	}
+	
 }

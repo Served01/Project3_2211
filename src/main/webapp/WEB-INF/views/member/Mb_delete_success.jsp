@@ -10,8 +10,8 @@
 <body>
 	<h1>회원정보 삭제(임시삭제) 완료</h1>
 	<script type="text/javascript">
-		alert("회원정보 삭제(임시삭제)를 성공 하였습니다!.")
-		location.href="${root}index"
+		alert("회원정보 삭제를 성공 하였습니다!.")
+		location.href="${root}Main/center"
 	</script>
 </body>
 </html>

@@ -91,22 +91,27 @@ public class Mb_Bean {
 		this.mb_tel = mb_tel;
 	}
 
-	public boolean isMbIdExist() {
-		return mbIdExist;
-	}
-
-	
 	public Mb_Bean() {
 		this.mbIdExist = false;
 		this.mbIdExist2 = false;
 		this.mblogin = false;
+	}
+	
+	public boolean isMbIdExist() {
+		return mbIdExist;
 	}
 
 	public void setMbIdExist(boolean mbIdExist) {
 		this.mbIdExist = mbIdExist;
 	}
 
-
+	public boolean isMbIdExist2() {
+		return mbIdExist2;
+	}
+	public void setMbIdExist2(boolean mbIdExist2) {
+		this.mbIdExist2 = mbIdExist2;
+	}
+	
 	public boolean isMblogin() {
 		return mblogin;
 	}
@@ -139,11 +144,5 @@ public class Mb_Bean {
 		this.mb_deleted_date = mb_deleted_date;
 	}
 
-	public boolean isMbIdExist2() {
-		return mbIdExist2;
-	}
-	public void setMbIdExist2(boolean mbIdExist2) {
-		this.mbIdExist2 = mbIdExist2;
-	}
 }
 

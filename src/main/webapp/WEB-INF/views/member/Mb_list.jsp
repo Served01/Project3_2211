@@ -12,13 +12,13 @@
 </style>
 </head>
 <body>
-
+<c:import url="/Main/header"></c:import>
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto">
-			<a href="#" onclick="location.href='index'"><h2>
-					<i class="fa-solid fa-book"></i>Ezen Book Store
-				</h2></a> <br>
-			<h4 class="mb-3">회원 목록 보기 화면 - 마이 페이지(관리자)</h4>
+			<a href="#" onclick="location.href='index'">
+					<i class="fa-solid fa-book">Ezen Book Store</i>
+				</a> <br>
+			<h4 class="mb-3">회원목록 보기화면(관리자)</h4>
 			<table border="1">
 				<tr align="center">
 					<td id=title>아이디</td>
@@ -26,6 +26,8 @@
 					<td id=title>이메일</td>
 					<td id=title>연락처</td>
 					<td id=title>가입날짜</td>
+					<td id=title>탈퇴여부</td>
+					<td id=title>탈퇴날짜</td>
 				</tr>
 				<tbody>
 					<c:forEach var="m" items="${memberlist }">
@@ -35,6 +37,8 @@
 							<td>${m.mb_email }</td>
 							<td>${m.mb_tel }</td>
 							<td>${m.mb_date }</td>
+							<td>${m.mb_deleted }</td>
+							<td>${m.mb_deleted_date }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -45,5 +49,6 @@
 		</div>
 	</div>
 	
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

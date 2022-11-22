@@ -24,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ezen.store.beans.Mb_Bean;
 import ezen.store.interceptor.CheckLoginInterceptor;
 import ezen.store.interceptor.LoginInterceptor;
+import ezen.store.mapper.Dv_Mapper;
 import ezen.store.mapper.Mb_Mapper;
 
 //Controller 
@@ -76,7 +77,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		source.setUsername(db_username); 
 		source.setPassword(db_password); 
 		
-		return source;		
+		return source;
 	}
 	
 	//
@@ -88,7 +89,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		
 		SqlSessionFactory factory = fSessionFactory.getObject(); 
 				
-		return factory;		
+		return factory;
 	}
 	
 	//
@@ -101,37 +102,47 @@ public class ServletAppContext implements WebMvcConfigurer{
 //		return factoryBean2;
 //		
 //	}
-//		@Bean
-//		public MapperFactoryBean<Mb_Mapper> getMapperFactoryBean(SqlSessionFactory factory){
-//		
-//		MapperFactoryBean<Mb_Mapper> factoryBean = new MapperFactoryBean<Mb_Mapper>(Mb_Mapper.class);
-//		
-//		factoryBean.setSqlSessionFactory(factory); 
-//		
-//		return factoryBean;
-//	}
-	
-		//
 		@Bean
-		public MapperFactoryBean<Mb_Mapper> getUserMapper(SqlSessionFactory factory){
-			MapperFactoryBean<Mb_Mapper> factoryBean = new MapperFactoryBean<Mb_Mapper>(Mb_Mapper.class);
-			
-			factoryBean.setSqlSessionFactory(factory); 
-			
-			return factoryBean;		
-		}
+		public MapperFactoryBean<Mb_Mapper> getMapperFactoryBean(SqlSessionFactory factory){
 		
+		MapperFactoryBean<Mb_Mapper> factoryBean = new MapperFactoryBean<Mb_Mapper>(Mb_Mapper.class);
+		
+		factoryBean.setSqlSessionFactory(factory); 
+		
+		return factoryBean;
+	}
+	
+		//Mb_Mapper 등록
+//		@Bean
+//		public MapperFactoryBean<Mb_Mapper> getUserMapper(SqlSessionFactory factory){
+//			MapperFactoryBean<Mb_Mapper> factoryBean = new MapperFactoryBean<Mb_Mapper>(Mb_Mapper.class);
+//			
+//				factoryBean.setSqlSessionFactory(factory); 
+//			
+//				return factoryBean;		
+//		}
+//		
+		//Dv_Mapper 등록
+		@Bean
+		public MapperFactoryBean<Dv_Mapper> getDv_Mapper(SqlSessionFactory factory){
+			MapperFactoryBean<Dv_Mapper> factoryBean2 = new MapperFactoryBean<Dv_Mapper>(Dv_Mapper.class);
+
+				factoryBean2.setSqlSessionFactory(factory);
+					
+				return factoryBean2;			
+		}
+				
 		// 로그인이 된 사용자 체크하는 인터셉터 부분
 		public void addInterceptors(InterceptorRegistry registry) {
 		
 		WebMvcConfigurer.super.addInterceptors(registry);	
 		
-		LoginInterceptor loginInterceptor = new LoginInterceptor(loginShowBean);		
+		LoginInterceptor loginInterceptor = new LoginInterceptor(loginShowBean, loginMbBean);		
 		InterceptorRegistration registration1 = registry.addInterceptor(loginInterceptor);
 			
 		registration1.addPathPatterns("/**");		
 	
-		//로그인이 되어있는지 확인하고 제어하는 인터셉터
+//		//로그인이 되어있는지 확인하고 제어하는 인터셉터(단위 테스트 할때는 꺼야함)
 //		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMbBean);
 //	
 //		InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);

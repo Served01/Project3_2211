@@ -11,24 +11,17 @@
 <!-- Bootstrap CDN -->
 </head>
 <body>
-
-	<h2>회원정보 시스템</h2>
-<%-- 	<c:choose> --%>
-<%-- 		<c:when test="${loginShowBean.mblogin == true }"> --%>
-			<a href="${root }member/Mblist?mb_id=admin" class="nav-link">[전체회원목록]</a>
-			<a href='${root }member/Mbselect?mb_id=${loginShowBean.mb_id}'>마이페이지(원본)</a>
-			<a href='${root }member/Mbselect?mb_id=admin'>[마이페이지]</a>
-			<a href="${root }member/Mbupdate" class="nav-link">정보수정(원본)</a>
-			<a href="${root }member/Mbupdate?mb_id=admin" class="nav-link">[정보수정]</a>
-			<a href="${root }member/Mbdelete?mb_id=admin" class="nav-link">[삭제(임시삭제)]</a>
-			<a href="${root }member/Mblogout" class="nav-link">[로그아웃]</a>
-<%-- 		</c:when> --%>
-<%-- 		<c:otherwise> --%>
-			<a href="${root }member/Mblogin" class="nav-link">[로그인]</a>
-			<a href="${root }member/Mbinsert" class="nav-link">[회원가입]</a>
-<%-- 		</c:otherwise> --%>
-<%-- 	</c:choose> --%>
-
+	<hr>
+	<h1>인덱스 페이지[단위 테스트용]</h1>
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<a href="${root }member/Mbinsert" class="nav-link">[회원가입]</a> <a
+			href="${root }member/Mblist?mb_id=admin" class="nav-link">[전체회원목록]</a>
+		<a href='${root }member/Mbselect?mb_id=admin'>[마이페이지]</a> <a
+			href="${root }member/Mbupdate?mb_id=admin" class="nav-link">[정보수정]</a>
+		<a href="${root }member/Mbdelete?mb_id=admin" class="nav-link">[삭제]</a>
+		<a href="${root }member/Mblogin" class="nav-link">[로그인]</a> <a
+			href="${root }member/Mblogout" class="nav-link">[로그아웃]</a>
+	</div>
 </body>
 </html>
 
