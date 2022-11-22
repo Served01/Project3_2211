@@ -23,6 +23,17 @@
 </head>
 <style>
 
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
+        
+        
 .basketdiv {
     width: 100%;
     border-top: 1px solid #e0e0e0;
@@ -231,6 +242,7 @@
 
 
 <script>
+
 let basket = {
 	    totalCount: 0, 
 	    totalPrice: 0,
@@ -399,42 +411,23 @@ let basket = {
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
 			
+			$(".loading").fadeIn();
+			
 			var ca_mbid = 'admin';
-	    		
+			
+				
+					
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
 			
 			var orderNumExist = this.orderNumExist(or_number1);
 			
 	    	this.delPreOrderItems(ca_mbid);
-	    	setTimeout(this.delPreOrder(ca_mbid),300);
-	    	
-	    	
-			
-			
-			
-	    	//var orderNumExist = $("#orderNumExist").val();
-			
-	    	
-			
-	    	
-	    	
-	    	
 	    	if(orderNumExist == 'true'){
 				this.orderCreate(or_number1,ca_mbid);
-				setTimeout(this.orderItems(or_number1,ca_mbid), 300);
 			}else if(orderNumExist == 'false'){
 				this.orderCreate(or_number2,ca_mbid);
-				setTimeout(this.orderItems(or_number2,ca_mbid), 300);
 			}
-	    	
-	    	//document.write(orderNumExist);
-	    	
-	    	//setTimeout(this.getOrderNumExist(ca_mbid,or_number1,or_number2),300);
-			
-	    		
-	    	
-	    	
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
@@ -442,8 +435,13 @@ let basket = {
 	    	$.ajax({
 				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
-				dataType: 'text'
-				
+				dataType: 'text',
+				success: function(){
+					javascript:basket.orderItems(or_number,ca_mbid);
+					},
+					complete : function() {
+						location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+				    }
 	    	})
 	    },
 	    orderItems: function(or_number,ca_mbid){
@@ -472,7 +470,11 @@ let basket = {
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
 				type: 'get',
-				dataType: 'text'
+				dataType: 'text',
+				success: function(){
+					javascript:basket.delPreOrder(ca_mbid);
+					}
+				
 			})
 	    },
 	    orderNumExist: function(or_number1){
@@ -526,7 +528,7 @@ let basket = {
 				    }
 				}
 				
-				orderNum1 = todayString+buf1;
+				orderNum1 = todayString.toUpperCase()+buf1;
 	    	%>
 	   	return '<%=orderNum1%>' ;
     	
@@ -547,7 +549,7 @@ let basket = {
 				    }
 				}
 				
-				orderNum2 = todayString+buf2;
+				orderNum2 = todayString.toUpperCase()+buf2;
 	    	%>
 	   	return '<%=orderNum2%>' ;
     	
@@ -566,10 +568,23 @@ let basket = {
 	    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
 	    return nstr;
 	};
-
+	//로딩바
+	/*
+	$(document).ready(function(){
+		//로딩화면 출력
+		$(".loading").css("display","");
+		//$("body").css("background", "#333333");
+	});
+	*/
+	 $(window).on('load', function () {
+		 $(".loading").fadeOut();
+		// $("body").css("background", "white");
+	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
-					
+	<!-- 로딩 -->		
+	<div class="loading"></div>
+			
 					          
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
@@ -631,7 +646,7 @@ let basket = {
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        		<div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
-	                        		<script>javascript:basket.priceComma(${str.bk_price })</script>
+	                        			<script>javascript:basket.priceComma(${str.bk_price })</script>
 	                        		</div>
 			                        <div class="num">
 			                            <div class="updown">

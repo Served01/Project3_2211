@@ -17,10 +17,10 @@ public class Wi_Service {
 	@Autowired
 	private Wi_DAO Wi_DAO;
 	
-	@Value("${page.listcnt}")
+	@Value("${page.wilistcnt}")
 	private int page_listcnt;  
 	//페이지
-	@Value("${page.pagButtonCnt}")
+	@Value("${page.wipagButtonCnt}")
 	private int page_pageButtonCnt;
 	
 	
@@ -40,10 +40,22 @@ public class Wi_Service {
 		Wi_DAO.addWishStuff(wi_mbid,wi_bknumbers);
 	}
 	public PageCountBean getContentCnt(String wi_mbid,int currentPage) {
+		
 		int content_cnt = Wi_DAO.getContentCnt(wi_mbid);
 		
 		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
 		return pageCountBean;
+	}
+	public boolean checkWishHeart(String wi_mbid,int wi_bknumbers) {
+		String wi_cul = Wi_DAO.checkWishHeart(wi_mbid, wi_bknumbers);
+		if(wi_cul == null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+		
 	}
 	
 }

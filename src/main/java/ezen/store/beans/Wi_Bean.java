@@ -2,8 +2,7 @@ package ezen.store.beans;
 
 public class Wi_Bean {
 	
-	private String wi_mbid;
-	private	int wi_bknumbers;
+	private String mb_id;
 	
 	private int bk_number;
 	private String bk_title;
@@ -13,26 +12,17 @@ public class Wi_Bean {
 	private String bk_quantity;
 	private String bk_price;
 	
-	
-	
+	public String getMb_id() {
+		return mb_id;
+	}
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
+	}
 	public int getBk_number() {
 		return bk_number;
 	}
 	public void setBk_number(int bk_number) {
 		this.bk_number = bk_number;
-	}
-	
-	public String getWi_mbid() {
-		return wi_mbid;
-	}
-	public void setWi_mbid(String wi_mbid) {
-		this.wi_mbid = wi_mbid;
-	}
-	public int getWi_bknumbers() {
-		return wi_bknumbers;
-	}
-	public void setWi_bknumbers(int wi_bknumbers) {
-		this.wi_bknumbers = wi_bknumbers;
 	}
 	public String getBk_title() {
 		return bk_title;
@@ -70,7 +60,6 @@ public class Wi_Bean {
 	public void setBk_price(String bk_price) {
 		this.bk_price = bk_price;
 	}
-	
 	
 	
 }

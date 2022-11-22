@@ -59,4 +59,7 @@ public class Ca_DAO {
 	public void insertOderItems(String or_number,int ca_bknumbers,String ca_mbid) {
 		ca_Mapper.insertOderItems(or_number, ca_bknumbers,ca_mbid);
 	}
+	public void insertOderItem(String or_number,int ca_bknumbers,String ca_mbid,int ca_bkcount) {
+		ca_Mapper.insertOderItem(or_number, ca_bknumbers,ca_mbid,ca_bkcount);
+	}
 }

@@ -68,5 +68,7 @@ public class Ca_Service {
 	public void insertOderItems(String or_number,int ca_bknumbers,String ca_mbid) {
 		ca_DAO.insertOderItems(or_number, ca_bknumbers,ca_mbid);
 	}
-	
+	public void insertOderItem(String or_number,int ca_bknumbers,String ca_mbid,int ca_bkcount) {
+		ca_DAO.insertOderItem(or_number, ca_bknumbers,ca_mbid,ca_bkcount);
+	}
 }

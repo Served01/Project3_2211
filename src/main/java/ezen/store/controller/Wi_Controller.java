@@ -20,17 +20,14 @@ public class Wi_Controller {
 	
 	@Autowired
 	private Wi_Service wi_Service;
-	
-//	@Autowired
-//	private Ca_Bean addStuff;
-	
-	
+
 	@GetMapping("/wish_info")
-	public String wish_info(@RequestParam("wi_mbid") String wi_mbid, 
+	public String wish_info(
+			@RequestParam("wi_mbid") String wi_mbid, 
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			Model model) {
 		
-//		model.addAttribute("ca_mbid" , ca_mbid);
+		model.addAttribute("wi_mbid", wi_mbid);
 		
 		List<Wi_Bean> infoWi_Bean = wi_Service.getWishInfo(wi_mbid);
 		model.addAttribute("infoWi_Bean",infoWi_Bean);
@@ -50,29 +47,5 @@ public class Wi_Controller {
 	}
 	
 	
-	//restAPI
-	@GetMapping("/wish_add/{wi_mbid}/{wi_bknumbers}")
-	public String wish_add(@PathVariable String wi_mbid,
-							@PathVariable int wi_bknumbers) {
-		wi_Service.addWishStuff(wi_mbid, wi_bknumbers);
-		return null;
-	}
-	
-	
-	//restAPI
-	@GetMapping("/wish_delete/{wi_mbid}/{wi_bknumbers}")
-	public String wish_delete(@PathVariable String wi_mbid,
-			@PathVariable int wi_bknumbers) {
-		wi_Service.delwish(wi_mbid,wi_bknumbers) ;
-		return null;
-		
-	}
-	//restAPI
-	@GetMapping("/wish_deleteAll/{wi_mbid}")
-	public String wish_deleteAll(@PathVariable String wi_mbid) {
-		wi_Service.delwishAll(wi_mbid);
-		return null;
-		
-	}
 	
 }

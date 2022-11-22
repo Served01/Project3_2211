@@ -3,8 +3,8 @@ create table Member_info(
         constraint mb_id check (length(mb_id) between 4 and 20),
     mb_pw varchar2(20) not null
         constraint mb_pw check (length(mb_pw) between 8 and 20),
-    mb_name varchar2(12) not null,
-    mb_email varchar2(30) not null,
+    mb_name varchar2(12) not null, --45
+    mb_email varchar2(30) not null, --100
     mb_tel varchar2(15) not null,
     mb_date date 
         default sysdate not null,
@@ -76,10 +76,18 @@ insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, 
     values(20220004,'Spring교육','최우성','ㅇㅅㅇ',sysdate,'bk_image.jpg','해외','경제','책 디테일4',200,1500,upper('Spring교육'));
 insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
     values(20220005,'컴퓨터교육','박경수','ㅇㅅㅇ',sysdate,'bk_image.jpg','해외','예술','책 디테일5',1000,13000,upper('컴퓨터교육'));
-    
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(20220011,'컴퓨터교육','박경수','ㅇㅅㅇ',sysdate,'bk_image.jpg','해외','예술','책 디테일5',1000,13000,upper('컴퓨터교육'));    
 select * from BOOK_INFO;
 
-
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(202200012,'Jsp교육','김경빈','ㅇㅅㅇ',sysdate,'bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(202200013,'Jsp교육','김경빈','ㅇㅅㅇ',sysdate,'bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
+    insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(202200014,'Jsp교육','김경빈','ㅇㅅㅇ',sysdate,'bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
+    insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(202200015,'Jsp교육','김경빈','ㅇㅅㅇ',sysdate,'bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
 
 create table Review_info(
 rv_number number(10) primary key,
@@ -155,6 +163,16 @@ create table Wish_info(
 
 insert into Wish_info values('hyun1',20220004);
 insert into Wish_info values('hyun1',20220005);
+
+insert into Wish_info values('admin',20220004);
+insert into Wish_info values('admin',20220005);
+insert into Wish_info values('admin',20220006);
+insert into Wish_info values('admin',20220007);
+insert into Wish_info values('admin',20220008);
+insert into Wish_info values('admin',20220009);
+insert into Wish_info values('admin',20220010);
+insert into Wish_info values('admin',20220011);
+
 
 select * from wish_info;
 
@@ -251,3 +269,7 @@ commit
 drop table book_info;
 
 drop table review_data;
+
+
+select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id='admin' and bk_number='20220001');
+select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id=#{ca_mbid} and bk_number=#{ca_bknumbers})

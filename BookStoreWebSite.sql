@@ -1,189 +1,247 @@
-
-
-create table Mb_info(
+-- Member 테이블
+create table Member_info(
     mb_id varchar2(20) primary key
-        constraint mb_id check (length(mb_id) between 4 and 12),
+        constraint mb_id check (length(mb_id) between 4 and 20),
     mb_pw varchar2(20) not null
-        constraint mb_pw check (length(mb_pw) between 8 and 16),
-    mb_name varchar2(12) not null,
-    mb_email varchar2(30) not null,
+        constraint mb_pw check (length(mb_pw) between 8 and 20),
+    mb_name varchar2(45) not null,
+    mb_email varchar2(100) not null,
     mb_tel varchar2(15) not null,
     mb_date date 
-        default sysdate not null
-)
+        default sysdate not null,
+    mb_deleted varchar2(7) 
+        default '0' not null,
+    mb_deleted_date date null
+	);
+	
+-- date의 경우 db에서 자료를 가져올 때 형변환을 하여야 한다. db자체에는 원형태로 들어가는 것이 맞다.
 
-insert into mb_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('admin',12345678,'test','test@gmail.com','010-1234-4567');
-select * from mb_info;
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('admin',12345678,'admin','admin@gmail.com','010-1234-4567');
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun1',12345678,'test1','test1@gmail.com','010-1234-4567');
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun2',12345678,'test2','test2@gmail.com','010-1234-4567');
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun3',12345678,'test3','test3@gmail.com','010-1234-4567');
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun4',12345678,'test4','test4@gmail.com','010-1234-4567');
 
-drop table Mb_info;
+select * from Member_info;
 
 
-
-create table Dv_info(
-    dv_id varchar2(20) not null,
-        constraint dv_id_fk foreign key(dv_id)
-            references Mb_info(mb_id),
-    dv_name varchar2(12) not null,
+-- Delivery 테이블
+create table Delivery_info(
+    mb_id varchar2(20) not null,
+    dv_nick varchar2(60) not null,
+    dv_name varchar2(45) not null,
     dv_tel varchar2(15) not null,
-    dv_address varchar2(100) not null
-)
+    dv_address varchar2(180) not null,
+    dv_pk varchar2(90) primary key
+	);
 
-insert into dv_info values('admin','house','010-7894-1234','신림언저리');
-select * from DV_INFO;
-drop table DV_INFO;
+insert into Delivery_info values('hyun3','집','house0','010-7894-1234','신림언저리0','hyun3.집');
+insert into Delivery_info values('hyun3','회사','house1','010-7894-1234','신림언저리1','hyun3.회사');
+insert into Delivery_info values('hyun3','편의점','house2','010-7894-1234','신림언저리2','hyun3.편의점');
+insert into Delivery_info values('hyun3','학원','house3','010-7894-1234','신림언저리3','hyun3.학원');
+insert into Delivery_info values('hyun3','망할','house4','010-7894-1234','신림언저리4','hyun3.망할');
+
+select * from Delivery_info;
+
+drop table delivery_info;
+
+
+-- Book 테이블
 create table Book_info(
     bk_number number(8) primary key,
-    bk_title VARCHAR2(100) not null,
-    bk_writer VARCHAR2(100) not null,
-    bk_publisher VARCHAR2(50) not null,
+    bk_title VARCHAR2(150) not null,
+    bk_writer VARCHAR2(90) not null,
+    bk_publisher VARCHAR2(60) not null,
     bk_pubdate date not null,
-    bk_image VARCHAR2(500) not null,
-    bk_local number(1) not null,
-    bk_genre number(2) not null,
+    bk_image VARCHAR2(600) not null,
+    bk_local VARCHAR2(30) not null,
+    bk_genre VARCHAR2(60) not null,
     bk_infodate date 
         default sysdate not null,
-    bk_detail VARCHAR2(1000),
-    bk_quantity number(4) not null,
-    bk_price number(30) not null,
-    bk_title_upper varchar2(1000)
-)
+    bk_detail VARCHAR2(1500) not null,
+    bk_quantity number(10) 
+    	default 1 not null,
+    bk_price number(10) not null,
+    bk_title_upper varchar2(150) not null,
+    bk_deleted varchar2(7) 
+        default '0' not null
+	);
 
-insert into BOOK_INFO values(70001000,'엄준식','아무무','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001001,'준식엄','안은우','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001002,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001003,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001004,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001005,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001006,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001007,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001008,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001009,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001010,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001011,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001012,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
-insert into BOOK_INFO values(70001013,'식준엄','엄퍼카','ㅇㅅㅇ',sysdate,'/images/amumu.jpg',1,99,sysdate,'책 디테일',1557,2700,'');
+-- bk_number 규칙
+-- 년도 4자리 + 랜덤숫자 순서대로 4자리(0001, 0002, 0003...)
 
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper)
+    values(20220001,'Java교육','임우성','빨강출판사','2011-09-09','bk_image.jpg','국내','소설','책 디테일1',5,500,upper('Java교육'));
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(20220002,'Jsp교육','김경빈','파랑출판사','2014-10-18','bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(20220003,'CSS교육','이영호','노랑출판사','2012-12-15','bk_image.jpg','국내','취미','책 디테일3',1,26000,upper('CSS교육'));
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(20220004,'Spring교육','최우성','하양출판사','2008-08-06','bk_image.jpg','해외','경제','책 디테일4',200,1500,upper('Spring교육'));
+insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
+    values(20220005,'컴퓨터교육','박경수','검정출판사','2018-09-26','bk_image.jpg','해외','예술','책 디테일5',1000,13000,upper('컴퓨터교육'));
+    
 select * from BOOK_INFO;
-drop table BOOK_INFO;
 
 
+-- Review 테이블
+create table Review_info(
+rv_number number(10) primary key,
+bk_number number(8) not null,
+    constraint rv_bk_number_fk foreign key(bk_number)
+            references Book_info(bk_number),
+mb_id varchar2(20) not null,
+    constraint Review_mb_id_fk foreign key(mb_id)
+        references Member_info(mb_id),
+rv_date date
+    default sysdate not null,
+rv_score number(1) not null,
+rv_content varchar2(1500) null,
+rv_deleted varchar2(7)
+    default '0' not null
+);
+
+create sequence review_seq
+	start with 1
+	increment by 1
+	maxvalue 9999999999
+	nocycle;
+
+insert into review_info(rv_number, bk_number, mb_id, rv_score, rv_content)
+	values(review_seq.nextval, 20220001, 'hyun1', 4, '내용1');
+insert into review_info(rv_number, bk_number, mb_id, rv_score, rv_content)
+	values(review_seq.nextval, 20220001, 'hyun2', 5, '내용2');
+insert into review_info(rv_number, bk_number, mb_id, rv_score, rv_content)
+	values(review_seq.nextval, 20220001, 'hyun3', 3, '내용3');
+insert into review_info(rv_number, bk_number, mb_id, rv_score, rv_content)
+	values(review_seq.nextval, 20220001, 'hyun4', 4, '내용4');
+insert into review_info(rv_number, bk_number, mb_id, rv_score, rv_content)
+	values(review_seq.nextval, 20220001, 'hyun1', 5, '내용5');
+insert into review_info(rv_number, bk_number, mb_id, rv_score, rv_content)
+	values(review_seq.nextval, 20220001, 'hyun2', 3, '내용6');
+
+drop sequence review_seq;
+
+delete review_info;
+
+select * from review_info;
+
+
+-- Cart 테이블
+create table Cart_info(
+	mb_id varchar2(20) not null,
+		constraint ca_mb_id_fk foreign key(mb_id)
+            references Member_info(mb_id),
+    bk_number number(8) not null,
+    	constraint ca_bk_number_fk foreign key(bk_number)
+    		references book_info(bk_number),
+	ca_bkcount number(3) default 1 not null,
+	    constraint ca_bkcount check (ca_bkcount between 1 and 999)
+);
+  
+insert into cart_info(mb_id,bk_number) values ('hyun1',20220001);
+insert into cart_info(mb_id,bk_number) values ('hyun1',20220002);
+insert into cart_info(mb_id,bk_number) values ('hyun1',20220003);
+
+select * from cart_info;
+
+
+-- Wish 테이블
+create table Wish_info(
+	mb_id varchar2(20) not null,
+		constraint wi_mb_id_fk foreign key(mb_id)
+            references Member_info(mb_id),
+    bk_number number(8) not null,
+    	constraint wi_bk_number_fk foreign key(bk_number)
+    		references book_info(bk_number)
+);
+
+insert into Wish_info values('hyun1',20220004);
+insert into Wish_info values('hyun1',20220005);
+
+select * from wish_info;
+
+drop table order_info;
+
+commit;
+
+
+-- Order 테이블
 create table order_info(
-    or_number varchar2(40) primary key,
-    or_mbid varchar2(20) not null,
-        constraint or_mbid_fk foreign key(or_mbid)
-            references mb_info(mb_id),
-
-    or_status number(1) 
-    	default 0 not null,
+    or_number varchar2(15) primary key,
+    mb_id varchar2(20) not null,
+        constraint or_mb_id_fk foreign key(mb_id)
+            references Member_info(mb_id),
+    mb_name varchar2(45) null,
+    mb_tel varchar2(15) null,
+    or_status varchar2(15)
+    	default '0' not null,
     or_date date 
         default sysdate not null,
-    or_delivery number(10),
+    or_delivery number(10) null,
     or_deliveryCost number (4)
     	default 3000 not null,
-    or_address varchar2(100) 
-)
+    dv_name varchar2(45) null,
+    dv_tel varchar2(15) null,
+    dv_address varchar2(180) null
+    );
 
-insert into ORDER_INFO values('22FEB105564','admin',1,sysdate,12345678,2500,'신림언저리');
+-- order number 규칙 (10자리)
+-- 년도 뒤에 2자리 + 월의 영어로 앞의 3자리 + 랜덤번호 순서대로 5자리 (00001, 00002 ...)
+
+insert into ORDER_INFO (or_number, mb_id)
+    values('22NOVABC001','hyun1');
+insert into ORDER_INFO (or_number, mb_id)
+    values('22NOVZXY002','hyun2');
+           
 select * from order_INFO;
+
 drop table order_info;
 
 
+-- Order_items 테이블
 create table order_items(
-
-    ori_number varchar2(40) not null,
-	constraint ori_number_fk foreign key(ori_number)
+    or_number varchar2(15) not null,
+	constraint or_number_fk foreign key(or_number)
 	    references order_info(or_number),
-    ori_bknumber number(8) not null,
-        constraint ori_bknumber_fk foreign key(ori_bknumber)
+    bk_number number(8) not null,
+        constraint bk_number_fk foreign key(bk_number)
             references book_info(bk_number),
-    ori_bkprice number(10),
+    bk_price number(10) not null,
     ori_bkdiscount number(3) 
         default 0 not null,
     ori_bkcount number(3) 
     	default 1 not null
-  )  
-insert into order_items values('22FEB105564',70001000,2400,10,1);
-insert into order_items values('22FEB105564',70001000,
-                        (select bk_price from book_info where bk_number = 70001000),
-                        (select ca_bkcount from  Cart_info where ca_mbid = 'admin' and ca_bknumbers = 70001000),1);
-                        
-select * from ORDER_INFO;
+ 	);
+
+insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
+    values('22NOVABC001',20220001,
+            (select bk_price from book_info where bk_number = 20220001), 3);
+insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
+    values('22NOVABC001',20220002,
+            (select bk_price from book_info where bk_number = 20220002), 1);
+insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
+    values('22NOVZXY002',20220003,
+            (select bk_price from book_info where bk_number = 20220001), 2);
+insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
+    values('22NOVZXY002',20220004,
+            (select bk_price from book_info where bk_number = 20220002), 2);
+            
 select * from order_items;
 
- drop table ORDER_INFO;
- drop table order_items;
- 
+drop table order_items;
 
- 
- 
-delete from ORDER_INFO where 
- 
- 
-Cart_info	
-
-ca_number	장바구니 번호	번호	NUMBER		not null	PK, FK
-ca_mbid	회원아이디	아이디	VARCHAR2	20	not null	FK
-ca_bknumber	책번호	번호	NUMBER	8	not null	FK
-ca_bkcount	선택된 갯수	개수	NUMBER	4	not null	
-
-create table Cart_info(
-	ca_mbid varchar2(20) not null,
-		constraint ca_mbid_fk foreign key(ca_mbid)
-            references mb_info(mb_id),
-    ca_bknumbers number(8) not null,
-    	constraint ca_bknumbers_fk foreign key(ca_bknumbers)
-    		references book_info(bk_number),
-	 ca_bkcount number(3) 
-	    	default 1 not null
-	    		constraint ca_bkcount check (ca_bkcount between 0 and 999)
-)
-select c.ca_mbid,c.ca_bknumbers from cart_info c,Mb_info m
-where c.ca_mbid = 'admin'
-and c.ca_mbid = m.mb_id;
-
-drop table cart_info;
-   
-delete from CART_INFO where ca_bknumbers = 70001000;
+commit;
 
 
-insert into cart_info(ca_mbid,ca_bknumbers) values ('admin',70001000);
-insert into cart_info(ca_mbid,ca_bknumbers) values ('admin',70001001);
-insert into cart_info(ca_mbid,ca_bknumbers)  values ('admin',70001002);
-insert into cart_info(ca_mbid) values('admin');
-select * from cart_info where ca_mbid = 'admin';
+select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id='admin' and bk_number='20220001');
 
-commit
-
-drop table cart_info;
-Wish_info	
-wi_number	찜목록 번호	번호	NUMBER		not null	PK, FK
-wi_mbid	회원아이디	아이디	VARCHAR2	20	not null	FK
-wi_bknumber	책번호	번호	NUMBER	8	not null	FK
-wi_bkcount	책재고	재고량	NUMBER	4	not null	
-
-
-create table Wish_info(
-	wi_mbid varchar2(20) not null,
-		constraint wi_mbid_fk foreign key(wi_mbid)
-            references mb_info(mb_id),
-    wi_bknumbers number(8) not null,
-    	constraint wi_bknumbers_fk foreign key(wi_bknumbers)
-    		references book_info(bk_number)
-)
-
-insert into Wish_info values('admin',70001002);
-insert into Wish_info values('admin',70001003);
-insert into Wish_info values('admin',70001004);
-insert into Wish_info values('admin',70001005);
-insert into Wish_info values('admin',70001006);
-insert into Wish_info values('admin',70001007);
-insert into Wish_info values('admin',70001008);
-insert into Wish_info values('admin',70001009);
-insert into Wish_info values('admin',70001010);
-insert into Wish_info values('admin',70001011);
-insert into Wish_info values('admin',70001012);
-insert into Wish_info values('admin',70001013);
-
-select * from wish_info;
-
-drop table Wish_info;
+	@Insert("insert into order_items(or_number, bk_number, bk_price,ori_bkdiscount,ori_bkcount) values(#{or_number},\r\n"
+			+ "#{ca_bknumbers},\r\n"
+			+ "(select bk_price from book_info where bk_number = #{ca_bknumbers}),\r\n"
+			+ "0,\r\n"
+			+ "(select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id=#{ca_mbid} and bk_number=#{ca_bknumbers}))")
+insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
+    values('22NOVZXY002',20220004,
+            (select bk_price from book_info where bk_number = 20220002),
+            (select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id='admin' and bk_number='20220001')));

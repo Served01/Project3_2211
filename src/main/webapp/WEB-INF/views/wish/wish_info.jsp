@@ -76,6 +76,7 @@
     .basketdiv .row.data > div > div {
         height: 60px;
         line-height: 60px;
+        padding: 0px 0;
     }
         .basketdiv .data .num .updown {
             color: #0075ff;
@@ -142,13 +143,13 @@
         width: 100px;
     }
 
-.buttongroup {
-    padding: 11px 0;
-    margin: 50px 0;
-}
-.narrowbuttongroup{
-    margin: 15px 0;
-}
+	.buttongroup {
+	    padding: 11px 0;
+	    margin: 50px 0;
+	}
+	.narrowbuttongroup{
+	    margin: 15px 0;
+	}
     .buttongroup.center {
         text-align: center;
     }
@@ -217,9 +218,10 @@
 }
 
 .orderform .p_num {
-    text-align: right;
-    width: 40px;
-    font-size: 1em;
+    text-align: center;
+    width: 35px;
+    height: 45px;
+    font-size: 0.78em;
 }
 
 </style>
@@ -350,6 +352,10 @@ let basket = {
 	        
 	        this.reCalc();
 	        this.updateUI();
+	    },
+		priceComma: function(bk_price){
+			var price = bk_price.toLocaleString('ko-KR');
+			document.write(price + '원');
 	    }
 	}
 
@@ -386,11 +392,12 @@ let basket = {
                     <div class="split"></div>
                 </div>
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
+        			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	                <div class="row data">
 	                    <div class="subdiv">
 	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        <div class="img"><img src="${str.bk_image }" width="60"></div>
-	                        <div class="pname">
+	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
+	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
 	                            <span>제목 : ${str.bk_title }</span>
 								<span>저자 : ${str.bk_writer }</span>
 					        	<span>출판사 : ${str.bk_publisher }</span>
@@ -398,7 +405,9 @@ let basket = {
 	                        </div>
 	                    </div>
 	                    <div class="subdiv">
-	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
+								<script>javascript:basket.priceComma(${str.bk_price })</script>
+							</div>
                        		<div class="sendcart"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
 	                    </div>
 	                   
@@ -406,11 +415,9 @@ let basket = {
 	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
 	                    </div>
 	                </div>
+	                </c:if>
         		</c:forEach>
             </div>
-    		
-    		
-    		
     		
             <div class="right-align basketrowcmd">
             	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>
@@ -423,48 +430,23 @@ let basket = {
 			<!-- 페이지네이션 -->
     		<div class="d-none d-md-block">
 				<ul class="pagination justify-content-center">
-					<c:choose>
-						<c:when test="${pageCountBean.prevPage <= 0 }">
-							<li class="page-item disabled">
-								<a href="#" class="page-link">이전</a>
-							</li>
-						</c:when>
-					<c:otherwise>
+					
 						<li class="page-item">
-						<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.prevPage}" class="page-link">이전</a>
+						<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="page-link">처음</a>
 						</li>					
-					</c:otherwise>					
-					</c:choose>
 														
 					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
-						<c:choose>
-							<c:when test="$idx == pageCountBean.currentPage">
+					
 							<li class="page-item active">
 								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
 							</li>		
-						</c:when>
-						
-						<c:otherwise>
-							<li class="page-item">
-								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
-							</li>						
-						</c:otherwise>						
-						</c:choose>									
+												
 					</c:forEach>					
 					
-					<c:choose>
-						<c:when test="${pageCountBean.max >= pageCountBean.pageCnt}">
-							<li class="page-item disabled">
-								<a href="#" class="page-link">다음</a>
-							</li>
-						</c:when>
-					
-					<c:otherwise>
 						<li class="page-item">
-							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.nextPage}" class="page-link">다음</a>
+							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
 						</li>
-					</c:otherwise>
-					</c:choose>
+					
 				</ul>
 			</div>		
 </body>

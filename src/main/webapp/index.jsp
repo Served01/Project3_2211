@@ -16,6 +16,14 @@
 	<hr>
 	<a href="${root}wish/wish_info?wi_mbid=admin&page=1">위시인포</a>
 	<a href="${root}wish/wish_test">위시추가테스트</a>
+	<br>
+	<hr>
+	<a href="${root }book/BkInsert">BkInsert</a>
+	<a href='${root }book/BkList?bk_local=해외&bk_genre=예술'>해외 인문 리스트</a>
+	<hr>
+	<h3>5. Order 기능</h3>
+	<a href="${root}order/Or_list?or_mbid=admin">주문 목록</a>
+	<a href="${root}order/Or_select?or_mbid=hyun1&or_number=22NOVABC001">주문 상세</a>
 	
 </body>
 </html>
