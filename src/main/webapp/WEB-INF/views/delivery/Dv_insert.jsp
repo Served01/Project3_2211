@@ -62,6 +62,8 @@
 	function CheckDvNick(){
 				
 		var dv_nick = $("#dv_nick").val()
+		var dv_id = $("#mb_id").val()
+		var dv_pk = $("#mb_id").val()+"."+$("#dv_nick").val()
 		
 		if(dv_nick.length == 0){
 			alert("닉네임를 입력해 주세요.")
@@ -69,7 +71,7 @@
 		}
 		
 		$.ajax({
-			url: '${root}delivery/CheckDvNick/' + dv_nick,
+			url: '${root}delivery/CheckDvNick/' + dv_pk,
 			type: 'get',
 			dataType: 'text',
 			success: function(result){
@@ -95,7 +97,7 @@
       <div class="input-form col-md-12 mx-auto">
         <h4 class="mb-3">배송지 추가</h4>
         <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
-            <form:hidden path="mb_id" value="${loginShowBean.mb_id}"/>
+            <form:hidden path="mb_id" value="${mb_id}"/>
             <div class="form-group">
               <form:label path="dv_nick">닉네임</form:label>
               <div class="input-group">

@@ -79,7 +79,7 @@
 		</tbody>
 	</table>
 	<div class="mb-4">
-				<a href="${root}delivery/DvInsert?mb_id=${loginShowBean.mb_id}" class="btn btn-dark">배송지 추가</a>
+				<a href="${root}delivery/DvInsert?mb_id=${mb_id}" class="btn btn-dark">배송지 추가</a>
 				<a href="${root }index" class="btn btn-dark">메인화면</a>
 				
 	</div>					

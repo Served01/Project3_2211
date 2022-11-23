@@ -17,6 +17,7 @@ public class Dv_Bean {
 	private String dv_tel;
 	
 	@Size(min=2, max=3000)
+	
 	private String dv_address;
 	private String dv_pk;
 	private boolean dv_numExist;

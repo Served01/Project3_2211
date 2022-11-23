@@ -19,8 +19,8 @@ public class Mb_Validator implements Validator {
 
 		String beanName = errors.getObjectName();
 
-		// 로그인시에 체크하므로 loginMbBean이므로 아래 내용을 실행하지 않고 통과합니다.
-		if (beanName.equals("insertMbBean") || beanName.equals("updateMbBean") || beanName.equals("deleteMbBean")) {
+			// 로그인시에 체크하므로 loginMbBean이므로 아래 내용을 실행하지 않고 통과합니다.
+			if (beanName.equals("insertMbBean") || beanName.equals("updateMbBean") || beanName.equals("deleteMbBean")){
 
 			// 회원가입시에 패스워드 체크에 사용한 부분
 			if (mbBean.getMb_pw().equals(mbBean.getMb_pw2()) == false) {
@@ -34,6 +34,13 @@ public class Mb_Validator implements Validator {
 					errors.rejectValue("mb_id", "DontCheckUserIdExist");
 				}
 			}
+			
+//			// 사용중인 패스워드 일치 확인(수정중)
+//			if (beanName.equals("deleteMbBean")) {
+//				if (mbBean.isMbIdExist2() == false) {
+//					errors.rejectValue("mb_pw", "DontCheckUserIdExist2");					
+//				}
+//			}
 		}
 	}
 }

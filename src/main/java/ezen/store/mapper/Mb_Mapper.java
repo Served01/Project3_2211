@@ -12,8 +12,12 @@ import ezen.store.beans.Mb_Bean;
 public interface Mb_Mapper {
 
 	// 濡쒓렇�씤�떆 �뙣�뒪�썙�뱶 �씪移� �솗�씤
-	@Select("select * from Member_info where mb_id = #{mb_id} and mb_pw = #{mb_pw}")
+	@Select("select * from Member_info where mb_id = #{mb_id} and mb_pw = #{mb_pw} and mb_deleted = '0'")
 	Mb_Bean getloginUserInfo(Mb_Bean tempMbBean);
+	
+	// �뙣�뒪�썙�뱶 �씪移� �솗�씤
+	@Select("select * from Member_info where mb_id = #{mb_id} and mb_pw = #{mb_pw}")
+	String checkUserIdExist2(String mb_id);
 	
 	// �븘�씠�뵒 以묐났 泥댄겕
 	@Select("select mb_name from Member_info where mb_id = #{mb_id}")
@@ -50,5 +54,5 @@ public interface Mb_Mapper {
 	// �쉶�썝�젙蹂� �궘�젣 �떎�뻾
 	@Update("update Member_info set mb_deleted = 'deleted', mb_deleted_date = sysdate where mb_id = #{mb_id} and mb_pw = #{mb_pw}")
 	void deleteUserInfo(Mb_Bean deleteMbBean);
-	
+
 }

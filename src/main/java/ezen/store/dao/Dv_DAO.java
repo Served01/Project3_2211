@@ -15,8 +15,8 @@ public class Dv_DAO {
 	private Dv_Mapper dv_Mapper;
 	
 	//중복확인
-	public String CheckDvNick(String dv_nick){				
-		return dv_Mapper.CheckDvNick(dv_nick);
+	public int CheckDvNick(String dv_pk){				
+		return dv_Mapper.CheckDvNick(dv_pk);
 	}	
 	
 	//delivery 리스트

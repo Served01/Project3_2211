@@ -57,7 +57,10 @@ public class Mb_Service {
 		Mb_Bean tempModifyUserDataBean = mbDAO.getMbInfo(updateMbBean.getMb_id());
 
 		updateMbBean.setMb_id(tempModifyUserDataBean.getMb_id());
-		updateMbBean.setMb_name(tempModifyUserDataBean.getMb_name());
+//		updateMbBean.setMb_name(tempModifyUserDataBean.getMb_name());
+//		updateMbBean.setMb_pw(tempModifyUserDataBean.getMb_pw());
+//		updateMbBean.setMb_email(tempModifyUserDataBean.getMb_email());
+//		updateMbBean.setMb_tel(tempModifyUserDataBean.getMb_tel());
 
 		return tempModifyUserDataBean;
 	}
@@ -66,7 +69,7 @@ public class Mb_Service {
 	public void modifyUserInfo(Mb_Bean updateMbBean) {
 
 		// 로그인정보 담아서 하는거라 단위 테스트시 비활성화 해야함!
-				updateMbBean.setMb_id(loginMbBean.getMb_id());
+//				updateMbBean.setMb_id(loginMbBean.getMb_id());
 
 		mbDAO.modifyUserInfo(updateMbBean);
 	}
@@ -82,7 +85,7 @@ public class Mb_Service {
 		return tempDeleteUserDataBean;
 	}
 
-	// 삭제 실시
+	// 삭제할 정보 확인
 	public void deleteUserInfo(Mb_Bean deleteMbBean) {
 		//
 		mbDAO.deleteUserInfo(deleteMbBean);
@@ -100,5 +103,5 @@ public class Mb_Service {
 
 		return mbDAO.getMbInfo(mb_id);
 	}
-	
+
 }

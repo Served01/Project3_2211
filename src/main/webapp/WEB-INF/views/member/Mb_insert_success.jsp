@@ -8,10 +8,10 @@
 <title>Mb_insert_success</title>
 </head>
 <body>
-	<h2>회원가입 완료</h2>
+	<h1>회원가입 완료</h1>
 	<script type="text/javascript">
-		alert("회원 가입이 완료되었습니다. 로그인 해주세요!")
-		location.href="${root}member/Mblogin"
+		alert("회원 가입이 정상적으로 완료되었습니다.")
+		location.href="${root}Main/center"
 	</script>
 </body>
 </html>

@@ -13,8 +13,8 @@ import ezen.store.beans.Dv_Bean;
 public interface Dv_Mapper {
 	
 	//중복확인
-	@Select("select * from Delivery_info where dv_nick = #{dv_nick}")
-	String CheckDvNick(String dv_nick);
+	@Select("select count(*) from Delivery_info where dv_pk = #{dv_pk}")
+	int CheckDvNick(String dv_pk);
 	
 	//배송지 조회
 	@Select("select * from Delivery_info where mb_id = #{mb_id}")
