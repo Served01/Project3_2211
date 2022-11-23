@@ -46,6 +46,7 @@ public class Or_Controller {
 	@Autowired
 	private Ca_Service ca_Service;
 	
+	
 	/*
 	@RequestMapping(value="URL이 들어가는 자리")
 	public void MemberInfo( @RequestBody HashMap<String, Object> params ) throws Exception {
@@ -133,6 +134,8 @@ public class Or_Controller {
 		List<Or_Bean> infoOrBean = or_Service.getOrInfo(mb_id, or_number);
 		model.addAttribute("infoOrBean", infoOrBean);
 		
+		
+		//mb_id 일치하는 주문 결제 완료로 표시 위한 주문 출력
 		Or_Bean updateOrPurchase = or_Service.UpdateOrBean(mb_id, or_number);
 		model.addAttribute("updateOrPurchase", updateOrPurchase);
 		
@@ -143,6 +146,7 @@ public class Or_Controller {
 	@PostMapping("/Or_purchasePro")
 	public String Orpurchse(@RequestParam("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
+			//@RequestParam("dv_pk") String dv_pk,
 			@ModelAttribute("updateOrPurchase") Or_Bean updateOrPurchase,
 			BindingResult result, Model model) {
 		
@@ -190,6 +194,7 @@ public class Or_Controller {
 		List<Or_Bean> updateOriBean = or_Service.UpdateOriBean(or_number);
 		model.addAttribute("updateOriBean", updateOriBean);
 		
+		
 		return "order/Or_after";
 	}
 	
@@ -219,7 +224,7 @@ public class Or_Controller {
 		
 		for(int i = 0; i < updateOriBean.size() ; i++) {
 			
-		//	or_Service.OriUpdateAfter(updateOriBean); //bk값 가져오기
+		or_Service.OriUpdateAfter(updateOriBean); //bk값 가져오기
 			
 		}
 		//updateOriBean = or_Service.UpdateOriBean(or_number);

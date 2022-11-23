@@ -101,11 +101,13 @@ public interface Or_Mapper {
 				+ "		and ori.bk_number = bk.bk_number")
 		List<Or_Bean> UpdateOriBean(String or_number);
 		
-//		@Update("update bk_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},\r\n"
+//		@Update("update book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},\r\n"
 //				+ "		bk_image=#{bk_image, jdbcType=VARCHAR}, bk_local=#{bk_local}, bk_genre=#{bk_genre}, bk_infodate=sysdate, bk_detail=#{bk_detail},\r\n"
 //				+ "		bk_quantity=bk_quantity+#{ori_bkcount}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted=#{bk_deleted}"
 //				+ "		where bk_number = #{ori_bknumber}")
-		@Update("update bk_info set bk_number = #{bk_number}, bk_quantity = bk_quantity + #{ori_bkcount}\r\n"
+		@Update("update book_info set bk_number = #{bk_number}, bk_quantity = (select sum(bk.bk_quantity, ori.ori_bkcount)as bk_quantity\r\n"
+				+ "																from book_info bk, order_items ori\r\n"
+				+ "																where bk.bk_number = ori.bk_number)\r\n"
 				+ "		where bk_number in (select bk_number from Order_items where bk_number = #{bk_number}")
 		void OriUpdateAfter(List<Or_Bean> updateOriBean);
 		
