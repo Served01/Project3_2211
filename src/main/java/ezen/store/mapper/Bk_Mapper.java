@@ -20,7 +20,7 @@ public interface Bk_Mapper {
 		@Insert("insert into Book_info(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre,"
 				+ "bk_infodate, bk_detail, bk_quantity, bk_price, bk_title_upper, bk_deleted)"
 				+ "values(#{bk_number}, #{bk_title}, #{bk_writer}, #{bk_publisher}, #{bk_pubdate}, #{bk_image, jdbcType=VARCHAR}, #{bk_local}, #{bk_genre},"
-				+ "sysdate, #{bk_detail}, #{bk_quantity}, #{bk_price}, upper(#{bk_title}), '0')")
+				+ "sysdate, #{bk_detail}, #{bk_quantity}, #{bk_price}, replace(upper(#{bk_title}),' ',''), '0')")
 
 		void addBkInfo(Bk_Bean InsertBkBean);
 		
@@ -28,10 +28,22 @@ public interface Bk_Mapper {
 		@Select("select nvl(avg(rv_score), 0) as avg_score from Review_info where bk_number = #{bk_number}")
 		double getBkScore(int bk_number);
 		
-		//책 리스트 개수를 가져오는 SQL문
+		//책 리스트 개수를 가져오는 SQL문 (지역, 장르)
 		@Select("select count(*) from Book_info where bk_local = #{bk_local} and bk_genre = #{bk_genre} and bk_deleted = '0'")
-		int getCntBook(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+		int getCntBook1(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
 		
+		//책 지역과 장르에 맞는 책들의 책번호 리스트 (지역, 장르)
+		@Select("select bk_number from Book_info where bk_local = #{bk_local} and bk_genre = #{bk_genre} and bk_deleted = '0'")
+		List<Bk_Number> getBkNumList1(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+		
+		//책 리스트 개수를 가져오는 SQL문 (검색어)
+		@Select("select count(*) from Book_info where bk_title_upper like '%' || replace(upper(#{search_word}),' ','') || '%' and bk_deleted = '0'")
+		int getCntBook2(String search_word);
+		
+		//책 지역과 장르에 맞는 책들의 책번호 리스트 (검색어)
+		@Select("select bk_number from Book_info where bk_title_upper like '%' || replace(upper(#{search_word}),' ','') || '%' and bk_deleted = '0'")
+		List<Bk_Number> getBkNumList2(String search_word);
+				
 		//책 정보를 추출하여 가져옵니다.
 		@Select("select bk_number, bk_title, bk_writer, bk_publisher, to_char(bk_pubdate, 'YYYY-MM-DD') as bk_pubdate, bk_image, bk_local, bk_genre, bk_infodate,"
 				+ " bk_detail, bk_quantity, bk_price, bk_title_upper, bk_deleted from Book_info where bk_number = #{bk_number}")
@@ -40,13 +52,11 @@ public interface Bk_Mapper {
 		//책 정보를 수정합니다.
 		@Update("update Book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},"
 				+ "bk_image=#{bk_image, jdbcType=VARCHAR}, bk_local=#{bk_local}, bk_genre=#{bk_genre}, bk_infodate=sysdate, bk_detail=#{bk_detail},"
-				+ "bk_quantity=#{bk_quantity}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted='0'"
+				+ "bk_quantity=#{bk_quantity}, bk_price=#{bk_price}, bk_title_upper=replace(upper(#{bk_title}),' ',''), bk_deleted='0'"
 				+ "where bk_number=#{bk_number}")
 		void updateBkBean(Bk_Bean updateBkBean);
 		
-		//책 지역과 장르에 맞는 책들의 책번호 리스트
-		@Select("select bk_number from Book_info where bk_local = #{bk_local} and bk_genre = #{bk_genre}")
-		List<Bk_Number> getBkNumList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+		
 	
 		//책 정보를 수정합니다.
 		@Update("update Book_info set bk_deleted='deleted'"

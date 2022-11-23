@@ -31,15 +31,7 @@ public class Bk_Service {
 	@Autowired
 	private Bk_DAO BkDAO;
 	
-	//책 리스트 갯수
-	public PageCountBean getContentCnt(String bk_local, String bk_genre, int currentPage) {
-		
-		int content_cnt = BkDAO.getCntBook(bk_local, bk_genre);
-		
-		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
-		
-		return pageCountBean;
-	}
+	
 	//책 일련번호 중복확인 관련 서비스
 	public boolean CheckBkNumExist(int bk_number) {		
 		String bk_writer = BkDAO.CheckBkNumExist(bk_number);		
@@ -81,7 +73,7 @@ public class Bk_Service {
 		
 		}
 	
-	//해당 책 평균 평점
+		//해당 책 평균 평점
 		public double getBkScore(int bk_number) { 
 			  
 			return BkDAO.getBkScore(bk_number); 
@@ -93,11 +85,39 @@ public class Bk_Service {
 			return BkDAO.getBkInfo(bk_number); 
 		}
 		
-		//책 리스트를 위한 책번호 리스트
-		public List<Bk_Number> getBkNumList(String bk_local, String bk_genre){
+		//책 리스트 갯수 (지역, 장르)
+		public PageCountBean getContentCnt1(String bk_local, String bk_genre, int currentPage) {
 			
-			return BkDAO.getBkNumList(bk_local, bk_genre);
+			int content_cnt = BkDAO.getCntBook1(bk_local, bk_genre);
 			
+			PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+			
+			return pageCountBean;
+		}
+		
+		//책 리스트를 위한 책번호 리스트 (지역, 장르)
+		public List<Bk_Number> getBkNumList1(String bk_local, String bk_genre){
+					
+			return BkDAO.getBkNumList1(bk_local, bk_genre);
+					
+		}
+		
+		//책 리스트 갯수 (검색어)
+		public PageCountBean getContentCnt2(String search_word, int currentPage) {
+					
+			int content_cnt = BkDAO.getCntBook2(search_word);
+					
+			PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+					
+			return pageCountBean;
+		}
+		
+		
+		//책 리스트를 위한 책번호 리스트 (검색어)
+		public List<Bk_Number> getBkNumList2(String search_word){
+					
+			return BkDAO.getBkNumList2(search_word);
+					
 		}
 			
 		//책 정보 수정

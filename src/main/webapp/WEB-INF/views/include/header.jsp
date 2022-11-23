@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <c:url var='root' value='/'/>
 <!doctype html>
 <html lang="en">
@@ -30,10 +31,10 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand">Ezen Book Store</a>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          <form:form action="${root }book/BkList" method="get" modelAttribute="searchBean" class="d-flex">
+            <form:input class="form-control me-2" path="search_word" placeholder="Search" aria-label="Search"/>
+            <form:button class="btn btn-outline-success" type="submit">Search</form:button>
+          </form:form>
           <div class="btn-group" role="group" aria-label="Basic example">
 				<a href="${root }member/Mbinsert" class="nav-link">[회원가입]</a> 
 				<a href="${root }member/Mblist?mb_id=admin" class="nav-link">[전체회원목록]</a>
