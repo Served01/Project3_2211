@@ -440,6 +440,7 @@ let basket = {
 					javascript:basket.orderItems(or_number,ca_mbid);
 					},
 					complete : function() {
+						$(".loading").fadeOut();
 						location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
 				    }
 	    	})
@@ -450,7 +451,7 @@ let basket = {
 	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
 	        	if (ca_bkcount != 0){
 	        		$.ajax({
-						url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid,
+						url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid + '/' + ca_bkcount,
 						type: 'get',
 						dataType: 'text'
 					})		
