@@ -26,8 +26,17 @@
 			url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
 			type: 'get',
 			dataType: 'text',
+			success: function(){
+				 var conFirm = confirm('장바구니에 추가되엇습니다. 장바구니로 가시겟습니까?');
+				 if (conFirm) {
+				      location.href="${root}cart/cart_info?ca_mbid="+ca_mbid;
+				   }
+				   else {
+				     false;
+				   }
+			}
 		})
-		alert('장바구니에 추가되었습니다.')
+		
 	}
 </script>
 <body>

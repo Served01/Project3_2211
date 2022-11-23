@@ -92,7 +92,6 @@ let basket = {
 			//로그인 아이디 받아와야됨
 			var ca_mbid = 'admin';
 			var ca_bkcount = $("#amount").val();
-			
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
 			
@@ -116,7 +115,10 @@ let basket = {
 				dataType: 'text',
 				success: function(){
 					javascript:basket.orderItem(or_number,ca_mbid,ca_bknumbers,ca_bkcount);
-					}
+				},
+				complete : function() {
+					location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+			    }
 	    	})
 	    },
 	    orderItem: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
@@ -284,6 +286,27 @@ let wish = {
 		});
 	}
 };
+function addcart(ca_mbid,ca_bknumbers){
+	
+	//var ca_mbid = $("#ca_mbid").val()
+	//var ca_bknumbers = $("#ca_bknumbers").val()
+	
+	$.ajax({
+		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
+		type: 'get',
+		dataType: 'text',
+		success: function(){
+			 var conFirm = confirm('장바구니에 추가되엇습니다. 장바구니로 가시겟습니까?');
+			 if (conFirm) {
+			      location.href="${root}cart/cart_info?ca_mbid="+ca_mbid;
+			   }
+			   else {
+			     false;
+			   }
+		}
+	})
+	
+}
 </script>
 <c:import url="/Main/header"></c:import>
 	<div class="jumbotron"style="padding-top:30px; padding-bottom: 30px;">
@@ -332,7 +355,7 @@ let wish = {
 				<p><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
 				<form name="form" method="get">
 				<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">
-				<input type="text" name="amount" value="1" size="3" onchange="change();"> 
+				<input type="text" id="amount" name="amount" value="1" size="3" onchange="change();"> 
 				<input type="button" value=" + " onclick="add();" style="width:35px;">
 				<input type="button" value=" - " onclick="del();" style="width:35px;"><br>
 				<input type="hidden" name="sum" size="11" readonly>
@@ -341,7 +364,7 @@ let wish = {
 				</form>
 				<p>
 				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
-				<input class="btn btn-info" type="reset" value="장바구니">
+				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니">
 				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
 				<a href='${root }book/BkDeletePro?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">삭제 &raquo;</a>	
 			</div>

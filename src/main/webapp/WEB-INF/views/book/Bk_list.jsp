@@ -118,20 +118,36 @@ let wish = {
 	</div>
 <div class="input-group">
 <aside class="aside_wrap">
-       <h4><b>국내/해외도서</b></h4><br>
+	<c:if test="${bk_local == '국내'}">
+       <h4><b>국내도서</b></h4><br>
            <ul class="list">
-            <li>소설</li>
-            <li>시/에세이</li>
-            <li>인문</li>
-            <li>가정/육아</li>
-            <li>요리</li>
-            <li>건강</li>
-            <li>취미/실용/스포츠</li>
-        </ul>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">소설</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">인문</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">취미</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">경제</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">자기개발</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">예술</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">기술</a></li>
+	            <li><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">잡지</a></li>
+        	</ul>
+     </c:if>
+     <c:if test="${bk_local == '해외'}">
+         <h4><b>해외도서</b></h4><br>
+           <ul class="list">
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin">소설</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=인문&mb_id=admin">인문</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=취미&mb_id=admin">취미</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=경제&mb_id=admin">경제</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=예술&mb_id=admin">예술</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=기술&mb_id=admin">기술</a></li>
+	            <li><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지&mb_id=admin">잡지</a></li>
+        	</ul>
+      </c:if>
     </aside>
 	<c:forEach var="bl" items="${bkListBean}" varStatus="status">
 		<c:if test="${bl.bk_deleted != 'deleted'}">
-		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
+		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">>
 	<div class="input-group-append">
 	<div class="container">
 		<div class="row">
@@ -199,7 +215,7 @@ let wish = {
 					</li>
 					
 				</ul>
-			</div>	
+			</div>
 <c:import url="/Main/footer"></c:import>	
 
 </body>

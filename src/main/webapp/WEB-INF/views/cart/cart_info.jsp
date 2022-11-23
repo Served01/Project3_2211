@@ -23,6 +23,17 @@
 </head>
 <style>
 
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
+        
+        
 .basketdiv {
     width: 100%;
     border-top: 1px solid #e0e0e0;
@@ -231,6 +242,7 @@
 
 
 <script>
+
 let basket = {
 	    totalCount: 0, 
 	    totalPrice: 0,
@@ -399,8 +411,12 @@ let basket = {
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
 			
+			$(".loading").fadeIn();
+			
 			var ca_mbid = 'admin';
-	    		
+			
+				
+					
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
 			
@@ -422,7 +438,11 @@ let basket = {
 				dataType: 'text',
 				success: function(){
 					javascript:basket.orderItems(or_number,ca_mbid);
-					}
+					},
+					complete : function() {
+						$(".loading").fadeOut();
+						location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+				    }
 	    	})
 	    },
 	    orderItems: function(or_number,ca_mbid){
@@ -431,7 +451,7 @@ let basket = {
 	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
 	        	if (ca_bkcount != 0){
 	        		$.ajax({
-						url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid,
+						url: '${root}cart/cart_insertOderItems/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid + '/' + ca_bkcount,
 						type: 'get',
 						dataType: 'text'
 					})		
@@ -453,7 +473,7 @@ let basket = {
 				type: 'get',
 				dataType: 'text',
 				success: function(){
-					javascript:basket.delPreOrderItems(ca_mbid);
+					javascript:basket.delPreOrder(ca_mbid);
 					}
 				
 			})
@@ -549,10 +569,23 @@ let basket = {
 	    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
 	    return nstr;
 	};
-
+	//로딩바
+	/*
+	$(document).ready(function(){
+		//로딩화면 출력
+		$(".loading").css("display","");
+		//$("body").css("background", "#333333");
+	});
+	*/
+	 $(window).on('load', function () {
+		 $(".loading").fadeOut();
+		// $("body").css("background", "white");
+	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
-					
+	<!-- 로딩 -->		
+	<div class="loading"></div>
+			
 					          
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
@@ -581,7 +614,7 @@ let basket = {
 	                    <div class="subdiv">
 	                    	<c:choose>
 	                    		<c:when test="${str.bk_quantity != 0}">
-			                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
+			                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        		<div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
@@ -618,7 +651,7 @@ let basket = {
 	                        		</div>
 			                        <div class="num">
 			                            <div class="updown">
-			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4>
+			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4></input>
 			                            </div>
 			                        </div>
 			                        <div class="sum">0원</div>

@@ -12,7 +12,7 @@ import ezen.store.beans.Mb_Bean;
 public interface Mb_Mapper {
 
 	// 濡쒓렇�씤�떆 �뙣�뒪�썙�뱶 �씪移� �솗�씤
-	@Select("select * from Member_info where mb_id = #{mb_id} and mb_pw = #{mb_pw}")
+	@Select("select * from Member_info where mb_id = #{mb_id} and mb_pw = #{mb_pw} and mb_deleted = '0'")
 	Mb_Bean getloginUserInfo(Mb_Bean tempMbBean);
 	
 	// �뙣�뒪�썙�뱶 �씪移� �솗�씤

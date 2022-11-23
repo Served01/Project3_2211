@@ -12,11 +12,10 @@ import ezen.store.beans.Ca_Bean;
 
 public interface Ca_Mapper {
 	
-	@Select("select DISTINCT a.bk_number,bk_title,bk_writer,bk_publisher,bk_image,bk_quantity,bk_price,b.ca_bkcount\r\n"
-			+ "    from book_info a,(select bk_number,ca_bkcount\r\n"
-			+ "                        from  Cart_info\r\n"
-			+ "                        where mb_id = #{ca_bmid}) b\r\n"
-			+ "    where a.bk_number = b.bk_number")
+	@Select("select b.bk_number,bk_title,bk_writer,bk_publisher,bk_image,bk_quantity,bk_price,b.ca_bkcount\r\n"
+			+ "    from book_info a, (select bk_number,ca_bkcount,row_number() over (partition by bk_number order by ca_bkcount desc) as rank from cart_info where mb_id = #{ca_mbid}) b\r\n"
+			+ "    where a.bk_number = b.bk_number\r\n"
+			+ "    and rank = 1")
 		List<Ca_Bean> getCartInfo(String ca_mbid);
 
 	@Insert("insert into cart_info(mb_id,bk_number) values(#{ca_mbid},#{ca_bknumbers})")
@@ -51,8 +50,8 @@ public interface Ca_Mapper {
 			+ "#{ca_bknumbers},"
 			+ "(select bk_price from book_info where bk_number = #{ca_bknumbers}),"
 			+ "0,"
-			+ "(select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id=#{ca_mbid} and bk_number=#{ca_bknumbers})))")
-		void insertOderItems(@Param("or_number")String or_number,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_mbid") String ca_mbid);
+			+ "#{ca_bkcount})")
+		void insertOderItems(@Param("or_number")String or_number,@Param("ca_bknumbers")int ca_bknumbers,@Param("ca_mbid") String ca_mbid,@Param("ca_bkcount") int ca_bkcount);
 	
 	@Insert("insert into order_items(or_number, bk_number, bk_price,ori_bkdiscount,ori_bkcount) values(#{or_number},\r\n"
 			+ "#{ca_bknumbers},\r\n"
