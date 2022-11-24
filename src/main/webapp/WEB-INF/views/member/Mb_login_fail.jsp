@@ -9,7 +9,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("로그인을 실패 하였습니다.")
+		alert("탈퇴한 회원이거나 아이디와 비밀번호를 확인해주세요.")
 		location.href="${root}member/Mblogin?fail=true"
 	</script>
 </body>

@@ -17,7 +17,7 @@ public class Dv_Validator implements Validator{
 		
 		String beanName = errors.getObjectName();
 		// 아이디 중복 확인 체크
-		if(beanName.equals("InsertBkBean")) {
+		if(beanName.equals("InsertDvBean")) {
 			if(dv_Bean.isDv_numExist() == false) {
 				errors.rejectValue("mb_id", "DontCheckDv_nickExist");
 					}

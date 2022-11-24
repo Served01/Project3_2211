@@ -15,9 +15,9 @@ public class Dv_Service {
 	private Dv_DAO dv_DAO;
 	
 	//중복확인 관련
-	public boolean CheckDvNick(String dv_nick) {		
-		String mb_id = dv_DAO.CheckDvNick(dv_nick);		
-			if(mb_id == null) {
+	public boolean CheckDvNick(String dv_pk) {		
+		int checkNick = dv_DAO.CheckDvNick(dv_pk);		
+			if(checkNick == 0) {
 				return true;
 			}else {
 				return false;		

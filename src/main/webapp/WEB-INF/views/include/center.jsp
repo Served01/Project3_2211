@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:url var='root' value='/'/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,14 +23,10 @@ left
 
 </style>
 
-  
 </head>
 
-
-<jsp:include page="header.jsp" />
-
-
 <body>
+<c:import url="/Main/header"></c:import>
 <br>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -93,6 +92,6 @@ left
   </div>
 </div>
 
-<jsp:include page="footer.jsp" />
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

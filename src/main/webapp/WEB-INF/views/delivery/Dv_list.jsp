@@ -72,15 +72,15 @@
 				<td height="20" width="300">${dvl.dv_address }</td>
 			</tr>
 			<tr>
-				<td><a href="${root}delivery/DvUpdate?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-success">배송지 수정</a></td>
-				<td><a href="${root}delivery/DvDelete?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-danger">배송지 삭제</a></td>
+				<td><a href="${root}delivery/DvUpdate?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 수정</a></td>
+				<td><a href="${root}delivery/DvDelete?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 삭제</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div class="mb-4">
-				<a href="${root}delivery/DvInsert?mb_id=${mb_id}" class="btn btn-primary">배송지 추가</a>
-				<a href="${root }index" class="btn btn-dark">메인화면</a>
+				<a href="${root}delivery/DvInsert?mb_id=${mb_id}" class="btn btn-dark">배송지 추가</a>
+				<a href="${root }Main/center" class="btn btn-dark">메인화면</a>
 				
 	</div>					
 		

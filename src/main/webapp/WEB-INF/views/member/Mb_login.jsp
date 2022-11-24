@@ -8,12 +8,13 @@
 <head>
 <title>Mb_login</title>
 <!-- Bootstrap CDN -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
 <c:import url="/Main/header"></c:import>
-<hr>
-	<h3>로그인</h3>
 	<div class="container" style="margin-top: 100px">
+	<h3>로그인</h3>
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">

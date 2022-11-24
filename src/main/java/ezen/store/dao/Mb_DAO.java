@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Mb_Bean;
 import ezen.store.mapper.Mb_Mapper;
 
@@ -44,11 +43,16 @@ public class Mb_DAO {
 
 		return mbMapper.getMbInfo(mb_id);
 	}
+	
+//	//수정할 회원정보 가져오기
+//	public Mb_Bean getModifyUserInfo(String mb_id) {
+//		
+//		return mbMapper.getModifyUserInfo(mb_id);
+//	}
 
 	// 회원정보 수정 실행
 	public void modifyUserInfo(Mb_Bean updateMbBean) {
 		mbMapper.modifyUserInfo(updateMbBean);
-
 	}
 	
 	// 삭제할 정보 가져오기
@@ -61,10 +65,4 @@ public class Mb_DAO {
 		mbMapper.deleteUserInfo(deleteMbBean);
 	}
 	
-	//수정할 회원정보 가져오기
-	public Mb_Bean getModifyUserInfo(String mb_id) {
-		
-		return mbMapper.getModifyUserInfo(mb_id);
-	}
-
 }

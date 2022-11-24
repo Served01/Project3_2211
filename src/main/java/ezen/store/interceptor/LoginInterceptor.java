@@ -15,7 +15,6 @@ import ezen.store.beans.Mb_Bean;
  */
 public class LoginInterceptor implements HandlerInterceptor {
 
-	@SuppressWarnings("unused")
 	private Mb_Bean loginShowBean;
 	@SuppressWarnings("unused")
 	private Mb_Bean loginMbBean;

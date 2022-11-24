@@ -48,13 +48,14 @@
   </style>
 </head>
 <body>
-<c:import url="/Main/header"></c:import>
+<%-- <c:import url="/Main/header"></c:import> --%>
 <div class="container" align="center">
-	<div class="input-form col-md-10 mx-auto">	
-        <a href="#" onclick="location.href='insertBook.jsp'">
+	<div class="input-form col-md-15 mx-auto">	
+        <a href="#" onclick="location.href='Main/center'">
         <i class="fa-solid fa-book"> </i>Ezen Book Store</a>  
         <br>
-        <h4 class="mb-3">회원 정보 보기 화면 - 마이 페이지</h4>
+        <div>
+        <h4 class="mb-7">회원 정보 보기 화면 - 마이 페이지</h4>
 						<div class="form-group">
 						<label for="mb_id">아이디</label>
 						<input type="text" id="mb_id" name="mb_id" class="form-control" value="${mbBean.mb_id }" disabled="disabled"/>
@@ -72,17 +73,18 @@
 						<input type="text" id="mb_tel" name="mb_tel" class="form-control" value="${mbBean.mb_tel }" disabled="disabled"/>
 						</div>
 						<div class="mb-4"></div>
-         				 <button class="btn btn-success" onclick="location.href='Mbupdate?mb_id=${mb_id }'">수정</button>
-         				 <button class="btn btn-danger" onclick="location.href='Mbdelete?mb_id=${mb_id }'">삭제</button>
-         				 <a href="${root }index" class="btn btn-dark">메인화면</a>
-					
+         				 <button class="btn btn-dark" onclick="location.href='Mbupdate?mb_id=${mb_id }'">수정</button>
+         				 <button class="btn btn-dark" onclick="location.href='Mbdelete?mb_id=${mb_id }'">삭제</button>
+         				 <a href="${root }Main/center" class="btn btn-danger">메인화면</a>
+				
+					</div>	
 						<c:import url="/delivery/DvList">
 							<c:param name="Deliverylist" value="${mb_id }"></c:param>
-							<c:param name="Deliverylist" value="${dv_nick }"></c:param>
+<%-- 							<c:param name="Deliverylist" value="${dv_nick }"></c:param> --%>
 						</c:import>
-					</div>	
-
+						</div>
+          
 </div>
-<c:import url="/Main/footer"></c:import>
+<%-- <c:import url="/Main/footer"></c:import> --%>
 </body>
 </html>
