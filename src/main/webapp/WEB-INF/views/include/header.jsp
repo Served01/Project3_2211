@@ -17,39 +17,42 @@
 <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 
+<!-- 글골 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js" ></script> 
   </head>
       <style>
- 
+
   </style>
  
   <body>
   <div style="width:1900px;">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand">Ezen Book Store</a>
+        
+          <a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a>
           <form:form action="${root }book/BkList" method="get" modelAttribute="searchBean" class="d-flex">
             <form:input class="form-control me-2" path="search_word" placeholder="Search" aria-label="Search"/>
             <form:button class="btn btn-outline-success" type="submit">Search</form:button>
           </form:form>
           <div class="btn-group" role="group" aria-label="Basic example">
-				<a href="${root }member/Mbinsert" class="nav-link">[회원가입]</a> 
-				<a href="${root }member/Mblist?mb_id=admin" class="nav-link">[전체회원목록]</a>
-				<a href='${root }member/Mbselect?mb_id=admin'>[마이페이지]</a> 
-				<a href="${root }member/Mbupdate?mb_id=admin" class="nav-link">[정보수정]</a>
-				<a href="${root }member/Mbdelete?mb_id=admin" class="nav-link">[삭제]</a>
-				<a href="${root }member/Mblogin" class="nav-link">[로그인]</a> 
-				<a href="${root }member/Mblogout" class="nav-link">[로그아웃]</a>
-				
-         	<!--  <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary">로그인</button>
-            <button type="button" class="btn btn-primary">회원가입</button>
-            <button type="button" class="btn btn-primary">장바구니</button>
-            <button type="button" class="btn btn-primary">찜 목록</button>--> 
-            
+			
+				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button>
+				<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
+				<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
+				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=admin'">마이페이지</button>
+				<button type="button" onclick="location.href='${root }member/Mbupdate?mb_id=admin'">정보수정</button>
+				<button type="button" onclick="location.href='${root }member/Mbdelete?mb_id=admin'">삭제</button>
+				<button type="button" onclick="location.href='${root }member/Mblogin'">로그인</button>
+				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>         
           </div>
         </div>
       </nav>
@@ -69,9 +72,9 @@
 						<span></span>
 					</div>
 				</button>
-				<ul  style="background-color:white"class="primary-navigation-ul horizontal-mega-menu">
+				<ul  style="background-color:#f8f9fa"class="primary-navigation-ul horizontal-mega-menu">
 					<li class="buddha-menu-item primary-navigation-li">
-						<a href="https://product.kyobobook.co.kr/category/KOR/01" href="/collections/brands" aria-label="Brands" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="" style="color:black">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<a style="color:#8685EF">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
 						<ul style="background-color:white" class="mm-submenu tree">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
 								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
@@ -100,7 +103,7 @@
 						</ul>
 					
 					<li class="buddha-menu-item primary-navigation-li">
-						<a data-href="/collections/all" href="/collections/all" aria-label="Products" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="">해외도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<a style="color:#8685EF	">해외도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
 						<ul class="mm-submenu tree" style="background-color:white">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
 								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin" href="/collections/brand-isospec" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
@@ -127,10 +130,10 @@
 							</li>
 						</ul>
 					
-					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/about" href="/pages/about" aria-label="About" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="">베스트셀러</a></li>
-					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/special-offers" href="/pages/special-offers" aria-label="Special Offers" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="">신상품</a></li>
-					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/downloads" href="/pages/downloads" aria-label="Downloads" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="">이벤트</a></li>
-					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/news" href="/pages/news" aria-label="News" data-no-instant="" onclick="mmGoToPage(this, event); return false;" class="">추천도서</a></li>
+					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/about" href="/pages/about" aria-label="About" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">베스트셀러</a></li>
+					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/special-offers" href="/pages/special-offers" aria-label="Special Offers" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">신상품</a></li>
+					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/downloads" href="/pages/downloads" aria-label="Downloads" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">이벤트</a></li>
+					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/news" href="/pages/news" aria-label="News" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">추천도서</a></li>
 					<li class="primary-navigation-li buddha-disabled">
 						<a href="/" title="">Home</a>
 					</li>

@@ -147,7 +147,7 @@ let wish = {
     </aside>
 	<c:forEach var="bl" items="${bkListBean}" varStatus="status">
 		<c:if test="${bl.bk_deleted != 'deleted'}">
-		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">>
+		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	<div class="input-group-append">
 	<div class="container">
 		<div class="row">
@@ -159,7 +159,7 @@ let wish = {
 					<c:if test="${bl.avg_score != 0}">
 						<c:set var = "string1" value = "${bl.avg_score}"/>
       					<c:set var = "string2" value = "${fn:substring(string1, 0, 3)}" />
-					<p>평점 : ${string2}
+					<p>평점 : ${string2}/5.0점
 					</c:if>
 					<c:if test="${bl.avg_score == 0.0}">
 					<p>등록된 평점이 없습니다.</p>
@@ -181,7 +181,7 @@ let wish = {
 				<p style="padding-top: 20px">
 				<c:set var = "string3" value = "${bl.bk_detail}"/>
       			<c:set var = "string4" value = "${fn:substring(string3, 0, 30)}" />
-      			${string2}...
+      			${string4}...
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
 				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>

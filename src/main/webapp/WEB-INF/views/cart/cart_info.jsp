@@ -586,6 +586,7 @@ let basket = {
 	<!-- 로딩 -->		
 	<div class="loading"></div>
 			
+	<c:import url="/Main/header"></c:import>
 					          
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
@@ -651,7 +652,7 @@ let basket = {
 	                        		</div>
 			                        <div class="num">
 			                            <div class="updown">
-			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4>
+			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4></input>
 			                            </div>
 			                        </div>
 			                        <div class="sum">0원</div>
@@ -680,6 +681,6 @@ let basket = {
                 </div>
             </div>
         </form>
-					
+	<c:import url="/Main/footer"></c:import>				
 </body>
 </html>

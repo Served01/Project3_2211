@@ -11,7 +11,7 @@
 	<h1>회원가입 완료</h1>
 	<script type="text/javascript">
 		alert("회원 가입이 정상적으로 완료되었습니다.")
-		location.href="${root}index"
+		location.href="${root}Main/center"
 	</script>
 </body>
 </html>

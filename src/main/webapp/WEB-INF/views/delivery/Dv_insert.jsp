@@ -62,6 +62,8 @@
 	function CheckDvNick(){
 				
 		var dv_nick = $("#dv_nick").val()
+		var dv_id = $("#mb_id").val()
+		var dv_pk = $("#mb_id").val()+"."+$("#dv_nick").val()
 		
 		if(dv_nick.length == 0){
 			alert("닉네임를 입력해 주세요.")
@@ -69,7 +71,7 @@
 		}
 		
 		$.ajax({
-			url: '${root}delivery/CheckDvNick/' + dv_nick,
+			url: '${root}delivery/CheckDvNick/' + dv_pk,
 			type: 'get',
 			dataType: 'text',
 			success: function(result){

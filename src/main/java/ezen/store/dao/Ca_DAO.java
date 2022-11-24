@@ -2,7 +2,6 @@ package ezen.store.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -57,8 +56,8 @@ public class Ca_DAO {
 	public void createOderInfo(String or_number, String ca_mbid) {
 		ca_Mapper.createOderInfo(or_number, ca_mbid);
 	}
-	public void insertOderItems(String or_number,int ca_bknumbers,String ca_mbid,int ca_bkcount) {
-		ca_Mapper.insertOderItems(or_number, ca_bknumbers,ca_mbid,ca_bkcount);
+	public void insertOderItems(String or_number,int ca_bknumbers,String ca_mbid) {
+		ca_Mapper.insertOderItems(or_number, ca_bknumbers,ca_mbid);
 	}
 	public void insertOderItem(String or_number,int ca_bknumbers,String ca_mbid,int ca_bkcount) {
 		ca_Mapper.insertOderItem(or_number, ca_bknumbers,ca_mbid,ca_bkcount);

@@ -306,6 +306,30 @@ function addcart(ca_mbid,ca_bknumbers){
 		}
 	})
 	
+};
+
+function delBook(bk_number){
+	
+	 var conFirm = confirm('삭제 하시겟습니까');
+	 if (conFirm) {
+		 $.ajax({
+				url: '${root }book/BkDeletePro/' + bk_number,
+				type: 'get',
+				dataType: 'text',
+				error : function(e) {
+					alert("삭제 실패"+ e);
+					//alert(e);
+				},
+				success: function(){
+					alert("삭제되었습니다.")
+					location.href="${root}Main/center";
+				}
+			})
+	 	}
+	   
+	   else {
+	     
+	   }
 }
 </script>
 <c:import url="/Main/header"></c:import>
@@ -366,7 +390,7 @@ function addcart(ca_mbid,ca_bknumbers){
 				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
 				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니">
 				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
-				<a href='${root }book/BkDeletePro?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">삭제 &raquo;</a>	
+				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a>	
 			</div>
 		</div>
 		<hr>

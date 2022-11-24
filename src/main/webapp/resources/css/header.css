@@ -1,3 +1,61 @@
+/*헤더 상단 버튼 */
+@import url(//db.onlinewebfonts.com/c/a580a1f62e042a890fa4bccbf36d9391?family=Digit+Square);
+body{
+  text-align:center;
+}
+body:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+a{
+	font-family: 'Noto Sans KR', sans-serif;
+	
+	
+}
+
+button{
+	font-family: 'Noto Sans KR', sans-serif;
+  background:#f0e9f7;
+  color:#3B3B3B;
+  border:none;
+  position:relative;
+  height:50px;
+  font-size:0.9em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+
+
 .html{
     display:flex;
     justify-content: space-between;
@@ -6,12 +64,6 @@
     width:100%;
     
     }
-
-
-    
-    
-    
-    
     <!-- menu bar-->
     
    /* APP STYLES */
@@ -85,7 +137,7 @@
     width: 320px;
     display: none;
     text-align: center;
-    font-family: "Helvetica Neue", "Helvetica", Arial;
+    font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
     color: #05F829;
 }
@@ -234,7 +286,7 @@ ul.mm-submenu {
     width: auto;
     background: #FA5882;
     box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1) !important;
-    font-family: "Helvetica Neue", "Helvetica", Arial;
+    font-family: 'Noto Sans KR', sans-serif;
     font-weight: normal;
     line-height: normal;
     white-space: initial;
@@ -267,7 +319,7 @@ ul.mm-submenu a {
     padding: 0px !important;
     cursor: pointer;
     background: none !important;
-    font-family: "Helvetica Neue", Arial !important;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 1em !important;
     white-space: initial !important;
     text-transform: none !important;
@@ -358,7 +410,7 @@ ul.mm-submenu li {
 
 .vertical-mega-menu li a i.fa-angle-down {
     display: none !important;
-    font-family: "FontAwesome"
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .vertical-mega-menu li .toggle-menu-btn {
@@ -493,7 +545,7 @@ ul.mm-submenu li {
     right: 8px;
     margin-top: -7px;
     font-size: 14px;
-    font-family: "FontAwesome";
+    font-family: 'Noto Sans KR', sans-serif;
     z-index: 1000000000 !important;
 }
 
@@ -503,7 +555,7 @@ ul.mm-submenu li {
     left: 8px;
     margin-top: -7px;
     font-size: 14px;
-    font-family: "FontAwesome"
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .horizontal-mega-menu ul.mm-submenu.tree ul {
@@ -578,7 +630,7 @@ ul.mm-submenu li {
 
 .vertical-mega-menu > li ul.mm-submenu.tree li.fa-angle-right:before, .vertical-mega-menu > li ul.mm-submenu.tree li.fa-angle-left:before {
     display: none !important;
-    font-family: "FontAwesome"
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .vertical-mega-menu ul.mm-submenu.tree li {
@@ -817,7 +869,7 @@ ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-sold_out {
     right: 10px;
     margin-top: -7px;
     font-size: 14px;
-    font-family: "FontAwesome"
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .horizontal-mega-menu ul.mm-submenu.tabbed > li > ul.mm-submenu {
@@ -890,7 +942,7 @@ ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-sold_out {
 
 .vertical-mega-menu ul.mm-submenu.tabbed > li.fa-angle-right:before {
     display: none !important;
-    font-family: "FontAwesome"
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* PRODUCTS LIST WIDGET */
@@ -1077,7 +1129,7 @@ ul.mm-submenu li.mm-contact-column h3 {
     font-weight: 200;
     margin-bottom: 10px;
     font-size: 1.6em;
-    font-family: "Helvetica Neue", "Helvetica", Arial;
+    font-family: 'Noto Sans KR', sans-serif;
     font-style: normal;
 }
 
@@ -1117,7 +1169,7 @@ ul.mm-submenu li.mm-contact-column button {
     padding: 10px !important;
     text-transform: uppercase;
     font-weight: 300;
-    font-family: "Helvetica Neue", "Helvetica", Arial;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 1em;
     line-height: inherit;
 }

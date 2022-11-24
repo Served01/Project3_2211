@@ -46,5 +46,15 @@ public class RestApiController {
 		
 	}
 	
+	// 책정보 삭제(수정) 기능 컨트롤러
+	@GetMapping("/book/BkDeletePro/{bk_number}")
+	public String bkDeletePro(@PathVariable int bk_number) {		
+		
+		BkSevice.deleteBook(bk_number);
+		
+		return null;
+		
+	}
+	
 	
 }

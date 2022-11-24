@@ -15,10 +15,10 @@ public class Dv_RestController {
 	@Autowired
 	private Dv_Service dv_Service;
 	
-	@GetMapping("/delivery/CheckDvNick/{dv_nick}")
-	public String restApiControll(@PathVariable String dv_nick) {
+	@GetMapping("/delivery/CheckDvNick/{dv_pk}")
+	public String restApiControll(@PathVariable String dv_pk) {
 		
-		boolean chk = dv_Service.CheckDvNick(dv_nick);
+		boolean chk = dv_Service.CheckDvNick(dv_pk);
 		
 		return chk + "";
 		
