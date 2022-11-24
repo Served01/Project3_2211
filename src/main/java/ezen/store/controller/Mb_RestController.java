@@ -13,8 +13,8 @@ import ezen.store.beans.Ca_Bean;
 import ezen.store.service.Ca_Service;
 
 @Controller
-@RequestMapping("/cart")
-public class Ca_Controller {
+@RequestMapping("/restmember")
+public class Mb_RestController {
 	
 	@Autowired
 	private Ca_Service ca_Service;
@@ -38,7 +38,12 @@ public class Ca_Controller {
 		return "cart/cart_test";
 	}
 	
-	
+	// password check routine
+		/*@InitBinder
+		public void initBinder(WebDataBinder binder) {
+			Mb_Validator validator = new Mb_Validator();
+			binder.addValidators(validator);
+		}*/
 	
 	
 	

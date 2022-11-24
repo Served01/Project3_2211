@@ -77,8 +77,7 @@
          				 <a href="${root }index" class="btn btn-danger">메인화면</a>
 					
 						<c:import url="/delivery/DvList">
-							<c:param name="Deliverylist" value="${mb_id }"></c:param>
-							<c:param name="Deliverylist" value="${dv_nick }"></c:param>
+							
 						</c:import>
 					</div>	
 						

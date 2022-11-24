@@ -7,17 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ezen.store.beans.Mb_Bean;
+import ezen.store.beans.PageCountBean;
 import ezen.store.service.Mb_Service;
-import ezen.store.validator.Mb_Validator;
 
 @Controller
 @RequestMapping("/member")
@@ -26,34 +24,24 @@ public class Mb_Controller {
 	@Autowired
 	private Mb_Service mbService;
 
-	@SuppressWarnings("unused")
-	@Autowired
-	private Mb_Bean insertMbBean;
-
-	@Autowired
-	private Mb_Bean loginMbBean;
-
-	@SuppressWarnings("unused")
-	@Autowired
-	private Mb_Bean tempMbBean;
-	
-	@SuppressWarnings("unused")
-	@Autowired
-	private Mb_Bean deleteMbBean;
-
-	// 회원 전체목록 컨트롤
+	// 회원 전체목록 기능
 	@GetMapping("/Mblist")
-	public String Mblist(@RequestParam("mb_id") String mb_id, Model model) {
+	public String Mblist(@RequestParam("mb_id") String mb_id, 
+						 @RequestParam(value="page", defaultValue="1") int page,
+						 Model model) {
 
 		model.addAttribute("mb_id", mb_id);
 
-		List<Mb_Bean> memberlist = mbService.getMbList(mb_id);
+		List<Mb_Bean> memberlist = mbService.getMbList();
 		model.addAttribute("memberlist", memberlist);
+		
+		PageCountBean pageCountBean = mbService.getContentCnt(page);
+		model.addAttribute("pageCountBean", pageCountBean);
 
 		return "member/Mb_list";
 	}
 
-	// 회원 상세보기 컨트롤
+	// 회원 상세보기 기능
 	@GetMapping("/Mbselect")
 	public String Mbselect(@RequestParam("mb_id") String mb_id, Model model) {
 
@@ -65,33 +53,39 @@ public class Mb_Controller {
 		return "member/Mb_select";
 	}
 
-	// 로그인 컨트롤
+	// 로그인 페이지
 	@GetMapping("/Mblogin")
-	public String Mblogin(@ModelAttribute("tempMbBean") Mb_Bean tempMbBean,
-			@RequestParam(value = "fail", defaultValue = "false") boolean fail, Model model) {
-
-		model.addAttribute("fail", fail);
-
-		model.addAttribute("tempMbBean", tempMbBean);
+	public String Mblogin(@ModelAttribute("tempMbBean") Mb_Bean tempMbBean
+						  ) {
 		return "member/Mb_login";
 	}
 
-	// 로그인 컨트롤 프로
+	// 로그인 기능
 	@PostMapping("/Mbloginpro")
-	public String Mbloginpro(@Validated @ModelAttribute("tempMbBean") Mb_Bean tempMbBean, BindingResult result) {
+	public String Mbloginpro(@Validated@ModelAttribute("tempMbBean") Mb_Bean tempMbBean, 
+							 BindingResult result) {
 
 		if (result.hasErrors()) {
+			
+			tempMbBean.setMblogin(false);
+			
 			return "member/Mb_login";
 		}
+		
+		tempMbBean.setMblogin(true);
 
-		mbService.getloginUserInfo(tempMbBean);
+		boolean loginCheck = mbService.getloginUserInfo(tempMbBean);
 
-		if (loginMbBean.isMblogin() == true) {
-			loginMbBean.setMblogin(true);
+		if (loginCheck == true) {
+			
 			return "member/Mb_login_success";
+			
 		} else {
-			loginMbBean.setMblogin(false);
+			
+			tempMbBean.setMblogin(loginCheck);
+			
 			return "member/Mb_login_fail";
+			
 		}
 	}
 	
@@ -115,25 +109,18 @@ public class Mb_Controller {
 		return "member/Mb_insert_success";
 	}
 
-	// 회원정보 수정 컨트롤 (단위 테스트용)
+	// 회원정보 수정 페이지
 	@GetMapping("/Mbupdate")
-	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
+	public String Mbupdate(@RequestParam("mb_id") String mb_id, Model model) {
 		
-		mbService.getModifyUserInfo(updateMbBean);
+		Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id);
+		model.addAttribute("updateMbBean", updateMbBean);
 		
 		return "member/Mb_update";
 	}
 	
-//	// 회원정보 수정 컨트롤
-//	@GetMapping("/Mbupdate")
-//	public String Mbupdate(@ModelAttribute("updateMbBean") Mb_Bean updateMbBean) {
-//
-//		mbService.getMbInfo(updateMbBean);
-//
-//		return "member/Mb_update";
-//	}
 
-	// 회원정보 수정 컨트롤 프로
+	// 회원정보 수정 기능
 	@PostMapping("/Mbupdatepro")
 	public String Mbupdatepro(@Validated @ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result) {
 
@@ -147,6 +134,8 @@ public class Mb_Controller {
 		return "member/Mb_update_success";
 	}
 
+	
+	
 		// 회원정보 삭제 정보 컨트롤 (원본)
 		@GetMapping("/Mbdelete")
 		public String Mbdelete(@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean) {
@@ -169,21 +158,17 @@ public class Mb_Controller {
 			return "member/Mb_delete_success";
 		}
 
-	// password check routine
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		Mb_Validator validator = new Mb_Validator();
-		binder.addValidators(validator);
-	}
+	
+	
 
 	// 로그아웃 컨트롤
-	@GetMapping("/Mblogout")
+	/*@GetMapping("/Mblogout")
 	public String Mblogout() {
 
 		loginMbBean.setMblogin(false);
 
 		return "member/Mb_logout";
-	}
+	}*/
 
 	// 로그인 확인 컨트롤
 	@GetMapping("/Mbnotlogin")

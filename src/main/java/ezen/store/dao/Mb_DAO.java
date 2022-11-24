@@ -33,10 +33,16 @@ public class Mb_DAO {
 	}
 	
 	// 전체회원 리스트
-	public List<Mb_Bean> getMbList(String mb_id) {
+	public List<Mb_Bean> getMbList() {
 
-		return mbMapper.getMbList(mb_id);
+		return mbMapper.getMbList();
 	}
+	
+	//  리스트 갯수
+		public int getCntMember() {
+			
+			return mbMapper.getCntMember();
+		}
 
 	// 회원정보 상세보기
 	public Mb_Bean getMbInfo(String mb_id) {
@@ -63,7 +69,7 @@ public class Mb_DAO {
 	//수정할 회원정보 가져오기
 	public Mb_Bean getModifyUserInfo(String mb_id) {
 		
-		return mbMapper.getModifyUserInfo(mb_id);
+		return mbMapper.getMbInfo(mb_id);
 	}
 
 }

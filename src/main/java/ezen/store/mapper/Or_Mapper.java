@@ -2,13 +2,10 @@ package ezen.store.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import ezen.store.beans.Ca_Bean;
-import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
 
 public interface Or_Mapper {

@@ -43,6 +43,29 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<!-- 페이지네이션 -->
+			<div class=hi>
+            	<ul id="hiyo" class="pagination">
+					
+					<li class="page-item">
+						<a href="${root}member/Mblist?mb_id=${mb_id}&page=1" class="page-link">First</a>
+					</li>					
+														
+				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+					<li class="page-item active">
+						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${idx}" class="page-link">${idx}</a>
+					</li>		
+												
+				</c:forEach>					
+					
+					<li class="page-item">
+						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+					</li>
+					
+				</ul>
+			</div>	
+			
 			<div class="mb-4"></div>
 			<a href="${root }member/Mbinsert" class="btn btn-danger">회원가입</a> <a
 				href="${root }index" class="btn btn-danger">메인</a>

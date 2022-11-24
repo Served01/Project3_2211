@@ -12,6 +12,8 @@ public class Mb_Validator implements Validator {
 
 		return Mb_Bean.class.isAssignableFrom(clazz);
 	}
+	
+	
 
 	@Override
 	public void validate(Object target, Errors errors) {

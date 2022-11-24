@@ -38,7 +38,7 @@ public class Mb_Bean {
 	private boolean mbIdExist;
 	
 	//비번용
-	private boolean mbIdExist2;
+	private boolean mbPwExist;
 	
 	//로그인용
 	private boolean mblogin;
@@ -90,12 +90,6 @@ public class Mb_Bean {
 	public void setMb_tel(String mb_tel) {
 		this.mb_tel = mb_tel;
 	}
-
-	public Mb_Bean() {
-		this.mbIdExist = false;
-		this.mbIdExist2 = false;
-		this.mblogin = false;
-	}
 	
 	public boolean isMbIdExist() {
 		return mbIdExist;
@@ -105,11 +99,11 @@ public class Mb_Bean {
 		this.mbIdExist = mbIdExist;
 	}
 
-	public boolean isMbIdExist2() {
-		return mbIdExist2;
+	public boolean isMbPwExist() {
+		return mbPwExist;
 	}
-	public void setMbIdExist2(boolean mbIdExist2) {
-		this.mbIdExist2 = mbIdExist2;
+	public void setMbPwExist(boolean mbPwExist) {
+		this.mbPwExist = mbPwExist;
 	}
 	
 	public boolean isMblogin() {

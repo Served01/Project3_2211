@@ -19,12 +19,7 @@
 			<div class="col-sm-6">
 				<div class="card shadow">
 					<div class="card-body">
-						<c:if test="${fail == true }">
-							<div class="alert alert-danger">
-								<h3>로그인 실패</h3>
-								<p>아이디 비밀번호를 확인해주세요</p>
-							</div>
-						</c:if>
+						
 						<form:form action="${root }member/Mbloginpro" method="post"
 							modelAttribute="tempMbBean">
 							<div class="form-group">

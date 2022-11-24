@@ -9,8 +9,8 @@
 </head>
 <body>
 	<script type="text/javascript">
-		alert("로그인을 실패 하였습니다.")
-		location.href="${root}member/Mblogin?fail=true"
+		alert("로그인을 실패 하였습니다.\n아이디와 비밀번호를 확인해주십시오.")
+		location.href="${root}member/Mblogin"
 	</script>
 </body>
 </html>
