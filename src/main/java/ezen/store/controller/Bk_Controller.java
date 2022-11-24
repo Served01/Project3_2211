@@ -59,7 +59,7 @@ public class Bk_Controller {
 				Model model, BindingResult result) {
 			
 			//검색어의 경우
-			if(searchBean.getSearch_word() != "") {
+			if(searchBean.getSearch_word() != null) {
 				
 				String search_word = searchBean.getSearch_word();
 				model.addAttribute("mb_id", mb_id);

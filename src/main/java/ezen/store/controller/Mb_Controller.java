@@ -2,6 +2,8 @@ package ezen.store.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,27 @@ public class Mb_Controller {
 	@Autowired
 	private Mb_Service mbService;
 
+	// 로그인 여부 체크
+	@GetMapping("/loginCheck")
+	public String loginCheck() {
+
+		return "member/Mb_loginCheck_logout";
+	}
+	
+	// 로그아웃 컨트롤
+		@GetMapping("/Mblogout")
+		public String Mblogout(HttpServletRequest request) throws Exception {
+			
+			HttpSession session = request.getSession();
+			
+			session.invalidate();
+			
+
+			return "member/Mb_logout";
+	}
+
+		
+	
 	// 회원 전체목록 기능
 	@GetMapping("/Mblist")
 	public String Mblist(@RequestParam("mb_id") String mb_id, 
@@ -81,23 +104,27 @@ public class Mb_Controller {
 
 		if (loginCheck == true) {
 			
-			if(session.getAttribute("loginBean") != null) {
+			if(session.getAttribute("mb_id") != null) {
 				
+				session.removeAttribute("mb_id");
+				
+				session.setAttribute("mb_id", tempMbBean.getMb_id());
+				
+				session.setMaxInactiveInterval(60*60*6);
+				
+				return "member/Mb_login_success";
+				
+			} else {
+			
 				session.removeAttribute("loginBean");
 				
 				session.setAttribute("loginBean", tempMbBean);
 				
-				
-				
-				return "member/Mb_login_success";
-				
-			}
-			
-			session.setAttribute("loginBean", tempMbBean);
+				session.setMaxInactiveInterval(60*60*6);
 			
 			return "member/Mb_login_success";
 			
-			} else {
+			}} else {
 				
 				tempMbBean.setMblogin(false);
 				
@@ -188,24 +215,5 @@ public class Mb_Controller {
 			}
 			
 		}
-
-	
-	
-
-	// 로그아웃 컨트롤
-	/*@GetMapping("/Mblogout")
-	public String Mblogout() {
-
-		loginMbBean.setMblogin(false);
-
-		return "member/Mb_logout";
-	}*/
-
-	// 로그인 확인 컨트롤
-	@GetMapping("/Mbnotlogin")
-	public String notlogin() {
-
-		return "member/Mb_not_login";
-	}
 
 }

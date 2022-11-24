@@ -28,8 +28,10 @@
 <!-- 아이콘 -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js" ></script> 
+
   </head>
-      <style>
+
+  <style>
 
   </style>
  
@@ -43,19 +45,26 @@
             <form:input class="form-control me-2" path="search_word" placeholder="Search" aria-label="Search"/>
             <form:button class="btn btn-outline-success" type="submit">Search</form:button>
           </form:form>
+         
           <div class="btn-group" role="group" aria-label="Basic example">
-			
-				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button>
+          <c:choose>
+		  <c:when test="${mb_id != null}">
+				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=admin'">마이페이지</button>
+				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
+		  </c:when>
+		  <c:when test="${mb_id == 'admin'}">
 				<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
 				<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
-				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=admin'">마이페이지</button>
-				<button type="button" onclick="location.href='${root }member/Mbupdate?mb_id=admin'">정보수정</button>
-				<button type="button" onclick="location.href='${root }member/Mbdelete?mb_id=admin'">삭제</button>
+		</c:when>	
+		  <c:otherwise>
 				<button type="button" onclick="location.href='${root }member/Mblogin'">로그인</button>
-				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>         
+				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button> 
+		  </c:otherwise>  
+		  </c:choose>      
           </div>
         </div>
       </nav>
+      
       
       
     <div id="shopify-section-navigation-primary" class="shopify-section">

@@ -15,8 +15,6 @@ public class Mb_DAO {
 	@Autowired
 	private Mb_Mapper mbMapper;
 	
-	private SqlSession loginSession;
-
 	// 로그인 정보
 	public Mb_Bean getloginUserInfo(Mb_Bean tempMbBean) {
 
