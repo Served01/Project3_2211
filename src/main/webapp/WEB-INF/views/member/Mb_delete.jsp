@@ -76,10 +76,9 @@
 								<form:input type="password" path="mb_pw2" class="form-control" />
 								<form:errors path="mb_pw2" style="color:red" />
 							</div>
-							<div class="form-group">
-								<form:label path="mb_pw"></form:label>
-								<form:input type="hidden" path="mb_pw" class="form-control" readonly="true" />
-							</div>
+							
+								<form:hidden path="mb_pw" class="form-control" readonly="true" />
+							
 							<div class="form-group">
 								<div class="text-right">
 									<form:button class="btn btn-primary">삭제하기</form:button>

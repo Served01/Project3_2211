@@ -2,6 +2,7 @@ package ezen.store.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,8 @@ public class Mb_DAO {
 
 	@Autowired
 	private Mb_Mapper mbMapper;
+	
+	private SqlSession loginSession;
 
 	// 로그인 정보
 	public Mb_Bean getloginUserInfo(Mb_Bean tempMbBean) {

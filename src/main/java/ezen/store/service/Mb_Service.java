@@ -68,16 +68,6 @@ public class Mb_Service {
 		
 	}
 
-	// 회원정보 삭제할정보 가져오기
-	public Mb_Bean getMbInfo(Mb_Bean deleteMbBean) {
-
-		Mb_Bean tempDeleteUserDataBean = mbDAO.getMbInfo(deleteMbBean.getMb_id());
-
-		deleteMbBean.setMb_id(tempDeleteUserDataBean.getMb_id());
-		deleteMbBean.setMb_pw(tempDeleteUserDataBean.getMb_pw());
-
-		return tempDeleteUserDataBean;
-	}
 
 	// 삭제할 정보 확인
 	public void deleteUserInfo(Mb_Bean deleteMbBean) {
