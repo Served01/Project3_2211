@@ -47,7 +47,7 @@ public class Mb_Service {
 			//
 			Mb_Bean tempMbBean2 = mbDAO.getloginUserInfo(tempMbBean);
 
-			if (!tempMbBean2.equals(null)) {
+			if (tempMbBean2!=null) {
 				return true;
 			} else {
 				return false;

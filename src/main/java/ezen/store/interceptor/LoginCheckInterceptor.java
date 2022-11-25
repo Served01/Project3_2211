@@ -32,7 +32,12 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 		
 		String requestUrl = request.getRequestURL().toString();
 		
+		System.out.println(requestUrl);
+		
+		System.out.println(mb_id.equals("admin"));
+		
 			// 세션 없어도 되는 경우
+			
 			if(requestUrl.contains("/BkList")){ 
 				
 				return true;
@@ -73,7 +78,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 			
 			String Referer = request.getHeader("Referer");
 			
-			if(mb_id=="admin") {
+			if(mb_id.equals("admin")) {
 				return true;
 			}else {
 				
@@ -84,6 +89,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 				}
 				
 				if(requestUrl.contains("/BkUpdate")){ 
+					
 					response.sendRedirect(Referer);
 					
 					return false;
