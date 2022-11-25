@@ -287,7 +287,7 @@ function delBook(bk_number){
 					
 				</ul>
 			</div>
-			</div>d
+			</div>
 <c:import url="/Main/footer"></c:import>	
 
 </body>
