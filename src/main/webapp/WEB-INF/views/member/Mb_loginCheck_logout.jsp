@@ -9,7 +9,7 @@
 <body>
 	<h1>세션 만료</h1>
 	<script type="text/javascript">
-		alert("세션이 만료되었습니다.\n다시 로그인하여 주시기 바랍니다.")
+		alert("세션이 만료되었거나 로그인되지 않은 상태입니다.\n다시 로그인하여 주시기 바랍니다.")
 		location.href="${root}Main/center"
 	</script>
 </body>

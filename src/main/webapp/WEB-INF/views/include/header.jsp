@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <c:url var='root' value='/'/>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,19 +47,22 @@
           </form:form>
          
           <div class="btn-group" role="group" aria-label="Basic example">
-          <c:choose>
-		  <c:when test="${mb_id != null}">
-				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=admin'">마이페이지</button>
-				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
-		  </c:when>
-		  <c:when test="${mb_id == 'admin'}">
-				<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
-				<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
-		</c:when>	
-		  <c:otherwise>
+          
+	  	  <c:if test="${mb_id == 'admin'}">
+			<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
+			<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
+		  </c:if>
+		 
+		  <c:choose>
+		  <c:when test="${mb_id == '0'}">
 				<button type="button" onclick="location.href='${root }member/Mblogin'">로그인</button>
-				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button> 
+				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button> 	
+		  </c:when>	
+		  <c:otherwise>
+				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
+				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button>
 		  </c:otherwise>  
+		  
 		  </c:choose>      
           </div>
         </div>

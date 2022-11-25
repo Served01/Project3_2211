@@ -4,13 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import ezen.store.beans.Mb_Bean;
 
 
-//
 public class LoginCheckInterceptor implements HandlerInterceptor{
 
 
@@ -21,12 +21,17 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 		
 		HttpSession session = request.getSession();
 		
-		String mb_id = null;
+		String mb_id = "0";
 		
-		if(!session.getAttribute("mb_id").equals(null)) {
+		Object mb_id_ob = session.getAttribute("mb_id");
+		
+		if(!(mb_id_ob).equals(null)) {
+		
 		mb_id = (String) session.getAttribute("mb_id");
+		
 		}
-
+		
+		System.out.println(mb_id);
 		
 		String requestUrl = request.getRequestURL().toString();
 		
@@ -66,7 +71,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 				return true;
 			}
 
-		if(mb_id!=null) {
+		if(mb_id!="0") {
 			
 			
 			String Referer = request.getHeader("Referer");
@@ -99,12 +104,9 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 					return false;
 				}
 				
-				if(requestUrl.contains("/BkUpdate")){ 
-					response.sendRedirect(Referer);
+				
 					
-					return false;
-					
-				} else {
+				 else {
 			
 				return true;
 			
@@ -112,7 +114,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 			}
 		}
 		
-			response.sendRedirect("/member/Mblogin");
+			response.sendRedirect("/member/Mblogout");
 			//여기서 return 값은 원래 컨트롤러 요청 uri로 돌아가도 되냐 안되냐를 의미함.
 			return false;
 			
@@ -125,8 +127,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, 
 		
 		Object handler, ModelAndView modelAndView) throws Exception {
-		
-		
 		
 		
 	

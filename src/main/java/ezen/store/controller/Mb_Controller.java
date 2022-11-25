@@ -16,34 +16,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import ezen.store.beans.Mb_Bean;
 import ezen.store.beans.PageCountBean;
 import ezen.store.service.Mb_Service;
 
 @Controller
+@SessionAttributes("mb_id")
 @RequestMapping("/member")
 public class Mb_Controller {
 
 	@Autowired
 	private Mb_Service mbService;
 
-	// 로그인 여부 체크
-	@GetMapping("/loginCheck")
-	public String loginCheck() {
-
-		return "member/Mb_loginCheck_logout";
-	}
-	
 	// 로그아웃 컨트롤
 		@GetMapping("/Mblogout")
-		public String Mblogout(HttpServletRequest request) throws Exception {
+		public String Mblogout(SessionStatus sessionStatus) throws Exception {
 			
-			HttpSession session = request.getSession();
+			sessionStatus.setComplete();
 			
-			session.invalidate();
-			
-
 			return "member/Mb_logout";
 	}
 
@@ -51,7 +45,7 @@ public class Mb_Controller {
 	
 	// 회원 전체목록 기능
 	@GetMapping("/Mblist")
-	public String Mblist(@RequestParam("mb_id") String mb_id, 
+	public String Mblist(@SessionAttribute(value="mb_id") String mb_id, 
 						 @RequestParam(value="page", defaultValue="1") int page,
 						 Model model) {
 
@@ -88,9 +82,10 @@ public class Mb_Controller {
 	// 로그인 기능
 	@PostMapping("/Mbloginpro")
 	public String Mbloginpro(@Validated@ModelAttribute("tempMbBean") Mb_Bean tempMbBean, 
-							 HttpSession session,
-							 BindingResult result) {
+							 BindingResult result,
+							 Model model) {
 
+		
 		if (result.hasErrors()) {
 			
 			tempMbBean.setMblogin(false);
@@ -101,30 +96,19 @@ public class Mb_Controller {
 		tempMbBean.setMblogin(true);
 
 		boolean loginCheck = mbService.getloginUserInfo(tempMbBean);
-
+		
+		String mb_id = "0";
+		if(tempMbBean.getMb_id()!=null) {
+		mb_id = tempMbBean.getMb_id();
+		}
+		
 		if (loginCheck == true) {
 			
-			if(session.getAttribute("mb_id") != null) {
+			model.addAttribute("mb_id", mb_id);
 				
-				session.removeAttribute("mb_id");
-				
-				session.setAttribute("mb_id", tempMbBean.getMb_id());
-				
-				session.setMaxInactiveInterval(60*60*6);
-				
-				return "member/Mb_login_success";
-				
-			} else {
-			
-				session.removeAttribute("loginBean");
-				
-				session.setAttribute("loginBean", tempMbBean);
-				
-				session.setMaxInactiveInterval(60*60*6);
-			
 			return "member/Mb_login_success";
 			
-			}} else {
+			} else {
 				
 				tempMbBean.setMblogin(false);
 				

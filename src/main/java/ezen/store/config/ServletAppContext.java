@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -195,15 +196,21 @@ public class ServletAppContext implements WebMvcConfigurer{
 	}
 	
 	// 로그인 여부 인터셉터
-	public void addInterceptor(InterceptorRegistry registry) {
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
 		
-		WebMvcConfigurer.super.addInterceptors(registry);	
+		WebMvcConfigurer.super.addInterceptors(registry);
 		
-		LoginCheckInterceptor loginCheckInterceptor = new LoginCheckInterceptor();		
-		InterceptorRegistration registration = registry.addInterceptor(loginCheckInterceptor);
+		LoginCheckInterceptor loginCheckInterceptor = new LoginCheckInterceptor();
+		InterceptorRegistration registration1 = registry.addInterceptor(loginCheckInterceptor);
+		
+		
+		registration1.addPathPatterns("/**");
+		registration1.excludePathPatterns("");
+		
+		
 			
-		registration.addPathPatterns("/**");		
-			
+				
 	}
 	
 	
