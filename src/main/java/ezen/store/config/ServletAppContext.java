@@ -11,12 +11,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+import ezen.store.interceptor.LoginCheckInterceptor;
 import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Ca_Mapper;
 import ezen.store.mapper.Dv_Mapper;
@@ -191,29 +194,23 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return new StandardServletMultipartResolver();
 	}
 	
-	// 로그인 인터셉터
-	/*public void addInterceptor1(InterceptorRegistry registry) {
-		
-		WebMvcConfigurer.super.addInterceptors(registry);	
-		
-		LoginInterceptor loginInterceptor = new LoginInterceptor(loginShowBean);		
-		InterceptorRegistration registration1 = registry.addInterceptor(loginInterceptor);
-			
-		registration1.addPathPatterns("/**");		
-			
-	}
-	
 	// 로그인 여부 인터셉터
-	/*public void addInterceptor2(InterceptorRegistry registry) {
-		
-		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginMbBean);
-		
-		InterceptorRegistration registration2 = registry.addInterceptor(checkLoginInterceptor);
-		
-		registration2.addPathPatterns("/member/Mb_update", "/member/Mb_logout", "/board/*");
-		registration2.excludePathPatterns("/board/main");
-		
-	}*/	
+	@Override
+		public void addInterceptors(InterceptorRegistry registry) {
+			
+			WebMvcConfigurer.super.addInterceptors(registry);
+			
+			LoginCheckInterceptor loginCheckInterceptor = new LoginCheckInterceptor();
+			InterceptorRegistration registration1 = registry.addInterceptor(loginCheckInterceptor);
+			
+			
+			registration1.excludePathPatterns("/**");
+			//registration1.addPathPatterns("/book/BkInsert");
+			
+			
+				
+					
+	}
 	
 }
 

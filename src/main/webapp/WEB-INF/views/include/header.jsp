@@ -45,14 +45,22 @@
           </form:form>
           <div class="btn-group" role="group" aria-label="Basic example">
 			
-				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button>
-				<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
-				<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
-				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=admin'">마이페이지</button>
-				<button type="button" onclick="location.href='${root }member/Mbupdate?mb_id=admin'">정보수정</button>
-				<button type="button" onclick="location.href='${root }member/Mbdelete?mb_id=admin'">삭제</button>
+				<c:if test="${mb_id == 'admin'}">
+			<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
+			<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
+		  </c:if>
+		 
+		  <c:choose>
+		  <c:when test="${mb_id == '0'}">
 				<button type="button" onclick="location.href='${root }member/Mblogin'">로그인</button>
-				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>         
+				<button type="button" onclick="location.href='${root }member/Mbinsert'">회원가입</button> 	
+		  </c:when>	
+		  <c:otherwise>
+				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
+				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button>
+		  </c:otherwise>  
+		  
+		  </c:choose>         
           </div>
         </div>
       </nav>

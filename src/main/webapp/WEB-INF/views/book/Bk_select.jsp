@@ -367,12 +367,12 @@ function delBook(bk_number){
 				<!--  /like button  -->
 				</div>
 				</div>
+				<p>${ReadBkBean.bk_detail }
 				<p><b>저자</b> : ${ReadBkBean.bk_writer }
 				<p><b>출판사</b> : ${ReadBkBean.bk_publisher }
 				<p><b>출간일</b> : ${ReadBkBean.bk_pubdate }
 				<p><b>지역</b> : ${ReadBkBean.bk_local }
 				<p><b>장르</b> : ${ReadBkBean.bk_genre }
-				<p>${ReadBkBean.bk_detail }
 				<p><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
 				<form name="form" method="get">
 				<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">

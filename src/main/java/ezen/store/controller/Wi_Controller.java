@@ -40,10 +40,7 @@ public class Wi_Controller {
 		return "wish/wish_info";
 		
 	}
-	@GetMapping("/wish_test")
-	public String wish_test() {
-		return "wish/wish_test";
-	}
+	
 	
 	
 	

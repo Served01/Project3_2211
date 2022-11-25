@@ -22,6 +22,7 @@
 	
 </head>
 <style>
+
 .loading{
     width:100%;
     height:100%;
@@ -595,7 +596,7 @@ let basket = {
 	                    <div class="subdiv">
 	                        <div class="check">선택</div>
 	                        <div class="img">이미지</div>
-	                        <div id="see" class="pname" style="text-align:left; padding-left:22px;">상품명</div>
+	                        <div class="pname" style="text-align:left; padding-left:22px;">상품명</div>
 	                    </div>
 	                    <div class="subdiv" style="width:400px;">
 	                        <div class="basketprice" style="width:115px;">가격</div>

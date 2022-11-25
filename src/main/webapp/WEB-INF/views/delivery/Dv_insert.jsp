@@ -18,6 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- 검색 api -->
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
   <style>
     body {
@@ -90,7 +92,10 @@
 	function ResetDvNick(){
 		$("#dv_nickExist").val('false')
 	}
+	
+	
 </script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <body>
 
     <div class="input-form-backgroud row">
@@ -119,8 +124,14 @@
               <form:errors path="dv_tel" style="color:red"/>                                
            <div class="form-group">
               <form:label path="dv_address">배송지</form:label>
-              <form:input path="dv_address" class="form-control"/>   
-              <form:errors path="dv_address" style="color:red"/>               
+              <div class="input-group">
+              <form:input path="dv_address" class="form-control postcodify_address" readonly="true"/>
+              <div class="input-group-append">
+              <button type='button' class="btn btn-dark" id="postcodify_search_button">검색</button>
+              </div>
+              </div>         
+              <form:input path="dv_addressDetail" class="form-control"/>
+              <form:errors path="dv_address" style="color:red"/>             
            </div>         
           <div class="row">
             </div>

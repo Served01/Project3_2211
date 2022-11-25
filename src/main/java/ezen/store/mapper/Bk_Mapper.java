@@ -44,11 +44,12 @@ public interface Bk_Mapper {
 				@Select("select bk_number from Book_info where bk_title_upper like '%' || replace(upper(#{search_word}),' ','') || '%' and bk_deleted = '0'")
 				List<Bk_Number> getBkNumList2(String search_word);
 				
-				@Select("select count(*) from Book_info where bk_local = #{bk_local} and bk_genre like '%'||#{bk_genre}||'%' and bk_deleted = '0'")
+				//책 지역에 맞는 책전체 책 갯수 (지역, 장르)
+				@Select("select count(*) from Book_info where bk_local = #{bk_local} and bk_deleted = '0'")
 				int getAllCntBook(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
 				
-				//책 지역과 장르에 맞는 책들의 책번호 리스트 (지역, 장르)
-				@Select("select bk_number from Book_info where bk_local = #{bk_local} and bk_genre like '%'||#{bk_genre}||'%' and bk_deleted = '0'")
+				//책 지역에 맞는 책전체 책번호 리스트 (지역, 장르)
+				@Select("select bk_number from Book_info where bk_local = #{bk_local} and bk_deleted = '0'")
 				List<Bk_Number> getAllBkNumList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
 				
 		//책 정보를 추출하여 가져옵니다.

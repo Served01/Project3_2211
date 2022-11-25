@@ -24,7 +24,7 @@ public class Ca_Controller {
 	@GetMapping("/cart_info")
 	public String cart_info(@RequestParam("ca_mbid") String ca_mbid, Model model) {
 		
-//		model.addAttribute("ca_mbid" , ca_mbid);
+
 		
 		List<Ca_Bean> infoCa_Bean = ca_Service.getCartInfo(ca_mbid);
 		model.addAttribute("infoCa_Bean",infoCa_Bean);
@@ -32,10 +32,6 @@ public class Ca_Controller {
 		
 		return "cart/cart_info";
 		
-	}
-	@GetMapping("/cart_test")
-	public String cart_test() {
-		return "cart/cart_test";
 	}
 	
 	

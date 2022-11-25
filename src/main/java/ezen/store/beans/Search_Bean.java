@@ -2,6 +2,7 @@ package ezen.store.beans;
 
 public class Search_Bean {
 	
+	// 책 제목 검색 기능을 위한 bean
 	String search_word;
 
 	public String getSearch_word() {
