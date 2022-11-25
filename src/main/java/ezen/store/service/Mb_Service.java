@@ -13,10 +13,13 @@ import ezen.store.dao.Mb_DAO;
 @Service
 public class Mb_Service {
 
+
 	@Autowired
 	private Mb_DAO mbDAO;
+	
 	@Value("${page.mblistcnt}")
-	private int page_listcnt;  
+	private int page_listcnt; 
+	
 	//페이지
 	@Value("${page.mbpagButtonCnt}")
 	private int page_pageButtonCnt;
@@ -40,63 +43,60 @@ public class Mb_Service {
 	}
 
 	// 로그인 정보 확인
-	public boolean getloginUserInfo(Mb_Bean tempMbBean) {
-		//
-		Mb_Bean tempMbBean2 = mbDAO.getloginUserInfo(tempMbBean);
+		public boolean getloginUserInfo(Mb_Bean tempMbBean) {
+			//
+			Mb_Bean tempMbBean2 = mbDAO.getloginUserInfo(tempMbBean);
 
-		if (!tempMbBean2.equals(null)) {
-			return true;
-		} else {
-			return false;
+			if (!tempMbBean2.equals(null)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
-	}
-	
+
+		// 회원정보 수정 정보 가져오기
+		public Mb_Bean getModifyUserInfo(String mb_id) {
+			
+			return mbDAO.getModifyUserInfo(mb_id);
+			
+		}
+
+		// 회원정보 수정 실행
+		public void modifyUserInfo(Mb_Bean updateMbBean) {
+
+			mbDAO.modifyUserInfo(updateMbBean);
+			
+		}
 
 
+		// 삭제할 정보 확인
+		public void deleteUserInfo(Mb_Bean deleteMbBean) {
+			//
+			mbDAO.deleteUserInfo(deleteMbBean);
 
-	// 회원정보 수정 정보 가져오기
-	public Mb_Bean getModifyUserInfo(String mb_id) {
+		}
+
+		// 전체회원 목록 리스트 가져오기
+		public List<Mb_Bean> getMbList() {
+
+			return mbDAO.getMbList();
+		}
 		
-		return mbDAO.getModifyUserInfo(mb_id);
-		
-	}
+		//전체회원 페이지네이션
+		public PageCountBean getContentCnt(int currentPage) {
+			
+			int content_cnt = mbDAO.getCntMember();
+			
+			PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+			
+			return pageCountBean;
+			
+		}
 
-	// 회원정보 수정 실행
-	public void modifyUserInfo(Mb_Bean updateMbBean) {
+		// 회원 상세보기 가져오기
+		public Mb_Bean getMbInfo(String mb_id) {
 
-		mbDAO.modifyUserInfo(updateMbBean);
-		
-	}
-
-
-	// 삭제할 정보 확인
-	public void deleteUserInfo(Mb_Bean deleteMbBean) {
-		//
-		mbDAO.deleteUserInfo(deleteMbBean);
-
-	}
-
-	// 전체회원 목록 리스트 가져오기
-	public List<Mb_Bean> getMbList() {
-
-		return mbDAO.getMbList();
-	}
-	
-	//전체회원 페이지네이션
-	public PageCountBean getContentCnt(int currentPage) {
-		
-		int content_cnt = mbDAO.getCntMember();
-		
-		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
-		
-		return pageCountBean;
-		
-	}
-
-	// 회원 상세보기 가져오기
-	public Mb_Bean getMbInfo(String mb_id) {
-
-		return mbDAO.getMbInfo(mb_id);
-	}
+			return mbDAO.getMbInfo(mb_id);
+		}
 
 }

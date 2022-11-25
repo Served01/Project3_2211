@@ -24,4 +24,13 @@ public class Dv_RestController {
 		
 	}
 	
+	//Dv_delete
+	@GetMapping("/delivery/DvDelete/{mb_id}/{dv_nick}")
+	public String DvDelete(@PathVariable("mb_id") String mb_id, @PathVariable("dv_nick") String dv_nick) {
+		
+		dv_Service.DeleteDvInfo(mb_id, dv_nick);
+		
+		return "delivery/Dv_delete";
+	}
+	
 }

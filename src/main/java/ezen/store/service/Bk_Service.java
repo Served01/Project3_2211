@@ -118,6 +118,22 @@ public class Bk_Service {
 					return BkDAO.getBkNumList2(search_word);
 							
 				}
+				
+				//ff
+				
+				public PageCountBean getAllContentCnt(String bk_local, String bk_genre, int currentPage) {
+					
+					int content_cnt = BkDAO.getAllCntBook(bk_local, bk_genre);
+					
+					PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+					
+					return pageCountBean;
+				}
+				
+				public List<Bk_Number> getAllBkNumList(String bk_local,String bk_genre){
+					return BkDAO.getAllBkNumList(bk_local,bk_genre);
+				}
+				
 			
 		//책 정보 수정
 		public void updateBook(Bk_Bean updateBkBean) {

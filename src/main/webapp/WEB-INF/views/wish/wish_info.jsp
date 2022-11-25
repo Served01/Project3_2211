@@ -19,6 +19,15 @@
 	
 </head>
 <style>
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
 
 .basketdiv {
     width: 100%;
@@ -367,10 +376,17 @@ let basket = {
 	    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
 	    return nstr;
 	};
-
+	 $(window).on('load', function () {
+		 $(".loading").fadeOut();
+		// $("body").css("background", "white");
+	 });
 </script>
 <body>
-					
+<c:import url="/Main/header"></c:import>
+	<!-- 로딩 -->		
+	<div class="loading"></div>
+			
+	<div class="container">						
 					          
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
@@ -448,6 +464,7 @@ let basket = {
 						</li>
 					
 				</ul>
-			</div>		
+			</div>
+		</div>		
 </body>
 </html>

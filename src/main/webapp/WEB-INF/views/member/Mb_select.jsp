@@ -80,9 +80,8 @@
 							
 						</c:import>
 					</div>	
-						
+			<c:import url="/Main/footer"></c:import>			
           
 </div>
-<c:import url="/Main/footer"></c:import>
 </body>
 </html>

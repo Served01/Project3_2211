@@ -28,10 +28,8 @@
 <!-- 아이콘 -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js" ></script> 
-
   </head>
-
-  <style>
+      <style>
 
   </style>
  
@@ -42,13 +40,12 @@
         
           <a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a>
           <form:form action="${root }book/BkList" method="get" modelAttribute="searchBean" class="d-flex">
-            <form:input class="form-control me-2" path="search_word" placeholder="Search" aria-label="Search"/>
-            <form:button class="btn btn-outline-success" type="submit">Search</form:button>
+            <form:input style="height:50px;width:500px;" class="form-control me-2" path="search_word" placeholder="Search" aria-label="Search"/>
+            <form:button style="height:50px;" class="btn btn-outline-success" type="submit">Search</form:button>
           </form:form>
-         
           <div class="btn-group" role="group" aria-label="Basic example">
-          
-	  	  <c:if test="${mb_id == 'admin'}">
+			
+				<c:if test="${mb_id == 'admin'}">
 			<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
 			<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
 		  </c:if>
@@ -63,11 +60,10 @@
 				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button>
 		  </c:otherwise>  
 		  
-		  </c:choose>      
+		  </c:choose>         
           </div>
         </div>
       </nav>
-      
       
       
     <div id="shopify-section-navigation-primary" class="shopify-section">
@@ -86,7 +82,7 @@
 				</button>
 				<ul  style="background-color:#f8f9fa"class="primary-navigation-ul horizontal-mega-menu">
 					<li class="buddha-menu-item primary-navigation-li">
-						<a style="color:#8685EF">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<a href="${root }book/BkList?bk_local=국내&bk_genre=전체&mb_id=admin" style="color:#8685EF">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
 						<ul style="background-color:white" class="mm-submenu tree">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
 								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
@@ -115,7 +111,7 @@
 						</ul>
 					
 					<li class="buddha-menu-item primary-navigation-li">
-						<a style="color:#8685EF	">해외도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<a href="${root }book/BkList?bk_local=해외&bk_genre=전체&mb_id=admin" style="color:#8685EF	">해외도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
 						<ul class="mm-submenu tree" style="background-color:white">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
 								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin" href="/collections/brand-isospec" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>

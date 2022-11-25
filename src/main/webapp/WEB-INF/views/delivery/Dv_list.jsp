@@ -10,7 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원 정보 보기 화면 - 마이페이지</title>
   <script src="https://kit.fontawesome.com/ece1cdce53.js" crossorigin="anonymous"></script>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -47,6 +48,27 @@
     text-align :center;
     }
   </style>
+<script>
+
+function delDv(mb_id, dv_nick){
+	 var conFirm = confirm('삭제 하시겟습니까');
+	 if (conFirm) {
+		 $.ajax({
+				url: '${root }delivery/DvDelete/' + mb_id +'/'+ dv_nick,
+				type: 'get',
+				dataType: 'text',
+				error : function(e) {
+					alert("삭제 실패"+ e);
+					//alert(e);
+				},
+				success: function(){
+					alert("삭제되었습니다.")
+					location.href="${root}member/Mbselect?mb_id="+mb_id;
+				}
+			})
+	 	}
+}
+</script>
 </head>
 <body>
 
@@ -73,7 +95,8 @@
 			</tr>
 			<tr>
 				<td><a href="${root}delivery/DvUpdate?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 수정</a></td>
-				<td><a href="${root}delivery/DvDelete?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark">배송지 삭제</a></td>
+				<td>
+				<input class="btn btn-info" type="button" onclick="javascript:delDv('${dvl.mb_id }','${dvl.dv_nick}')" value="배송지 삭제"></td>
 			</tr>
 			</c:forEach>
 		</tbody>

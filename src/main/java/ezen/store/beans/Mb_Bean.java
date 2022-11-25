@@ -20,7 +20,14 @@ public class Mb_Bean {
 
 	@Size(min = 8, max = 15)
 	private String mb_pw2;
-
+	
+	@Size(min = 8, max = 15)
+	private String mb_pw3;
+	
+	@Size(min = 8, max = 15)
+	private String mb_pw4;
+	
+	
 	@Size(min = 1, max = 30)
 	private String mb_email;
 	
@@ -36,9 +43,6 @@ public class Mb_Bean {
 	
 	//아이디용
 	private boolean mbIdExist;
-	
-	//비번용
-	private boolean mbPwExist;
 	
 	//로그인용
 	private boolean mblogin;
@@ -70,9 +74,25 @@ public class Mb_Bean {
 	public String getMb_pw2() {
 		return mb_pw2;
 	}
-
+	
 	public void setMb_pw2(String mb_pw2) {
 		this.mb_pw2 = mb_pw2;
+	}
+
+	public String getMb_pw3() {
+		return mb_pw3;
+	}
+
+	public void setMb_pw3(String mb_pw3) {
+		this.mb_pw3 = mb_pw3;
+	}
+
+	public String getMb_pw4() {
+		return mb_pw4;
+	}
+
+	public void setMb_pw4(String mb_pw4) {
+		this.mb_pw4 = mb_pw4;
 	}
 
 	public String getMb_email() {
@@ -90,6 +110,11 @@ public class Mb_Bean {
 	public void setMb_tel(String mb_tel) {
 		this.mb_tel = mb_tel;
 	}
+
+	public Mb_Bean() {
+		this.mbIdExist = false;
+		this.mblogin = false;
+	}
 	
 	public boolean isMbIdExist() {
 		return mbIdExist;
@@ -99,13 +124,6 @@ public class Mb_Bean {
 		this.mbIdExist = mbIdExist;
 	}
 
-	public boolean isMbPwExist() {
-		return mbPwExist;
-	}
-	public void setMbPwExist(boolean mbPwExist) {
-		this.mbPwExist = mbPwExist;
-	}
-	
 	public boolean isMblogin() {
 		return mblogin;
 	}

@@ -57,6 +57,43 @@ public class Bk_Controller {
 				@ModelAttribute("searchBean") Search_Bean searchBean,
 				@RequestParam(value="page", defaultValue="1") int page,
 				Model model, BindingResult result) {
+			//전체
+			if(bk_genre.equals("전체")||bk_genre.equals("")) {
+				
+				bk_genre = "";
+				
+				model.addAttribute("bk_local", bk_local);
+				model.addAttribute("bk_genre", bk_genre);
+				model.addAttribute("mb_id", mb_id);
+				
+				List<Bk_Number> bkNumList = BkService.getAllBkNumList(bk_local, bk_genre);
+				
+				List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
+				
+				for(int i=0; i<bkNumList.size(); i++) {
+					
+					Bk_Number bk_numbers = bkNumList.get(i);
+					int bk_number = bk_numbers.getBk_number();
+					
+					Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
+					double avg_score = BkService.getBkScore(bk_number);
+					
+					bkInfoBean.setAvg_score(avg_score);
+					
+					bkListBean.add(i, bkInfoBean);
+				}
+				
+				model.addAttribute("bkListBean", bkListBean);
+				
+				PageCountBean pageCountBean = BkService.getAllContentCnt(bk_local, bk_genre, page);
+				
+				model.addAttribute("pageCountBean", pageCountBean);
+				
+				
+				return "book/Bk_list";
+			}else
+			
+			
 			
 			//검색어의 경우
 			if(searchBean.getSearch_word() != null) {

@@ -69,11 +69,22 @@ public class Bk_DAO {
 					return bk_Mapper.getCntBook2(search_word);
 							
 				}
+				public List<Bk_Number> getAllBkNumList(String bk_local,String bk_genre){
+					return bk_Mapper.getAllBkNumList(bk_local,bk_genre);
+				}
+				
+				//책 리스트 갯수 (지역, 장르)
+				public int getAllCntBook(String bk_local, String bk_genre) {
+					
+					return bk_Mapper.getAllCntBook(bk_local, bk_genre);
+					
+				}
 	
 		//책 정보 삭제(수정)
 		public void deleteBook(int bk_number) {
 			bk_Mapper.deleteBkBean(bk_number);
 		}
-
+		
+		
 
 }

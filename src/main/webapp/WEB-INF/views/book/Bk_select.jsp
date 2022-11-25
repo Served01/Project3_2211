@@ -326,10 +326,7 @@ function delBook(bk_number){
 				}
 			})
 	 	}
-	   
-	   else {
-	     
-	   }
+
 }
 </script>
 <c:import url="/Main/header"></c:import>

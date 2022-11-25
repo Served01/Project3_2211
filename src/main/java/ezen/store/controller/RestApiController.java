@@ -10,7 +10,7 @@ import ezen.store.service.Mb_Service;
 
 // html형태의 데이터가 아니라면 사용합니다. 아니라면 json으로 처리를 합니다.
 @RestController
-public class Bk_RestController {
+public class RestApiController {
 
 	@Autowired
 	Bk_Service BkSevice;
@@ -25,7 +25,26 @@ public class Bk_RestController {
 		
 	}
 	
-
+	@Autowired
+	Mb_Service mbSevice;
+	
+	@GetMapping("/member/checkUserIdExist/{mb_id}")
+	public String restApiControll(@PathVariable String mb_id) {
+		
+		boolean chk = mbSevice.checkUserIdExist(mb_id);
+		
+		return chk + "";
+		
+	}
+	
+	@GetMapping("/member/checkUserIdExist2/{mb_pw}")
+	public String restApiControll2(@PathVariable String mb_pw) {
+		
+		boolean chk = mbSevice.checkUserIdExist(mb_pw);
+		
+		return chk + "";
+		
+	}
 	
 	// 책정보 삭제(수정) 기능 컨트롤러
 	@GetMapping("/book/BkDeletePro/{bk_number}")
