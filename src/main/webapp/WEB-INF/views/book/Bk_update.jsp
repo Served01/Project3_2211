@@ -243,7 +243,7 @@ function previewImage(targetObj, View_area) {
 					</tr>
 					<tr align="center">
 						<td height="20" width="10">
-						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
+						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')" required="true"/></td>
 						<form:errors path="upload_file" style="color:red"></form:errors>
 						<td height="70" width="200">가격</td>
 						<td height="20" width="400">
@@ -270,7 +270,7 @@ function previewImage(targetObj, View_area) {
 				<hr class="mb-4">
 				<div class="hi">
 				<form:button type="submit" class="btn btn-dark">수정완료</form:button>
-				<form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
+				<a href="javascript:window.history.back();"class="btn btn-dark" role="button">뒤로가기</a>
 				</div>
 			</form:form>
 			</div>

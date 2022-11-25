@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Bk_Number;
+import ezen.store.beans.PageCountBean;
 import ezen.store.dao.Bk_DAO;
 
 
@@ -20,6 +21,12 @@ public class Bk_Service {
 	
 	@Value("${path.upload}")
 	private String PathUpload;
+	
+	@Value("${page.bklistcnt}")
+	private int page_listcnt;  
+	//페이지
+	@Value("${page.bkpagButtonCnt}")
+	private int page_pageButtonCnt;
 	
 	@Autowired
 	private Bk_DAO BkDAO;
@@ -36,7 +43,6 @@ public class Bk_Service {
 	}
 	
 	//업로드 받은 파일명 관련 서비스
-	@SuppressWarnings("unused")
 	private String SaveUploadFile(MultipartFile upload_file) {
 		
 		String file_name = upload_file.getOriginalFilename();
@@ -66,7 +72,7 @@ public class Bk_Service {
 		
 		}
 	
-	//해당 책 평균 평점
+		//해당 책 평균 평점
 		public double getBkScore(int bk_number) { 
 			  
 			return BkDAO.getBkScore(bk_number); 
@@ -78,12 +84,56 @@ public class Bk_Service {
 			return BkDAO.getBkInfo(bk_number); 
 		}
 		
-		//책 리스트를 위한 책번호 리스트
-		public List<Bk_Number> getBkNumList(String bk_local, String bk_genre){
-			
-			return BkDAO.getBkNumList(bk_local, bk_genre);
-			
-		}
+		//책 리스트 갯수 (지역, 장르)
+				public PageCountBean getContentCnt1(String bk_local, String bk_genre, int currentPage) {
+					
+					int content_cnt = BkDAO.getCntBook1(bk_local, bk_genre);
+					
+					PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+					
+					return pageCountBean;
+				}
+				
+				//책 리스트를 위한 책번호 리스트 (지역, 장르)
+				public List<Bk_Number> getBkNumList1(String bk_local, String bk_genre){
+							
+					return BkDAO.getBkNumList1(bk_local, bk_genre);
+							
+				}
+				
+				//책 리스트 갯수 (검색어)
+				public PageCountBean getContentCnt2(String search_word, int currentPage) {
+							
+					int content_cnt = BkDAO.getCntBook2(search_word);
+							
+					PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+							
+					return pageCountBean;
+				}
+				
+				
+				//책 리스트를 위한 책번호 리스트 (검색어)
+				public List<Bk_Number> getBkNumList2(String search_word){
+							
+					return BkDAO.getBkNumList2(search_word);
+							
+				}
+				
+				//ff
+				
+				public PageCountBean getAllContentCnt(String bk_local, String bk_genre, int currentPage) {
+					
+					int content_cnt = BkDAO.getAllCntBook(bk_local, bk_genre);
+					
+					PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+					
+					return pageCountBean;
+				}
+				
+				public List<Bk_Number> getAllBkNumList(String bk_local,String bk_genre){
+					return BkDAO.getAllBkNumList(bk_local,bk_genre);
+				}
+				
 			
 		//책 정보 수정
 		public void updateBook(Bk_Bean updateBkBean) {
