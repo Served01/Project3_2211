@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
-<c:url var='root' value='/'/>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +9,8 @@
 <body>
 
 	<script>
-		alert("주문 수정 성공")
-		location.href="${root}order/Or_list?mb_id=${mb_id}"
+		alert("주문 수정 실패, 다시 시도 바랍니다.")
+		location.href="${root}Or_list?mb_id=hyun1"
 	</script>
 
 </body>

@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>       
-<c:url var='root' value='/'/>  <!DOCTYPE html>
+<c:url var='root' value='/'/>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -113,23 +114,5 @@ function delDv(mb_id, dv_nick){
 </div>
 
 </div>
- <script>
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
-
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  </script>
-  
- 
 </body>
 </html>

@@ -1,10 +1,15 @@
 package ezen.store.dao;
 
 import java.util.List;
+import java.util.HashMap;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.Or_items;
 import ezen.store.mapper.Or_Mapper;
 
 @Repository
@@ -58,6 +63,10 @@ public class Or_DAO {
 	public List<Or_Bean> UpdateOriBean(String or_number) {
 		return or_Mapper.UpdateOriBean(or_number);
 	}
+	
+	public Or_Bean DvSelect(String mb_id, String dv_pk) {
+		return or_Mapper.DvSelect(mb_id, dv_pk);
+	}
 //	public void UpdateOrBean(String or_mbid, String or_number) {
 //		or_Mapper.UpdateOrInfo(or_mbid, or_number);
 //	}
@@ -74,7 +83,23 @@ public class Or_DAO {
 		
 	}
 
+	public List<Or_items> SelectBkQuantity(String or_number) {
+		return or_Mapper.SelectBkQuantity(or_number);
+	}
+
 	
+	public Or_Bean SelectBkPurchase(@Param("or_number") String or_number, @Param("bk_number") int bk_number) {
+		return or_Mapper.SelectBkPurchase(or_number, bk_number);
+	}
+	
+	public Or_Bean SelectBkAfter(@Param("or_number") String or_number, @Param("bk_number") int bk_number) {
+		return or_Mapper.SelectBkAfter(or_number, bk_number);
+	}
+
+	public void UpdateBkQuantity(Or_Bean updateBkBean) {
+		or_Mapper.UpdateBkQuantity(updateBkBean);
+		
+	}
 	
 //	public void Or_insert(String or_mbid, int or_bknumbers) {
 //		or_Mapper.Or_insert(or_mbid, or_bknumbers); 

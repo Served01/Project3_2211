@@ -22,6 +22,8 @@ public class Dv_Bean {
 	
 	private String dv_address;
 	
+	private String dv_addressDetail;
+	
 	private String dv_pk;
 	
 	private boolean dv_numExist;
@@ -61,6 +63,12 @@ public class Dv_Bean {
 	public void setDv_address(String dv_address) {
 		this.dv_address = dv_address;
 	}
+	public String getDv_addressDetail() {
+		return dv_addressDetail;
+	}
+	public void setDv_addressDetail(String dv_addressDetail) {
+		this.dv_addressDetail = dv_addressDetail;
+	}
 	public String getDv_pk() {
 		return dv_pk;
 	}
@@ -72,10 +80,6 @@ public class Dv_Bean {
 	}
 	public void setDv_numExist(boolean dv_numExist) {
 		this.dv_numExist = dv_numExist;
-	}
-	
-	
-	
-	
+	}	
 	
 }

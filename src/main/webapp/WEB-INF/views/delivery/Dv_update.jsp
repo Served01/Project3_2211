@@ -17,7 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
   <style>
     body {
       min-height: 100vh;
@@ -57,6 +57,8 @@
  }
   </style>
 </head>
+
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <body>
  <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -80,7 +82,12 @@
 		</div>	
 		<div class="form-group">
 			<form:label path="dv_address">배송지</form:label>
+			<div class="input-group">
 			<form:input path="dv_address" class="form-control"/>
+			<div class="input-group-append">
+            <button type='button' class="btn btn-dark" id="postcodify_search_button">검색</button>
+            </div>
+            </div>     
 			<form:errors path="dv_address" style="color:red"/>
            </div>         
           <div class="row">
