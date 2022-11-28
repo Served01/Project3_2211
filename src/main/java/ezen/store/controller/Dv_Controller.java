@@ -30,6 +30,7 @@ public class Dv_Controller {
 		model.addAttribute("Deliverylist", Deliverylist);
 		
 		return "delivery/Dv_list";
+		
 	}
 	
 	
@@ -38,41 +39,50 @@ public class Dv_Controller {
 	public String DvInsert(@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean) {
 				
 		return "delivery/Dv_insert";
+	
 	}
 	
 	@PostMapping("/delivery/DvInsertPro")
 	public String DvInsertPro(@Validated@ModelAttribute("InsertDvBean") Dv_Bean InsertDvBean,
-							BindingResult result) {
+							  BindingResult result) {
 		
 		if(result.hasErrors()) {
+			
 			return "/delivery/Dv_insert";
-			}
+		
+		}
 		
 		dv_Service.addDvInfo(InsertDvBean);
 		
 		return "delivery/Dv_insert_success";
+		
 	}
 	
 	//Dv_update
 	@GetMapping("/delivery/DvUpdate")
-	public String DvUpdate(@SessionAttribute("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick, Model model) {
+	public String DvUpdate(@SessionAttribute("mb_id") String mb_id, 
+						   @RequestParam("dv_nick") String dv_nick, Model model) {
 		
 		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(mb_id, dv_nick);
 		model.addAttribute("UpdateDvBean", UpdateDvBean);
 		
 		return "delivery/Dv_update";
+	
 	}
 	
 	@PostMapping("/delivery/DvUpdatePro")
 	public String DvUpdatePro(@Validated@ModelAttribute("UpdateDvBean") Dv_Bean UpdateDvBean, BindingResult result) {
 		
 		if(result.hasErrors()) {
+			
 			return "delivery/Dv_update";
+		
 		}
 		
 		dv_Service.UpdateDvInfo(UpdateDvBean);
 		
 		return "delivery/Dv_update_success";
+		
 	}
 	
 }

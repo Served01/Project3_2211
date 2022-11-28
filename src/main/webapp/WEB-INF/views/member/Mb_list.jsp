@@ -38,7 +38,7 @@ border: 1px solid #F3E8EB;
 
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto" id="adad" style="top:50px;">
-			<a href="#" onclick="location.href='${root}Main.center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+			<a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
 					Ezen Book Store
 				</a> <br>
 			<h4 class="mb-3"style="font-family: 'Noto Sans KR', sans-serif;">회원목록 보기화면(관리자)</h4>

@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
-<style>
+  <style>
     body {
       min-height: 100vh;
 		background-color:#F3E8EB;
@@ -47,7 +47,7 @@
 <body>
 <div class="container" align="center">
 	<div class="input-form col-md-12 mx-auto">	
-      <a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px; font-family:'Frank Ruhl Libre', serif;">
+      <a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
 		Ezen Book Store</a> 
 		
         <br>
@@ -69,9 +69,9 @@
 						<input type="text" id="mb_tel" name="mb_tel" class="form-control" value="${mbBean.mb_tel }" disabled="disabled"/>
 						</div>
 						<div class="mb-4"></div>
-         				 <button class="btn btn-dark" onclick="location.href='Mbupdate?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">정보수정</button>
-         				 <button class="btn btn-dark" onclick="location.href='Mbdelete?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">회원탈퇴</button>
-         				 <a href="${root }index" class="btn btn-danger" style="font-family: 'Noto Sans KR', sans-serif;">메인화면</a>
+         				 <button class="btn btn-dark" onclick="location.href='Mbupdate?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">수정</button>
+         				 <button class="btn btn-dark" onclick="location.href='Mbdelete?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">삭제</button>
+         				 <a href="${root }Main/center" class="btn btn-danger" style="font-family: 'Noto Sans KR', sans-serif;">메인화면</a>
 					
 						<c:import url="/delivery/DvList">
 							

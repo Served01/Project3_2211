@@ -14,19 +14,6 @@ import ezen.store.service.Mb_Service;
 public class RestApiController {
 
 	@Autowired
-	Bk_Service BkSevice;
-	
-	//책 일련번호 중복 체크 관련 컨트롤러
-	@GetMapping("/book/CheckBkNumExist/{bk_number}")
-	public String restApiControll(@PathVariable int bk_number) {
-		
-		boolean chk = BkSevice.CheckBkNumExist(bk_number);
-		
-		return chk + "";
-		
-	}
-	
-	@Autowired
 	Mb_Service mbSevice;
 	
 	@GetMapping("/member/checkUserIdExist/{mb_id}")
@@ -47,6 +34,19 @@ public class RestApiController {
 		
 	}
 	
+	@Autowired
+	Bk_Service BkSevice;
+	
+	//책 일련번호 중복 체크 관련 컨트롤러
+	@GetMapping("/book/CheckBkNumExist/{bk_number}")
+	public String restApiControll(@PathVariable int bk_number) {
+		
+		boolean chk = BkSevice.CheckBkNumExist(bk_number);
+		
+		return chk + "";
+		
+	}
+	
 	// 책정보 삭제(수정) 기능 컨트롤러
 	@GetMapping("/book/BkDeletePro/{bk_number}")
 	public String bkDeletePro(@PathVariable int bk_number) {		
@@ -56,6 +56,5 @@ public class RestApiController {
 		return null;
 		
 	}
-	
 	
 }

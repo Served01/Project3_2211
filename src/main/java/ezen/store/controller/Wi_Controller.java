@@ -22,10 +22,8 @@ public class Wi_Controller {
 	private Wi_Service wi_Service;
 
 	@GetMapping("/wish_info")
-	public String wish_info(
-			@SessionAttribute("mb_id") String wi_mbid, 
-			@RequestParam(value = "page", defaultValue = "1") int page,
-			Model model) {
+	public String wish_info(@SessionAttribute("mb_id") String wi_mbid, 
+							@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		model.addAttribute("wi_mbid", wi_mbid);
 		
@@ -37,12 +35,8 @@ public class Wi_Controller {
 		
 		model.addAttribute("page", page);
 		
-		
 		return "wish/wish_info";
 		
 	}
-	
-	
-	
 	
 }

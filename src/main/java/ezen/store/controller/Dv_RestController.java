@@ -32,6 +32,7 @@ public class Dv_RestController {
 		dv_Service.DeleteDvInfo(mb_id, dv_nick);
 		
 		return "delivery/Dv_delete";
+		
 	}
 	
 }
