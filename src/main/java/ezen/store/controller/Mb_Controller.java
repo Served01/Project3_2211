@@ -36,17 +36,31 @@ public class Mb_Controller {
 			
 			return "member/Mb_logout";
 	}
+		
+	// 세션 종료후 자동 초기화
+		@GetMapping("/MbInitial")
+		public String Mbintial(Model model) {
+					
+				model.addAttribute("mb_id","0");
+					
+				return "member/Mb_not_login";
+		}
 
 		
+	//로그인을 요구하는 페이지
+	@GetMapping("/MbRequired")
+	public String Mbrequired(@ModelAttribute("tempMbBean") Mb_Bean tempMbBean
+							  ) {
+		return "member/Mb_required_login";
+	}
 	
 	// 회원 전체목록 기능
 	@GetMapping("/Mblist")
-	public String Mblist(@SessionAttribute(value="mb_id") String mb_id, 
+	public String Mblist( 
 						 @RequestParam(value="page", defaultValue="1") int page,
 						 Model model) {
 
-		model.addAttribute("mb_id", mb_id);
-
+		
 		List<Mb_Bean> memberlist = mbService.getMbList();
 		model.addAttribute("memberlist", memberlist);
 		
@@ -58,10 +72,9 @@ public class Mb_Controller {
 
 	// 회원 상세보기 기능
 	@GetMapping("/Mbselect")
-	public String Mbselect(@RequestParam("mb_id") String mb_id, Model model) {
+	public String Mbselect(@SessionAttribute("mb_id") String mb_id, Model model) {
 
-		model.addAttribute("mb_id", mb_id);
-
+		
 		Mb_Bean mbBean = mbService.getMbInfo(mb_id);
 		model.addAttribute("mbBean", mbBean);
 
@@ -94,6 +107,7 @@ public class Mb_Controller {
 		boolean loginCheck = mbService.getloginUserInfo(tempMbBean);
 		
 		String mb_id = "0";
+		
 		if(tempMbBean.getMb_id()!=null) {
 		mb_id = tempMbBean.getMb_id();
 		}
@@ -101,7 +115,9 @@ public class Mb_Controller {
 		if (loginCheck == true) {
 			
 			model.addAttribute("mb_id", mb_id);
-				
+			
+			
+			
 			return "member/Mb_login_success";
 			
 			} else {
@@ -138,7 +154,7 @@ public class Mb_Controller {
 
 	// 회원정보 수정 페이지
 	@GetMapping("/Mbupdate")
-	public String Mbupdate(@RequestParam("mb_id") String mb_id, Model model) {
+	public String Mbupdate(@SessionAttribute("mb_id") String mb_id, Model model) {
 		
 		Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id);
 		model.addAttribute("updateMbBean", updateMbBean);
@@ -165,7 +181,7 @@ public class Mb_Controller {
 	
 		// 회원정보 삭제 페이지
 		@GetMapping("/Mbdelete")
-		public String Mbdelete(@RequestParam("mb_id") String mb_id, Model model) {
+		public String Mbdelete(@SessionAttribute("mb_id") String mb_id, Model model) {
 
 			Mb_Bean deleteMbBean = mbService.getMbInfo(mb_id);
 			model.addAttribute("deleteMbBean", deleteMbBean);

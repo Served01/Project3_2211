@@ -21,17 +21,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>	
 body {
 	min-height: 100vh;
-	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),
-		to(#1d466c));
-	background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-}
+	background-color:#F3E8EB;
+	text-align:center;
+	}
+	a{
+	font-family: 'Noto Sans KR', sans-serif;
+	}e
 .input { margin:0 0 0 50; }
 
 .input-form {
@@ -156,7 +162,8 @@ function previewImage(targetObj, View_area) {
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto" style="margin-top:50px">
-				<h4 class="mb-3" align="center">책 정보 수정</h4>
+			<a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a> <br>
+				<h4 class="mb-3" align="center"style="font-family: 'Noto Sans KR', sans-serif;">책 정보 수정</h4>
 				<form:form class="validation-form" action="${root }book/BkUpdatePro" method="post" modelAttribute="updateBkBean" enctype="multipart/form-data">		
 				
 				<table border="1">
@@ -168,7 +175,7 @@ function previewImage(targetObj, View_area) {
 							</div>
 						</td>
 
-					<tr align = "center">
+					<tr align = "center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">일련번호</td>
 						<td height="20" width="400">
 						<div class="input-group">
@@ -177,35 +184,35 @@ function previewImage(targetObj, View_area) {
 						<form:errors path="bk_number" style="color:red"></form:errors>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">제목</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_title"/>
 						<form:errors path="bk_title" style="color:red"></form:errors>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">저자</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_writer"/>
 						<form:errors path="bk_writer" style="color:red"></form:errors>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">출판사</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_publisher"/>
 						<form:errors path="bk_publisher" style="color:red"></form:errors>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">출간일</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_pubdate" placeholder="xxxx-xx-xx"/>
 						<form:errors path="bk_pubdate" style="color:red"></form:errors>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="50" width="200">지역</td>
 						<td height="20" width="400">
               			<form:select class="custom-select d-block w-100" path="bk_local">
@@ -214,7 +221,7 @@ function previewImage(targetObj, View_area) {
               			</form:select>
               			</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="40" width="200">장르</td>
 						<td height="20" width="400">
 			            <form:select class="custom-select d-block w-100" path="bk_genre">
@@ -229,7 +236,7 @@ function previewImage(targetObj, View_area) {
 			             </form:select>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">재고</td>
 						<td height="20" width="200">
 						<div class="input-group">
@@ -241,9 +248,9 @@ function previewImage(targetObj, View_area) {
 						<form:errors path="bk_quantity" style="color:red"></form:errors>
 						</td>		
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="20" width="10">
-						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')" required="true"/></td>
+						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
 						<form:errors path="upload_file" style="color:red"></form:errors>
 						<td height="70" width="200">가격</td>
 						<td height="20" width="400">
@@ -256,11 +263,11 @@ function previewImage(targetObj, View_area) {
 						<form:errors path="bk_price" style="color:red"></form:errors>
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td colspan="4">상세내용
 						</td>
 					</tr>
-					<tr align="center">
+					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td colspan="4" height="600" width="400">
 						<form:textarea class="form-control" path="bk_detail" style="width: 1000px; height: 600px; resize: none;"/>
 						<form:errors path="bk_detail" style="color:red"></form:errors>
@@ -268,9 +275,9 @@ function previewImage(targetObj, View_area) {
 					</tr>
 				</table>
 				<hr class="mb-4">
-				<div class="hi">
+				<div class="hi"style="font-family: 'Noto Sans KR', sans-serif;">
 				<form:button type="submit" class="btn btn-dark">수정완료</form:button>
-				<a href="javascript:window.history.back();"class="btn btn-dark" role="button">뒤로가기</a>
+				<form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
 				</div>
 			</form:form>
 			</div>

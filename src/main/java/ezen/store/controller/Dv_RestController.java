@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.service.Dv_Service;
 
@@ -26,7 +27,7 @@ public class Dv_RestController {
 	
 	//Dv_delete
 	@GetMapping("/delivery/DvDelete/{mb_id}/{dv_nick}")
-	public String DvDelete(@PathVariable("mb_id") String mb_id, @PathVariable("dv_nick") String dv_nick) {
+	public String DvDelete(@SessionAttribute("mb_id") String mb_id, @PathVariable("dv_nick") String dv_nick) {
 		
 		dv_Service.DeleteDvInfo(mb_id, dv_nick);
 		

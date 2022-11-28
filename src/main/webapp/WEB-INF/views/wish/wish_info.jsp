@@ -383,6 +383,10 @@ let basket = {
 </script>
 <body>
 <c:import url="/Main/header"></c:import>
+
+	<br>
+	<h1 style="text-align:center;">찜 목록</h1>
+	<p>
 	<!-- 로딩 -->		
 	<div class="loading"></div>
 			
@@ -396,11 +400,11 @@ let basket = {
                     <div class="subdiv">
                         <div class="check">선택</div>
                         <div class="img">이미지</div>
-                        <div class="pname">상품명</div>
+                        <div class="pname" style="text-align:left; padding-left:22px;">상품명</div>
                     </div>
-                    <div class="subdiv">
-                        <div class="basketprice">가격</div>
-                        <div class="sendcar">구매하기</div>
+                    <div class="subdiv" style="width:400px;">
+                        <div class="basketprice" style="width:115px;">가격</div>
+                        <div class="sendcar" style="width:160px; margin-left:50px;">구매하기</div>
                     </div>
                     <div class="subdiv">
                         <div class="basketcmd">삭제</div>
@@ -410,25 +414,25 @@ let basket = {
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
         			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	                <div class="row data">
-	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
-	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
-	                            <span>제목 : ${str.bk_title }</span>
-								<span>저자 : ${str.bk_writer }</span>
-					        	<span>출판사 : ${str.bk_publisher }</span>
-					        	<span>재고: ${str.bk_quantity }</span>
+	                    <div class="subdiv" style="height:165px;">
+	                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        <div class="img" style="width:120px; height:145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" style="width: 120px; height: 145px;"></div>
+	                        <div class="pname" style="position:relative; top:20px; height:20px; padding-left:20px; width:370px; bottom:0px;">
+	                            <p>제목 : ${str.bk_title }</p>
+								<p>저자 : ${str.bk_writer }</p>
+					        	<p>출판사 : ${str.bk_publisher }</p>
+					        	<p>재고: ${str.bk_quantity }</p>
 	                        </div>
 	                    </div>
-	                    <div class="subdiv">
+	                    <div class="subdiv" style="margin-top:50px">
 	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
 								<script>javascript:basket.priceComma(${str.bk_price })</script>
 							</div>
-                       		<div class="sendcart"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
+                       		<div class="sendcart" style="margin-left:50px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
 	                    </div>
 	                   
 	                    <div class="subdiv">
-	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
+	                        <div class="basketcmd" style="width: 50px; height: 165px; padding-top:50px; padding-left:5px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
 	                    </div>
 	                </div>
 	                </c:if>
@@ -465,6 +469,8 @@ let basket = {
 					
 				</ul>
 			</div>
-		</div>		
+		</div>
+		<br>
+<c:import url="/Main/footer"></c:import>			
 </body>
 </html>

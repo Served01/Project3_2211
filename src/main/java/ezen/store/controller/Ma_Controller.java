@@ -1,7 +1,6 @@
 package ezen.store.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,18 +20,7 @@ public class Ma_Controller {
 	public String header(@SessionAttribute("mb_id") String mb_id,
 						@ModelAttribute("searchBean") Search_Bean searchBean,
 						Model model,
-						 HttpServletRequest request) {
-
-		
-		
-		if(mb_id!=null) {
-			model.addAttribute("mb_id",mb_id);
-		} else {
-			model.addAttribute("mb_id","0");
-		}
-		
-		
-		
+						HttpServletRequest request) {
 		
 		return "include/header";
 	}

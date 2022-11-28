@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Dv_Bean;
@@ -57,7 +58,7 @@ public class Or_Controller {
 	
 	//주문 목록 출력 select
 	@GetMapping("/Or_list")
-	public String OrList(@RequestParam("mb_id") String mb_id, 
+	public String OrList(@SessionAttribute("mb_id") String mb_id,
 			Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
@@ -86,7 +87,7 @@ public class Or_Controller {
 	//주문 상세 정보 출력 select
 //	@GetMapping("/Or_select")
 	@RequestMapping(value="/Or_select", method = {RequestMethod.GET, RequestMethod.POST})
-	public String OrSelect(@RequestParam("mb_id") String mb_id,
+	public String OrSelect(@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number, Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
@@ -111,7 +112,7 @@ public class Or_Controller {
 	//결제 진행 페이지 insert/update
 	@GetMapping("/Or_purchase")
 	public String Orpurchase(
-			@RequestParam("mb_id") String mb_id,
+			@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			 Model model) {
 		
@@ -137,7 +138,7 @@ public class Or_Controller {
 	
 	
 	@PostMapping("/Or_purchasePro")
-	public String Orpurchse(@RequestParam("mb_id") String mb_id,
+	public String Orpurchse(@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			//@RequestParam("dv_pk") String dv_pk,
 			@ModelAttribute("updateOrPurchase") Or_Bean updateOrPurchase,
@@ -188,7 +189,7 @@ public class Or_Controller {
 	
 	//주문 A/S update (Book 재고수 변경 필요)
 	@GetMapping("/Or_after")
-	public String Orafter(@RequestParam("mb_id") String mb_id,
+	public String Orafter(@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			Model model) {
 		
@@ -207,7 +208,7 @@ public class Or_Controller {
 	@PostMapping("/Or_afterPro")
 	public String OrafterPro(@ModelAttribute("updateOrBean") Or_Bean updateOrBean,
 			BindingResult result1,
-			@RequestParam("mb_id") String mb_id,
+			@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			BindingResult result, Model model) {
 		

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.Dv_Bean;
 import ezen.store.service.Dv_Service;
@@ -23,7 +24,7 @@ public class Dv_Controller {
 	
 	//Dv_list
 	@GetMapping("/delivery/DvList")
-	public String DvList(@RequestParam("mb_id") String mb_id, Model model) {
+	public String DvList(@SessionAttribute("mb_id") String mb_id, Model model) {
 		
 		List<Dv_Bean> Deliverylist = dv_Service.getDvList(mb_id);
 		model.addAttribute("Deliverylist", Deliverylist);
@@ -54,7 +55,7 @@ public class Dv_Controller {
 	
 	//Dv_update
 	@GetMapping("/delivery/DvUpdate")
-	public String DvUpdate(@RequestParam("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick, Model model) {
+	public String DvUpdate(@SessionAttribute("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick, Model model) {
 		
 		Dv_Bean UpdateDvBean = dv_Service.UpdateDvBean(mb_id, dv_nick);
 		model.addAttribute("UpdateDvBean", UpdateDvBean);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Bk_Number;
@@ -53,7 +54,7 @@ public class Bk_Controller {
 		public String BkList(
 				@RequestParam(value="bk_local", defaultValue="") String bk_local, 
 				@RequestParam(value="bk_genre", defaultValue="") String bk_genre,
-				@RequestParam(value="mb_id", defaultValue="admin") String mb_id,
+				@SessionAttribute("mb_id") String mb_id,
 				@ModelAttribute("searchBean") Search_Bean searchBean,
 				@RequestParam(value="page", defaultValue="1") int page,
 				Model model, BindingResult result) {
@@ -62,7 +63,7 @@ public class Bk_Controller {
 			if(searchBean.getSearch_word() != null) {
 				
 				String search_word = searchBean.getSearch_word();
-				model.addAttribute("mb_id", mb_id);
+				
 			
 				List<Bk_Number> bkNumList = BkService.getBkNumList2(search_word);
 				
