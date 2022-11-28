@@ -17,7 +17,7 @@ public class RestApiController {
 	Mb_Service mbSevice;
 	
 	@GetMapping("/member/checkUserIdExist/{mb_id}")
-	public String restApiControll(@SessionAttribute("mb_id") String mb_id) {
+	public String restApiControll(@PathVariable String mb_id) {
 		
 		boolean chk = mbSevice.checkUserIdExist(mb_id);
 		
