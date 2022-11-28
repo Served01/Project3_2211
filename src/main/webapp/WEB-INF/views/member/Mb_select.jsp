@@ -69,8 +69,8 @@
 						<input type="text" id="mb_tel" name="mb_tel" class="form-control" value="${mbBean.mb_tel }" disabled="disabled"/>
 						</div>
 						<div class="mb-4"></div>
-         				 <button class="btn btn-dark" onclick="location.href='Mbupdate?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">수정</button>
-         				 <button class="btn btn-dark" onclick="location.href='Mbdelete?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">삭제</button>
+         				 <button class="btn btn-dark" onclick="location.href='Mbupdate?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">정보수정</button>
+         				 <button class="btn btn-dark" onclick="location.href='Mbdelete?mb_id=${mb_id }'" style="font-family: 'Noto Sans KR', sans-serif;">회원탈퇴</button>
          				 <a href="${root }index" class="btn btn-danger" style="font-family: 'Noto Sans KR', sans-serif;">메인화면</a>
 					
 						<c:import url="/delivery/DvList">
