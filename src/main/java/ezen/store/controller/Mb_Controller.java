@@ -125,7 +125,7 @@ public class Mb_Controller {
 				
 				tempMbBean.setMblogin(false);
 				
-				return "member/Mb_login";
+				return "member/Mb_login_fail";
 			}
 
 	}
