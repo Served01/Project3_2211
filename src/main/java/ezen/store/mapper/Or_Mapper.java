@@ -2,14 +2,12 @@ package ezen.store.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import ezen.store.beans.Ca_Bean;
-import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.Or_items;
 
 public interface Or_Mapper {
 	
@@ -59,8 +57,14 @@ public interface Or_Mapper {
 //				+ "		and or.or_number = ori.ori_number")
 //		List<Or_Bean> OrSelect(String or_mbid, String or_number);
 		
+		@Select("select mb_id, dv_nick, dv_name, dv_tel, dv_address"
+				+ "		from delivery_info"
+				+ "		where mb_id = #{mb_id}"
+				+ "		and dv_pk = #{dv_pk}")
+		Or_Bean DvSelect(String mb_id, String dv_pk);
+		
 		//주문 확정
-		@Update("update order_info set or_status = '준비중', dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}, or_date = sysdate\r\n"
+		@Update("update order_info set or_status = '구매 확정', dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}, or_date = sysdate\r\n"
 				+ "		where mb_id = #{mb_id}\r\n"
 				+ "		and or_number = #{or_number}")
 		void UpdateOrPurchase(Or_Bean updateOrPurchase);
@@ -101,14 +105,32 @@ public interface Or_Mapper {
 				+ "		and ori.bk_number = bk.bk_number")
 		List<Or_Bean> UpdateOriBean(String or_number);
 		
-//		@Update("update bk_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},\r\n"
+//		@Update("update book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},\r\n"
 //				+ "		bk_image=#{bk_image, jdbcType=VARCHAR}, bk_local=#{bk_local}, bk_genre=#{bk_genre}, bk_infodate=sysdate, bk_detail=#{bk_detail},\r\n"
 //				+ "		bk_quantity=bk_quantity+#{ori_bkcount}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted=#{bk_deleted}"
 //				+ "		where bk_number = #{ori_bknumber}")
-		@Update("update bk_info set bk_number = #{bk_number}, bk_quantity = bk_quantity + #{ori_bkcount}\r\n"
+		@Update("update book_info set bk_number = #{bk_number}, bk_quantity = (select sum(bk.bk_quantity, ori.ori_bkcount)as bk_quantity\r\n"
+				+ "																from book_info bk, order_items ori\r\n"
+				+ "																where bk.bk_number = ori.bk_number)\r\n"
 				+ "		where bk_number in (select bk_number from Order_items where bk_number = #{bk_number}")
 		void OriUpdateAfter(List<Or_Bean> updateOriBean);
 		
+		
+		
+		//책 재고 수 수정
+		@Select("select bk.bk_number, bk.bk_quantity from book_info bk, order_items ori where bk.bk_number = ori.bk_number and or_number = #{or_number} order by bk.bk_number")
+		List<Or_items> SelectBkQuantity (String or_number);
+		
+		//구매시 재고 수 다운
+		@Select("select bk.bk_number, (bk.bk_quantity - ori.ori_bkcount) as bk_quantity from book_info bk, order_items ori where ori.or_number = #{or_number} and bk.bk_number = #{bk_number} and bk.bk_number = ori.bk_number")
+		Or_Bean SelectBkPurchase(@Param("or_number") String or_number, @Param("bk_number") int bk_number);
+		//환불시 재고 수 업
+		@Select("select bk.bk_number, (bk.bk_quantity + ori.ori_bkcount) as bk_quantity from book_info bk, order_items ori where ori.or_number = #{or_number} and bk.bk_number = #{bk_number} and bk.bk_number = ori.bk_number")
+		Or_Bean SelectBkAfter(@Param("or_number") String or_number, @Param("bk_number") int bk_number);
+		
+		@Update("update book_info set bk_quantity = #{bk_quantity}\r\n"
+				+ "		where bk_number in #{bk_number}")
+		void UpdateBkQuantity(Or_Bean updateBkBean);
 		
 		/*
 	@Select("select user_id, user_name from user_table where user_idx = #{user_idx}")

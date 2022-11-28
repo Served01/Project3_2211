@@ -326,10 +326,7 @@ function delBook(bk_number){
 				}
 			})
 	 	}
-	   
-	   else {
-	     
-	   }
+
 }
 </script>
 <c:import url="/Main/header"></c:import>
@@ -339,11 +336,12 @@ function delBook(bk_number){
 		</div>
 	</div>
 	
+	<div style="padding-left:400px;">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
 				<img style="width: 320px; height: 360px; padding-right: 0px; margin-right: 0px;" src="${root }upload/${ReadBkBean.bk_image}"/>
-				<div style="left: 75px; width: 150px; top: 10px;" class="input-group">
+				<div style="left: 0px; width: 320px; top: 10px; padding-left: 105px;" class="input-group">
 				<c:if test="${ReadScore != 0}">
 					<c:set var = "string1" value = "${ReadScore}"/>
       				<c:set var = "string2" value = "${fn:substring(ReadScore, 0, 3)}" />
@@ -370,32 +368,37 @@ function delBook(bk_number){
 				<!--  /like button  -->
 				</div>
 				</div>
-				<p>${ReadBkBean.bk_detail }
-				<p><b>저자</b> : ${ReadBkBean.bk_writer }
-				<p><b>출판사</b> : ${ReadBkBean.bk_publisher }
-				<p><b>출간일</b> : ${ReadBkBean.bk_pubdate }
-				<p><b>지역</b> : ${ReadBkBean.bk_local }
-				<p><b>장르</b> : ${ReadBkBean.bk_genre }
-				<p><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
+				<p style="text-align:left;">${ReadBkBean.bk_detail }
+				<p style="text-align:left;"><b>저자</b> : ${ReadBkBean.bk_writer }
+				<p style="text-align:left;"><b>출판사</b> : ${ReadBkBean.bk_publisher }
+				<p style="text-align:left;"><b>출간일</b> : ${ReadBkBean.bk_pubdate }
+				<p style="text-align:left;"><b>지역</b> : ${ReadBkBean.bk_local }
+				<p style="text-align:left;"><b>장르</b> : ${ReadBkBean.bk_genre }
+				<p style="text-align:left;"><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
 				<form name="form" method="get">
+				<div class="input-group" style="text-align:left; width:300px;">
 				<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">
 				<input type="text" id="amount" name="amount" value="1" size="3" onchange="change();"> 
 				<input type="button" value=" + " onclick="add();" style="width:35px;">
 				<input type="button" value=" - " onclick="del();" style="width:35px;"><br>
 				<input type="hidden" name="sum" size="11" readonly>
+				</div>
 				<p>
 				<div class="input-group"><b>금액</b>&nbsp;:&nbsp;<span class="input-group-append" id="my_sum">원</span><b>원</b></div>
+				<p>
 				</form>
+				<div class="input-group-append">
 				<p>
 				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
-				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니">
-				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
-				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a>	
+				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니"></p>
+				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a>
+				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a></p>
+				</div>	
 			</div>
 		</div>
 		<hr>
 	</div>
-	
+	</div>	
 	<c:import url="/Review/RvInsert">
 	</c:import>
 	

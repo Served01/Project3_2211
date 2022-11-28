@@ -1,7 +1,7 @@
 package ezen.store.beans;
 
 
-public class Or_Bean {
+public class Or_items {
 	
 	private String or_number; 
 	private String mb_id;

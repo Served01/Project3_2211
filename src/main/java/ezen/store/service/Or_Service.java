@@ -3,12 +3,11 @@ package ezen.store.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import ezen.store.beans.Or_Bean;
-import ezen.store.beans.PageCountBean;
+import ezen.store.beans.Or_items;
 import ezen.store.dao.Or_DAO;
 
 @Service
@@ -75,7 +74,26 @@ public class Or_Service {
 			or_DAO.OriUpdateAfter(updateOriBean);
 			
 		}
+
+		public List<Or_items> SelectBkQuantity(String or_number) {
+			return or_DAO.SelectBkQuantity(or_number);
+		}
 		
+		public Or_Bean SelectBkPurchase(String or_number, int bk_number) {
+			return or_DAO.SelectBkPurchase(or_number, bk_number);
+		}
+		
+		public Or_Bean SelectBkAfter(String or_number, int bk_number) {
+			return or_DAO.SelectBkAfter(or_number, bk_number);
+		}
+		
+		public void UpdateBkQuantity(Or_Bean updateBkBean) {
+			or_DAO.UpdateBkQuantity(updateBkBean);
+		}
+		
+		public Or_Bean DvSelect(String mb_id, String dv_pk) {
+			return or_DAO.DvSelect(mb_id, dv_pk);
+		}
 //		public void Or_update(int or_bknumbers) {
 //			or_DAO.Or_update(or_bknumbers);
 //		}

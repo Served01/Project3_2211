@@ -22,7 +22,7 @@ public interface Dv_Mapper {
 		
 	//배송지 입력
 	@Insert("insert into Delivery_info(mb_id, dv_nick, dv_name, dv_tel, dv_address, dv_pk)"
-	+ "values(#{mb_id}, #{dv_nick}, #{dv_name}, #{dv_tel}, #{dv_address}, concat(concat(#{mb_id},'.'),#{dv_nick}))")
+	+ "values(#{mb_id}, #{dv_nick}, #{dv_name}, #{dv_tel}, #{dv_address}||' '||#{dv_addressDetail}, concat(concat(#{mb_id},'.'),#{dv_nick}))")
 	void addDvInfo(Dv_Bean InsertDvBean);
 	
 	//배송지 수정 

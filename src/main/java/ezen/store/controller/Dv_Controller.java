@@ -74,15 +74,5 @@ public class Dv_Controller {
 		return "delivery/Dv_update_success";
 	}
 	
-	//Dv_delete
-	@GetMapping("/delivery/DvDelete")
-	public String DvDelete(@RequestParam("mb_id") String mb_id, @RequestParam("dv_nick") String dv_nick) {
-		
-		dv_Service.DeleteDvInfo(mb_id, dv_nick);
-		
-		return "delivery/Dv_delete";
-	}
-	
-	
 }
 
