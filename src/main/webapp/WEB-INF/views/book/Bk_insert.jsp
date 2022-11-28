@@ -11,7 +11,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>책 정보 입력 - Bootstrap</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -22,20 +23,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-<style>
+<style>	
 body {
+    background-color:#F3E8EB;	
 	min-height: 100vh;
-	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),
-		to(#1d466c));
-	background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+	
 }
+.input { margin:0 0 0 50; }
 
 .input-form {
-	max-width: 680px;
-	margin-top: 50px;
+	max-width: 1050px;
 	padding: 32px;
 	background: #fff;
 	-webkit-border-radius: 10px;
@@ -43,7 +40,8 @@ body {
 	border-radius: 10px;
 	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	margin-bottom:50px;	
 }
 
 table {
@@ -54,10 +52,34 @@ table {
 }
 
 img {
-	width: 300px;
-	height: 340px;
+	width: 500px;
+	height: 600px;
 	object-fit: fill;
 }
+
+button{
+    text-align:center;
+    display:block;
+    margin:auto;
+    }
+    
+.hi{
+	text-align:center;
+ }
+.form-control {
+	height: calc(1.8em + 0.75rem + 2px);
+}
+input::file-selector-button {
+    Background: #343A40;
+    color: white;
+    padding: auto;
+    border: thin solid grey;
+    border-radius: 3px;
+}
+
+a{
+	font-family: 'Noto Sans KR', sans-serif;
+	}
 </style>
 </head>
 <script>
@@ -105,8 +127,8 @@ function previewImage(targetObj, View_area) {
 				img.id = "prev_" + View_area;
 				img.classList.add("obj");
 				img.file = file;
-				img.style.width = '300px'; 
-				img.style.height = '340px';
+				img.style.width = '500px'; 
+				img.style.height = '600px';
 				preview.appendChild(img);
 				if (window.FileReader) { // FireFox, Chrome, Opera 확인.
 					var reader = new FileReader();
@@ -130,7 +152,7 @@ function previewImage(targetObj, View_area) {
 		}
 	}
       
-	function checkBk_numExist(){
+	function CheckBkNumExist(){
 		
 		var bk_number = $("#bk_number").val()
 		
@@ -143,7 +165,7 @@ function previewImage(targetObj, View_area) {
 		}
 		
 		$.ajax({
-			url: '${root}book/checkBk_numExist/' + bk_number,
+			url: '${root}book/CheckBkNumExist/' + bk_number,
 			type: 'get',
 			dataType: 'text',
 			success: function(result){
@@ -159,7 +181,7 @@ function previewImage(targetObj, View_area) {
 			}			
 		})
 	}
-		function resetBk_numExist(){
+		function ResetBkNumExist(){
 			$("#bk_numExist").val('false')
 		}
     </script>
@@ -167,85 +189,85 @@ function previewImage(targetObj, View_area) {
 <body>
 	<div class="container">
 		<div class="input-form-backgroud row">
-			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-3">책 정보 입력</h4>	
-				<form:form class="validation-form" action="${root }book/Bk_insert_pro" method="post" modelAttribute="insert_bk_Bean" enctype="multipart/form-data">		
+			<div class="input-form col-md-12 mx-auto" style="margin-top:50px">
+				<h4 class="mb-3" align="center" style="font-family: 'Noto Sans KR', sans-serif; font-size:25px;">책 정보 입력</h4>
+				<form:form class="validation-form" action="${root }book/BkInsertPro" method="post" modelAttribute="InsertBkBean" enctype="multipart/form-data">		
 				<form:hidden path="bk_numExist"/>
-				<table border="1">
+				<table border="1" style="font-family: 'Noto Sans KR', sans-serif;">
 					<tr align="center" style="height:60; width:1150;">
-						<td rowspan="9" style="width:300px; height:340px;">
-							<div style="width:300px; height:340px;">
+						<td rowspan="9" style="width:500px; height:600px;">
+							<div style="width:500px; height:600px;">
 								<div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; dispaly: inline; '>
 							</div>
 							</div>
 						</td>
 
 					<tr align = "center">
-						<td height="20" width="200">일련번호</td>
+						<td height="70" width="200">일련번호</td>
 						<td height="20" width="400">
 						<div class="input-group">
-						<form:input class="form-control" path="bk_number" onkeypress="resetBk_numExist()"/>
+						<form:input class="form-control" path="bk_number" onkeypress="ResetBkNumExist()"/>
 						<div class="input-group-append">
-						<form:button type="button" class="btn btn-primary" onclick="checkBk_numExist()">중복확인</form:button>
+						<form:button type="button" class="btn btn-dark" onclick="CheckBkNumExist()">중복확인</form:button>
 						</div>
 						</div>
 						<form:errors path="bk_number" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">제목</td>
+						<td height="70" width="200">제목</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_title"/>
 						<form:errors path="bk_title" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">저자</td>
+						<td height="70" width="200">저자</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_writer"/>
 						<form:errors path="bk_writer" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">출판사</td>
+						<td height="70" width="200">출판사</td>
 						<td height="20" width="400">
 						<form:input class="form-control" path="bk_publisher"/>
 						<form:errors path="bk_publisher" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">출간일</td>
+						<td height="70" width="200">출간일</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_pubdate"/>
+						<form:input class="form-control" path="bk_pubdate" placeholder="xxxx-xx-xx"/>
 						<form:errors path="bk_pubdate" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">지역</td>
+						<td height="50" width="200">지역</td>
 						<td height="20" width="400">
               			<form:select class="custom-select d-block w-100" path="bk_local">
-                		<form:option value="1">국내</form:option>
-                		<form:option value="2">해외</form:option>
+                		<form:option value="국내">국내</form:option>
+                		<form:option value="해외">해외</form:option>
               			</form:select>
               			</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">장르</td>
+						<td height="40" width="200">장르</td>
 						<td height="20" width="400">
 			            <form:select class="custom-select d-block w-100" path="bk_genre">
-			               <form:option value="1">소설</form:option>
-			               <form:option value="2">인문</form:option>
-			               <form:option value="3">취미</form:option>
-			               <form:option value="4">경제</form:option>
-			               <form:option value="5">자기계발</form:option>
-			               <form:option value="6">예술</form:option>
-			               <form:option value="7">기술</form:option>
-			               <form:option value="8">잡지</form:option>
+			               <form:option value="소설">소설</form:option>
+			               <form:option value="인문">인문</form:option>
+			               <form:option value="취미">취미</form:option>
+			               <form:option value="경제">경제</form:option>
+			               <form:option value="자기계발">자기계발</form:option>
+			               <form:option value="예술">예술</form:option>
+			               <form:option value="기술">기술</form:option>
+			               <form:option value="잡지">잡지</form:option>
 			             </form:select>
 						</td>
 					</tr>
 					<tr align="center">
-						<td height="20" width="200">재고</td>
+						<td height="70" width="200">재고</td>
 						<td height="20" width="200">
 						<div class="input-group">
 						<form:input class="form-control" path="bk_quantity"/>			
@@ -258,11 +280,11 @@ function previewImage(targetObj, View_area) {
 					</tr>
 					<tr align="center">
 						<td height="20" width="10">
-						<form:input type="file" class="form-control" path="upload_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
+						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
 						<form:errors path="upload_file" style="color:red"></form:errors>
-						<td height="20" width="200">가격</td>
+						<td height="70" width="200">가격</td>
 						<td height="20" width="400">
-						<div class="input-group">
+						<div class="input-group" style="text-align:center; align-items : center;">
 						<form:input class="form-control" path="bk_price"/>
 						<div class="input-group-append" style="text-align:center; align-items : center;">
 						원
@@ -276,15 +298,17 @@ function previewImage(targetObj, View_area) {
 						</td>
 					</tr>
 					<tr align="center">
-						<td colspan="4" height="200" width="400">
-						<form:textarea class="form-control" path="bk_detail" style="width: 620px; height: 200px; resize: none;"/>
+						<td colspan="4" height="600" width="400">
+						<form:textarea class="form-control" path="bk_detail" style="width: 1000px; height: 600px; resize: none;"/>
 						<form:errors path="bk_detail" style="color:red"></form:errors>
 						</td>
 					</tr>
 				</table>
 				<hr class="mb-4">
-				<form:button type="submit" class="btn btn-primary btn-lg btn-block">입력완료</form:button>
-				<form:button class="btn btn-primary btn-lg btn-block" href="javascript:window.history.back();">뒤로가기</form:button>
+				<div class="hi" style="font-family: 'Noto Sans KR', sans-serif;">
+				<form:button type="submit" class="btn btn-dark">입력완료</form:button>
+				<form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
+				</div>
 			</form:form>
 			</div>
 			</div>

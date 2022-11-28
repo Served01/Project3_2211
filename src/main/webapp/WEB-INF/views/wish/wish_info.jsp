@@ -19,6 +19,15 @@
 	
 </head>
 <style>
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
 
 .basketdiv {
     width: 100%;
@@ -76,6 +85,7 @@
     .basketdiv .row.data > div > div {
         height: 60px;
         line-height: 60px;
+        padding: 0px 0;
     }
         .basketdiv .data .num .updown {
             color: #0075ff;
@@ -142,13 +152,13 @@
         width: 100px;
     }
 
-.buttongroup {
-    padding: 11px 0;
-    margin: 50px 0;
-}
-.narrowbuttongroup{
-    margin: 15px 0;
-}
+	.buttongroup {
+	    padding: 11px 0;
+	    margin: 50px 0;
+	}
+	.narrowbuttongroup{
+	    margin: 15px 0;
+	}
     .buttongroup.center {
         text-align: center;
     }
@@ -217,9 +227,10 @@
 }
 
 .orderform .p_num {
-    text-align: right;
-    width: 40px;
-    font-size: 1em;
+    text-align: center;
+    width: 35px;
+    height: 45px;
+    font-size: 0.78em;
 }
 
 </style>
@@ -232,11 +243,20 @@ let basket = {
 	    //체크한 장바구니 상품 비우기
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var wi_bknumbers = parseInt(item.getAttribute('value'));
+	        	var wi_mbid = 'admin';
+	        	
+	        	$.ajax({
+	        		url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
+					type: 'get',
+					dataType: 'text'
+				})	        		        	
 	            item.parentElement.parentElement.parentElement.remove();
 	        });
 	        //AJAX 서버 업데이트 전송
-	    
+	    	
 	        //전송 처리 결과가 성공이면
+	        alert('삭제되었습니다.')
 	        this.reCalc();
 	        this.updateUI();
 	    },
@@ -308,8 +328,10 @@ let basket = {
 	    },
 	    delItem: function (wi_bknumbers) {
 	        event.target.parentElement.parentElement.parentElement.remove();
+	        
+	        var wi_mbid = 'admin';
 	        $.ajax({
-				url: '${root}wish/wish_delete/' + wi_bknumbers,
+				url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
 				type: 'get',
 				dataType: 'text',
 			})
@@ -324,7 +346,7 @@ let basket = {
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        
 	        $.ajax({
-				url: '${root}wish/wish_delete/' + wi_bknumbers,
+				url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
 				type: 'get',
 				dataType: 'text',
 			})
@@ -339,6 +361,10 @@ let basket = {
 	        
 	        this.reCalc();
 	        this.updateUI();
+	    },
+		priceComma: function(bk_price){
+			var price = bk_price.toLocaleString('ko-KR');
+			document.write(price + '원');
 	    }
 	}
 
@@ -350,10 +376,17 @@ let basket = {
 	    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
 	    return nstr;
 	};
-
+	 $(window).on('load', function () {
+		 $(".loading").fadeOut();
+		// $("body").css("background", "white");
+	 });
 </script>
 <body>
-					
+<c:import url="/Main/header"></c:import>
+	<!-- 로딩 -->		
+	<div class="loading"></div>
+			
+	<div class="container">						
 					          
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
@@ -375,11 +408,12 @@ let basket = {
                     <div class="split"></div>
                 </div>
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
+        			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 	                <div class="row data">
 	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="260" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        <div class="img"><img src="${str.bk_image }" width="60"></div>
-	                        <div class="pname">
+	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
+	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
+	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
 	                            <span>제목 : ${str.bk_title }</span>
 								<span>저자 : ${str.bk_writer }</span>
 					        	<span>출판사 : ${str.bk_publisher }</span>
@@ -387,7 +421,9 @@ let basket = {
 	                        </div>
 	                    </div>
 	                    <div class="subdiv">
-	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">${str.bk_price}원</div>
+	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
+								<script>javascript:basket.priceComma(${str.bk_price })</script>
+							</div>
                        		<div class="sendcart"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
 	                    </div>
 	                   
@@ -395,16 +431,40 @@ let basket = {
 	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
 	                    </div>
 	                </div>
+	                </c:if>
         		</c:forEach>
             </div>
-    
+    		
             <div class="right-align basketrowcmd">
             	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>
+            	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">찜목록비우기</a>
             </div>
     
     
         </form>
+			<!-- 페이지네이션 -->
+    		<div class="d-none d-md-block">
+				<ul class="pagination justify-content-center">
 					
+						<li class="page-item">
+						<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="page-link">처음</a>
+						</li>					
+														
+					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+							<li class="page-item active">
+								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
+							</li>		
+												
+					</c:forEach>					
+					
+						<li class="page-item">
+							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
+						</li>
+					
+				</ul>
+			</div>
+		</div>		
 </body>
 </html>

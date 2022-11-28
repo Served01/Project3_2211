@@ -7,142 +7,163 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>구매 정보</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<style>
+		.hi{
+		    text-align:center;
+		   } 
+		#hiyo {
+			  width: 300px;
+			  margin-left: auto;
+			  margin-right: auto;
+			  }
+</style>
 </head>
 <body>
+<c:import url="/Main/header"></c:import>
 
 <form name="orderdetail" id="orderdetail" method="post" class="orderdetail">
+	<br>
+	<h1 class="display-5">구매 정보</h1>
+	<br>
+	<div class="container">
 	<c:forEach var="orBean" items="${infoOrBean}" varStatus="status">
 	        
 	        
-	        <table>
+	        <table class="table table-hover">
 		<tr>
-			<td>주문 번호 : ${orBean.or_number }</td>
+			<td>주문 번호</td>
+	        <td>${orBean.or_number }</td>
 		</tr>
 		<tr>
-			<td>아이디 : ${orBean.mb_id }</td>
+			<td>아이디</td>
+	        <td>${orBean.mb_id }</td>
 		</tr>
 		<tr>	
-			<td>구매자 이름 : ${orBean.mb_name }</td>
+			<td>구매자 이름</td>
+	        <td>${orBean.mb_name }</td>
 		</tr>
 		<tr>
-			<td>구매자 연락처: ${orBean.mb_tel }</td>
+			<td>구매자 연락처</td>
+	        <td>${orBean.mb_tel }</td>
 		</tr>
 		<tr>
-			<td>배송 상태: ${orBean.or_status }</td>
+			<td>배송 상태</td>
+	        <td>${orBean.or_status }</td>
 		</tr>
 		<tr>
-			<td>구매날짜: ${orBean.or_date }</td>
+			<td>구매날짜</td>
+	        <td>${orBean.or_date }</td>
 		</tr>
 		<tr>
-			<td>송장번호: ${orBean.or_delivery }</td>
+			<td>송장번호</td>
+	        <td>${orBean.or_delivery }</td>
 		</tr>
 		<tr>
-			<td>배송비: ${orBean.or_deliveryCost }</td>
+			<td>배송비</td>
+	        <td>${orBean.or_deliveryCost }</td>
 		</tr>
 		<tr>
-			<td>받는 사람: ${orBean.dv_name }</td>
+			<td>받는 사람</td>
+	        <td>${orBean.dv_name }</td>
 		</tr>
 		<tr>
-			<td>받는 사람 연락처: ${orBean.dv_tel }</td>
+			<td>받는 사람 연락처</td>
+	        <td>${orBean.dv_tel }</td>
 		</tr>
 		<tr>
-			<td>배송지: ${orBean.dv_address }</td>
+			<td>배송지</td>
+	        <td>${orBean.dv_address }</td>
 		</tr>
 		<tr>
-    		<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
-			<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_list?mb_id=${orBean.mb_id }'">주문 목록</button>      
+			<td>
+			<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_list?mb_id=${orBean.mb_id }'">주문 목록</button>
+			</td>
+			<td>
+			<c:if test="${orBean.or_status ne '교환'}">
+			<c:if test="${orBean.or_status ne '환불'}">
+			<c:if test="${orBean.or_status ne '취소'}">
+			<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+			</c:if>
+			</c:if>
+			</c:if>
+			</td>
     	</tr>
+			
 	           	 </table>                 	
     </c:forEach>
-    <hr>
+    </div>
+    <br>
     <h3>주문 품목</h3>
+    <br>
+    <div class="container">
     <c:forEach var="oriBean" items="${itemsOrBean }" varStatus="status">
-    <table>
+    <div class="container">
+    <table class="table table-hover">
+    
+    	<%-- <tr>
+    		<td>주문 번호</td>
+	        <td>${oriBean.or_number }</td>
+    	</tr> --%>
+		<%-- <tr>
+    		<td>책 번호</td>
+	        <td>${oriBean.bk_number }</td>
+		</tr> --%>
+		<tr>
+			<td rowspan="5"><div class="img" style="width: 170px; height: 220px; padding-left: 180px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" style="width: 170px; height: 220px;"></div></td>
+	        <td colspan="2"><a href="${root}book/Bk_select?bk_number=${oriBean.bk_number }">${oriBean.bk_title }</a></td>
+    	</tr>
+		<tr>
+    		<td>책 가격</td>
+	        <td>${oriBean.bk_price }원</td>
+    	</tr>
+		<tr>
+    		<td>할인율</td>
+	        <td>${oriBean.ori_bkdiscount }</td>
+    	</tr>
+		<tr>
+    		<td>구매 개수</td>
+	    	<td>${oriBean.ori_bkcount }</td>
+    	</tr>
     	<tr>
-    		<td>주문 번호: ${oriBean.or_number }</td>
-    	</tr>
-		<tr>
-    		<td>책 번호: ${oriBean.bk_number }</td>
-		</tr>
-		<tr>
-    		<td>책 제목: <a href="${root}book/Bk_select?bk_number=${oriBean.bk_number }">${oriBean.bk_title }</a></td>
-    	</tr>
-		<tr>
-			<td>${oriBean.bk_image }</td>
-    	</tr>
-		<tr>
-    		<td>구매 가격: ${oriBean.bk_price }</td>
-    	</tr>
-		<tr>
-    		<td>할인율: ${oriBean.ori_bkdiscount }</td>
-    	</tr>
-		<tr>
-    		<td>구매 개수: ${oriBean.ori_bkcount }</td>
+    		<td>구매 가격</td>
+    		<c:set var= "sumprice" value="${oriBean.bk_price * oriBean.ori_bkcount}"/>
+	    	<td>${sumprice }원</td>
     	</tr>
     	
     </table>
+    </div>
     </c:forEach>
-		</form>
-        
-<%-- <div class="container" style="margin-top:100px">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<div class="card shadow">
-				<div class="card-body">
-					<div class="form-group">
-						<label for="or_number">주문번호</label>
-						<input type="text" id="or_number" name="or_number" class="form-control" value="${detailOrBean.or_number }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_mbid">아이디</label>
-						<input type="text" id="or_mbid" name="or_mbid" class="form-control" value="${detailOrBean.or_mbid }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_bknumber">책번호</label>
-						<input type="text" id="or_bknumber" name="or_bknumber" class="form-control" value="${detailOrBean.or_bknumber }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_bkprice">책가격</label>
-						<input type="text" id="or_bkprice" name="or_bkprice" class="form-control" value="${detailOrBean.or_bkprice }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_cacount">책갯수</label>
-						<input type="text" id="or_cacount" name="or_cacount" class="form-control" value="${detailOrBean.or_cacount }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_status">주문상태</label>
-						<input type="text" id="or_status" name="or_status" class="form-control" value="${detailOrBean.or_status }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_date">주문날짜</label>
-						<input type="text" id="or_date" name="or_date" class="form-control" value="${detailOrBean.or_date }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_delivery">송장번호</label>
-						<input type="text" id="or_delivery" name="or_delivery" class="form-control" value="${detailOrBean.or_delivery }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_address">배송주소</label>
-						<input type="text" id="or_address" name="or_address" class="form-control" value="${detailOrBean.or_address }" disabled="disabled"/>
-					</div>
+    </div>
+    
+    <!-- 페이지네이션 -->
+    		<div class=hi>
+            	<ul id="hiyo" class="pagination">
 					
-					<div class="form-group">
-						<div class="text-right">
-							<a href="${root }order/Or_list?or_mbid=admin" class="btn btn-primary">목록보기</a>
-						</div>
-					</div>
-				</div>
+					<li class="page-item">
+						<a href="${root}order/Or_list?mb_id=${mb_id}&page=1" class="page-link">First</a>
+					</li>					
+														
+				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+					<li class="page-item active">
+						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${idx}" class="page-link">${idx}</a>
+					</li>		
+												
+				</c:forEach>					
+					
+					<li class="page-item">
+						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+					</li>
+					
+				</ul>
 			</div>
-		</div>
-		<div class="col-sm-3"></div>
-	</div>
-</div> --%>
-
+		</form>
+<br>
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

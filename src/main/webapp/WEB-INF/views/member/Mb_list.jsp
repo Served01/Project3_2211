@@ -5,64 +5,97 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 <title>Mb_list.jsp</title>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
 <style>
+body{
+  text-align:center;
+  
+}	
+
+tr:nth-child(odd) { background-color: #e6f1ff; }
+tr:nth-child(even) { background-color: #f0f7ff; }
+td { padding: 5px; }
+tr:hover { background-color: #ffc5c2; cursor: pointer; }
+#adad{
+border: 1px solid #F3E8EB;
+ background-color:#F3E8EB; 
+  border-radius: 16px;
+  box-shadow: inset 0 0 8px #deb13a;
+  }
+ 
+  
+  
+  
 </style>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/include/header.jsp" />
-	<!-- 게시글 리스트 -->
+
 	<div class="container" align="center">
-		<div class="input-form col-md-12 mx-auto">
-			<a href="#" onclick="location.href='insertBook.jsp'"><h2>
-					<i class="fa-solid fa-book"></i>Ezen Book Store
-				</h2></a> <br>
-			<h4 class="mb-3">회원 목록 보기 화면 - 마이 페이지(관리자)</h4>
+		<div class="input-form col-md-12 mx-auto" id="adad" style="top:50px;">
+			<a href="#" onclick="location.href='index'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+					Ezen Book Store
+				</a> <br>
+			<h4 class="mb-3"style="font-family: 'Noto Sans KR', sans-serif;">회원목록 보기화면(관리자)</h4>
 			<table border="1">
-				<tr align="center">
+				<tr align="center" >
 					<td id=title>아이디</td>
 					<td id=title>이름</td>
 					<td id=title>이메일</td>
 					<td id=title>연락처</td>
-					<td id=title>가입날짜</td>
+					<td id=title style="width:100px;">가입날짜</td>
+					<td id=title>탈퇴여부</td>
+					<td id=title>탈퇴날짜</td>
 				</tr>
-
-
 				<tbody>
 					<c:forEach var="m" items="${memberlist }">
 						<tr>
-							<%-- 							<td><a href="Mb_select?mb_idx=${m.mb_idx()}">${m.mb_idx()}</a></td> --%>
-							<%-- 							<td><a href='${root }member/Mb_select?mb_id=${m.mb_id}'>${m.mb_id }</a></td> --%>
 							<td><a href='${root }member/Mbselect?mb_id=${m.mb_id}'>${m.mb_id }</a></td>
 							<td>${m.mb_name }</td>
 							<td>${m.mb_email }</td>
 							<td>${m.mb_tel }</td>
 							<td>${m.mb_date }</td>
+							<td>${m.mb_deleted }</td>
+							<td>${m.mb_deleted_date }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-
-			<div class="mb-4"></div>
-			<a href="${root }member/Mbinsert" class="btn btn-danger">회원가입</a>
-			<%-- 				<a href="${root }member/Mb_select" class="btn btn-danger">마이페이지</a> --%>
-			<a href="${root }index" class="btn btn-danger">메인</a>
-			<!-- 				<button class="btn btn-dark" onclick="location.href='inputshippingAddresspro.jsp'">마이 페이지</button> -->
-			<!-- 				<button class="btn btn-dark" onclick="location.href='mainSession.jsp?center=mbDeleteform.jsp&mb_id='">메인 페이지</button> -->
-
-
-
-			<footer class="my-3 text-center text-small">
-				<p class="mb-1">&copy; 2022</p>
-			</footer>
+			<br><br>
+			<!-- 페이지네이션 -->
+			<div class=hi>
+            	<ul id="hiyo" class="pagination" style="padding-left:470px;font-family: 'Noto Sans KR', sans-serif;">
+					
+					<li class="page-item">
+						<a href="${root}member/Mblist?mb_id=${mb_id}&page=1" class="page-link">First</a>
+					</li>					
+														
+				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+					<li class="page-item active">
+						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${idx}" class="page-link">${idx}</a>
+					</li>		
+												
+				</c:forEach>					
+					
+					<li class="page-item">	
+						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+					</li>
+					
+				</ul>
+			</div>	
+			
+			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:20px;">
+			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a> <a
+				href="${root }index" class="btn btn-dark">메인</a>
 		</div>
-	</div>
+	</div></div>
+	
+
 </body>
 </html>

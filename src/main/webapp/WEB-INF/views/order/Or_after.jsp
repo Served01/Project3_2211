@@ -53,8 +53,8 @@ orderItems: function(or_number,ca_mbid){
 	<form:hidden path="bk_number"/>
         </div>
   
-    <form:button class="form-control" type="submit">주문 변경</form:button>
-    <form:button class="form-control" href="history.back();">뒤로가기</form:button>
+    <form:button class="btn btn-dark" type="submit">주문 변경</form:button>
+    <a href="javascript:window.history.back();" class="btn btn-dark" role="button">뒤로가기</a> 
     
 </form:form>
 

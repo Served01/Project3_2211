@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Mb_logout</title>
 </head>
 <body>
+	<% session.setAttribute("mb_id","0"); %>
 	<script type="text/javascript">
 		alert("로그아웃이 되었습니다.")
-		location.href='${root}index'
+		location.href='${root}Main/center'
 	</script>
 </body>
 </html>

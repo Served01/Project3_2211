@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Mb_insert_success</title>
 </head>
 <body>
+	<h1>회원가입 완료</h1>
 	<script type="text/javascript">
 		alert("회원 가입이 정상적으로 완료되었습니다.")
-		location.href="${root}member/Mblogin"
+		location.href="${root}Main/center"
 	</script>
 </body>
 </html>

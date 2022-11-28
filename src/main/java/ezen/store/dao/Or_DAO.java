@@ -1,14 +1,11 @@
 package ezen.store.dao;
 
 import java.util.List;
-import java.util.HashMap;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.Or_items;
 import ezen.store.mapper.Or_Mapper;
 
 @Repository
@@ -18,15 +15,14 @@ public class Or_DAO {
 	private Or_Mapper or_Mapper;
 		
 	
+	//주문 목록 개수
+	public int getOrCount(String mb_id) {
+		return or_Mapper.getOrCount(mb_id);
+	}
 	
-//	public void Or_insert(Or_Bean addOrderDataBean) {
-//		or_Mapper.Or_insert(addOrderDataBean); 
-//	}
-	
-	//구매 내역 정보 로드
-//	public	List<Or_Bean> getOrInfo(String or_number) {
-	//	return or_Mapper.getOrInfo(or_number);
-//	}
+	public int getOrItemCount(String or_number) {
+		return or_Mapper.getOrItemCount(or_number);
+	}
 	
 	//select
 	public	List<Or_Bean> OrList(String mb_id) {
@@ -62,6 +58,10 @@ public class Or_DAO {
 	public List<Or_Bean> UpdateOriBean(String or_number) {
 		return or_Mapper.UpdateOriBean(or_number);
 	}
+	
+	public Or_Bean DvSelect(String mb_id, String dv_pk) {
+		return or_Mapper.DvSelect(mb_id, dv_pk);
+	}
 //	public void UpdateOrBean(String or_mbid, String or_number) {
 //		or_Mapper.UpdateOrInfo(or_mbid, or_number);
 //	}
@@ -78,6 +78,23 @@ public class Or_DAO {
 		
 	}
 
+	public List<Or_items> SelectBkQuantity(String or_number) {
+		return or_Mapper.SelectBkQuantity(or_number);
+	}
+
+	
+	public Or_Bean SelectBkPurchase(@Param("or_number") String or_number, @Param("bk_number") int bk_number) {
+		return or_Mapper.SelectBkPurchase(or_number, bk_number);
+	}
+	
+	public Or_Bean SelectBkAfter(@Param("or_number") String or_number, @Param("bk_number") int bk_number) {
+		return or_Mapper.SelectBkAfter(or_number, bk_number);
+	}
+
+	public void UpdateBkQuantity(Or_Bean updateBkBean) {
+		or_Mapper.UpdateBkQuantity(updateBkBean);
+		
+	}
 	
 	
 //	public void Or_insert(String or_mbid, int or_bknumbers) {

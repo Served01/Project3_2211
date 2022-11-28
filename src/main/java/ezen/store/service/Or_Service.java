@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.Or_items;
 import ezen.store.beans.PageCountBean;
 import ezen.store.dao.Or_DAO;
 
@@ -18,13 +19,32 @@ public class Or_Service {
 	@Autowired
 	private Or_DAO or_DAO;	
 	
-	/*
-	@Value("${page.listcnt}")
+	@Value("${page.orlistcnt}")
 	private int page_listcnt;  
 	//페이지
-	@Value("${page.pagButtonCnt}")
+	@Value("${page.orpagButtonCnt}")
 	private int page_pageButtonCnt;
-	*/
+	
+	public PageCountBean getOrCount(String mb_id, int currentPage) {
+		
+		int content_cnt = or_DAO.getOrCount(mb_id);
+		
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
+		return pageCountBean;
+		
+	}
+	
+	public PageCountBean getOrItemCount(String or_number, int currentPage) {
+		
+		int content_cnt = or_DAO.getOrItemCount(or_number);
+		
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
+		return pageCountBean;
+		
+	}
+	
 	
 		//주문 목록 select
 		public	List<Or_Bean> OrList(String mb_id) {
@@ -51,9 +71,6 @@ public class Or_Service {
 			//return or_DAO.OrUpdatePurchase(mb_id, or_number);
 		}
 		
-//		public List<Or_Bean> OrAfter(String or_mbid, String or_number, String or_status){
-//			return or_DAO.OrAfter(or_mbid, or_number, or_status);
-//		}
 		
 		//주문 변경 update
 		public void OrUpdateAfter(Or_Bean updateOrBean) {
@@ -75,10 +92,31 @@ public class Or_Service {
 			or_DAO.OriUpdateAfter(updateOriBean);
 			
 		}
+
+		public List<Or_items> SelectBkQuantity(String or_number) {
+			return or_DAO.SelectBkQuantity(or_number);
+		}
 		
+		public Or_Bean SelectBkPurchase(String or_number, int bk_number) {
+			return or_DAO.SelectBkPurchase(or_number, bk_number);
+		}
+		
+		public Or_Bean SelectBkAfter(String or_number, int bk_number) {
+			return or_DAO.SelectBkAfter(or_number, bk_number);
+		}
+		
+		public void UpdateBkQuantity(Or_Bean updateBkBean) {
+			or_DAO.UpdateBkQuantity(updateBkBean);
+		}
+		
+		public Or_Bean DvSelect(String mb_id, String dv_pk) {
+			return or_DAO.DvSelect(mb_id, dv_pk);
+		}
 //		public void Or_update(int or_bknumbers) {
 //			or_DAO.Or_update(or_bknumbers);
 //		}
+		
+		
 		
 //		public void Or_insert(String or_mbid,int or_bknumbers) {
 //			or_DAO.Or_insert(or_mbid,or_bknumbers);

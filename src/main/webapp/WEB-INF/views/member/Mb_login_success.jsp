@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Mb_login_success</title>
 </head>
 <body>
 	<script type="text/javascript">
 		alert("로그인을 성공 하였습니다.")
-		location.href="${root}index"
+		location.href="${root}Main/center"
 	</script>
 </body>
 </html>
