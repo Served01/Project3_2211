@@ -82,13 +82,8 @@
 		</div>	
 		<div class="form-group">
 			<form:label path="dv_address">배송지</form:label>
-			<div class="input-group">
-			<form:input path="dv_address" class="form-control"/>
-			<div class="input-group-append">
-            <button type='button' class="btn btn-dark" id="postcodify_search_button">검색</button>
-            </div>
-            </div>     
-			<form:errors path="dv_address" style="color:red"/>
+			<form:input path="dv_address" class="form-control"/>			
+            <form:errors path="dv_address" style="color:red"/>
            </div>         
           <div class="row">
             </div>

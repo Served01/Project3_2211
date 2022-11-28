@@ -583,7 +583,10 @@ let basket = {
 	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
-<c:import url="/Main/header"></c:import>
+<c:import url="/Main/header"></c:import>	
+	<br>
+	<h1 style="text-align:center;">장바구니</h1>
+	<p>
 	<!-- 로딩 -->		
 	<div class="loading"></div>
 			
@@ -625,7 +628,7 @@ let basket = {
 		                            <p>제목 : ${str.bk_title }</p>
 									<p>저자 : ${str.bk_writer }</p>
 						        	<p>출판사 : ${str.bk_publisher }</p>
-						        	<p>재고: ${str.bk_quantity }</sp>
+						        	<p>재고: ${str.bk_quantity }</p>
 		                        </div>
 		                    </div>
 		                    <div class="subdiv" style="margin-top:50px">

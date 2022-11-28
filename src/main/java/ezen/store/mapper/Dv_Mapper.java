@@ -29,7 +29,7 @@ public interface Dv_Mapper {
 	@Select("select * from Delivery_info where dv_pk = concat(concat(#{mb_id},'.'),#{dv_nick})")
 	Dv_Bean UpdateDvBean(@Param("mb_id") String mb_id, @Param("dv_nick") String dv_nick);
 	
-	@Update("update Delivery_info set dv_nick = #{dv_nick}, dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}||' '||#{dv_addressDetail}, dv_pk = concat(concat(#{mb_id},'.'),#{dv_nick})" 
+	@Update("update Delivery_info set dv_nick = #{dv_nick}, dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}, dv_pk = concat(concat(#{mb_id},'.'),#{dv_nick})" 
 			+"where dv_pk = #{dv_pk}")
 	void UpdateDvInfo(Dv_Bean UpdateDvBean);
 	

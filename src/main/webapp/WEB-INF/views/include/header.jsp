@@ -29,10 +29,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/header.js" ></script> 
   </head>
-      <style>
-
-  </style>
- 
   <body>
   <div style="width:1900px;">
     <nav class="navbar navbar-light">
@@ -57,7 +53,22 @@
 		  </c:when>	
 		  <c:otherwise>
 				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
-				<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button>
+				<ul  style="background-color:#f8f9fa;padding-left: 0px;"class="primary-navigation-ul horizontal-mega-menu">
+					<li class="buddha-menu-item primary-navigation-li">
+						<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<ul style="background-color:white;" class="mm-submenu tree">
+							<li data-href="" aria-label="isoSPEC" data-no-instant="">
+								<a data-href="${root }wish/wish_info?wi_mbid=${mb_id }&page=1"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">찜목록</a>
+							</li>							
+							<li data-href="" aria-label="Adam Equipment" data-no-instant="">
+								<a data-href="${root}cart/cart_info?ca_mbid=${mb_id }" href="" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">장바구니</a>
+							</li>				
+							<li data-href="" aria-label="Environmental Express" data-no-instant="">
+								<a data-href="${root}order/Or_list?mb_id=${mb_id }" href="" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">주문내역</a>
+							</li>
+						</ul>
+					
+				</ul>
 		  </c:otherwise>  
 		  
 		  </c:choose>         

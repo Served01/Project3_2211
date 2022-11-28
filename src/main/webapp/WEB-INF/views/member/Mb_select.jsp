@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
-  <style>
+<style>
     body {
       min-height: 100vh;
 		background-color:#F3E8EB;
@@ -47,7 +47,7 @@
 <body>
 <div class="container" align="center">
 	<div class="input-form col-md-12 mx-auto">	
-      <a href="#" onclick="location.href='insertBook.jsp'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+      <a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px; font-family:'Frank Ruhl Libre', serif;">
 		Ezen Book Store</a> 
 		
         <br>

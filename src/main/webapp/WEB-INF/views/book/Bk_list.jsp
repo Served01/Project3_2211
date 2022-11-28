@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath}/css/Bk_list.css" rel="stylesheet" type="text/css">
 <title>책 리스트</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/Bk_list.js" ></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
@@ -163,7 +164,11 @@ function delBook(bk_number){
 			})
 	 	}
 
-}
+};
+
+$(window).on('load', function () {
+	$("#${bk_genre}").attr("class","active");
+});
 </script>
 <body>
 <c:import url="/Main/header"></c:import>
@@ -181,14 +186,14 @@ function delBook(bk_number){
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left;">국내도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
-	            <li id="welcome-a" class="active"><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">소설</a></li>
-	            <li id="about-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=인문&mb_id=admin">인문</a></li>
-	            <li id="portfolio-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=취미&mb_id=admin">취미</a></li>
-	            <li id="portfolio-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=경제&mb_id=admin">경제</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=예술&mb_id=admin">예술</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=기술&mb_id=admin">기술</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=국내&bk_genre=잡지&mb_id=admin">잡지</a></li>
+	            <li id="소설" ><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">소설</a></li>
+	            <li id="인문" ><a href="${root }book/BkList?bk_local=국내&bk_genre=인문&mb_id=admin">인문</a></li>
+	            <li id="취미"><a href="${root }book/BkList?bk_local=국내&bk_genre=취미&mb_id=admin">취미</a></li>
+	            <li id="경제"><a href="${root }book/BkList?bk_local=국내&bk_genre=경제&mb_id=admin">경제</a></li>
+	            <li id="자기개발" ><a href="${root }book/BkList?bk_local=국내&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
+	            <li id="예술" ><a href="${root }book/BkList?bk_local=국내&bk_genre=예술&mb_id=admin">예술</a></li>
+	            <li id="기술" ><a href="${root }book/BkList?bk_local=국내&bk_genre=기술&mb_id=admin">기술</a></li>
+	            <li id="잡지" ><a href="${root }book/BkList?bk_local=국내&bk_genre=잡지&mb_id=admin">잡지</a></li>
         	</ul>
         </div>
      </c:if>
@@ -196,14 +201,14 @@ function delBook(bk_number){
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left; padding-left: 0px; width: 230px;">해외도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
-	            <li id="welcome-a" class="active"><a href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin">소설</a></li>
-	            <li id="about-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=인문&mb_id=admin">인문</a></li>
-	            <li id="portfolio-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=취미&mb_id=admin">취미</a></li>
-	            <li id="portfolio-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=경제&mb_id=admin">경제</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=예술&mb_id=admin">예술</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=기술&mb_id=admin">기술</a></li>
-	            <li id="contact-a"><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지&mb_id=admin">잡지</a></li>
+	            <li id="소설"  ><a href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin">소설</a></li>
+	            <li id="인문" ><a href="${root }book/BkList?bk_local=해외&bk_genre=인문&mb_id=admin">인문</a></li>
+	            <li id="취미"><a href="${root }book/BkList?bk_local=해외&bk_genre=취미&mb_id=admin">취미</a></li>
+	            <li id="경제" ><a href="${root }book/BkList?bk_local=해외&bk_genre=경제&mb_id=admin">경제</a></li>
+	            <li id="자기개발" ><a href="${root }book/BkList?bk_local=해외&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
+	            <li id="예술" ><a href="${root }book/BkList?bk_local=해외&bk_genre=예술&mb_id=admin">예술</a></li>
+	            <li id="기술" ><a href="${root }book/BkList?bk_local=해외&bk_genre=기술&mb_id=admin">기술</a></li>
+	            <li id="소설" ><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지&mb_id=admin">잡지</a></li>
         	</ul>
         </div>
       </c:if>
@@ -220,11 +225,12 @@ function delBook(bk_number){
 			<div class="col-md-3" align="center">	
 				<img src="${root }upload/${bl.bk_image}" style="width: 200px; height: 230px;">	
 			</div>
-				<h4 style="text-align:center;margin-bottom:0px;width:230px;">
+				<h4 style="text-align:center; margin-bottom:0px; width:230px; height: 35px;">
 					<c:if test="${bl.avg_score != 0}">
 						<c:set var = "string1" value = "${bl.avg_score}"/>
       					<c:set var = "string2" value = "${fn:substring(string1, 0, 3)}" />
-					<p>평점 : ${string2}/5.0점</p>
+      				<p>	
+					<p style="font-size:19px;">평점 : ${string2}/5.0점</p>
 					</c:if>
 					<c:if test="${bl.avg_score == 0.0}">
 					<p>
