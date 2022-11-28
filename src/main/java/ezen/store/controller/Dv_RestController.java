@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.service.Dv_Service;
 
@@ -15,13 +16,22 @@ public class Dv_RestController {
 	@Autowired
 	private Dv_Service dv_Service;
 	
-	@GetMapping("/delivery/CheckDvNick/{dv_nick}")
-	public String restApiControll(@PathVariable String dv_nick) {
+	@GetMapping("/delivery/CheckDvNick/{dv_pk}")
+	public String restApiControll(@PathVariable String dv_pk) {
 		
-		boolean chk = dv_Service.CheckDvNick(dv_nick);
+		boolean chk = dv_Service.CheckDvNick(dv_pk);
 		
 		return chk + "";
 		
+	}
+	
+	//Dv_delete
+	@GetMapping("/delivery/DvDelete/{mb_id}/{dv_nick}")
+	public String DvDelete(@SessionAttribute("mb_id") String mb_id, @PathVariable("dv_nick") String dv_nick) {
+		
+		dv_Service.DeleteDvInfo(mb_id, dv_nick);
+		
+		return "delivery/Dv_delete";
 	}
 	
 }

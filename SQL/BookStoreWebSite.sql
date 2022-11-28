@@ -39,7 +39,7 @@ insert into Delivery_info values('hyun3','집','house0','010-7894-1234','신림�
 insert into Delivery_info values('hyun3','회사','house1','010-7894-1234','신림언저리1','hyun3.회사');
 insert into Delivery_info values('hyun3','편의점','house2','010-7894-1234','신림언저리2','hyun3.편의점');
 insert into Delivery_info values('hyun3','학원','house3','010-7894-1234','신림언저리3','hyun3.학원');
-insert into Delivery_info values('hyun3','망할','house4','010-7894-1234','신림언저리4','hyun3.망할');
+insert into Delivery_info values('admin','망할','house4','010-7894-1234','신림언저리4','admin.망할');
 
 select * from Delivery_info;
 

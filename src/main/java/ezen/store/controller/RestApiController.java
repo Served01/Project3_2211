@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.service.Bk_Service;
 import ezen.store.service.Mb_Service;
@@ -27,7 +28,7 @@ public class RestApiController {
 	
 	@Autowired
 	Mb_Service mbSevice;
-	
+		
 	@GetMapping("/member/checkUserIdExist/{mb_id}")
 	public String restApiControll(@PathVariable String mb_id) {
 		
@@ -43,6 +44,16 @@ public class RestApiController {
 		boolean chk = mbSevice.checkUserIdExist(mb_pw);
 		
 		return chk + "";
+		
+	}
+	
+	// 책정보 삭제(수정) 기능 컨트롤러
+	@GetMapping("/book/BkDeletePro/{bk_number}")
+	public String bkDeletePro(@PathVariable int bk_number) {		
+		
+		BkSevice.deleteBook(bk_number);
+		
+		return null;
 		
 	}
 	

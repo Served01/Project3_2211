@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.PageCountBean;
 import ezen.store.beans.Wi_Bean;
@@ -22,7 +23,7 @@ public class Wi_Controller {
 
 	@GetMapping("/wish_info")
 	public String wish_info(
-			@RequestParam("wi_mbid") String wi_mbid, 
+			@SessionAttribute("mb_id") String wi_mbid, 
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			Model model) {
 		
@@ -40,10 +41,7 @@ public class Wi_Controller {
 		return "wish/wish_info";
 		
 	}
-	@GetMapping("/wish_test")
-	public String wish_test() {
-		return "wish/wish_test";
-	}
+	
 	
 	
 	

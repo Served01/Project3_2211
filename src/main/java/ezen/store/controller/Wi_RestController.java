@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.service.Wi_Service;
 
@@ -17,7 +18,7 @@ public class Wi_RestController {
 
 	
 	@GetMapping("wish_checkWishHeart/{wi_mbid}/{wi_bknumbers}")
-	public String wish_checkWishHeart(@PathVariable String wi_mbid,
+	public String wish_checkWishHeart(@SessionAttribute("mb_id") String wi_mbid,
 										@PathVariable int wi_bknumbers) {
 		
 		boolean chk = wi_Service.checkWishHeart(wi_mbid,wi_bknumbers);
@@ -26,7 +27,7 @@ public class Wi_RestController {
 	}
 	//restAPI
 	@GetMapping("/wish_add/{wi_mbid}/{wi_bknumbers}")
-	public String wish_add(@PathVariable String wi_mbid,
+	public String wish_add(@SessionAttribute("mb_id") String wi_mbid,
 							@PathVariable int wi_bknumbers) {
 		wi_Service.addWishStuff(wi_mbid, wi_bknumbers);
 		boolean chk = true;
@@ -37,7 +38,7 @@ public class Wi_RestController {
 	
 	//restAPI
 	@GetMapping("/wish_delete/{wi_mbid}/{wi_bknumbers}")
-	public String wish_delete(@PathVariable String wi_mbid,
+	public String wish_delete(@SessionAttribute("mb_id") String wi_mbid,
 			@PathVariable int wi_bknumbers) {
 		wi_Service.delwish(wi_mbid,wi_bknumbers) ;
 		boolean chk = true;
@@ -47,7 +48,7 @@ public class Wi_RestController {
 	}
 	//restAPI
 	@GetMapping("/wish_deleteAll/{wi_mbid}")
-	public String wish_deleteAll(@PathVariable String wi_mbid) {
+	public String wish_deleteAll(@SessionAttribute("mb_id") String wi_mbid) {
 		wi_Service.delwishAll(wi_mbid);
 		return null;
 		

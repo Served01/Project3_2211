@@ -54,9 +54,19 @@
 			<td>배송지: ${orBean.dv_address }</td>
 		</tr>
 		<tr>
-    		<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
-			<td><button type="button" class="Btn" onClick="location.href='${root}order/Or_list?mb_id=${orBean.mb_id }'">주문 목록</button>      
+			<td><button type="button" class="btn btn-dark" onClick="location.href='${root}order/Or_list?mb_id=${orBean.mb_id }'">주문 목록</button>      
     	</tr>
+			<c:if test="${orBean.or_status ne '교환'}">
+			<c:if test="${orBean.or_status ne '환불'}">
+			<c:if test="${orBean.or_status ne '취소'}">
+			<tr>
+				<td><button type="button" class="btn btn-dark" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+			</tr>
+			</c:if>
+			</c:if>
+			</c:if>
+    		
+			
 	           	 </table>                 	
     </c:forEach>
     <hr>
@@ -88,61 +98,5 @@
     </table>
     </c:forEach>
 		</form>
-        
-<%-- <div class="container" style="margin-top:100px">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
-			<div class="card shadow">
-				<div class="card-body">
-					<div class="form-group">
-						<label for="or_number">주문번호</label>
-						<input type="text" id="or_number" name="or_number" class="form-control" value="${detailOrBean.or_number }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_mbid">아이디</label>
-						<input type="text" id="or_mbid" name="or_mbid" class="form-control" value="${detailOrBean.or_mbid }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_bknumber">책번호</label>
-						<input type="text" id="or_bknumber" name="or_bknumber" class="form-control" value="${detailOrBean.or_bknumber }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_bkprice">책가격</label>
-						<input type="text" id="or_bkprice" name="or_bkprice" class="form-control" value="${detailOrBean.or_bkprice }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_cacount">책갯수</label>
-						<input type="text" id="or_cacount" name="or_cacount" class="form-control" value="${detailOrBean.or_cacount }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_status">주문상태</label>
-						<input type="text" id="or_status" name="or_status" class="form-control" value="${detailOrBean.or_status }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_date">주문날짜</label>
-						<input type="text" id="or_date" name="or_date" class="form-control" value="${detailOrBean.or_date }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_delivery">송장번호</label>
-						<input type="text" id="or_delivery" name="or_delivery" class="form-control" value="${detailOrBean.or_delivery }" disabled="disabled"/>
-					</div>
-					<div class="form-group">
-						<label for="or_address">배송주소</label>
-						<input type="text" id="or_address" name="or_address" class="form-control" value="${detailOrBean.or_address }" disabled="disabled"/>
-					</div>
-					
-					<div class="form-group">
-						<div class="text-right">
-							<a href="${root }order/Or_list?or_mbid=admin" class="btn btn-primary">목록보기</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-3"></div>
-	</div>
-</div> --%>
-
 </body>
 </html>

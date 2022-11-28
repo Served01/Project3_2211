@@ -1,29 +1,23 @@
 package ezen.store.controller;
 
+
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Or_Bean;
-import ezen.store.beans.PageCountBean;
-import ezen.store.dao.Or_DAO;
-import ezen.store.mapper.Or_Mapper;
+import ezen.store.beans.Or_items;
 import ezen.store.service.Ca_Service;
 import ezen.store.service.Dv_Service;
 import ezen.store.service.Or_Service;
@@ -46,6 +40,7 @@ public class Or_Controller {
 	@Autowired
 	private Ca_Service ca_Service;
 	
+	
 	/*
 	@RequestMapping(value="URL이 들어가는 자리")
 	public void MemberInfo( @RequestBody HashMap<String, Object> params ) throws Exception {
@@ -63,7 +58,7 @@ public class Or_Controller {
 	
 	//주문 목록 출력 select
 	@GetMapping("/Or_list")
-	public String OrList(@RequestParam("mb_id") String mb_id, 
+	public String OrList(@SessionAttribute("mb_id") String mb_id,
 			Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
@@ -92,20 +87,19 @@ public class Or_Controller {
 	//주문 상세 정보 출력 select
 //	@GetMapping("/Or_select")
 	@RequestMapping(value="/Or_select", method = {RequestMethod.GET, RequestMethod.POST})
-	public String OrSelect(@RequestParam("mb_id") String mb_id,
+	public String OrSelect(@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number, Model model) {
 		
 //		model.addAttribute("ca_mbid" , ca_mbid);
 		
 		//mb id, or number 일치하는 order select
 		List<Or_Bean> infoOrBean = or_Service.getOrInfo(mb_id, or_number);
-		
-		//String or_number = infoOrBean.get(0).getOr_number();
+		model.addAttribute("infoOrBean", infoOrBean);
 		
 		//or number 일치하는 items select
 		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
 
-		model.addAttribute("infoOrBean", infoOrBean);
+		
 		model.addAttribute("itemsOrBean", itemsOrBean);
 		
 		
@@ -113,11 +107,12 @@ public class Or_Controller {
 		
 	}
 	
+		
 	
 	//결제 진행 페이지 insert/update
 	@GetMapping("/Or_purchase")
 	public String Orpurchase(
-			@RequestParam("mb_id") String mb_id,
+			@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			 Model model) {
 		
@@ -133,6 +128,8 @@ public class Or_Controller {
 		List<Or_Bean> infoOrBean = or_Service.getOrInfo(mb_id, or_number);
 		model.addAttribute("infoOrBean", infoOrBean);
 		
+		
+		//mb_id 일치하는 주문 결제 완료로 표시 위한 주문 출력
 		Or_Bean updateOrPurchase = or_Service.UpdateOrBean(mb_id, or_number);
 		model.addAttribute("updateOrPurchase", updateOrPurchase);
 		
@@ -141,9 +138,9 @@ public class Or_Controller {
 	
 	
 	@PostMapping("/Or_purchasePro")
-	public String Orpurchse(@RequestParam("mb_id") String mb_id,
+	public String Orpurchse(@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
-			@RequestParam("dv_nick") String dv_nick,
+			//@RequestParam("dv_pk") String dv_pk,
 			@ModelAttribute("updateOrPurchase") Or_Bean updateOrPurchase,
 			BindingResult result, Model model) {
 		
@@ -151,36 +148,48 @@ public class Or_Controller {
 			return "order/Or_purchasefail";
 		}
 		
-		//List<Or_Bean>
-		//orUpdatePurchase =
+		List<Or_Bean> infoOrBean = or_Service.getOrInfo(mb_id, or_number);
+		model.addAttribute("infoOrBean", infoOrBean);
+		
+		//주문 status update
 		or_Service.UpdateOrPurchase(updateOrPurchase);
 		model.addAttribute("updateOrPurchase", updateOrPurchase);
+		
+		
+		
+		//주문 아이템 정보 list select
+		List<Or_Bean> updateOriBean = or_Service.UpdateOriBean(or_number);
+		model.addAttribute("updateOriBean", updateOriBean);
+		
+		
+		//주문 정보의 bk_number, bk_quantity list select
+		List<Or_items> bkNum = or_Service.SelectBkQuantity(or_number);
+		model.addAttribute("bkNum", bkNum);
+		
+		
+		//bk_number(수만큼 반복)와 bk_quantity 추출 및 수정 대입
+		for(int i=0; i<bkNum.size(); i++) {
+			
+			Or_items bk_items = bkNum.get(i);
+			int bk_number = bk_items.getBk_number();
+			
+			//bk_number 일치하는 bk select
+			Or_Bean updateBkBean = or_Service.SelectBkPurchase(or_number, bk_number);
+			model.addAttribute("updateBkBean", updateBkBean);
+			
+			//bk quantity update
+			or_Service.UpdateBkQuantity(updateBkBean);
+			
+		}
+		
 		
 		return "order/Or_purchasesuccess";
 	}
 	
-	/*
-	@GetMapping("/Or_after")
-	public String Orafter(@RequestParam("or_mbid") String or_mbid,
-			@RequestParam("or_number") String or_number,
-			
-			Model model) {
-		
-		List<Or_Bean> updateOrBean = or_Service.getOrInfo(or_mbid, or_number);
-		model.addAttribute("updateOrBean", updateOrBean);
-		
-		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
-		model.addAttribute("itemsOrBean", itemsOrBean);
-		
-		
-		return "order/Or_after";
-	}
-	*/
-	
 	
 	//주문 A/S update (Book 재고수 변경 필요)
 	@GetMapping("/Or_after")
-	public String Orafter(@RequestParam("mb_id") String mb_id,
+	public String Orafter(@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			Model model) {
 		
@@ -188,8 +197,10 @@ public class Or_Controller {
 		Or_Bean updateOrBean = or_Service.UpdateOrBean(mb_id, or_number);
 		model.addAttribute("updateOrBean", updateOrBean);
 		
+		//주문 아이템들 select
 		List<Or_Bean> updateOriBean = or_Service.UpdateOriBean(or_number);
 		model.addAttribute("updateOriBean", updateOriBean);
+		
 		
 		return "order/Or_after";
 	}
@@ -197,218 +208,55 @@ public class Or_Controller {
 	@PostMapping("/Or_afterPro")
 	public String OrafterPro(@ModelAttribute("updateOrBean") Or_Bean updateOrBean,
 			BindingResult result1,
-			//@ModelAttribute("updateOriBean") List<Or_Bean> updateOriBean,
-			//BindingResult result2,
-			//@RequestParam("bk_number") int bk_number, //@RequestParam("ori_bkcount") int ori_bkcount,
+			@SessionAttribute("mb_id") String mb_id,
 			@RequestParam("or_number") String or_number,
 			BindingResult result, Model model) {
 		
-		if (result1.hasErrors()/* || result2.hasErrors() */) {
+		if (result1.hasErrors()) {
 			return "order/Or_afterfail";
 		}
 		
+		
+		//주문 status update
 		or_Service.OrUpdateAfter(updateOrBean);
 		
+		Or_Bean infoOrBean = or_Service.UpdateOrBean(mb_id, or_number);
+		model.addAttribute("infoOrBean", infoOrBean);
 		
-		 if(updateOrBean.getOr_status() == "교환") {
+		String Status = infoOrBean.getOr_status();
+		
+		
+		 if(Status.equals("교환")) {
 		 
 		 return "order/Or_aftersuccess";
 		 }
-		 
-		List<Or_Bean> updateOriBean = or_Service.UpdateOriBean(or_number);
-		model.addAttribute("updateOriBean", updateOriBean);
 		
-		for(int i = 0; i < updateOriBean.size() ; i++) {
-			
-		//	or_Service.OriUpdateAfter(updateOriBean); //bk값 가져오기
-			
-		}
-		//updateOriBean = or_Service.UpdateOriBean(or_number);
-		//model.addAttribute("updateOriBean", updateOriBean);
-			
-			
-		
-		
-		return "order/Or_aftersuccess";
-	}
-	
-	
-	@PostMapping("/Or_afterPro2")
-	public String OrafterPro2(@ModelAttribute("updateOrBean") Or_Bean updateOrBean,
-			BindingResult result1,
-			//@ModelAttribute("updateOriBean") List<Or_Bean> updateOriBean,
-			//BindingResult result2,
-			//@RequestParam("bk_number") int bk_number, //@RequestParam("ori_bkcount") int ori_bkcount,
-			@RequestParam("or_number") String or_number,
-			BindingResult result, Model model) {
-		
-		if (result1.hasErrors()/* || result2.hasErrors() */) {
-			return "order/Or_after";
-		}
-		
-		or_Service.OrUpdateAfter(updateOrBean);
-		
-		
-		 if(updateOrBean.getOr_status() == "교환") {
-		 
-		 return "order/Or_aftersuccess";
-		 }
-		 
+		//주문 아이템 정보 list select
 		List<Or_Bean> updateOriBean = or_Service.UpdateOriBean(or_number);
 		model.addAttribute("updateOriBean", updateOriBean);
 		
 		
-		for(int i = 0; i < updateOriBean.size() ; i++) {
+		//주문 정보의 bk_number, bk_quantity list select
+		List<Or_items> bkNum = or_Service.SelectBkQuantity(or_number);
+		model.addAttribute("bkNum", bkNum);
+		
+		
+		//bk_number(수만큼 반복)와 bk_quantity 추출 및 수정 대입
+		for(int i=0; i<bkNum.size(); i++) {
 			
-			updateOriBean.get(i).getBk_number();
-		or_Service.OriUpdateAfter(updateOriBean); //bk값 가져오기
+			Or_items bk_items = bkNum.get(i);
+			int bk_number = bk_items.getBk_number();
+			
+			//bk_number 일치하는 bk select
+			Or_Bean updateBkBean = or_Service.SelectBkAfter(or_number, bk_number);
+			model.addAttribute("updateBkBean", updateBkBean);
+			
+			//bk quantity update
+			or_Service.UpdateBkQuantity(updateBkBean);
 			
 		}
-		//updateOriBean = or_Service.UpdateOriBean(or_number);
-		//model.addAttribute("updateOriBean", updateOriBean);
-			
-			
-		
+		 
 		
 		return "order/Or_aftersuccess";
 	}
-	
-	
-	/*
-	@GetMapping("/BkList")
-	public String BkList(
-			@RequestParam("bk_local") String bk_local, 
-			@RequestParam("bk_genre") String bk_genre,
-			Model model) {
-
-		model.addAttribute("bk_local", bk_local);
-		model.addAttribute("bk_genre", bk_genre);
-		
-		List<Bk_Number> bkNumList = BkService.getBkNumList(bk_local, bk_genre);
-		
-		
-		List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
-		
-		for(int i=0; i<bkNumList.size(); i++) {
-			
-			Bk_Number bk_numbers = bkNumList.get(i);
-			int bk_number = bk_numbers.getBk_number();
-			
-			Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
-			double avg_score = BkService.getBkScore(bk_number);
-			
-			bkInfoBean.setAvg_score(avg_score);
-			
-			bkListBean.add(i, bkInfoBean);
-		}
-		
-		model.addAttribute("bkListBean", bkListBean);
-		
-		return "book/Bk_list";
-	}
-	*/
-	/*
-	
-	@GetMapping("/Or_afterPro")
-	public String OrafterPro(@RequestParam("or_mbid") String or_mbid,
-			@RequestParam("or_number") String or_number,
-			@RequestParam("or_status") String or_status,
-			Model model, BindingResult result) {
-		
-		List<Or_Bean> infoOrBean = or_Service.getOrInfo(or_mbid, or_number);
-		
-		List<Or_Bean> aftOrBean = or_Service.OrAfter(or_mbid, or_number, or_status);
-		
-		model.addAttribute("aftOrBean", aftOrBean);
-		
-		if(result.hasErrors()) {
-			return "order/Or_after";
-		}
-		
-		
-		return "order/Or_aftersuccess";
-	}
-	*/
-	
-	
-//	@GetMapping("/Or_select")
-//	public String OrSelect(@RequestParam("or_number") String or_number, Model model) {
-//		
-///		model.addAttribute("ca_mbid" , ca_mbid);
-//		
-	//	List<Or_Bean> detailOrBean = or_Service.OrSelect(or_number);
-	//	model.addAttribute("detailOrBean", detailOrBean);
-	//	
-	//	
-	//	return "order/Or_select";
-		
-//	}
-	
-	
-	/*
-	 * //restAPI
-	 * 
-	 * @GetMapping("/cart_add/{ca_mbid}/{ca_bknumbers}") public String
-	 * cart_add(@PathVariable String ca_mbid,
-	 * 
-	 * @PathVariable int ca_bknumbers) { or_Service.Or_insert(ca_mbid,
-	 * ca_bknumbers); return null; }
-	 */
-	/*
-	@GetMapping("/purchase")
-	public String purchase(HttpServletRequest request, @RequestParam("board_info_idx")
-	int board_info_idx,	
-	@RequestParam("content_idx") int content_idx, Model model) {
-	
-	model.addAttribute("board_info_idx", board_info_idx);
-	
-	Or_Bean readContentDataBean = or_Service.getContentInfo(content_idx);
-	model.addAttribute("readContentDataBean", readContentDataBean);
-	
-	return "board/read"; }
-	*/
-	/*
-	@RequestMapping("/purchase")
-	public String purchase(HttpServletRequest request, @RequestParam("mb_id")
-	int mb_id,	@RequestParam("ca_mbid") int ca_mbid, Model model) {
-		
-		String name = request.getParameter("name");
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String email = request.getParameter("email");
-
-		model.addAttribute("id",id);
-		model.addAttribute("name",name);
-		model.addAttribute("pw",pw);
-		model.addAttribute("email",email);
-
-		return "member/join";
-	}
-	
-	/*
-	 * @GetMapping("/write") public String
-	 * write(@ModelAttribute("writeContentDataBean") ContentDataBean
-	 * writeContentDataBean,
-	 * 
-	 * @RequestParam("board_info_idx") int board_info_idx) {
-	 * 
-	 * // 어떤 게시판이냐? writeContentDataBean.setContent_board_idx(board_info_idx);
-	 * 
-	 * return "board/write"; }
-	 * 
-	 * @PostMapping("/write_pro") public String
-	 * write_pro(@Validated@ModelAttribute("writeContentDataBean") ContentDataBean
-	 * writeContentDataBean, BindingResult result) {
-	 * 
-	 * if(result.hasErrors()) { return "board/write"; } // upload 처리
-	 * boardUploadService.addContentInfo(writeContentDataBean);
-	 * 
-	 * return "board/write_success"; }
-	 */
-	
-	/*
-	 * @GetMapping("/modify") public String modify() { return "board/modify"; }
-	 * 
-	 * @GetMapping("/delete") public String delete() { return "board/delete"; }
-	 */
 }

@@ -27,7 +27,6 @@ public class Mb_Bean {
 	@Size(min = 8, max = 15)
 	private String mb_pw4;
 	
-	
 	@Size(min = 1, max = 30)
 	private String mb_email;
 	

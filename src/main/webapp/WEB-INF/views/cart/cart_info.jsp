@@ -438,11 +438,11 @@ let basket = {
 				dataType: 'text',
 				success: function(){
 					javascript:basket.orderItems(or_number,ca_mbid);
-					},
-					complete : function() {
-						$(".loading").fadeOut();
-						location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
-				    }
+				},
+				complete : function() {
+					$(".loading").fadeOut();
+					location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+			    }
 	    	})
 	    },
 	    orderItems: function(or_number,ca_mbid){
@@ -583,103 +583,107 @@ let basket = {
 	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
+<c:import url="/Main/header"></c:import>	
+	<br>
+	<h1 style="text-align:center;">장바구니</h1>
+	<p>
 	<!-- 로딩 -->		
 	<div class="loading"></div>
 			
-					          
-	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
-    
-            <input type="hidden" name="cmd" value="order">
-            <input type="hidden" id="orderNumExist" name="orderNumExist" value="false">
-            <div class="basketdiv" id="basket">
-                <div class="row head">
-                    <div class="subdiv">
-                        <div class="check">선택</div>
-                        <div class="img">이미지</div>
-                        <div class="pname">상품명</div>
-                    </div>
-                    <div class="subdiv">
-                        <div class="basketprice">가격</div>
-                        <div class="num">수량</div>
-                        <div class="sum">합계</div>
-                    </div>
-                    <div class="subdiv">
-    
-                        <div class="basketcmd">삭제</div>
-                    </div>
-                    <div class="split"></div>
-                </div>
-        		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
-	                <div class="row data">
+	<div class="container">				          
+		<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">	    
+	            <input type="hidden" name="cmd" value="order">
+	            <input type="hidden" id="orderNumExist" name="orderNumExist" value="false">
+	            <div class="basketdiv" id="basket">
+	                <div class="row head">
 	                    <div class="subdiv">
-	                    	<c:choose>
-	                    		<c:when test="${str.bk_quantity != 0}">
-			                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        	</c:when>
-	                        	<c:otherwise>
-	                        		<div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        	</c:otherwise>
-	                        </c:choose>
-	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
-	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
-	                            <span>제목 : ${str.bk_title }</span>
-								<span>저자 : ${str.bk_writer }</span>
-					        	<span>출판사 : ${str.bk_publisher }</span>
-					        	<span>재고: ${str.bk_quantity }</span>
-	                        </div>
+	                        <div class="check">선택</div>
+	                        <div class="img">이미지</div>
+	                        <div class="pname" style="text-align:left; padding-left:22px;">상품명</div>
+	                    </div>
+	                    <div class="subdiv" style="width:400px;">
+	                        <div class="basketprice" style="width:115px;">가격</div>
+	                        <div class="num" style="width: 180px;">수량</div>
+	                        <div class="sum" style="padding-left:15px;">합계</div>
 	                    </div>
 	                    <div class="subdiv">
-	                    	<c:choose>
-	                    		<c:when test="${str.bk_quantity != 0}">
-			                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
-			                        	<script>javascript:basket.priceComma(${str.bk_price })</script>
-									</div>
-			                        <div class="num">
-			                            <div class="updown">
-			                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="p_num${status.count}" id="p_num${status.count}" size="2" maxlength="2" class="p_num"   value="${str.ca_bkcount} " onkeyup="javascript:basket.changeKeyupPNum(${status.count},${str.bk_number },${str.bk_quantity });">
-			                                <span class="fas fa-arrow-alt-circle-up up" onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"></span>
-			                                <span class="fas fa-arrow-alt-circle-down down" onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"></span>
-			                            </div>
-			                        </div>
-			                        <div class="sum">
-			                        	<script>javascript:basket.priceComma(${str.bk_price*str.ca_bkcount})</script>
-			                        </div>
-	                        	</c:when>
-	                        	<c:otherwise>
-	                        		<div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
-	                        			<script>javascript:basket.priceComma(${str.bk_price })</script>
-	                        		</div>
-			                        <div class="num">
-			                            <div class="updown">
-			                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4></input>
-			                            </div>
-			                        </div>
-			                        <div class="sum">0원</div>
-	                        	</c:otherwise>
-	                        </c:choose>
+	    
+	                        <div class="basketcmd">삭제</div>
 	                    </div>
-	                    <div class="subdiv">
-	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
-	                    </div>
+	                    <div class="split"></div>
 	                </div>
-        		</c:forEach>
-            </div>
-    
-            <div class="right-align basketrowcmd">
-                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
-                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
-            </div>
-    
-            <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 개</div>
-            <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 원</div>
-    
-            <div id="goorder" class="">
-                <div class="clear"></div>
-                <div class="buttongroup center-align cmd">
-                    <a href="javascript:void(0)" onclick="javascript:basket.orderInitiator();">선택한 상품 주문</a>
-                </div>
-            </div>
+	        		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
+		                <div class="row data">
+		                    <div class="subdiv" style="height:165px;">
+		                    	<c:choose>
+		                    		<c:when test="${str.bk_quantity != 0}">
+				                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
+		                        	</c:otherwise>
+		                        </c:choose>
+		                        <div class="img" style="width: 120px; height: 145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" style="width: 120px; height: 145px;"></div>
+		                        <div class="pname" style=" position: relative; height: 20px; width:360px; padding-top:20px; padding-left:20px;">
+		                            <p>제목 : ${str.bk_title }</p>
+									<p>저자 : ${str.bk_writer }</p>
+						        	<p>출판사 : ${str.bk_publisher }</p>
+						        	<p>재고: ${str.bk_quantity }</p>
+		                        </div>
+		                    </div>
+		                    <div class="subdiv" style="margin-top:50px">
+		                    	<c:choose>
+		                    		<c:when test="${str.bk_quantity != 0}">
+				                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
+				                        	<script>javascript:basket.priceComma(${str.bk_price })</script>
+										</div>
+				                        <div class="num">
+				                            <div class="updown">
+				                                <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="p_num${status.count}" id="p_num${status.count}" size="2" maxlength="2" class="p_num"   value="${str.ca_bkcount} " onkeyup="javascript:basket.changeKeyupPNum(${status.count},${str.bk_number },${str.bk_quantity });">
+				                                <span class="fas fa-arrow-alt-circle-up up" onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"></span>
+				                                <span class="fas fa-arrow-alt-circle-down down" onclick="javascript:basket.changePNum(${status.count},${str.bk_number },${str.bk_quantity });"></span>
+				                            </div>
+				                        </div>
+				                        <div class="sum">
+				                        	<script>javascript:basket.priceComma(${str.bk_price*str.ca_bkcount})</script>
+				                        </div>
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<div class="basketprice"><input type="hidden" name="p_price" id="p_price" class="p_price" value="${str.bk_price }">
+		                        			<script>javascript:basket.priceComma(${str.bk_price })</script>
+		                        		</div>
+				                        <div class="num">
+				                            <div class="updown">
+				                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4>
+				                            </div>
+				                        </div>
+				                        <div class="sum">0원</div>
+		                        	</c:otherwise>
+		                        </c:choose>
+		                    </div>
+		                    <div class="subdiv">
+		                        <div class="basketcmd" style="width: 50px; height: 165px; padding-top:50px; padding-left:5px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
+		                    </div>
+		                </div>
+	        		</c:forEach>
+	            </div>
+	            <div class="right-align basketrowcmd">
+	            	<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="abutton" >찜목록보기</a>
+	                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
+	                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
+	            </div>
+	    
+	            <div class="bigtext right-align sumcount" id="sum_p_num">상품갯수: 개</div>
+	            <div class="bigtext right-align box blue summoney" id="sum_p_price">합계금액: 원</div>
+	    
+	            <div id="goorder" class="">
+	                <div class="clear"></div>
+	                <div class="buttongroup center-align cmd">
+	                    <a href="javascript:void(0)" onclick="javascript:basket.orderInitiator();">선택한 상품 주문</a>
+	                </div>
+	            </div>
         </form>
-					
+     </div>
+<c:import url="/Main/footer"></c:import>		
 </body>
 </html>

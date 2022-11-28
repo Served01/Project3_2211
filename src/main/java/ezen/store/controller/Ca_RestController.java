@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.service.Ca_Service;
 
@@ -25,7 +26,7 @@ public class Ca_RestController {
 	
 	//restAPI
 		@GetMapping("/cart_add/{ca_mbid}/{ca_bknumbers}")
-		public String cart_add(@PathVariable String ca_mbid,
+		public String cart_add(@SessionAttribute("mb_id") String ca_mbid,
 								@PathVariable int ca_bknumbers) {
 			ca_Service.addCartStuff(ca_mbid, ca_bknumbers);
 			return null;
@@ -34,7 +35,7 @@ public class Ca_RestController {
 		
 		//restAPI
 		@GetMapping("/cart_delete/{ca_mbid}/{ca_bknumbers}")
-		public String cart_delete(@PathVariable String ca_mbid,
+		public String cart_delete(@SessionAttribute("mb_id") String ca_mbid,
 									@PathVariable int ca_bknumbers) {
 			ca_Service.delcart(ca_mbid,ca_bknumbers) ;
 			return null;
@@ -42,14 +43,14 @@ public class Ca_RestController {
 		}
 		//restAPI
 		@GetMapping("/cart_deleteAll/{ca_mbid}")
-		public String cart_deleteAll(@PathVariable String ca_mbid) {
+		public String cart_deleteAll(@SessionAttribute("mb_id") String ca_mbid) {
 			ca_Service.delcartAll(ca_mbid);
 			return null;
 			
 		}
 		
 		@GetMapping("/cart_plusBookCount/{ca_mbid}/{ca_bknumbers}")
-		public String cart_plusBookCount(@PathVariable String ca_mbid,
+		public String cart_plusBookCount(@SessionAttribute("mb_id") String ca_mbid,
 									@PathVariable int ca_bknumbers) {
 			ca_Service.plusBookCount(ca_mbid,ca_bknumbers) ;
 			return null;
@@ -57,14 +58,14 @@ public class Ca_RestController {
 		}
 		
 		@GetMapping("/cart_minusBookCount/{ca_mbid}/{ca_bknumbers}")
-		public String cart_minusBookCount(@PathVariable String ca_mbid,
+		public String cart_minusBookCount(@SessionAttribute("mb_id") String ca_mbid,
 									@PathVariable int ca_bknumbers) {
 			ca_Service.minusBookCount(ca_mbid,ca_bknumbers) ;
 			return null;
 		}
 		
 		@GetMapping("/cart_setBookCount/{ca_mbid}/{ca_bknumbers}/{newval}")
-		public String cart_setBookCount(@PathVariable String ca_mbid,
+		public String cart_setBookCount(@SessionAttribute("mb_id") String ca_mbid,
 									@PathVariable int ca_bknumbers,
 									@PathVariable int newval) {
 			ca_Service.setBookCount(ca_mbid,ca_bknumbers,newval) ;
@@ -73,18 +74,17 @@ public class Ca_RestController {
 		
 		@GetMapping("/cart_createOderInfo/{or_number}/{ca_mbid}")
 		public String cart_createOderInfo(@PathVariable String or_number,
-									@PathVariable String ca_mbid) {
+				@SessionAttribute("mb_id") String ca_mbid) {
 			ca_Service.createOderInfo(or_number,ca_mbid) ;
 			return null;
 			
 		}
 		
-		@GetMapping("/cart_insertOderItems/{or_number}/{ca_bknumbers}/{ca_mbid}/{ca_bkcount}")
+		@GetMapping("/cart_insertOderItems/{or_number}/{ca_bknumbers}/{ca_mbid}")
 		public String cart_insertOderItems(@PathVariable String or_number,
 									@PathVariable int ca_bknumbers,
-									@PathVariable String ca_mbid,
-									@PathVariable int ca_bkcount) {
-			ca_Service.insertOderItems(or_number,ca_bknumbers,ca_mbid,ca_bkcount) ;
+									@SessionAttribute("mb_id") String ca_mbid) {
+			ca_Service.insertOderItems(or_number,ca_bknumbers,ca_mbid) ;
 			return null;
 			
 		}
@@ -92,7 +92,7 @@ public class Ca_RestController {
 		@GetMapping("/cart_insertOderItem/{or_number}/{ca_bknumbers}/{ca_mbid}/{ca_bkcount}")
 		public String cart_insertOderItem(@PathVariable String or_number,
 									@PathVariable int ca_bknumbers,
-									@PathVariable String ca_mbid,
+									@SessionAttribute("mb_id") String ca_mbid,
 									@PathVariable int ca_bkcount) {
 			ca_Service.insertOderItem(or_number,ca_bknumbers,ca_mbid,ca_bkcount) ;
 			return null;
@@ -100,13 +100,13 @@ public class Ca_RestController {
 		}
 		
 		@GetMapping("/cart_delPreOrder/{ca_mbid}")
-		public String cart_delPreOrder(@PathVariable String ca_mbid) {
+		public String cart_delPreOrder(@SessionAttribute("mb_id") String ca_mbid) {
 			ca_Service.delPreOrder(ca_mbid);
 			return null;
 			
 		}
 		@GetMapping("/cart_delPreOrderItems/{ca_mbid}")
-		public String cart_delPreOrderItems(@PathVariable String ca_mbid) {
+		public String cart_delPreOrderItems(@SessionAttribute("mb_id") String ca_mbid) {
 			ca_Service.delPreOrderItems(ca_mbid);
 			return null;
 			
