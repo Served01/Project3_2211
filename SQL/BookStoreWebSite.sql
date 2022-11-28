@@ -23,7 +23,7 @@ insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun3',1234
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun4',12345678,'test4','test4@gmail.com','010-1234-4567');
 
 select * from Member_info;
-drop table Member_info;
+
 
 -- Delivery 테이블
 create table Delivery_info(
@@ -39,7 +39,6 @@ insert into Delivery_info values('hyun3','집','house0','010-7894-1234','신림�
 insert into Delivery_info values('hyun3','회사','house1','010-7894-1234','신림언저리1','hyun3.회사');
 insert into Delivery_info values('hyun3','편의점','house2','010-7894-1234','신림언저리2','hyun3.편의점');
 insert into Delivery_info values('hyun3','학원','house3','010-7894-1234','신림언저리3','hyun3.학원');
-insert into Delivery_info values('hyun3','망할','house4','010-7894-1234','신림언저리4','hyun3.망할');
 insert into Delivery_info values('admin','망할','house4','010-7894-1234','신림언저리4','admin.망할');
 
 select * from Delivery_info;
@@ -67,8 +66,6 @@ create table Book_info(
     bk_deleted varchar2(7) 
         default '0' not null
 	);
-	
-drop table Book_info;
 
 -- bk_number 규칙
 -- 년도 4자리 + 랜덤숫자 순서대로 4자리(0001, 0002, 0003...)
@@ -83,16 +80,6 @@ insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, 
     values(20220004,'Spring교육','최우성','하양출판사','2008-08-06','bk_image.jpg','해외','경제','책 디테일4',200,1500,upper('Spring교육'));
 insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
     values(20220005,'컴퓨터교육','박경수','검정출판사','2018-09-26','bk_image.jpg','해외','예술','책 디테일5',1000,13000,upper('컴퓨터교육'));
-    
-    
-insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
-    values(20220006,'Jsp석숭','김경빈','파랑출판사','2014-10-18','bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
-    insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
-    values(20220007,'Jsp석롱','김경빈','파랑출판사','2014-10-18','bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
-    insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
-    values(20220008,'Jsp석살','김경빈','파랑출판사','2014-10-18','bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
-    insert into BOOK_INFO(bk_number, bk_title, bk_writer, bk_publisher, bk_pubdate, bk_image, bk_local, bk_genre, bk_detail, bk_quantity, bk_price, bk_title_upper) 
-    values(20220009,'Jsp석제비','김경빈','파랑출판사','2014-10-18','bk_image.jpg','국내','인문','책 디테일2',16,2500,upper('Jsp교육'));
     
 select * from BOOK_INFO;
 
@@ -113,8 +100,6 @@ rv_content varchar2(1500) null,
 rv_deleted varchar2(7)
     default '0' not null
 );
-
-drop table Review_info;
 
 create sequence review_seq
 	start with 1

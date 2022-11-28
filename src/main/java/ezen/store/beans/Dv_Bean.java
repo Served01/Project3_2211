@@ -6,8 +6,10 @@ import javax.validation.constraints.Size;
 public class Dv_Bean {
 	
 	private String mb_id;
+	
 	@Size(min=2, max=20)
 	private String dv_nick;
+	
 	@Size(min=2, max=10)
 	@Pattern(regexp = "[a-zA-Z가-힣]*")
 	private String dv_name;
@@ -19,12 +21,17 @@ public class Dv_Bean {
 	@Size(min=2, max=3000)
 	
 	private String dv_address;
+	
+	private String dv_addressDetail;
+	
 	private String dv_pk;
+	
 	private boolean dv_numExist;
 	
 	public Dv_Bean() {
 		this.dv_numExist = false;
 	}
+	
 	//생성 입력
 	public String getMb_id() {
 		return mb_id;
@@ -56,6 +63,12 @@ public class Dv_Bean {
 	public void setDv_address(String dv_address) {
 		this.dv_address = dv_address;
 	}
+	public String getDv_addressDetail() {
+		return dv_addressDetail;
+	}
+	public void setDv_addressDetail(String dv_addressDetail) {
+		this.dv_addressDetail = dv_addressDetail;
+	}
 	public String getDv_pk() {
 		return dv_pk;
 	}
@@ -67,10 +80,6 @@ public class Dv_Bean {
 	}
 	public void setDv_numExist(boolean dv_numExist) {
 		this.dv_numExist = dv_numExist;
-	}
-	
-	
-	
-	
+	}	
 	
 }

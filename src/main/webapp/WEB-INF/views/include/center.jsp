@@ -91,7 +91,7 @@ left
     </div>
   </div>
 </div>
-
+<br><br><br>
 <c:import url="/Main/footer"></c:import>
 </body>
 </html>

@@ -13,8 +13,8 @@ import ezen.store.beans.Dv_Bean;
 public interface Dv_Mapper {
 	
 	//중복확인
-	@Select("select * from Delivery_info where dv_nick = #{dv_nick}")
-	String CheckDvNick(String dv_nick);
+	@Select("select count(*) from Delivery_info where dv_pk = #{dv_pk}")
+	int CheckDvNick(String dv_pk);
 	
 	//배송지 조회
 	@Select("select * from Delivery_info where mb_id = #{mb_id}")
@@ -22,7 +22,7 @@ public interface Dv_Mapper {
 		
 	//배송지 입력
 	@Insert("insert into Delivery_info(mb_id, dv_nick, dv_name, dv_tel, dv_address, dv_pk)"
-	+ "values(#{mb_id}, #{dv_nick}, #{dv_name}, #{dv_tel}, #{dv_address}, concat(concat(#{mb_id},'.'),#{dv_nick}))")
+	+ "values(#{mb_id}, #{dv_nick}, #{dv_name}, #{dv_tel}, #{dv_address}||' '||#{dv_addressDetail}, concat(concat(#{mb_id},'.'),#{dv_nick}))")
 	void addDvInfo(Dv_Bean InsertDvBean);
 	
 	//배송지 수정 
