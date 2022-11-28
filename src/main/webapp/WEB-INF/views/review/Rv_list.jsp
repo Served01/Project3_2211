@@ -53,9 +53,11 @@
      
      </script>
 <body>
+<br>
 <div class="container">
             <div class="info" style="margin-left:150px;width:900px">
                 <h1 style="text-align:center">리뷰 목록</h1>
+                <br>
 		<div class="reviews">
 			<table class="table">
 				<thead>
@@ -87,7 +89,7 @@
 			</table>
 			<hr style="margin-top: -1em">
             </div>
-			
+			<br><br>
 			<!-- 페이지네이션 -->
     		<div class=hi>
             	<ul id="hiyo" class="pagination">

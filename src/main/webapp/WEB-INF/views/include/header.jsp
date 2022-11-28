@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
-<c:url var='root' value='/'/>
+<c:set var='root' value="${pageContext.request.contextPath }/"/>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -55,7 +55,7 @@
 				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
 				<ul  style="background-color:#f8f9fa;padding-left: 0px;"class="primary-navigation-ul horizontal-mega-menu">
 					<li class="buddha-menu-item primary-navigation-li">
-						<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
 						<ul style="background-color:white;" class="mm-submenu tree">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
 								<a data-href="${root }wish/wish_info?wi_mbid=${mb_id }&page=1"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">찜목록</a>

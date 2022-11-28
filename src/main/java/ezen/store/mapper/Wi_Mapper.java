@@ -30,6 +30,7 @@ public interface Wi_Mapper {
 	
 	@Delete("delete from Wish_info where mb_id = #{wi_mbid}")
 		void delwishAll(String wi_mbid);
+	
 	//check
 	@Select("select mb_id,bk_number from Wish_info where mb_id = #{wi_mbid}"
 			+ " and bk_number = #{wi_bknumbers}")

@@ -13,6 +13,15 @@
 <link rel="Stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <title>도서 상세 정보</title>
+        	<!-- 글골 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
 .star-ratings {
   color: #aaa9a9; 
@@ -332,7 +341,7 @@ function delBook(bk_number){
 <c:import url="/Main/header"></c:import>
 	<div class="jumbotron"style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="width:1600px">
-			<h1 class="display-5">도서 정보</h1>
+			<h1 class="display-5" style="font-family: 'Noto Sans KR', sans-serif;">도서 정보</h1>
 		</div>
 	</div>
 	
@@ -348,7 +357,7 @@ function delBook(bk_number){
 					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${string2}/5.0 점</div>
 				</c:if>
 				<c:if test="${ReadScore == 0.0}">
-					<div><h5>등록된 평점이 없습니다.</h5></div>
+					<div><h5 style="font-family: 'Noto Sans KR', sans-serif;">등록된 평점이 없습니다.</h5></div>
 				</c:if>
 				</div>
 			</div>
@@ -396,12 +405,12 @@ function delBook(bk_number){
 				</div>	
 			</div>
 		</div>
-		<hr>
-	</div>
+		<hr style="margin-right:300px;">
+	</div>	
 	</div>	
 	<c:import url="/Review/RvInsert">
 	</c:import>
-	
+	<br><br><br>
 	<c:import url="/Review/RvList">
 	</c:import>
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->

@@ -1,7 +1,6 @@
 package ezen.store.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,22 +18,11 @@ public class Ma_Controller {
 	
 	@GetMapping("/header")
 	public String header(@SessionAttribute("mb_id") String mb_id,
-						@ModelAttribute("searchBean") Search_Bean searchBean,
-						Model model,
-						 HttpServletRequest request) {
-
-		
-		
-		if(mb_id!=null) {
-			model.addAttribute("mb_id",mb_id);
-		} else {
-			model.addAttribute("mb_id","0");
-		}
-		
-		
-		
+						 @ModelAttribute("searchBean") Search_Bean searchBean,
+						 Model model,HttpServletRequest request) {
 		
 		return "include/header";
+		
 	}
 	
 	
@@ -42,12 +30,14 @@ public class Ma_Controller {
 	public String footer() {
 
 		return "include/footer";
+		
 	}
 
 	@GetMapping("/center")
 	public String center() {
 
 		return "include/center";
+		
 	}
 	
 

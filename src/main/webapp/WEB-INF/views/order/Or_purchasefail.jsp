@@ -35,7 +35,7 @@ text-align:center;
     	<button type="button" class="btn btn-danger btn-lg" onclick="location.href='/findIdPw'">홈으로</button>
     	</div>
     </div>
-			<div style="float:right";class="find-btn">
+			<div style="float:right" class="find-btn">
 </div>
 		</div>
 		

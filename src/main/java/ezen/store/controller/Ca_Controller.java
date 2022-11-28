@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.Ca_Bean;
 import ezen.store.service.Ca_Service;
@@ -22,7 +22,7 @@ public class Ca_Controller {
 	
 	
 	@GetMapping("/cart_info")
-	public String cart_info(@RequestParam("ca_mbid") String ca_mbid, Model model) {
+	public String cart_info(@SessionAttribute("mb_id") String ca_mbid, Model model) {
 		
 
 		

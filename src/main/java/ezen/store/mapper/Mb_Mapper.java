@@ -24,20 +24,20 @@ public interface Mb_Mapper {
 	void addUserInfo(Mb_Bean insertMbBean);
 	
 	// 전체 리스트 받아오기 SQL
-		@Select("select * from Member_info")
-		List<Mb_Bean> getMbList();
+	@Select("select * from Member_info")
+	List<Mb_Bean> getMbList();
 		
-		// 전체 회원 수
-		@Select("select count(*) from Member_info")
-		int getCntMember();
+	// 전체 회원 수
+	@Select("select count(*) from Member_info")
+	int getCntMember();
 
 	// 상세정보 받아오기 SQL
 	@Select("select * from Member_info where mb_id = #{mb_id}")
 	Mb_Bean getMbInfo(String mb_id);
 
 	// 수정 실행 SQL문
-		@Update("update Member_info set mb_name = #{mb_name}, mb_pw = #{mb_pw}, mb_email = #{mb_email}, mb_tel = #{mb_tel} where mb_id = #{mb_id}")
-		void modifyUserInfo(Mb_Bean updateMbBean);
+	@Update("update Member_info set mb_name = #{mb_name}, mb_pw = #{mb_pw}, mb_email = #{mb_email}, mb_tel = #{mb_tel} where mb_id = #{mb_id}")
+	void modifyUserInfo(Mb_Bean updateMbBean);
 
 	
 	// 삭제할 정보 받아오기 SQL
@@ -45,7 +45,7 @@ public interface Mb_Mapper {
 	Mb_Bean deleteMbBean(@Param("mb_id") String mb_id);
 	
 	// 삭제 실행 SQL
-		@Update("update Member_info set mb_deleted = 'deleted', mb_deleted_date = sysdate where mb_id = #{mb_id} and mb_pw = #{mb_pw}")
-		void deleteUserInfo(Mb_Bean deleteMbBean);
+	@Update("update Member_info set mb_deleted = 'deleted', mb_deleted_date = sysdate where mb_id = #{mb_id} and mb_pw = #{mb_pw}")
+	void deleteUserInfo(Mb_Bean deleteMbBean);
 
 }

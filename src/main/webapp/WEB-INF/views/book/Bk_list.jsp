@@ -179,8 +179,8 @@ $(window).on('load', function () {
 				<h2 class="display-5">${bk_local} ${bk_genre}</h2>
 		</div>
 	</div>
-	
-<div class="input-group">	
+<!-- 이 페이지 형식상 </div>를 쓰면 모양이 무너짐. -->
+<div class="input-group">
 <aside class="sidebar" style="width:300px;board-left-width:10px;left:20px; background-color:#white" id="menu-bar">
 	<c:if test="${bk_local == '국내'}">
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left;">국내도서</span></h1>
@@ -293,8 +293,8 @@ $(window).on('load', function () {
 					
 				</ul>
 			</div>
-			</div>d
+			</div>
 <c:import url="/Main/footer"></c:import>	
-
+</div>
 </body>
 </html>

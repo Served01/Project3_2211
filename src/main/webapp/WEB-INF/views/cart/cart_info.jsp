@@ -617,7 +617,7 @@ let basket = {
 		                    <div class="subdiv" style="height:165px;">
 		                    	<c:choose>
 		                    		<c:when test="${str.bk_quantity != 0}">
-				                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+				                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
 		                        	</c:when>
 		                        	<c:otherwise>
 		                        		<div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
@@ -654,7 +654,7 @@ let basket = {
 		                        		</div>
 				                        <div class="num">
 				                            <div class="updown">
-				                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4></input>
+				                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4>
 				                            </div>
 				                        </div>
 				                        <div class="sum">0원</div>
@@ -682,8 +682,8 @@ let basket = {
 	                    <a href="javascript:void(0)" onclick="javascript:basket.orderInitiator();">선택한 상품 주문</a>
 	                </div>
 	            </div>
-           	</div>
         </form>
+     </div>
 <c:import url="/Main/footer"></c:import>		
 </body>
 </html>
