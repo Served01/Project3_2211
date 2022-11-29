@@ -77,7 +77,7 @@ public class Mb_Controller {
 						   @RequestParam("mb_id2") String mb_id2,
 						   Model model) {
 
-		if(mb_id==mb_id2 || mb_id.equals("admin")) {
+		if(mb_id.equals(mb_id2) || mb_id.equals("admin")) {
 			
 		model.addAttribute("mb_id2", mb_id2);
 		

@@ -119,6 +119,8 @@ var mb_id = '${mb_id}';
 
 function addcart(ca_mbid,ca_bknumbers){
 	
+
+	
 		$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
 		type: 'get',
@@ -254,7 +256,7 @@ $(window).on('load', function () {
 				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
 				<a href='#' onclick="javascript:delBook(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
 			</c:if>
-				<a href='#' onclick="javascript:addcart(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
+				<a href='#' onclick="javascript:addcart('${mb_id}',${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
 			</div>
 		</div>
 		</div>
