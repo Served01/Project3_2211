@@ -26,7 +26,7 @@ left
 </head>
 
 <body>
-<c:import url="/Main/header"></c:import>
+<%@include file = "../include/header.jsp" %>
 <br>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -92,6 +92,6 @@ left
   </div>
 </div>
 <br><br><br>
-<c:import url="/Main/footer"></c:import>
+<%@include file = "../include/footer.jsp" %>
 </body>
 </html>

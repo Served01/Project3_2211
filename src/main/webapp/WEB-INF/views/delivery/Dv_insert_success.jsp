@@ -11,7 +11,7 @@
 <body>
 	<script type="text/javascript">
 		alert("배송지 작성이 정상적으로 완료되었습니다.")
-		location.href="${root}member/Mbselect?mb_id=admin"
+		location.href="${root}member/Mbselect?mb_id=${mb_id}"
 	</script>
 </body>
 </html>

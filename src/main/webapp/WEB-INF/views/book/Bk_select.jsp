@@ -84,13 +84,13 @@ document.getElementById("my_sum").innerHTML=sum_;
 //주문
 
 let basket = {
-		orderInitiator: function(ca_bknumbers){
+		orderInitiator: function(ca_mbid,ca_bknumbers){
 	    	<%java.util.Date today = new java.util.Date();
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
 			
 			//로그인 아이디 받아와야됨
-			var ca_mbid = 'admin';
+			
 			var ca_bkcount = $("#amount").val();
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
@@ -222,13 +222,8 @@ let basket = {
 	    }
 };
 let wish = {
-	switchWishHeart : function(bk_number) {
-		//alert("헤이!");
-		//alert(a_memberNo);
-		
-		var mb_id = 'admin';
-		
-		
+	switchWishHeart : function(mb_id,bk_number) {
+
 		var imgsrc = $("#wish").attr("src");
 		
 		var culsrc = imgsrc.split('-');
@@ -263,11 +258,8 @@ let wish = {
 		
 		
 	},
-	checkWishHeart : function(bk_number){
-		
-		var mb_id = 'admin';
-		
-		
+	checkWishHeart : function(mb_id,bk_number){
+
 		$.ajax({
 			url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
 			type : "GET",
@@ -287,9 +279,6 @@ let wish = {
 	}
 };
 function addcart(ca_mbid,ca_bknumbers){
-	
-	//var ca_mbid = $("#ca_mbid").val()
-	//var ca_bknumbers = $("#ca_bknumbers").val()
 	
 	$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
@@ -329,7 +318,7 @@ function delBook(bk_number){
 
 }
 </script>
-<c:import url="/Main/header"></c:import>
+<%@include file = "../include/header.jsp" %>
 	<div class="jumbotron"style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="width:1600px">
 			<h1 class="display-5">도서 정보</h1>
@@ -359,11 +348,11 @@ function delBook(bk_number){
 				<!--  like button  -->
 				<script>
 				$(document).ready(function(){
-					setTimeout(wish.checkWishHeart(${ReadBkBean.bk_number}), 200);
+					setTimeout(wish.checkWishHeart(${mb_id},${ReadBkBean.bk_number}), 200);
 				})
 				</script>
 				
-					<img src="${root }imgs/heart.svg"  id="wish"  onclick="javascript:wish.switchWishHeart(${ReadBkBean.bk_number})"/>
+					<img src="${root }imgs/heart.svg"  id="wish"  onclick="javascript:wish.switchWishHeart(${mb_id},${ReadBkBean.bk_number})"/>
 					
 				<!--  /like button  -->
 				</div>
@@ -389,23 +378,30 @@ function delBook(bk_number){
 				</form>
 				<div class="input-group-append">
 				<p>
-				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
-				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니"></p>
+				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${mb_id},${ReadBkBean.bk_number});">도서주문 &raquo;</a>
+				<input class="btn btn-info" type="button" onclick="javascript:addcart(${mb_id },${ReadBkBean.bk_number})" value="장바구니"></p>
+				<c:if test="${mb_id==admin }">
 				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a>
 				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a></p>
+				</c:if>
 				</div>	
 			</div>
 		</div>
 		<hr>
 	</div>
-	</div>	
-	<c:import url="/Review/RvInsert">
-	</c:import>
+	</div>
+	
+	<c:if test="${mb_id!=0 }">
+		<c:import url="/Review/RvInsert">
+		</c:import>
+	</c:if>
 	
 	<c:import url="/Review/RvList">
 	</c:import>
+	
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
 	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
-	<c:import url="/Main/footer"></c:import>
+	
+	<%@include file = "../include/footer.jsp" %>
 </body>
 </html>

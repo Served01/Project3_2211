@@ -7,52 +7,95 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>구매 내역</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<style>
+		.hi{
+		    text-align:center;
+		   } 
+		#hiyo {
+			  width: 300px;
+			  margin-left: auto;
+			  margin-right: auto;
+			  }
+</style>
 </head>
-<body>
-
+<body bgcolor="WHITE">
+<c:import url="/Main/header"></c:import>
 <form name="orderlist" id="orderlist" method="post" class="orderlist">
-	
+	<br>
+	<h1 class="display-5">구매 내역</h1>
+	<br>
+	<div class="container">
 	<c:forEach var="orBean" items="${infoOrBean}" varStatus="status">
+	<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 			
-		<table class="table">
+ 		<table class="table table-hover"> 
 		<c:if test="${orBean.or_status ne '0'}">
 				<tr>
-	            	<td>주문번호: ${orBean.or_number }</td>
+	            	<td width="300">주문번호</td>
+	            	<td width="450"><a href="${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }"> ${orBean.or_number }</a></td>
 	            </tr> 
 	            <tr>
-					<td>구매날짜: ${orBean.or_date }</td>
+					<td>구매날짜</td>
+	            	<td>${orBean.or_date }</td>
 				</tr>
 	            <tr>
-					<td>송장번호: ${orBean.or_delivery }</td>
+					<td>송장번호</td>
+	            	<td>${orBean.or_delivery }</td>
 				</tr>
 	            <tr>
-					<td>배송지: ${orBean.dv_address }</td>
+					<td>배송지</td>
+	            	<td>${orBean.dv_address }</td>
 				</tr>
 				<tr>
-					<td>배송 상태: ${orBean.or_status }</td>
+					<td>배송 상태</td>
+	            	<td>${orBean.or_status }</td>
 				</tr>
 				<tr>
-					<td><button type="button" class="btn btn-dark" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
-				</tr>
+					<td><td>
+						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
 					<c:if test="${orBean.or_status ne '교환'}">
 					<c:if test="${orBean.or_status ne '환불'}">
 					<c:if test="${orBean.or_status ne '취소'}">
-					<tr>
-						<td><button type="button" class="btn btn-dark" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+					</c:if>
+					</c:if>
+					</c:if>
 					</tr>
 					</c:if>
-					</c:if>
-					</c:if>
-				
-			</c:if>
 		</table>
+	</c:if>
 	</c:forEach>
+	</div>
+	<br>
+	<!-- 페이지네이션 -->
+    		<div class=hi>
+            	<ul id="hiyo" class="pagination">
+					
+					<li class="page-item">
+						<a href="${root}order/Or_list?mb_id=${mb_id}&page=1" class="page-link">First</a>
+					</li>					
+														
+				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
+					
+					<li class="page-item active">
+						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${idx}" class="page-link">${idx}</a>
+					</li>		
+												
+				</c:forEach>					
+					
+					<li class="page-item">
+						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+					</li>
+					
+				</ul>
+			</div>
 </form>
-
+<br>
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>

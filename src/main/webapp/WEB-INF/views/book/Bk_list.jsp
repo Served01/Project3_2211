@@ -59,13 +59,8 @@ padding-top: 8px;
 </style>
 <script>
 let wish = {
-		switchWishHeart : function(bk_number,su) {
-			//alert("헤이!");
-			//alert(a_memberNo);
-			
-			var mb_id = 'admin';
-			
-			
+		switchWishHeart : function(mb_id,bk_number,su) {
+
 			var imgsrc = $("#wish"+su).attr("src");
 			var culsrc = imgsrc.split('-');
 			
@@ -99,11 +94,8 @@ let wish = {
 			
 			
 		},
-		checkWishHeart : function(bk_number,su){
-			
-			var mb_id = 'admin';
-			
-			
+		checkWishHeart : function(mb_id,bk_number,su){
+	
 			$.ajax({
 				url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
 				type : "GET",
@@ -125,10 +117,7 @@ let wish = {
 
 function addcart(ca_mbid,ca_bknumbers){
 	
-	//var ca_mbid = $("#ca_mbid").val()
-	//var ca_bknumbers = $("#ca_bknumbers").val()
-	
-	$.ajax({
+		$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
 		type: 'get',
 		dataType: 'text',
@@ -171,7 +160,7 @@ $(window).on('load', function () {
 });
 </script>
 <body>
-<c:import url="/Main/header"></c:import>
+<%@include file = "../include/header.jsp" %>
 
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="font-family: 'Noto Sans KR', sans-serif;">
@@ -245,10 +234,10 @@ $(window).on('load', function () {
 				<!--  like button  -->
 				<script>
 					$(document).ready(function(){
-						setTimeout(wish.checkWishHeart(${bl.bk_number},${status.count}), 200);
+						setTimeout(wish.checkWishHeart(${mb_id},${bl.bk_number},${status.count}), 200);
 					})
 				</script>
-				<img src="${root }imgs/heart.svg"  id="wish${status.count }"  onclick="javascript:wish.switchWishHeart(${bl.bk_number},${status.count})"/>
+				<img src="${root }imgs/heart.svg"  id="wish${status.count }"  onclick="javascript:wish.switchWishHeart(${mb_id},${bl.bk_number},${status.count})"/>
 				
 				<p>${bl.bk_writer} | ${bl.bk_publisher} | ${bl.bk_pubdate} 출시 
 				<p style="padding-top: 20px">
@@ -259,9 +248,11 @@ $(window).on('load', function () {
 				
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
+			<c:if test = "${mb_id == admin }">
 				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
 				<a href='#' onclick="javascript:delBook(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
-				<a href='#' onclick="javascript:addcart('admin',${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
+			</c:if>
+				<a href='#' onclick="javascript:addcart(${mb_id },${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
 			</div>
 		</div>
 		</div>
@@ -276,25 +267,26 @@ $(window).on('load', function () {
             	<ul id="hiyo" class="pagination" style="padding-left:100px;">
 					
 					<li class="page-item">
-						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
+						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
 					</li>					
 														
 				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 					<li class="page-item active">
-						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
+						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
 					</li>		
 												
 				</c:forEach>					
 					
 					<li class="page-item">
-						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>
 			</div>
 			</div>
-<c:import url="/Main/footer"></c:import>	
+
 </div>
+<%@include file = "../include/footer.jsp" %>
 </body>
 </html>

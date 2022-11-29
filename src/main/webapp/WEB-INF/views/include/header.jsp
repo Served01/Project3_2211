@@ -43,7 +43,8 @@
 			
 				<c:if test="${mb_id == 'admin'}">
 			<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
-			<button type="button" onclick="location.href='${root }member/Mblist?mb_id=admin'">전체회원목록</button>
+			<button type="button" onclick="location.href='${root }member/Mblist'">전체회원목록</button>
+			<button type="button" onclick="location.href='${root }'">전체구매목록</button>
 		  </c:if>
 		 
 		  <c:choose>

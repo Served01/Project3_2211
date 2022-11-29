@@ -75,10 +75,10 @@
 						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.mb_id }</td>
 						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_date }</td>
 						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_content }</td>	
-						
+					<c:if test="${mb_id==rvl.mb_id or mb_id==admin}">
 						<th><button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvUpdate?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">수정</button></th>
                         <th><button type="button" class="btn btn-dark" onclick="location.href='${root }Review/RvDeletePro?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">삭제</button></th>			
-					
+					</c:if>
 					</tr>
 					
 					</c:if>

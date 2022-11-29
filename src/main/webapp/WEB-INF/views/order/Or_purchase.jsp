@@ -13,11 +13,15 @@
 <title>구매 화면</title>
 </head>
 
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 검색 api -->
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <script>
 
 function check(n, count) {
@@ -37,8 +41,11 @@ function check(n, count) {
 }
 
 </script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <body bgcolor="WHITE">  
-		
+<c:import url="/Main/header"></c:import>
+		<br>
+		<br>
         <div class="container">
 		<div class="row">
 			<div class="container">
@@ -90,12 +97,34 @@ function check(n, count) {
 		</div>
 		</div>
 		
+	
+	
+
+		
+
+		
 	<form:form action="${root }order/Or_purchasePro" method="post" modelAttribute="updateOrPurchase">
 		 
 		<form:hidden path="mb_id"/>
    		<form:hidden path="or_number"/>
-		<form:hidden path="mb_name" name="mb_name"/>
-		<form:hidden path="mb_tel" name="mb_tel"/>
+   		
+		<table border="1" align="center" style="width:600; cellspacing:0; cellpadding:3;">
+		<tr>
+		<td align="center" colspan="2">구매자 정보
+		</td>
+		</tr>
+		<tr>
+		<td  width="200">성명</td> 
+       	<td  width="400">
+		<form:input path="mb_name" value="${infoMbBean.mb_name}" class="form-control" readonly="true"/></td>
+		</tr>
+		<tr>
+		<td  width="200">전화번호</td> 
+        <td  width="400">
+		<form:input path="mb_tel" value="${infoMbBean.mb_tel}" class="form-control" readonly="true"/></td>
+   		</tr>
+   		</table>
+   		
     	<form:hidden path="or_status" value="구매 확정"/>
 		<form:hidden path="or_date"/>
 		<% int ran = 0;
@@ -111,9 +140,7 @@ function check(n, count) {
 					</c:otherwise>
 				</c:choose>
 	<br>
-    
-	
-		 <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center">
+		 <table border="1" style="width:600; cellspacing:0; cellpadding:3;" align="center">
 		 <tr>
 		 <td align="center" colspan="2">받는 사람 정보</td>
 		 </tr>
@@ -149,15 +176,19 @@ function check(n, count) {
         <form:input id="dv_address" name="dv_address" path="dv_address" class="form-control postcodify_address" width="400"/>
 		<form:errors path="dv_address" style="color:red"/>
 		<div class="input-group-append">
-		<button type='button' class="btn btn-dark"  id="postcodify_search_button">검색</button>
+		<button type='button' class="btn btn-dark" id="postcodify_search_button" style="height:38px">검색</button>
 		</div>
 		</div> 
 		</td>
 	 </tr>
      </table>
-     <button type="submit" class="btn btn-dark" >구매 확정</button>
-    <a href="javascript:window.history.back();" class="btn btn-dark" role="button">뒤로가기</a> 
+     <br>
+      <div align="center">
+     <button type="submit" class="btn btn-dark"  style="width: 86px; height: 44px;" >구매 확정</button>
+    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px;" class="btn btn-dark" role="button">뒤로가기</a> 
+    </div>
+    <br>
 </form:form>
-	
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

@@ -13,7 +13,7 @@
 
 	<script type="text/javascript">
 		alert("리뷰 삭제에 성공하였습니다.")
-		location.replace("${root}book/BkSelect?mb_id=${deleteRvBean.mb_id}&bk_number=${deleteRvBean.bk_number}")
+		location.replace("${root}book/BkSelect?mb_id=${mb_id}&bk_number=${deleteRvBean.bk_number}")
 	</script>
 	
 </body>
