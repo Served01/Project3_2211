@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" 	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>     
@@ -7,8 +7,119 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+   <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> 
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
+        
+        	<!-- 글골 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <style>
+        body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+  
+}
+
+.textarea-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea {
+  border: 1px solid #999;
+  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  height: 60px;
+  padding: 8px;
+  width: 500px;
+  text-align: center;
+}
+
+.btn1 {
+  align-items: center;
+  background: linear-gradient(90deg, #ff6f00, #ff9100);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  height: 32px;
+  justify-content: cetner;
+  margin-left: 4px;
+  opacity: .9;
+  padding: 2px 18px;
+}
+
+.btn1:hover {
+  opacity: 1;
+}
+
+.result1 {
+  margin-top: 6px;
+  color: #888;
+}
+           
+button{
+  text-align:center;
+  display:block;
+  margin:auto;
+  }
+textarea{
+  resize: none;
+  }
+  label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+  
+        </style>
+<script>
+async function start() {
+	  const textarea = document.querySelector("textarea");
+	  const resultDiv = document.querySelector(".result");
+
+	  // Load the TFLite model.
+	  const model = await tfTask.NLClassification.CustomModel.TFLite.load({
+	    model:
+	      "https://storage.googleapis.com/tfweb/models/movie_review_sentiment_classification.tflite"
+	  });
+
+	  document.querySelector(".btn").addEventListener("click", async () => {
+	    // Get the classification result for the entered text
+	    const result = await model.predict(textarea.value);
+
+	    // Show the results.
+	    resultDiv.textContent = result.classes
+	      .map((c) => `${c.className}: ${c.score.toFixed(3)}`)
+	      .join(", ");
+	  });
+	}
+
+	start();
+
+</script>   
 <body>
 
 	<form:form action="${root }Review/RvUpdatePro" method="post" modelAttribute="updateRvBean">
@@ -19,28 +130,47 @@
 		
 		<form:hidden path="bk_number"/>
 		<form:hidden path="rv_number"/>
-			<div>
-				<form:label path="mb_id">작성자</form:label>
-				<form:input path="mb_id" readonly="true"/>
+		<div class="container">
+		<div>
+			<div class="input-group">
+		
+		
+				<form:label path="mb_id" class="input-group-text">작성자</form:label>	
+			<div class="input-group-append">
+			<form:input path="mb_id" readonly="true"/>
+				
 			</div>
-			<div>
-				<form:label path="rv_score">리뷰 평점</form:label><br>
-				<form:radiobutton path="rv_score" value="0" label="0점"/><br>
-				<form:radiobutton path="rv_score" value="1" label="1점"/><br>
-				<form:radiobutton path="rv_score" value="2" label="2점"/><br>
-				<form:radiobutton path="rv_score" value="3" label="3점"/><br>
-				<form:radiobutton path="rv_score" value="4" label="4점"/><br>
-				<form:radiobutton path="rv_score" value="5" label="5점"/><br>
-				<form:errors path="rv_score" style="color:red"></form:errors>
-			</div>
-			<div>
-				<form:label path="rv_content">리뷰 내용</form:label><br>
-				<form:textarea path="rv_content" cols="50" rows="10" style="resize:none" value="${rv_content }"></form:textarea><br>
-				<form:errors path="rv_content" style="color:red"></form:errors>
-			</div>
-			<div>
-				<form:button type="submit">수정하기</form:button>
-			</div>					
+		</div>
+		<br>
+					<div class="input-group" >
+					<form:label path="rv_score" class="input-group-text">리뷰 평점</form:label>
+					&nbsp;&nbsp;&nbsp;
+					<div class="input-group-append" style="padding-top:10px; padding-bottom:10px;">
+						<form:radiobutton path="rv_score" value="1"/>&nbsp;1점&nbsp;&nbsp;
+						<form:radiobutton path="rv_score" value="2"/>&nbsp;2점&nbsp;&nbsp;
+						<form:radiobutton path="rv_score" value="3"/>&nbsp;3점&nbsp;&nbsp;
+						<form:radiobutton path="rv_score" value="4"/>&nbsp;4점&nbsp;&nbsp;
+						<form:radiobutton path="rv_score" value="5"/>&nbsp;5점&nbsp;&nbsp;
+						<form:errors path="rv_score" style="color:red"></form:errors>
+						</div></div>
+					<br>
+					<form:label path="rv_content" class="input-group-text">리뷰 내용</form:label>
+					
+						<div class="textarea-container">
+							<form:textarea path="rv_content" class="form-control" id="bookReview" cols="30" rows="5" style="text-align:left; resize:none; height:130px;" placeholder="500자까지 입력할 수 있습니다."></form:textarea>
+							<form:errors path="rv_content" style="color:red"></form:errors>
+						</div>
+					
+                  
+                
+                    
+					
+				<br>
+				<form:button style="float:right;font-family: 'Noto Sans KR', sans-serif;" class="btn btn-dark" type="submit">수정하기</form:button>	
+				                     
+				</div>
+				</div>			
 		</form:form>
+					
 </body>
 </html>

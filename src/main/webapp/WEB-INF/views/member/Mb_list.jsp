@@ -91,7 +91,7 @@ border: 1px solid #F3E8EB;
 			</div>	
 			
 			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:20px;">
-			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a> <a
+			<a href="${root }member/Mbselect?mb_id=${mb_id}" class="btn btn-dark">마이페이지</a> <a
 				href="${root }Main/center" class="btn btn-dark">메인</a>
 		</div>
 	</div></div>
