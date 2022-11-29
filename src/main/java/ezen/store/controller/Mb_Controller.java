@@ -136,7 +136,7 @@ public class Mb_Controller {
 				
 				tempMbBean.setMblogin(false);
 				
-				return "member/Mb_login";
+				return "member/Mb_login_fail";
 			}
 
 	}
@@ -177,22 +177,25 @@ public class Mb_Controller {
 	}
 	
 
-		// 회원정보 수정 기능
-		@PostMapping("/Mbupdatepro")
-		public String Mbupdatepro(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result) {
+	// 회원정보 수정 기능
+	@PostMapping("/Mbupdatepro")
+	public String Mbupdatepro(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result, Model model) {
 
-			if (result.hasErrors()) {
-				
-				return "member/Mb_update";
-				
-			}
-
-			// 회원정보 수정 성공페이지
-			mbService.modifyUserInfo(updateMbBean);
-
-			return "member/Mb_update_success";
+		if (result.hasErrors()) {
 			
+			return "member/Mb_update";
 		}
+		if(updateMbBean.getMb_pw().equals(updateMbBean.getMb_pw2())) {
+				
+			model.addAttribute("mb_id2",updateMbBean.getMb_id());
+			mbService.modifyUserInfo(updateMbBean);
+				
+			return "member/Mb_update_success";
+		} else {
+			model.addAttribute("mb_id2",updateMbBean.getMb_id());
+			return "member/Mb_update_fail";
+		}
+	}
 
 	
 	
@@ -209,27 +212,27 @@ public class Mb_Controller {
 		
 		
 		// 회원정보 삭제(처리) 기능 
-		@PostMapping("/Mbdeletepro")
-		public String Mbdeletepro(@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean, BindingResult result) {
-			
-			if(result.hasErrors()) {
-				
-				return "member/Mb_delete";
-				
-			}
-			
-			if(deleteMbBean.getMb_pw().equals(deleteMbBean.getMb_pw2())) {
-				
-				mbService.deleteUserInfo(deleteMbBean);
-			
-				return "member/Mb_delete_success";
-			
-			} else {
-				
-				return "member/Mb_delete_fail";
-				
-			}
-			
-		}
+				@PostMapping("/Mbdeletepro")
+				public String Mbdeletepro(@ModelAttribute("deleteMbBean") Mb_Bean deleteMbBean, BindingResult result, Model model) {
+					
+					if(result.hasErrors()) {
+						
+						return "member/Mb_delete";
+						
+					}
+					
+					if(deleteMbBean.getMb_pw().equals(deleteMbBean.getMb_pw2())) {
+						
+						mbService.deleteUserInfo(deleteMbBean);
+					
+						return "member/Mb_delete_success";
+					
+					} else {
+						model.addAttribute("mb_id2",deleteMbBean.getMb_id());
+						return "member/Mb_delete_fail";
+						
+					}
+					
+				}
 
 }

@@ -1,8 +1,10 @@
 /*헤더 상단 버튼 */
 @import url(//db.onlinewebfonts.com/c/a580a1f62e042a890fa4bccbf36d9391?family=Digit+Square);
+
 body{
   text-align:center;
 }
+
 body:before{
   content:'';
   height:100%;
@@ -11,12 +13,11 @@ body:before{
 }
 a{
 	font-family: 'Noto Sans KR', sans-serif;
-	
-	
+		
 }
 
-button{
-	font-family: 'Noto Sans KR', sans-serif;
+div.btn-group button{
+  font-family: 'Noto Sans KR', sans-serif;
   background:#f0e9f7;
   color:#3B3B3B;
   border:none;
@@ -28,11 +29,11 @@ button{
   transition:800ms ease all;
   outline:none;
 }
-button:hover{
+div.btn-group button:hover{
   background:#fff;
   color:#1AAB8A;
 }
-button:before,button:after{
+div.btn-group button:before,button:after{
   content:'';
   position:absolute;
   top:0;
@@ -42,30 +43,26 @@ button:before,button:after{
   background: #1AAB8A;
   transition:400ms ease all;
 }
-button:after{
+div.btn-group button:after{
   right:inherit;
   top:inherit;
   left:0;
   bottom:0;
 }
-button:hover:before,button:hover:after{
+div.btn-group button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
-
-
-
 
 .html{
     display:flex;
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    width:100%;
-    
+    width:100%;   
     }
-    <!-- menu bar-->
     
+   /* menu bar  
    /* APP STYLES */
 .buddha-transparent {
     opacity: 0.2 !important;
@@ -591,10 +588,6 @@ ul.mm-submenu li {
     border-bottom: 0px;
 }
 
-.horizontal-mega-menu ul.mm-submenu.tree li:hover, .horizontal-mega-menu ul.mm-submenu.tree li.mega-hover {
-    /* background: #eff1f0; */
-}
-
 .horizontal-mega-menu ul.mm-submenu.tree li.add-sub-item {
     font-weight: bold;
 }
@@ -650,9 +643,6 @@ ul.mm-submenu.simple > li .mega-menu-prices span {
 
 ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-compare_at_price, ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-compare_at_price > span {
     text-decoration: line-through;
-}
-
-ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-price {
 }
 
 ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-sold_out {
@@ -883,10 +873,6 @@ ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-sold_out {
     cursor: default;
 }
 
-.horizontal-mega-menu ul.mm-submenu.tabbed > li.tab-opened {
-    /*background: #eff1f0;*/
-}
-
 .horizontal-mega-menu ul.mm-submenu.tabbed > li.tab-opened ul.mm-submenu {
     display: block !important;
 }
@@ -898,7 +884,6 @@ ul.mm-submenu.simple > li .mega-menu-prices span.mega-menu-sold_out {
 .horizontal-mega-menu ul.mm-submenu.tabbed > li {
     box-sizing: border-box;
     float: left !important;
-    vertical-align: top;
     text-align: left !important;
     padding: 12px !important;
     display: block !important;
@@ -1438,9 +1423,6 @@ li.buddha-menu-item a[data-href="no-link"], .horizontal-mega-menu li[data-href="
 
 
 /* BUDDAH MENU STYLES */
-
-#header-contain #shopify-section-navigation-primary .horizontal-mega-menu {}
-
 #header-contain #shopify-section-navigation-primary .horizontal-mega-menu>li {
 	position: unset!important;
 }

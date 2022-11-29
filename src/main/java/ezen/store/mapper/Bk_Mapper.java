@@ -50,6 +50,10 @@ public interface Bk_Mapper {
 		//책 지역에 맞는 책전체 책번호 리스트 (지역, 장르)
 		@Select("select bk_number from Book_info where bk_local = #{bk_local} and bk_deleted = '0'")
 		List<Bk_Number> getAllBkNumList(@Param("bk_local") String bk_local, @Param("bk_genre") String bk_genre);
+			
+		//책 지역에 맞는 책전체 책번호 리스트 (책 등록일 기준 내림차순 정렬)
+				@Select("select bk_number from Book_info where bk_deleted = '0' and ROWNUM <= 5 ORDER BY bk_infodate desc")
+				List<Bk_Number> getAllBkDateList();
 				
 		//책 정보를 추출하여 가져옵니다.
 		@Select("select bk_number, bk_title, bk_writer, bk_publisher, to_char(bk_pubdate, 'YYYY-MM-DD') as bk_pubdate, bk_image, bk_local, bk_genre, bk_infodate,"
