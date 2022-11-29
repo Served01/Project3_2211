@@ -13,10 +13,7 @@
 
 <% session.setAttribute("mb_id","0"); %>
 
-<c:import url="/Main/center">
-</c:import>
-
-
+<c:import url="/Main/center"></c:import>
 
 </body>
 </html>

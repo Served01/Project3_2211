@@ -18,11 +18,11 @@ public class Ma_Controller {
 	
 	@GetMapping("/header")
 	public String header(@SessionAttribute("mb_id") String mb_id,
-						@ModelAttribute("searchBean") Search_Bean searchBean,
-						Model model,
-						HttpServletRequest request) {
+						 @ModelAttribute("searchBean") Search_Bean searchBean,
+						 Model model,HttpServletRequest request) {
 		
 		return "include/header";
+		
 	}
 	
 	
@@ -30,12 +30,14 @@ public class Ma_Controller {
 	public String footer() {
 
 		return "include/footer";
+		
 	}
 
 	@GetMapping("/center")
 	public String center() {
 
 		return "include/center";
+		
 	}
 	
 

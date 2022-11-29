@@ -38,7 +38,7 @@ border: 1px solid #F3E8EB;
 
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto" id="adad" style="top:50px;">
-			<a href="#" onclick="location.href='${root}Main.center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+			<a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
 					Ezen Book Store
 				</a> <br>
 			<h4 class="mb-3"style="font-family: 'Noto Sans KR', sans-serif;">회원목록 보기화면(관리자)</h4>
@@ -55,7 +55,7 @@ border: 1px solid #F3E8EB;
 				<tbody>
 					<c:forEach var="m" items="${memberlist }">
 						<tr>
-							<td><a href='${root }member/Mbselect?mb_id=${m.mb_id}'>${m.mb_id }</a></td>
+							<td><a href='${root }member/Mbselect?mb_id2=${m.mb_id}'>${m.mb_id }</a></td>
 							<td>${m.mb_name }</td>
 							<td>${m.mb_email }</td>
 							<td>${m.mb_tel }</td>
@@ -86,16 +86,13 @@ border: 1px solid #F3E8EB;
 					<li class="page-item">	
 						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
-					
 				</ul>
 			</div>	
-			
 			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:20px;">
-			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a> <a
-				href="${root }Main/center" class="btn btn-dark">메인</a>
+			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a>
+			<a href="${root }Main/center" class="btn btn-danger">메인화면</a>
 		</div>
-	</div></div>
-	
-
+	</div>
+</div>
 </body>
 </html>

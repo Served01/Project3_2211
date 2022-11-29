@@ -27,8 +27,7 @@ public class Rv_Controller {
 	
 	// 리뷰 리스트
 	@GetMapping("/RvList")
-	public String list(
-			@SessionAttribute("mb_id") String mb_id,
+	public String list(@SessionAttribute("mb_id") String mb_id,
 					   @RequestParam("bk_number") int bk_number, 
 					   @RequestParam(value="page", defaultValue="1") int page,
 					   Model model) {
@@ -36,15 +35,14 @@ public class Rv_Controller {
 		// Review 목록 열기
 		model.addAttribute("bk_number", bk_number);
 		
-		
 		List<Rv_Bean> reviewlist = rvService.getRvList(bk_number);
 		model.addAttribute("reviewlist", reviewlist);
 		
 		PageCountBean pageCountBean = rvService.getContentCnt(bk_number, page);
 		model.addAttribute("pageCountBean", pageCountBean);
 		
-		
 		return "review/Rv_list";
+		
 	}
 
 	// Rv_insert 파일 열기
@@ -59,6 +57,7 @@ public class Rv_Controller {
 		insertRvBean.setBk_number(bk_number);
 		
 		return "review/Rv_insert";
+		
 	}
 	
 	// 리뷰 insert 기능
@@ -68,7 +67,9 @@ public class Rv_Controller {
 		
 		// insert 처리
 		if(result.hasErrors()) {
+			
 			return "review/Rv_insert";
+			
 		}
 		
 		rvService.insertReview(insertRvBean);
@@ -86,6 +87,7 @@ public class Rv_Controller {
 		model.addAttribute("updateRvBean", updateRvBean);
 		
 		return "review/Rv_update";
+		
 	}
 	
 	// 리뷰 update 기능
@@ -95,7 +97,9 @@ public class Rv_Controller {
 							BindingResult result) {
 		
 		if(result.hasErrors()) {
+			
 		return "review/Rv_update";
+		
 		}
 		
 		rvService.updateReview(updateRvBean);
@@ -111,7 +115,9 @@ public class Rv_Controller {
 		rvService.deleteReview(deleteRvBean.getRv_number());
 		
 		if(result.hasErrors()) {
+			
 		return "review/Rv_delete_fail";
+		
 		}
 		
 		return "review/Rv_delete_success";

@@ -1,8 +1,10 @@
 package ezen.store.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -27,11 +29,14 @@ public class Dv_RestController {
 	
 	//Dv_delete
 	@GetMapping("/delivery/DvDelete/{mb_id}/{dv_nick}")
-	public String DvDelete(@SessionAttribute("mb_id") String mb_id, @PathVariable("dv_nick") String dv_nick) {
+	public String DvDelete(@PathVariable String mb_id, @PathVariable("dv_nick") String dv_nick,
+						   Model model) {
 		
+		model.addAttribute("mb_id2", mb_id);
 		dv_Service.DeleteDvInfo(mb_id, dv_nick);
 		
-		return "delivery/Dv_delete";
+		return "";
+		
 	}
 	
 }

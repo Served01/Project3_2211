@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mb_login_fail</title>
+<title>Mb_update_fail</title>
 </head>
 <body>
 	<script type="text/javascript">
 		alert("올바른 비밀번호를 입력 해주세요.")
-		location.href="${root}member/Mbupdate?mb_id=admin"
+		location.href="${root}member/Mbupdate?mb_id2=${mb_id2}"
 	</script>
 </body>
 </html>

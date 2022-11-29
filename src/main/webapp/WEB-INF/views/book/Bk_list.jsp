@@ -60,12 +60,8 @@ padding-top: 8px;
 <script>
 let wish = {
 		switchWishHeart : function(bk_number,su) {
-			//alert("헤이!");
-			//alert(a_memberNo);
 			
-			var mb_id = 'admin';
-			
-			
+var mb_id = '${mb_id}';
 			var imgsrc = $("#wish"+su).attr("src");
 			var culsrc = imgsrc.split('-');
 			
@@ -100,10 +96,8 @@ let wish = {
 			
 		},
 		checkWishHeart : function(bk_number,su){
-			
-			var mb_id = 'admin';
-			
-			
+	
+			var mb_id = '${mb_id}';
 			$.ajax({
 				url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
 				type : "GET",
@@ -125,10 +119,7 @@ let wish = {
 
 function addcart(ca_mbid,ca_bknumbers){
 	
-	//var ca_mbid = $("#ca_mbid").val()
-	//var ca_bknumbers = $("#ca_bknumbers").val()
-	
-	$.ajax({
+		$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
 		type: 'get',
 		dataType: 'text',
@@ -186,14 +177,14 @@ $(window).on('load', function () {
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left;">국내도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
-	            <li id="소설" ><a href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin">소설</a></li>
-	            <li id="인문" ><a href="${root }book/BkList?bk_local=국내&bk_genre=인문&mb_id=admin">인문</a></li>
-	            <li id="취미"><a href="${root }book/BkList?bk_local=국내&bk_genre=취미&mb_id=admin">취미</a></li>
-	            <li id="경제"><a href="${root }book/BkList?bk_local=국내&bk_genre=경제&mb_id=admin">경제</a></li>
-	            <li id="자기개발" ><a href="${root }book/BkList?bk_local=국내&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
-	            <li id="예술" ><a href="${root }book/BkList?bk_local=국내&bk_genre=예술&mb_id=admin">예술</a></li>
-	            <li id="기술" ><a href="${root }book/BkList?bk_local=국내&bk_genre=기술&mb_id=admin">기술</a></li>
-	            <li id="잡지" ><a href="${root }book/BkList?bk_local=국내&bk_genre=잡지&mb_id=admin">잡지</a></li>
+	            <li id="소설" ><a href="${root }book/BkList?bk_local=국내&bk_genre=소설">소설</a></li>
+	            <li id="인문" ><a href="${root }book/BkList?bk_local=국내&bk_genre=인문">인문</a></li>
+	            <li id="취미"><a href="${root }book/BkList?bk_local=국내&bk_genre=취미">취미</a></li>
+	            <li id="경제"><a href="${root }book/BkList?bk_local=국내&bk_genre=경제">경제</a></li>
+	            <li id="자기개발" ><a href="${root }book/BkList?bk_local=국내&bk_genre=자기개발">자기개발</a></li>
+	            <li id="예술" ><a href="${root }book/BkList?bk_local=국내&bk_genre=예술">예술</a></li>
+	            <li id="기술" ><a href="${root }book/BkList?bk_local=국내&bk_genre=기술">기술</a></li>
+	            <li id="잡지" ><a href="${root }book/BkList?bk_local=국내&bk_genre=잡지">잡지</a></li>
         	</ul>
         </div>
      </c:if>
@@ -201,14 +192,14 @@ $(window).on('load', function () {
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left; padding-left: 0px; width: 230px;">해외도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
-	            <li id="소설"  ><a href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin">소설</a></li>
-	            <li id="인문" ><a href="${root }book/BkList?bk_local=해외&bk_genre=인문&mb_id=admin">인문</a></li>
-	            <li id="취미"><a href="${root }book/BkList?bk_local=해외&bk_genre=취미&mb_id=admin">취미</a></li>
-	            <li id="경제" ><a href="${root }book/BkList?bk_local=해외&bk_genre=경제&mb_id=admin">경제</a></li>
-	            <li id="자기개발" ><a href="${root }book/BkList?bk_local=해외&bk_genre=자기개발&mb_id=admin">자기개발</a></li>
-	            <li id="예술" ><a href="${root }book/BkList?bk_local=해외&bk_genre=예술&mb_id=admin">예술</a></li>
-	            <li id="기술" ><a href="${root }book/BkList?bk_local=해외&bk_genre=기술&mb_id=admin">기술</a></li>
-	            <li id="소설" ><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지&mb_id=admin">잡지</a></li>
+	            <li id="소설"  ><a href="${root }book/BkList?bk_local=해외&bk_genre=소설">소설</a></li>
+	            <li id="인문" ><a href="${root }book/BkList?bk_local=해외&bk_genre=인문">인문</a></li>
+	            <li id="취미"><a href="${root }book/BkList?bk_local=해외&bk_genre=취미">취미</a></li>
+	            <li id="경제" ><a href="${root }book/BkList?bk_local=해외&bk_genre=경제">경제</a></li>
+	            <li id="자기개발" ><a href="${root }book/BkList?bk_local=해외&bk_genre=자기개발">자기개발</a></li>
+	            <li id="예술" ><a href="${root }book/BkList?bk_local=해외&bk_genre=예술">예술</a></li>
+	            <li id="기술" ><a href="${root }book/BkList?bk_local=해외&bk_genre=기술">기술</a></li>
+	            <li id="소설" ><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지">잡지</a></li>
         	</ul>
         </div>
       </c:if>
@@ -241,7 +232,7 @@ $(window).on('load', function () {
 		</div>		
 			<div class="col-md-7">
 			<br>
-				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}&mb_id=${mb_id}'><b>${bl.bk_title}</b></a>
+				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}'><b>${bl.bk_title}</b></a>
 				<!--  like button  -->
 				<script>
 					$(document).ready(function(){
@@ -259,9 +250,11 @@ $(window).on('load', function () {
 				
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
+			<c:if test = "${mb_id == 'admin' }">
 				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
 				<a href='#' onclick="javascript:delBook(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
-				<a href='#' onclick="javascript:addcart('admin',${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
+			</c:if>
+				<a href='#' onclick="javascript:addcart(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
 			</div>
 		</div>
 		</div>
@@ -276,25 +269,26 @@ $(window).on('load', function () {
             	<ul id="hiyo" class="pagination" style="padding-left:100px;">
 					
 					<li class="page-item">
-						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
+						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
 					</li>					
 														
 				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 					<li class="page-item active">
-						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
+						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
 					</li>		
 												
 				</c:forEach>					
 					
 					<li class="page-item">
-						<a href="${root}book/BkList?mb_id=${mb_id}&bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>
 			</div>
 			</div>
-<c:import url="/Main/footer"></c:import>	
+
 </div>
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>
