@@ -102,7 +102,7 @@
 				</a> <br>
         <h4 class="mb-3" style="font-family: 'Noto Sans KR', sans-serif;">배송지 추가</h4>
         <form:form action="${root}delivery/DvInsertPro" method="post" modelAttribute="InsertDvBean">          
-            <form:hidden path="mb_id" value="${mb_id2 }"/>
+            <form:hidden path="mb_id"/>
             <div class="form-group" style="font-family: 'Noto Sans KR', sans-serif;">
               <form:label path="dv_nick">닉네임</form:label>
               <div class="input-group">
