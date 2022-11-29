@@ -1,8 +1,0 @@
-@charset "UTF-8";
-.html{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    width:100%;
-    }

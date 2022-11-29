@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
-
 import ezen.store.service.Bk_Service;
 import ezen.store.service.Mb_Service;
 
@@ -17,7 +15,7 @@ public class RestApiController {
 	Mb_Service mbSevice;
 	
 	@GetMapping("/member/checkUserIdExist/{mb_id}")
-	public String restApiControll(@SessionAttribute("mb_id") String mb_id) {
+	public String restApiControll(@PathVariable String mb_id) {
 		
 		boolean chk = mbSevice.checkUserIdExist(mb_id);
 		

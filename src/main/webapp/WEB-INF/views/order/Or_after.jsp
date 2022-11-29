@@ -17,9 +17,10 @@
 <script>
 
 
-orderItems: function(or_number,ca_mbid){
+orderItems: function(or_number){
 	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
-    	var or_bknumber = parseInt(item.getAttribute('value'));
+		var ca_mbid = '${mb_id}' ;
+		var or_bknumber = parseInt(item.getAttribute('value'));
     	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
     	if (ca_bkcount != 0){
     		$.ajax({

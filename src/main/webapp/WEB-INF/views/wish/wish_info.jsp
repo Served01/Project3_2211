@@ -243,8 +243,8 @@ let basket = {
 	    //체크한 장바구니 상품 비우기
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var wi_mbid = '${mb_id}' ;
 	        	var wi_bknumbers = parseInt(item.getAttribute('value'));
-	        	var wi_mbid = 'admin';
 	        	
 	        	$.ajax({
 	        		url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
@@ -262,13 +262,13 @@ let basket = {
 	    },
 	    //장바구니 전체 비우기
 	    delAllItem: function(){
-	    	
+	    	var wi_mbid = '${mb_id}' ;
 	        document.querySelectorAll('.row.data').forEach(function (item) {
 	            item.remove();
 	          });
 	          //AJAX 서버 업데이트 전송
 	        // var ca_bknumbers = ca_bknumbers; id값 받아야함
-	        var wi_mbid = 'admin';
+	        
 	        $.ajax({
 				url: '${root}wish/wish_deleteAll/' + wi_mbid,
 				type: 'get',
@@ -327,9 +327,9 @@ let basket = {
 	        this.updateUI();
 	    },
 	    delItem: function (wi_bknumbers) {
+	    	var wi_mbid = '${mb_id}' ;
 	        event.target.parentElement.parentElement.parentElement.remove();
-	        
-	        var wi_mbid = 'admin';
+
 	        $.ajax({
 				url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
 				type: 'get',
@@ -341,8 +341,8 @@ let basket = {
 	        this.updateUI();
 	    },
 	    
-	    sendCart:function (wi_mbid,wi_bknumbers) {
-	    	
+	    sendCart:function (wi_bknumbers) {
+	    	var wi_mbid = '${mb_id}' ;
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        
 	        $.ajax({
@@ -428,7 +428,7 @@ let basket = {
 	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
 								<script>javascript:basket.priceComma(${str.bk_price })</script>
 							</div>
-                       		<div class="sendcart" style="margin-left:50px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
+                       		<div class="sendcart" style="margin-left:50px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart(${str.bk_number });">장바구니로 옮기기</a></div>
 	                    </div>
 	                   
 	                    <div class="subdiv">
@@ -440,7 +440,7 @@ let basket = {
             </div>
     		
             <div class="right-align basketrowcmd">
-            	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>
+            	<a href="${root }cart/cart_info?ca_mbid=${mb_id}" class="abutton">장바구니보기</a>
             	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">찜목록비우기</a>
             </div>
@@ -452,25 +452,25 @@ let basket = {
 				<ul class="pagination justify-content-center">
 					
 						<li class="page-item">
-						<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="page-link">처음</a>
+						<a href="${root}wish/wish_info?wi_mbid=${mb_id }&page=1" class="page-link">처음</a>
 						</li>					
 														
 					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 							<li class="page-item active">
-								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
+								<a href="${root}wish/wish_info?wi_mbid=${mb_id }&page=${idx}" class="page-link">${idx}</a>
 							</li>		
 												
 					</c:forEach>					
 					
 						<li class="page-item">
-							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
+							<a href="${root}wish/wish_info?wi_mbid=${mb_id }&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
 						</li>
 					
 				</ul>
 			</div>
 		</div>
 		<br>
-<c:import url="/Main/footer"></c:import>			
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>

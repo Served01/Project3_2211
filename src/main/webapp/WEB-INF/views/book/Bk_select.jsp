@@ -13,15 +13,6 @@
 <link rel="Stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <title>도서 상세 정보</title>
-        	<!-- 글골 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
-<!-- 아이콘 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
 .star-ratings {
   color: #aaa9a9; 
@@ -99,7 +90,7 @@ let basket = {
 			String todayString = formatTime.format(today); %>
 			
 			//로그인 아이디 받아와야됨
-			var ca_mbid = 'admin';
+			var ca_mbid = '${mb_id}';
 			var ca_bkcount = $("#amount").val();
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
@@ -117,7 +108,10 @@ let basket = {
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
+	    orderCreate: function(or_number,ca_bknumbers,ca_bkcount){
+	    	
+	    	var ca_mbid = '${mb_id}';
+	    	
 	    	$.ajax({
 				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
@@ -130,9 +124,9 @@ let basket = {
 			    }
 	    	})
 	    },
-	    orderItem: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
+	    orderItem: function(or_number,ca_bknumbers,ca_bkcount){
 	    	
-	        	
+	        	var ca_mbid='${mb_id}';
 	        	if (ca_bkcount != 0){
 	        		$.ajax({
 						url: '${root}cart/cart_insertOderItem/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid + '/' + ca_bkcount,
@@ -163,14 +157,16 @@ let basket = {
 			return orderNumExist;
 	    },
 
-	    delPreOrder: function(ca_mbid){
+	    delPreOrder: function(){
+	    	var ca_mbid='${mb_id}';
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
 				dataType: 'text'
 			})
 	    },
-	    delPreOrderItems: function(ca_mbid){
+	    delPreOrderItems: function(){
+	    	var ca_mbid='${mb_id}';
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
 				type: 'get',
@@ -232,12 +228,8 @@ let basket = {
 };
 let wish = {
 	switchWishHeart : function(bk_number) {
-		//alert("헤이!");
-		//alert(a_memberNo);
-		
-		var mb_id = 'admin';
-		
-		
+
+		var mb_id = '${mb_id}';
 		var imgsrc = $("#wish").attr("src");
 		
 		var culsrc = imgsrc.split('-');
@@ -273,10 +265,8 @@ let wish = {
 		
 	},
 	checkWishHeart : function(bk_number){
-		
-		var mb_id = 'admin';
-		
-		
+
+		var mb_id = '${mb_id}';
 		$.ajax({
 			url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
 			type : "GET",
@@ -295,10 +285,8 @@ let wish = {
 		});
 	}
 };
-function addcart(ca_mbid,ca_bknumbers){
-	
-	//var ca_mbid = $("#ca_mbid").val()
-	//var ca_bknumbers = $("#ca_bknumbers").val()
+function addcart(ca_bknumbers){
+	var ca_mbid = '${mb_id}';
 	
 	$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
@@ -341,7 +329,7 @@ function delBook(bk_number){
 <c:import url="/Main/header"></c:import>
 	<div class="jumbotron"style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="width:1600px">
-			<h1 class="display-5" style="font-family: 'Noto Sans KR', sans-serif;">도서 정보</h1>
+			<h1 class="display-5">도서 정보</h1>
 		</div>
 	</div>
 	
@@ -357,7 +345,7 @@ function delBook(bk_number){
 					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${string2}/5.0 점</div>
 				</c:if>
 				<c:if test="${ReadScore == 0.0}">
-					<div><h5 style="font-family: 'Noto Sans KR', sans-serif;">등록된 평점이 없습니다.</h5></div>
+					<div><h5>등록된 평점이 없습니다.</h5></div>
 				</c:if>
 				</div>
 			</div>
@@ -399,22 +387,29 @@ function delBook(bk_number){
 				<div class="input-group-append">
 				<p>
 				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
-				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니"></p>
+				<input class="btn btn-info" type="button" onclick="javascript:addcart(${ReadBkBean.bk_number})" value="장바구니"></p>
+				<c:if test="${mb_id=='admin'}">
 				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a>
 				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a></p>
+				</c:if>
 				</div>	
 			</div>
 		</div>
-		<hr style="margin-right:300px;">
-	</div>	
-	</div>	
-	<c:import url="/Review/RvInsert">
-	</c:import>
-	<br><br><br>
+		<hr>
+	</div>
+	</div>
+	
+	<c:if test="${mb_id!='0'}">
+		<c:import url="/Review/RvInsert">
+		</c:import>
+	</c:if>
+	
 	<c:import url="/Review/RvList">
 	</c:import>
+	
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
 	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
+	
 	<c:import url="/Main/footer"></c:import>
 </body>
 </html>

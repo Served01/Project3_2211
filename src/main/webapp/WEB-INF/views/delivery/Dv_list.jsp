@@ -60,7 +60,7 @@ function delDv(mb_id, dv_nick){
 				},
 				success: function(){
 					alert("삭제되었습니다.")
-					location.href="${root}member/Mbselect?mb_id="+mb_id;
+					location.href="${root}member/Mbselect?mb_id2="+mb_id;
 				}
 			})
 	 	}
@@ -87,7 +87,7 @@ function delDv(mb_id, dv_nick){
 				<td height="20" width="120">${dvl.dv_nick }</td>
 				<td height="20" width="150">${dvl.dv_tel }</td>
 				<td height="20" width="300">${dvl.dv_address }</td>
-				<td><a href="${root}delivery/DvUpdate?mb_id=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark" style="font-size:15px; font-family:'Noto Sans KR', sans-serif; width: 58px;height: 38px;">수정</a>
+				<td><a href="${root}delivery/DvUpdate?mb_id2=${dvl.mb_id}&dv_nick=${dvl.dv_nick}" class="btn btn-dark" style="font-size:15px; font-family:'Noto Sans KR', sans-serif; width: 58px;height: 38px;">수정</a>
 			<td><input style="font-family: 'Noto Sans KR', sans-serif;"class="btn btn-dark" type="button" onclick="javascript:delDv('${dvl.mb_id }','${dvl.dv_nick}')" style="width:32px; height:24px;" value="삭제"/>
 			</tr>
 			</c:forEach>
@@ -95,7 +95,7 @@ function delDv(mb_id, dv_nick){
 		
 	</table>
 	<div class="mb-4">
-		<a href="${root}delivery/DvInsert?mb_id=${mb_id}" class="btn btn-dark"style="font-size:15px;font-family: 'Noto Sans KR', sans-serif;">배송지 추가</a>
+		<a href="${root}delivery/DvInsert?mb_id2=${mb_id2}" class="btn btn-dark"style="font-size:15px;font-family: 'Noto Sans KR', sans-serif;">배송지 추가</a>
 				
 				</div>	
 		

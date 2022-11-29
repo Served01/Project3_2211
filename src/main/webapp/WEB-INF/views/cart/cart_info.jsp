@@ -250,7 +250,7 @@ let basket = {
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
-	        	var ca_mbid = 'admin';
+	        	var ca_mbid = '${mb_id}' ;
 	        	$.ajax({
 					url: '${root}cart/cart_delete/'+ ca_mbid +'/'+ ca_bknumbers,
 					type: 'get',
@@ -267,13 +267,13 @@ let basket = {
 	    },
 	    //장바구니 전체 비우기
 	    delAllItem: function(){
-	    	
+	    	var ca_mbid = '${mb_id}' ;
 	        document.querySelectorAll('.row.data').forEach(function (item) {
 	            item.remove();
 	          });
 	          //AJAX 서버 업데이트 전송
 	        // var ca_bknumbers = ca_bknumbers; id값 받아야함
-	        var ca_mbid = 'admin';
+	      
 	        $.ajax({
 				url: '${root}cart/cart_deleteAll/' + ca_mbid,
 				type: 'get',
@@ -310,11 +310,11 @@ let basket = {
 	    },
 	    //개별 수량 변경
 	    changePNum: function (pos,ca_bknumbers,bk_quantity) {
+	    	var ca_mbid = '${mb_id}' ;
 	        var item = document.querySelector('input[name=p_num'+pos+']');
 	        var p_num = parseInt(item.getAttribute('value'));
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
-	        
-	        var ca_mbid = 'admin';
+
 	        
 	        if (parseInt(newval) < 1 || parseInt(newval) > bk_quantity) { return false; }
 	        
@@ -347,14 +347,13 @@ let basket = {
 	    },
 	    changeKeyupPNum: function (pos,ca_bknumbers,bk_quantity) {
 	    	
+	    	var ca_mbid = '${mb_id}' ;
+	    	
 	        var item = document.querySelector('input[name=p_num'+pos+']');
 	        
 	        var p_num = parseInt(item.getAttribute('value'));
 	        
-	        
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
-	        
-	        var ca_mbid = 'admin';
 	        
 	        if (newval < 1 || newval > bk_quantity) { 
 	        	alert("재고가 부족합니다.");
@@ -389,8 +388,9 @@ let basket = {
 	    delItem: function (ca_bknumbers) {
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        var ca_bknumbers = ca_bknumbers;
-	        var ca_mbid = 'admin';
 			
+	        var ca_mbid = '${mb_id}' ;
+	        
 	        $.ajax({
 				url: '${root}cart/cart_delete/' + ca_mbid +'/'+ ca_bknumbers,
 				type: 'get',
@@ -407,15 +407,12 @@ let basket = {
 	    },
 	    //콤마찍고 시작
 	    orderInitiator: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	<%java.util.Date today = new java.util.Date();
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
 			
 			$(".loading").fadeIn();
-			
-			var ca_mbid = 'admin';
-			
-				
 					
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
@@ -431,7 +428,8 @@ let basket = {
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number,ca_mbid){
+	    orderCreate: function(or_number){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
@@ -445,8 +443,9 @@ let basket = {
 			    }
 	    	})
 	    },
-	    orderItems: function(or_number,ca_mbid){
+	    orderItems: function(or_number){
 	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	    		var ca_mbid = '${mb_id}' ;
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
 	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
 	        	if (ca_bkcount != 0){
@@ -460,14 +459,16 @@ let basket = {
 	           // item.parentElement.parentElement.parentElement.remove();
 	        })
 	    },
-	    delPreOrder: function(ca_mbid){
+	    delPreOrder: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
 				dataType: 'text'
 			})
 	    },
-	    delPreOrderItems: function(ca_mbid){
+	    delPreOrderItems: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
 				type: 'get',
@@ -500,7 +501,8 @@ let basket = {
 			return orderNumExist;
 	    },
 	   
-	    delPreOrder: function(ca_mbid){
+	    delPreOrder: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
@@ -583,7 +585,7 @@ let basket = {
 	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
-<c:import url="/Main/header"></c:import>	
+<c:import url="/Main/header"></c:import>
 	<br>
 	<h1 style="text-align:center;">장바구니</h1>
 	<p>
@@ -668,7 +670,7 @@ let basket = {
 	        		</c:forEach>
 	            </div>
 	            <div class="right-align basketrowcmd">
-	            	<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="abutton" >찜목록보기</a>
+	            	<a href="${root}wish/wish_info?page=1" class="abutton" >찜목록보기</a>
 	                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
 	                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
 	            </div>
@@ -684,6 +686,6 @@ let basket = {
 	            </div>
         </form>
      </div>
-<c:import url="/Main/footer"></c:import>		
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>
