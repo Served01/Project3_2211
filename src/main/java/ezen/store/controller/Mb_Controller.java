@@ -73,13 +73,24 @@ public class Mb_Controller {
 
 	// 회원 상세보기 기능
 	@GetMapping("/Mbselect")
-	public String Mbselect(@SessionAttribute("mb_id") String mb_id, Model model) {
+	public String Mbselect(@SessionAttribute("mb_id") String mb_id, 
+						   @RequestParam("mb_id2") String mb_id2,
+						   Model model) {
 
-		Mb_Bean mbBean = mbService.getMbInfo(mb_id);
+		if(mb_id==mb_id2 || mb_id.equals("admin")) {
+			
+		model.addAttribute("mb_id2", mb_id2);
+		
+		Mb_Bean mbBean = mbService.getMbInfo(mb_id2);
 		model.addAttribute("mbBean", mbBean);
 
 		return "member/Mb_select";
-	
+		
+		} else {
+			
+			return "member/Mb_logout";
+			
+		}
 	}
 
 	// 로그인 페이지
@@ -156,9 +167,9 @@ public class Mb_Controller {
 
 	// 회원정보 수정 페이지
 	@GetMapping("/Mbupdate")
-	public String Mbupdate(@SessionAttribute("mb_id") String mb_id, Model model) {
+	public String Mbupdate(@RequestParam("mb_id2") String mb_id2, Model model) {
 		
-		Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id);
+		Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id2);
 		model.addAttribute("updateMbBean", updateMbBean);
 		
 		return "member/Mb_update";
@@ -187,9 +198,9 @@ public class Mb_Controller {
 	
 		// 회원정보 삭제 페이지
 		@GetMapping("/Mbdelete")
-		public String Mbdelete(@SessionAttribute("mb_id") String mb_id, Model model) {
+		public String Mbdelete(@RequestParam("mb_id2") String mb_id2, Model model) {
 
-			Mb_Bean deleteMbBean = mbService.getMbInfo(mb_id);
+			Mb_Bean deleteMbBean = mbService.getMbInfo(mb_id2);
 			model.addAttribute("deleteMbBean", deleteMbBean);
 
 			return "member/Mb_delete";

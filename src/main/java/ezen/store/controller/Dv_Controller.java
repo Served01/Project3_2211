@@ -24,9 +24,9 @@ public class Dv_Controller {
 	
 	//Dv_list
 	@GetMapping("/delivery/DvList")
-	public String DvList(@SessionAttribute("mb_id") String mb_id, Model model) {
+	public String DvList(@RequestParam("mb_id2") String mb_id2, Model model) {
 		
-		List<Dv_Bean> Deliverylist = dv_Service.getDvList(mb_id);
+		List<Dv_Bean> Deliverylist = dv_Service.getDvList(mb_id2);
 		model.addAttribute("Deliverylist", Deliverylist);
 		
 		return "delivery/Dv_list";

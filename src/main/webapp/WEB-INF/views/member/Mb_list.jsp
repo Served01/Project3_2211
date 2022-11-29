@@ -55,7 +55,7 @@ border: 1px solid #F3E8EB;
 				<tbody>
 					<c:forEach var="m" items="${memberlist }">
 						<tr>
-							<td><a href='${root }member/Mbselect?mb_id=${m.mb_id}'>${m.mb_id }</a></td>
+							<td><a href='${root }member/Mbselect?mb_id2=${m.mb_id}'>${m.mb_id }</a></td>
 							<td>${m.mb_name }</td>
 							<td>${m.mb_email }</td>
 							<td>${m.mb_tel }</td>

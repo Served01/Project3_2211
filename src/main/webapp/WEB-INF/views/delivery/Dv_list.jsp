@@ -95,7 +95,7 @@ function delDv(mb_id, dv_nick){
 		
 	</table>
 	<div class="mb-4">
-		<a href="${root}delivery/DvInsert?mb_id=${mb_id}" class="btn btn-dark"style="font-size:15px;font-family: 'Noto Sans KR', sans-serif;">배송지 추가</a>
+		<a href="${root}delivery/DvInsert?mb_id2=${mb_id2}" class="btn btn-dark"style="font-size:15px;font-family: 'Noto Sans KR', sans-serif;">배송지 추가</a>
 				
 				</div>	
 		
