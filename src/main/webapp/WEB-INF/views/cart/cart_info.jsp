@@ -574,7 +574,7 @@ let basket = {
 	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
-<%@include file = "../include/header.jsp" %>
+<c:import url="/Main/header"></c:import>
 	<br>
 	<h1 style="text-align:center;">장바구니</h1>
 	<p>
@@ -675,6 +675,6 @@ let basket = {
 	            </div>
         </form>
      </div>
-<%@include file = "../include/footer.jsp" %>	
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>

@@ -160,7 +160,7 @@ $(window).on('load', function () {
 });
 </script>
 <body>
-<%@include file = "../include/header.jsp" %>
+<c:import url="/Main/header"></c:import>
 
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="font-family: 'Noto Sans KR', sans-serif;">
@@ -287,6 +287,6 @@ $(window).on('load', function () {
 			</div>
 
 </div>
-<%@include file = "../include/footer.jsp" %>
+<c:import url="/Main/footer"></c:import>
 </body>
 </html>

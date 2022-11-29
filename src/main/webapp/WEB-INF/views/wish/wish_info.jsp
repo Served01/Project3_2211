@@ -380,7 +380,7 @@ let basket = {
 	 });
 </script>
 <body>
-<%@include file = "../include/header.jsp" %>
+<c:import url="/Main/header"></c:import>
 
 	<br>
 	<h1 style="text-align:center;">찜 목록</h1>
@@ -469,6 +469,6 @@ let basket = {
 			</div>
 		</div>
 		<br>
-<%@include file = "../include/footer.jsp" %>			
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>

@@ -318,7 +318,7 @@ function delBook(bk_number){
 
 }
 </script>
-<%@include file = "../include/header.jsp" %>
+<c:import url="/Main/header"></c:import>
 	<div class="jumbotron"style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="width:1600px">
 			<h1 class="display-5">도서 정보</h1>
@@ -402,6 +402,6 @@ function delBook(bk_number){
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
 	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
 	
-	<%@include file = "../include/footer.jsp" %>
+	<c:import url="/Main/footer"></c:import>
 </body>
 </html>
