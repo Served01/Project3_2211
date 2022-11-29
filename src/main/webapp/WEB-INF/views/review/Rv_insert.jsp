@@ -144,7 +144,7 @@ async function start() {
 		
 				<form:label path="mb_id" class="input-group-text">작성자</form:label>	
 			<div class="input-group-append">
-			<form:input path="mb_id" value=${mb_id } readonly="true"/>
+			<form:input path="mb_id" value="${mb_id}" readonly="true"/>
 				
 			</div>
 		</div>

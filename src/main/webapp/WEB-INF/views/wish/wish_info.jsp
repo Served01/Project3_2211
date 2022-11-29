@@ -241,8 +241,9 @@ let basket = {
 	    totalCount: 0, 
 	    totalPrice: 0,
 	    //체크한 장바구니 상품 비우기
-	    delCheckedItem: function(wi_mbid){
+	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var wi_mbid = '${mb_id}' ;
 	        	var wi_bknumbers = parseInt(item.getAttribute('value'));
 	        	
 	        	$.ajax({
@@ -260,8 +261,8 @@ let basket = {
 	        this.updateUI();
 	    },
 	    //장바구니 전체 비우기
-	    delAllItem: function(wi_mbid){
-	    	
+	    delAllItem: function(){
+	    	var wi_mbid = '${mb_id}' ;
 	        document.querySelectorAll('.row.data').forEach(function (item) {
 	            item.remove();
 	          });
@@ -325,7 +326,8 @@ let basket = {
 	        this.reCalc();
 	        this.updateUI();
 	    },
-	    delItem: function (wi_mbid,wi_bknumbers) {
+	    delItem: function (wi_bknumbers) {
+	    	var wi_mbid = '${mb_id}' ;
 	        event.target.parentElement.parentElement.parentElement.remove();
 
 	        $.ajax({
@@ -339,8 +341,8 @@ let basket = {
 	        this.updateUI();
 	    },
 	    
-	    sendCart:function (wi_mbid,wi_bknumbers) {
-	    	
+	    sendCart:function (wi_bknumbers) {
+	    	var wi_mbid = '${mb_id}' ;
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        
 	        $.ajax({
@@ -426,11 +428,11 @@ let basket = {
 	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
 								<script>javascript:basket.priceComma(${str.bk_price })</script>
 							</div>
-                       		<div class="sendcart" style="margin-left:50px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart(${mb_id },${str.bk_number });">장바구니로 옮기기</a></div>
+                       		<div class="sendcart" style="margin-left:50px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart(${str.bk_number });">장바구니로 옮기기</a></div>
 	                    </div>
 	                   
 	                    <div class="subdiv">
-	                        <div class="basketcmd" style="width: 50px; height: 165px; padding-top:50px; padding-left:5px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${mb_id},${str.bk_number });">삭제</a></div>
+	                        <div class="basketcmd" style="width: 50px; height: 165px; padding-top:50px; padding-left:5px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
 	                    </div>
 	                </div>
 	                </c:if>
@@ -439,8 +441,8 @@ let basket = {
     		
             <div class="right-align basketrowcmd">
             	<a href="${root }cart/cart_info?ca_mbid=${mb_id}" class="abutton">장바구니보기</a>
-            	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem(${mb_id});">선택상품삭제</a>
-                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem(${mb_id});">찜목록비우기</a>
+            	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
+                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">찜목록비우기</a>
             </div>
     
     

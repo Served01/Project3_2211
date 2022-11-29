@@ -41,7 +41,7 @@
           </form:form>
           <div class="btn-group" role="group" aria-label="Basic example">
 			
-				<c:if test="${mb_id == 'admin'}">
+		<c:if test="${mb_id == 'admin'}">
 			<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
 			<button type="button" onclick="location.href='${root }member/Mblist'">전체회원목록</button>
 			<button type="button" onclick="location.href='${root }'">전체구매목록</button>
@@ -56,16 +56,16 @@
 				<button type="button" onclick="location.href='${root }member/Mblogout'">로그아웃</button>
 				<ul  style="background-color:#f8f9fa;padding-left: 0px;"class="primary-navigation-ul horizontal-mega-menu">
 					<li class="buddha-menu-item primary-navigation-li">
-						<button type="button" onclick="location.href='${root }member/Mbselect?mb_id=${mb_id }'">마이페이지</button><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+						<button type="button" onclick="location.href='${root }member/Mbselect?mb_id='${mb_id }'">마이페이지</button><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
 						<ul style="background-color:white;" class="mm-submenu tree">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
-								<a data-href="${root }wish/wish_info?wi_mbid=${mb_id }&page=1"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">찜목록</a>
+								<a data-href="${root }wish/wish_info?wi_mbid='${mb_id }'&page=1"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">찜목록</a>
 							</li>							
 							<li data-href="" aria-label="Adam Equipment" data-no-instant="">
-								<a data-href="${root}cart/cart_info?ca_mbid=${mb_id }" href="" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">장바구니</a>
+								<a data-href="${root}cart/cart_info?ca_mbid='${mb_id }'" href="" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">장바구니</a>
 							</li>				
 							<li data-href="" aria-label="Environmental Express" data-no-instant="">
-								<a data-href="${root}order/Or_list?mb_id=${mb_id }" href="" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">주문내역</a>
+								<a data-href="${root}order/Or_list?mb_id='${mb_id }'" href="" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">주문내역</a>
 							</li>
 						</ul>
 					
@@ -94,59 +94,59 @@
 				</button>
 				<ul  style="background-color:#f8f9fa"class="primary-navigation-ul horizontal-mega-menu">
 					<li class="buddha-menu-item primary-navigation-li">
-						<a href="${root }book/BkList?bk_local=국내&bk_genre=전체&mb_id=admin" style="color:#8685EF">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<a href="${root }book/BkList?bk_local=국내&bk_genre=전체" style="color:#8685EF">국내도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
 						<ul style="background-color:white" class="mm-submenu tree">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=소설&mb_id=admin"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=소설"  href="" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
 							</li>							
 							<li data-href="" aria-label="Adam Equipment" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=인문&mb_id=admin" href="" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">인문</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=인문" href="" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">인문</a>
 							</li>				
 							<li data-href="" aria-label="Environmental Express" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=취미&mb_id=admin" href="/collections/brand-environmental-express" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">취미</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=취미" href="/collections/brand-environmental-express" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">취미</a>
 							</li>
 							<li data-href="" aria-label="Environmental Sampling Supply" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=경제&mb_id=admin" href="/collections/brand-environmental-sampling-supply" aria-label="Environmental Sampling Supply" data-no-instant="" onclick="mmGoToPage(this, event); return false;">경제</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=경제" href="/collections/brand-environmental-sampling-supply" aria-label="Environmental Sampling Supply" data-no-instant="" onclick="mmGoToPage(this, event); return false;">경제</a>
 							</li>
 							<li data-href="" aria-label="Glass Expansion" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=자기개발&mb_id=admin" href="/collections/brand-glass-expansion" aria-label="Glass Expansion" data-no-instant="" onclick="mmGoToPage(this, event); return false;">자기개발</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=자기개발&mb_id=admi" href="/collections/brand-glass-expansion" aria-label="Glass Expansion" data-no-instant="" onclick="mmGoToPage(this, event); return false;">자기개발</a>
 							</li>
 							<li data-href="" aria-label="Goodfellow" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=예술&mb_id=admin" href="/collections/brand-goodfellow" aria-label="Goodfellow" data-no-instant="" onclick="mmGoToPage(this, event); return false;">예술</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=예술" href="/collections/brand-goodfellow" aria-label="Goodfellow" data-no-instant="" onclick="mmGoToPage(this, event); return false;">예술</a>
 							</li>
 							<li data-href="" aria-label="High-Purity Standards" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=기술&mb_id=admin" href="/collections/brand-high-purity-standards" aria-label="High-Purity Standards" data-no-instant="" onclick="mmGoToPage(this, event); return false;">기술</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=기술" href="/collections/brand-high-purity-standards" aria-label="High-Purity Standards" data-no-instant="" onclick="mmGoToPage(this, event); return false;">기술</a>
 							</li>
 							<li data-href="" aria-label="Inorganic Ventures" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=잡지&mb_id=admin" href="/collections/brand-inorganic-ventures" aria-label="Inorganic Ventures" data-no-instant="" onclick="mmGoToPage(this, event); return false;">잡지</a>
+								<a data-href="${root }book/BkList?bk_local=국내&bk_genre=잡지" href="/collections/brand-inorganic-ventures" aria-label="Inorganic Ventures" data-no-instant="" onclick="mmGoToPage(this, event); return false;">잡지</a>
 							</li>
 						</ul>
 					
 					<li class="buddha-menu-item primary-navigation-li">
-						<a href="${root }book/BkList?bk_local=해외&bk_genre=전체&mb_id=admin" style="color:#8685EF	">해외도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
+						<a href="${root }book/BkList?bk_local=해외&bk_genre=전체" style="color:#8685EF	">해외도서&nbsp;<i class="fa fa-angle-down" aria-hidden="true"></i><button class="toggle-menu-btn" style="display:none;" onclick="return toggleSubmenu(this)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></a>
 						<ul class="mm-submenu tree" style="background-color:white">
 							<li data-href="" aria-label="isoSPEC" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=소설&mb_id=admin" href="/collections/brand-isospec" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=소설" href="/collections/brand-isospec" aria-label="isoSPEC" data-no-instant="" onclick="mmGoToPage(this, event); return false;">소설</a>
 							</li>
 							<li data-href="" aria-label="Adam Equipment" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=인문&mb_id=admin" href="/collections/brand-adam-equipment" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">인문</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=인문" href="/collections/brand-adam-equipment" aria-label="Adam Equipment" data-no-instant="" onclick="mmGoToPage(this, event); return false;">인문</a>
 							</li>
 							<li data-href="" aria-label="Environmental Express" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=취미&mb_id=admin" href="/collections/brand-environmental-express" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">취미</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=취미" href="/collections/brand-environmental-express" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">취미</a>
 							</li>
 							<li data-href="" aria-label="Environmental Sampling Supply" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=경제&mb_id=admin" href="/collections/brand-environmental-sampling-supply" aria-label="Environmental Sampling Supply" data-no-instant="" onclick="mmGoToPage(this, event); return false;">경제</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=경제" href="/collections/brand-environmental-sampling-supply" aria-label="Environmental Sampling Supply" data-no-instant="" onclick="mmGoToPage(this, event); return false;">경제</a>
 							</li>
 							<li data-href="" aria-label="Glass Expansion" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=자기개발&mb_id=admin" href="/collections/brand-glass-expansion" aria-label="Glass Expansion" data-no-instant="" onclick="mmGoToPage(this, event); return false;">자기개발</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=자기개발" href="/collections/brand-glass-expansion" aria-label="Glass Expansion" data-no-instant="" onclick="mmGoToPage(this, event); return false;">자기개발</a>
 							</li>
 							<li data-href="" aria-label="Goodfellow" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=예술&mb_id=admin" href="/collections/brand-goodfellow" aria-label="Goodfellow" data-no-instant="" onclick="mmGoToPage(this, event); return false;">예술</a></li>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=예술" href="/collections/brand-goodfellow" aria-label="Goodfellow" data-no-instant="" onclick="mmGoToPage(this, event); return false;">예술</a></li>
 							<li data-href="" aria-label="High-Purity Standards" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=기술&mb_id=admin" href="/collections/brand-high-purity-standards" aria-label="High-Purity Standards" data-no-instant="" onclick="mmGoToPage(this, event); return false;">기술</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=기술" href="/collections/brand-high-purity-standards" aria-label="High-Purity Standards" data-no-instant="" onclick="mmGoToPage(this, event); return false;">기술</a>
 							</li>
 							<li data-href="" aria-label="Inorganic Ventures" data-no-instant="">
-								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=잡지&mb_id=admin" href="/collections/brand-inorganic-ventures" aria-label="Inorganic Ventures" data-no-instant="" onclick="mmGoToPage(this, event); return false;">잡지</a>
+								<a data-href="${root }book/BkList?bk_local=해외&bk_genre=잡지" href="/collections/brand-inorganic-ventures" aria-label="Inorganic Ventures" data-no-instant="" onclick="mmGoToPage(this, event); return false;">잡지</a>
 							</li>
 						</ul>
 					

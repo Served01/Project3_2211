@@ -84,13 +84,13 @@ document.getElementById("my_sum").innerHTML=sum_;
 //주문
 
 let basket = {
-		orderInitiator: function(ca_mbid,ca_bknumbers){
+		orderInitiator: function(ca_bknumbers){
 	    	<%java.util.Date today = new java.util.Date();
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
 			
 			//로그인 아이디 받아와야됨
-			
+			var ca_mbid = '${mb_id}';
 			var ca_bkcount = $("#amount").val();
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
@@ -108,7 +108,10 @@ let basket = {
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
+	    orderCreate: function(or_number,ca_bknumbers,ca_bkcount){
+	    	
+	    	var ca_mbid = '${mb_id}';
+	    	
 	    	$.ajax({
 				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
@@ -121,9 +124,9 @@ let basket = {
 			    }
 	    	})
 	    },
-	    orderItem: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
+	    orderItem: function(or_number,ca_bknumbers,ca_bkcount){
 	    	
-	        	
+	        	var ca_mbid='${mb_id}';
 	        	if (ca_bkcount != 0){
 	        		$.ajax({
 						url: '${root}cart/cart_insertOderItem/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid + '/' + ca_bkcount,
@@ -154,14 +157,16 @@ let basket = {
 			return orderNumExist;
 	    },
 
-	    delPreOrder: function(ca_mbid){
+	    delPreOrder: function(){
+	    	var ca_mbid='${mb_id}';
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
 				dataType: 'text'
 			})
 	    },
-	    delPreOrderItems: function(ca_mbid){
+	    delPreOrderItems: function(){
+	    	var ca_mbid='${mb_id}';
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
 				type: 'get',
@@ -222,8 +227,9 @@ let basket = {
 	    }
 };
 let wish = {
-	switchWishHeart : function(mb_id,bk_number) {
+	switchWishHeart : function(bk_number) {
 
+		var mb_id = '${mb_id}';
 		var imgsrc = $("#wish").attr("src");
 		
 		var culsrc = imgsrc.split('-');
@@ -258,8 +264,9 @@ let wish = {
 		
 		
 	},
-	checkWishHeart : function(mb_id,bk_number){
+	checkWishHeart : function(bk_number){
 
+		var mb_id = '${mb_id}';
 		$.ajax({
 			url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
 			type : "GET",
@@ -278,7 +285,8 @@ let wish = {
 		});
 	}
 };
-function addcart(ca_mbid,ca_bknumbers){
+function addcart(ca_bknumbers){
+	var ca_mbid = '${mb_id}';
 	
 	$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
@@ -348,11 +356,11 @@ function delBook(bk_number){
 				<!--  like button  -->
 				<script>
 				$(document).ready(function(){
-					setTimeout(wish.checkWishHeart(${mb_id},${ReadBkBean.bk_number}), 200);
+					setTimeout(wish.checkWishHeart(${ReadBkBean.bk_number}), 200);
 				})
 				</script>
 				
-					<img src="${root }imgs/heart.svg"  id="wish"  onclick="javascript:wish.switchWishHeart(${mb_id},${ReadBkBean.bk_number})"/>
+					<img src="${root }imgs/heart.svg"  id="wish"  onclick="javascript:wish.switchWishHeart(${ReadBkBean.bk_number})"/>
 					
 				<!--  /like button  -->
 				</div>
@@ -378,9 +386,9 @@ function delBook(bk_number){
 				</form>
 				<div class="input-group-append">
 				<p>
-				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${mb_id},${ReadBkBean.bk_number});">도서주문 &raquo;</a>
-				<input class="btn btn-info" type="button" onclick="javascript:addcart(${mb_id },${ReadBkBean.bk_number})" value="장바구니"></p>
-				<c:if test="${mb_id==admin }">
+				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
+				<input class="btn btn-info" type="button" onclick="javascript:addcart(${ReadBkBean.bk_number})" value="장바구니"></p>
+				<c:if test="${mb_id=='admin'}">
 				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a>
 				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a></p>
 				</c:if>
@@ -391,7 +399,7 @@ function delBook(bk_number){
 	</div>
 	</div>
 	
-	<c:if test="${mb_id!=0 }">
+	<c:if test="${mb_id!='0'}">
 		<c:import url="/Review/RvInsert">
 		</c:import>
 	</c:if>
