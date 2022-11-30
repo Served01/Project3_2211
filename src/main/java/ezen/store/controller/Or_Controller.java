@@ -41,18 +41,35 @@ public class Or_Controller {
 	private Mb_Service mb_Service;
 	
 	
+	//주문 list all select
+	@GetMapping("/Or_alllist")
+	public String OrAllList( 
+			@RequestParam(value="page", defaultValue="1") int page,
+			Model model) {
+		
+		//모든 order list select
+		List<Or_Bean> allListOrBean = or_Service.OrAllList();
+		model.addAttribute("allListOrBean", allListOrBean);
+		
+		//order list 수에 맞춰 페이지 생성
+		PageCountBean pageCountBean = or_Service.getOrAllCount(page);
+		model.addAttribute("pageCountBean", pageCountBean);
+		
+		
+		return "order/Or_alllist";
+		
+	}
+	
 	//주문 list select
 	@GetMapping("/Or_list")
 	public String OrList(@RequestParam("mb_id") String mb_id, 
 			@RequestParam(value="page", defaultValue="1") int page,
 			Model model) {
 		
-		//mb_id 저장
-		model.addAttribute("mb_id", mb_id);
 		
 		//mb id 일치하는 order list select
 		List<Or_Bean> listOrBean = or_Service.OrList(mb_id);
-		model.addAttribute("infoOrBean", listOrBean);
+		model.addAttribute("listOrBean", listOrBean);
 		
 		//order list 수에 맞춰 페이지 생성
 		PageCountBean pageCountBean = or_Service.getOrCount(mb_id, page);
@@ -104,11 +121,11 @@ public class Or_Controller {
 		List<Dv_Bean> listDvBean = dv_Service.getDvList(mb_id);
 		model.addAttribute("listDvBean", listDvBean);
 		
-		//mb id 일치하는 장바구니 정보 select
-		List<Ca_Bean> infoCaBean = ca_Service.getCartInfo(mb_id);
-		model.addAttribute("infoCaBean", infoCaBean);
+		//mb id 일치하는 장바구니 정보 select(미리 생성된 주문 item select)
+		List<Or_Bean> OrSelect = or_Service.OrSelect(or_number);
+		model.addAttribute("OrSelect", OrSelect);
 		
-		//mb id 일치하는 주문 정보 생성 or number
+		//mb id 일치하는 주문 정보 생성 or number(미리 생성된 주문 정보 수정 위한 select)
 		List<Or_Bean> infoOrBean = or_Service.getOrInfo(mb_id, or_number);
 		model.addAttribute("infoOrBean", infoOrBean);
 		

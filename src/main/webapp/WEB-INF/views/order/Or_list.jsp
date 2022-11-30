@@ -30,7 +30,7 @@
 	<h1 class="display-5">구매 내역</h1>
 	<br>
 	<div class="container">
-	<c:forEach var="orBean" items="${infoOrBean}" varStatus="status">
+	<c:forEach var="orBean" items="${listOrBean}" varStatus="status">
 	<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 			
  		<table class="table table-hover"> 

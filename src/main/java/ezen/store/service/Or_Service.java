@@ -25,6 +25,16 @@ public class Or_Service {
 	@Value("${page.orpagButtonCnt}")
 	private int page_pageButtonCnt;
 	
+	public PageCountBean getOrAllCount(int currentPage) {
+		
+		int content_cnt = or_DAO.getOrAllCount();
+		
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
+		return pageCountBean;
+		
+	}
+
 	public PageCountBean getOrCount(String mb_id, int currentPage) {
 		
 		int content_cnt = or_DAO.getOrCount(mb_id);
@@ -44,7 +54,11 @@ public class Or_Service {
 		return pageCountBean;
 		
 	}
-	
+		
+		//모든 주문 목록 select
+			public	List<Or_Bean> OrAllList() {
+				return or_DAO.OrAllList();
+			}
 	
 		//주문 목록 select
 		public	List<Or_Bean> OrList(String mb_id) {
@@ -59,7 +73,7 @@ public class Or_Service {
 			return or_DAO.getOrInfo(mb_id, or_number);
 		}
 		
-		//주문 item select
+		//주문 items select
 		public	List<Or_Bean> OrSelect(String or_number) {
 			return or_DAO.OrSelect(or_number);
 		}

@@ -2,10 +2,13 @@ package ezen.store.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -143,7 +146,7 @@ public class Mb_Controller {
 	
 	// 회원가입 컨트롤
 	@GetMapping("/Mbinsert")
-	public String Mbinsert(@ModelAttribute("insertMbBean") Mb_Bean insertMbBean) {
+	public String Mbinsert(@Validated @ModelAttribute("insertMbBean") Mb_Bean insertMbBean, BindingResult result) {
 
 		return "member/Mb_insert";
 		
@@ -151,25 +154,30 @@ public class Mb_Controller {
 
 	// 회원가입 컨트롤 프로
 	@PostMapping("/Mbinsertpro")
-	public String Mbinsertpro(@Validated @ModelAttribute("insertMbBean") Mb_Bean insertMbBean, BindingResult result) {
+	public String Mbinsertpro(@Validated@ModelAttribute("insertMbBean") Mb_Bean insertMbBean, BindingResult result) {
 
-		if (result.hasErrors()) {
+		if (insertMbBean.getMb_pw().equals(insertMbBean.getMb_pw2())) {
 			
-			return "member/Mb_insert";
+			mbService.addUserInfo(insertMbBean);
+
+			return "member/Mb_insert_success";
 			
 		}
 
-		mbService.addUserInfo(insertMbBean);
-
-		return "member/Mb_insert_success";
+		result.addError(new FieldError("updateMbBean", "mb_pw", insertMbBean.getMb_pw(), false, new String[]{"NotEquals.insertMbBean.mb_pw"}, null, null));
+		result.addError(new FieldError("updateMbBean", "mb_pw2", insertMbBean.getMb_pw2(), false, new String[]{"NotEquals.insertMbBean.mb_pw2"}, null, null));
+		
+		return "member/Mb_insert";
 		
 	}
 
 	// 회원정보 수정 페이지
 	@GetMapping("/Mbupdate")
-	public String Mbupdate(@RequestParam("mb_id2") String mb_id2, Model model) {
+	public String Mbupdate(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result,
+							@RequestParam("mb_id2") String mb_id2, Model model) {
 		
-		Mb_Bean updateMbBean = mbService.getModifyUserInfo(mb_id2);
+		
+		updateMbBean = mbService.getModifyUserInfo(mb_id2);
 		model.addAttribute("updateMbBean", updateMbBean);
 		
 		return "member/Mb_update";
@@ -181,21 +189,37 @@ public class Mb_Controller {
 	@PostMapping("/Mbupdatepro")
 	public String Mbupdatepro(@Validated@ModelAttribute("updateMbBean") Mb_Bean updateMbBean, BindingResult result, Model model) {
 
-		if (result.hasErrors()) {
-			
-			return "member/Mb_update";
-		}
+		
+		
 		if(updateMbBean.getMb_pw().equals(updateMbBean.getMb_pw2())) {
 				
-			model.addAttribute("mb_id2",updateMbBean.getMb_id());
-			mbService.modifyUserInfo(updateMbBean);
+			if(updateMbBean.getMb_pw3().equals(updateMbBean.getMb_pw4())) {
 				
-			return "member/Mb_update_success";
+				model.addAttribute("mb_id2",updateMbBean.getMb_id());
+				mbService.modifyUserInfo(updateMbBean);
+				
+				return "member/Mb_update_success";
+				
+			} else {
+				result.addError(new FieldError("updateMbBean", "mb_pw3", updateMbBean.getMb_pw3(), false, new String[]{"NotEquals.updateMbBean.mb_pw3"}, null, null));
+				result.addError(new FieldError("updateMbBean", "mb_pw4", updateMbBean.getMb_pw4(), false, new String[]{"NotEquals.updateMbBean.mb_pw4"}, null, null));
+				return "member/Mb_update";
+				
+			}
+			
 		} else {
+			
+		
+			result.addError(new FieldError("updateMbBean", "mb_pw", updateMbBean.getMb_pw(), false, new String[]{"NotEquals.updateMbBean.mb_pw"}, null, null));
+			result.addError(new FieldError("updateMbBean", "mb_pw2", updateMbBean.getMb_pw2(), false, new String[]{"NotEquals.updateMbBean.mb_pw2"}, null, null));
 			model.addAttribute("mb_id2",updateMbBean.getMb_id());
-			return "member/Mb_update_fail";
+			
+			return "member/Mb_update";
+			
 		}
 	}
+		
+	
 
 	
 	

@@ -8,9 +8,7 @@
 <title>Mb_update_fail</title>
 </head>
 <body>
-	<script type="text/javascript">
-		alert("올바른 비밀번호를 입력 해주세요.")
-		location.href="${root}member/Mbupdate?mb_id2=${mb_id2}"
-	</script>
+	<c:import url="/member/Mbupdate">
+	</c:import>
 </body>
 </html>

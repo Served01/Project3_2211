@@ -13,8 +13,11 @@ public class Or_DAO {
 	
 	@Autowired
 	private Or_Mapper or_Mapper;
-		
 	
+	
+	public int getOrAllCount() {
+		return or_Mapper.getOrAllCount();
+	}
 	//주문 목록 개수
 	public int getOrCount(String mb_id) {
 		return or_Mapper.getOrCount(mb_id);
@@ -25,6 +28,10 @@ public class Or_DAO {
 	}
 	
 	//select
+	public	List<Or_Bean> OrAllList() {
+		return or_Mapper.OrAllList();
+	}
+	
 	public	List<Or_Bean> OrList(String mb_id) {
 		return or_Mapper.OrList(mb_id);
 	}

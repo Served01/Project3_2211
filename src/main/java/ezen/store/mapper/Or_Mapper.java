@@ -11,6 +11,14 @@ import ezen.store.beans.Or_items;
 
 public interface Or_Mapper {
 	
+		//모든 주문 list 출력
+		@Select("select * from order_info")
+		List<Or_Bean> OrAllList();
+		
+		//주문 list 개수 출력
+		@Select("select count(*) from order_info\r\n")
+		int getOrAllCount();
+		
 		//주문 list 출력
 		@Select("select *\r\n"
 			+ "    from order_info\r\n"

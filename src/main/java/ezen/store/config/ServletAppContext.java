@@ -1,5 +1,7 @@
 package ezen.store.config;
 
+import javax.validation.Validator;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Ca_Mapper;
@@ -183,6 +186,8 @@ public class ServletAppContext implements WebMvcConfigurer{
 			
 		return res; 
 	}	
+	
+	
 	
 	// 스탠다드서블릿멀티파트리졸버 등록 (upload/download 용도)
 	@Bean

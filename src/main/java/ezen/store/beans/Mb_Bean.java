@@ -46,6 +46,12 @@ public class Mb_Bean {
 	
 	//로그인용
 	private boolean mblogin;
+	
+	private boolean mbPw12;
+	
+	private boolean mbPw34;
+	
+	
 
 	public String getMb_id() {
 		return mb_id;
@@ -111,10 +117,6 @@ public class Mb_Bean {
 		this.mb_tel = mb_tel;
 	}
 
-	public Mb_Bean() {
-		this.mbIdExist = false;
-		this.mblogin = false;
-	}
 	
 	public boolean isMbIdExist() {
 		return mbIdExist;
@@ -156,5 +158,22 @@ public class Mb_Bean {
 		this.mb_deleted_date = mb_deleted_date;
 	}
 
+	public boolean isMbPw12() {
+		return mbPw12;
+	}
+
+	public void setMbPw12(boolean mbPw12) {
+		this.mbPw12 = mbPw12;
+	}
+
+	public boolean isMbPw34() {
+		return mbPw34;
+	}
+
+	public void setMbPw34(boolean mbPw34) {
+		this.mbPw34 = mbPw34;
+	}
+
+	
 }
 
