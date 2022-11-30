@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<meta charset="UTF-8">
 		<!-- Webpage Title -->
         <title>책 리뷰공간</title>
@@ -44,16 +45,18 @@
 			  margin-right: auto;
 			  }
         </style>
+     
 </head>
-
+<script>
+    
+     	
+     
+     </script>
 <body>
-
-<!--  <div class="container">
-	<div class="info">-->
-		<h1 style="text-align:center">리뷰 목록</h1>
-		<p align="right">
-			<button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvInsert?mb_id=${mb_id }&bk_number=${bk_number}'">리뷰 등록</button>
-		<p>
+<div class="container">
+            <div class="info" style="margin-left:150px;width:900px">
+                <h1 style="text-align:center">리뷰 목록</h1>
+                <br><br>
 		<div class="reviews">
 			<table class="table">
 				<thead>
@@ -61,46 +64,54 @@
                         <th scope="col">작성자</th>
                         <th scope="col">작성일</th>
                         <th scope="col">내용</th>
+                        <th></th>
+	                    <th></th>
                     </tr>
 				</thead>
 				<tbody id="reviews-box">
 					<c:forEach var="rvl" items="${reviewlist }" varStatus="status">
-					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent }">
+					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
+					
 					<tr>
-						<td>${rvl.mb_id } </td>
-						<td>${rvl.rv_date } </td>
-						<td>${rvl.rv_content }</td>	
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.mb_id }</td>
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_date }</td>
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_content }</td>	
+					<c:if test="${mb_id==rvl.mb_id or mb_id=='admin'}">
 						<th><button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvUpdate?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">수정</button></th>
                         <th><button type="button" class="btn btn-dark" onclick="location.href='${root }Review/RvDeletePro?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">삭제</button></th>			
+					</c:if>
 					</tr>
+					
 					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
-			
+			<hr style="margin-top: -1em">
+            </div>
+			<br><br>
 			<!-- 페이지네이션 -->
     		<div class=hi>
             	<ul id="hiyo" class="pagination">
 					
 					<li class="page-item">
-						<a href="${root}Review/RvList?mb_id=${mb_id}&bk_number=${bk_number }&page=1" class="page-link">First</a>
+						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=1" class="page-link">First</a>
 					</li>					
 														
 				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 					<li class="page-item active">
-						<a href="${root}Review/RvList?mb_id=${mb_id}&bk_number=${bk_number }&page=${idx}" class="page-link">${idx}</a>
+						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=${idx}" class="page-link">${idx}</a>
 					</li>		
 												
 				</c:forEach>					
 					
 					<li class="page-item">
-						<a href="${root}Review/RvList?mb_id=${mb_id}&bk_number=${bk_number }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>
 			</div>	
-
+		</div>
+	</div>
 </body>
 </html>

@@ -245,3 +245,10 @@ insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
     values('22NOVZXY002',20220004,
             (select bk_price from book_info where bk_number = 20220002),
             (select ca_bkcount from (select DISTINCT ca_bkcount from CART_INFO where mb_id='admin' and bk_number='20220001')));
+            
+            
+            
+            
+            
+            
+select bk_number from Book_info where bk_local = '국내' and bk_genre like '%'||''||'%' and bk_deleted = '0'

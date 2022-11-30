@@ -11,9 +11,12 @@ public class Or_Bean {
 	private String or_date;
 	private int or_delivery;
 	private int or_deliveryCost;
+	
+	private String dv_nick;
 	private String dv_name;
 	private String dv_tel;
 	private String dv_address;
+	private String dv_pk;
 	
 	private int bk_number;
 	private int bk_price;
@@ -31,6 +34,8 @@ public class Or_Bean {
 	private int bk_quantity;
 	private String bk_title_upper;
 	private String bk_deleted;
+	
+	private double avg_score;
 	
 	public String getOr_number() {
 		return or_number;
@@ -80,6 +85,12 @@ public class Or_Bean {
 	public void setOr_deliveryCost(int or_deliveryCost) {
 		this.or_deliveryCost = or_deliveryCost;
 	}
+	public String getDv_nick() {
+		return dv_nick;
+	}
+	public void setDv_nick(String dv_nick) {
+		this.dv_nick = dv_nick;
+	}
 	public String getDv_name() {
 		return dv_name;
 	}
@@ -97,6 +108,12 @@ public class Or_Bean {
 	}
 	public void setDv_address(String dv_address) {
 		this.dv_address = dv_address;
+	}
+	public String getDv_pk() {
+		return dv_pk;
+	}
+	public void setDv_pk(String dv_pk) {
+		this.dv_pk = dv_pk;
 	}
 	public int getBk_number() {
 		return bk_number;
@@ -187,6 +204,12 @@ public class Or_Bean {
 	}
 	public void setBk_deleted(String bk_deleted) {
 		this.bk_deleted = bk_deleted;
+	}
+	public double getAvg_score() {
+		return avg_score;
+	}
+	public void setAvg_score(double avg_score) {
+		this.avg_score = avg_score;
 	}
 	
 	

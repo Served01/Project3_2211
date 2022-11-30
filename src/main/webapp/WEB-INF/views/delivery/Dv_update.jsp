@@ -13,20 +13,21 @@
 <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
   <style>
     body {
       min-height: 100vh;
-
-      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+background-color:#F3E8EB;
+text-aling:center;
+      
     }
 
     .input-form {
@@ -57,31 +58,35 @@
  }
   </style>
 </head>
+
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <body>
- <div class="input-form-backgroud row">
+ <div class="input-form-backgroud row" align="center">
       <div class="input-form col-md-12 mx-auto">
-              <h4 class="mb-3">배송지 수정</h4>
+     <a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px; font-family:'Frank Ruhl Libre', serif;">
+		Ezen Book Store</a> 
+              <h4 class="mb-3" style="font-family: 'Noto Sans KR', sans-serif;">배송지 수정</h4>
 	<form:form action="${root }delivery/DvUpdatePro" method="post" modelAttribute="UpdateDvBean">
 		<form:hidden path="mb_id"/>
 		<form:hidden path="dv_pk"/>
-		 <div class="form-group">
+		 <div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 			<form:label path="dv_nick">닉네임</form:label>
 			<form:input path="dv_nick" class="form-control" readonly="true"/>
 		</div>		
-		<div class="form-group">
+		<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 			<form:label path="dv_name">이름</form:label>
 			<form:input path="dv_name" class="form-control"/>
 			<form:errors path="dv_name" style="color:red"/>
 		</div>	
-		<div class="form-group">
+		<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 			<form:label path="dv_tel">연락처</form:label>
 			<form:input path="dv_tel" class="form-control"/>
 			<form:errors path="dv_tel" style="color:red"/>
 		</div>	
-		<div class="form-group">
+		<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 			<form:label path="dv_address">배송지</form:label>
-			<form:input path="dv_address" class="form-control"/>
-			<form:errors path="dv_address" style="color:red"/>
+			<form:input path="dv_address" class="form-control"/>			
+            <form:errors path="dv_address" style="color:red"/>
            </div>         
           <div class="row">
             </div>
@@ -89,7 +94,7 @@
            
             </div>
           <hr class="mb-4">
-          <div class="hi">
+          <div class="hi"style="font-family: 'Noto Sans KR', sans-serif;">
 				<form:button class="btn btn-dark" type="submit">수정하기</form:button>				
           </div>
         </form:form>

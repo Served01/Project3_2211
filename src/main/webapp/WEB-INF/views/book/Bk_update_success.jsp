@@ -11,6 +11,7 @@
 <body>
 	<script>
 		alert("책 정보 수정에 성공하였습니다.")
+		location.replace("${root}book/BkSelect?mb_id=admin&bk_number=${updateBkBean.bk_number}")
 	</script>
 </body>
 </html>

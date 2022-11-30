@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.PageCountBean;
 import ezen.store.beans.Rv_Bean;
@@ -26,15 +27,13 @@ public class Rv_Controller {
 	
 	// 리뷰 리스트
 	@GetMapping("/RvList")
-	public String list(
-					   @RequestParam("mb_id") String mb_id,
+	public String list(@SessionAttribute("mb_id") String mb_id,
 					   @RequestParam("bk_number") int bk_number, 
 					   @RequestParam(value="page", defaultValue="1") int page,
 					   Model model) {
 		
 		// Review 목록 열기
 		model.addAttribute("bk_number", bk_number);
-		model.addAttribute("mb_id", mb_id);
 		
 		List<Rv_Bean> reviewlist = rvService.getRvList(bk_number);
 		model.addAttribute("reviewlist", reviewlist);
@@ -42,9 +41,8 @@ public class Rv_Controller {
 		PageCountBean pageCountBean = rvService.getContentCnt(bk_number, page);
 		model.addAttribute("pageCountBean", pageCountBean);
 		
-		model.addAttribute("page", page);
-		
 		return "review/Rv_list";
+		
 	}
 
 	// Rv_insert 파일 열기
@@ -52,13 +50,14 @@ public class Rv_Controller {
 	//여기서 ModelAttribute로 Rv_Bean을 설정하면 Rv_Bean을 이어 받는데 여기서는 이어 받는게 없으므로 아무것도 없는 상태로 Rv_insert페이지로 반환함
 	public String insert(@ModelAttribute("insertRvBean") Rv_Bean insertRvBean,
 						 @RequestParam("bk_number") int bk_number,
-						 @RequestParam("mb_id") String mb_id, Model model) {
+						 @SessionAttribute("mb_id") String mb_id, Model model) {
 		
 		// insert 페이지 열기
-		model.addAttribute("bk_number", bk_number);
-		model.addAttribute("mb_id", mb_id);
+		insertRvBean.setMb_id(mb_id);
+		insertRvBean.setBk_number(bk_number);
 		
 		return "review/Rv_insert";
+		
 	}
 	
 	// 리뷰 insert 기능
@@ -68,7 +67,9 @@ public class Rv_Controller {
 		
 		// insert 처리
 		if(result.hasErrors()) {
+			
 			return "review/Rv_insert";
+			
 		}
 		
 		rvService.insertReview(insertRvBean);
@@ -86,6 +87,7 @@ public class Rv_Controller {
 		model.addAttribute("updateRvBean", updateRvBean);
 		
 		return "review/Rv_update";
+		
 	}
 	
 	// 리뷰 update 기능
@@ -95,7 +97,9 @@ public class Rv_Controller {
 							BindingResult result) {
 		
 		if(result.hasErrors()) {
+			
 		return "review/Rv_update";
+		
 		}
 		
 		rvService.updateReview(updateRvBean);
@@ -111,7 +115,9 @@ public class Rv_Controller {
 		rvService.deleteReview(deleteRvBean.getRv_number());
 		
 		if(result.hasErrors()) {
+			
 		return "review/Rv_delete_fail";
+		
 		}
 		
 		return "review/Rv_delete_success";

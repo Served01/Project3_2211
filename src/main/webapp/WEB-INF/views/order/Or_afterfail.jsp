@@ -10,7 +10,7 @@
 
 	<script>
 		alert("주문 수정 실패, 다시 시도 바랍니다.")
-		location.href="${root}Or_list?mb_id=hyun1"
+		location.href="${root}Or_list?mb_id='${mb_id}'"
 	</script>
 
 </body>

@@ -6,49 +6,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>주문 변경</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 </head>
-<body>
+<body bgcolor="WHITE">
+<br>
+		<div class="container">
+		<div class="row">
+			<div class="container">
+			<h1 class="display-5">주문 변경</h1>
+		</div>
+		</div>
 
-
-	
 <form:form action="${root }Or_afterPro" method="post" modelAttribute="updateOrBean">
-	<c:out value="주문번호 : ${updateOrBean.or_number }"/><br>
 	<div class="form-group">
-	
+	<table border="1" align="center" style="width:600; cellspacing:0; cellpadding:3;">
+		<tr>
+		<td>주문 번호</td>
+		<td>${updateOrBean.or_number }</td>
+		</tr>	
     <form:hidden path="mb_id"/>
     <form:hidden path="or_number"/>
 	<form:hidden path="mb_name"/>
 	<form:hidden path="mb_tel"/>
-	
-	<c:choose>
-			<c:when test="${updateOrBean.or_status == 교환}">
-				
-				<c:set var= "sumprice" value="${sumprice + 3000}"/>
-			</c:when>
-			<c:otherwise>
-				<form:hidden path="or_deliveryCost" value="0"/>
-				<c:out value="0"/>원
-			</c:otherwise>
-		</c:choose>
-	
-	
+    	<tr>
+    	<td align="center" colspan="2">
     	<form:radiobutton path="or_status" value="교환" label="교환"/>
     	<form:radiobutton path="or_status" value="환불" label="환불"/>
-    	<form:radiobutton path="or_status" value="취소" label="취소"/>
+    	</td>
+    	</tr>
+    
 	<form:hidden path="or_date"/>
 	<form:hidden path="or_delivery"/>
 	<form:hidden path="or_deliveryCost"/>
 	<form:hidden path="dv_name"/>
 	<form:hidden path="dv_tel"/>
 	<form:hidden path="dv_address"/>
-        </div>
-  
-    <form:button class="form-control" type="submit">주문 변경</form:button>
-    <form:button class="form-control" href="history.back();">뒤로가기</form:button>
-    
+	<form:hidden path="bk_number"/>
+        
+  		<tr>
+    	<td align="center" colspan="2">
+    	<form:button class="btn btn-dark" type="submit">주문 변경</form:button>
+    	<a href="javascript:window.history.back();" class="btn btn-dark" role="button">뒤로가기</a>
+   		</td>
+   		</tr>
+   		</table>
+    </div>
 </form:form>
-
+</div>
 
 </body>
 </html>

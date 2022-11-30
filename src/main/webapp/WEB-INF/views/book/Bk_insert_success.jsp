@@ -10,7 +10,8 @@
 </head>
 <body>
 	<script>
-		alert("글쓰기를 성공 했습니다.")
+		alert("책정보 추가에 성공하였습니다.")
+		location.replace("${root}book/BkSelect?mb_id=admin&bk_number=${InsertBkBean.bk_number}")
 	</script>
 </body>
 </html>

@@ -12,8 +12,8 @@ public class PageCountBean {
 	private int firstContent; //현재 페이지 첫번째 글
 	private int lastContent; //현재 페이지 마지막 글
 	
-	//contentCnt: 전체글개수, currentPage: 현재 페이지 번호, contentPageCnt: 페이지당 글 개수, pagButtonCnt: 페이지 버튼의 개수
-	public PageCountBean(int contentCnt, int currentPage, int contentPageCnt, int pagButtonCnt) {
+	//contentCnt: 전체글개수, currentPage: 현재 페이지 번호, contentPageCnt: 페이지당 글 개수, pageButtonCnt: 페이지 버튼의 개수
+	public PageCountBean(int contentCnt, int currentPage, int contentPageCnt, int pageButtonCnt) {
 		
     // 현재 페이지번호
 	this.currentPage = currentPage;
@@ -26,7 +26,7 @@ public class PageCountBean {
 		}	
 	
 	min = ((currentPage -1) / contentPageCnt) * contentPageCnt + 1;
-	max = min + pagButtonCnt - 1;
+	max = min + pageButtonCnt - 1;
 	
 	if(max > pageCnt) {
 		max = pageCnt;

@@ -19,6 +19,15 @@
 	
 </head>
 <style>
+.loading{
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0px;
+    top:0px;
+    background:#fff;
+    z-index:1000; /* 이 값으로 레이어의 위치를 조정합니다. */
+}
 
 .basketdiv {
     width: 100%;
@@ -234,8 +243,8 @@ let basket = {
 	    //체크한 장바구니 상품 비우기
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
+	        	var wi_mbid = '${mb_id}' ;
 	        	var wi_bknumbers = parseInt(item.getAttribute('value'));
-	        	var wi_mbid = 'admin';
 	        	
 	        	$.ajax({
 	        		url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
@@ -248,18 +257,17 @@ let basket = {
 	    	
 	        //전송 처리 결과가 성공이면
 	        alert('삭제되었습니다.')
-	        this.reCalc();
-	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    //장바구니 전체 비우기
 	    delAllItem: function(){
-	    	
+	    	var wi_mbid = '${mb_id}' ;
 	        document.querySelectorAll('.row.data').forEach(function (item) {
 	            item.remove();
 	          });
 	          //AJAX 서버 업데이트 전송
 	        // var ca_bknumbers = ca_bknumbers; id값 받아야함
-	        var wi_mbid = 'admin';
+	        
 	        $.ajax({
 				url: '${root}wish/wish_deleteAll/' + wi_mbid,
 				type: 'get',
@@ -273,8 +281,7 @@ let basket = {
 	          //전송 처리 결과가 성공이면
 	          this.totalCount = 0;
 	          this.totalPrice = 0;
-	          this.reCalc();
-	          this.updateUI();
+	          this.emptyImg();
 	    },
 	    //재계산
 	    reCalc: function(){
@@ -310,17 +317,13 @@ let basket = {
 	        //AJAX 업데이트 전송
 
 	        //전송 처리 결과가 성공이면    
-	        this.reCalc();
-	        this.updateUI();
 	    },
 	    checkItem: function () {
-	        this.reCalc();
-	        this.updateUI();
 	    },
 	    delItem: function (wi_bknumbers) {
+	    	var wi_mbid = '${mb_id}' ;
 	        event.target.parentElement.parentElement.parentElement.remove();
-	        
-	        var wi_mbid = 'admin';
+
 	        $.ajax({
 				url: '${root}wish/wish_delete/' + wi_mbid +'/'+ wi_bknumbers,
 				type: 'get',
@@ -328,12 +331,11 @@ let basket = {
 			})
 	        
 	        
-	        this.reCalc();
-	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    
-	    sendCart:function (wi_mbid,wi_bknumbers) {
-	    	
+	    sendCart:function (wi_bknumbers) {
+	    	var wi_mbid = '${mb_id}' ;
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        
 	        $.ajax({
@@ -350,12 +352,16 @@ let basket = {
 			
 			alert('장바구니에 추가되었습니다')
 	        
-	        this.reCalc();
-	        this.updateUI();
+	        this.emptyImg();
 	    },
 		priceComma: function(bk_price){
 			var price = bk_price.toLocaleString('ko-KR');
 			document.write(price + '원');
+	    },
+	    emptyImg: function(){
+	    	if(document.querySelector('.row.data') == null){
+	    		$(".empty").show();
+	    	}
 	    }
 	}
 
@@ -367,10 +373,21 @@ let basket = {
 	    while (regex.test(nstr)) nstr = nstr.replace(regex, '$1' + ',' + '$2');
 	    return nstr;
 	};
-
+	 $(window).on('load', function () {
+		 $(".loading").fadeOut();
+		// $("body").css("background", "white");
+	 });
 </script>
 <body>
-					
+<c:import url="/Main/header"></c:import>
+
+	<br>
+	<h1 style="text-align:center;">찜 목록</h1>
+	<p>
+	<!-- 로딩 -->		
+	<div class="loading"></div>
+			
+	<div class="container">						
 					          
 	<form name="orderform" id="orderform" method="post" class="orderform" action="/Page" onsubmit="return false;">
     
@@ -380,47 +397,54 @@ let basket = {
                     <div class="subdiv">
                         <div class="check">선택</div>
                         <div class="img">이미지</div>
-                        <div class="pname">상품명</div>
+                        <div class="pname" style="text-align:left; padding-left:22px;">상품명</div>
                     </div>
-                    <div class="subdiv">
-                        <div class="basketprice">가격</div>
-                        <div class="sendcar">구매하기</div>
+                    <div class="subdiv" style="width:400px;">
+                        <div class="basketprice" style="width:115px;">가격</div>
+                        <div class="sendcar" style="width:160px; margin-left:50px;">구매하기</div>
                     </div>
                     <div class="subdiv">
                         <div class="basketcmd">삭제</div>
                     </div>
                     <div class="split"></div>
                 </div>
+                <c:if test = "${empty infoWi_Bean}">
+                	<div class="row data" >
+                		<div class="img" style="width:100%; align:center"><img src="${root }imgs/empty_cart.png"></div>
+                	</div>
+		        </c:if>
+			        <div class="empty" style=" display : none;">
+	               		<div class="img" style="width:100%; align:center""><img src="${root }imgs/empty_cart.png"></div>
+	                </div>
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
         			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
-	                <div class="row data">
-	                    <div class="subdiv">
-	                        <div class="check"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
-	                        <div class="img"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" width="60"></div>
-	                        <div class="pname" style=" position: relative;top: 35%;height: 20px;">
-	                            <span>제목 : ${str.bk_title }</span>
-								<span>저자 : ${str.bk_writer }</span>
-					        	<span>출판사 : ${str.bk_publisher }</span>
-					        	<span>재고: ${str.bk_quantity }</span>
-	                        </div>
-	                    </div>
-	                    <div class="subdiv">
-	                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
-								<script>javascript:basket.priceComma(${str.bk_price })</script>
-							</div>
-                       		<div class="sendcart"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart('admin',${str.bk_number });">장바구니로 옮기기</a></div>
-	                    </div>
-	                   
-	                    <div class="subdiv">
-	                        <div class="basketcmd"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
-	                    </div>
-	                </div>
+		                <div class="row data">
+		                    <div class="subdiv" style="height:165px;">
+		                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
+		                        <div class="img"  style="width:120px; height:145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" onclick="location.href='${root }book/BkSelect?bk_number=${str.bk_number}'" style="width: 120px; height: 145px;"></div>
+		                        <div class="pname" style="position:relative; top:20px; height:20px; padding-left:20px; width:370px; bottom:0px;">
+		                            <p>제목 : <a href='${root }book/BkSelect?bk_number=${str.bk_number}'><b>${str.bk_title}</b></a></p>
+									<p>저자 : ${str.bk_writer }</p>
+						        	<p>출판사 : ${str.bk_publisher }</p>
+						        	<p>재고: ${str.bk_quantity }</p>
+		                        </div>
+		                    </div>
+		                    <div class="subdiv" style="margin-top:50px">
+		                        <div class="basketprice"><input type="hidden" name="p_price" id="p_price1" class="p_price" value="${str.bk_price }">
+									<script>javascript:basket.priceComma(${str.bk_price })</script>
+								</div>
+	                       		<div class="sendcart" style="margin-left:50px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.sendCart(${str.bk_number });">장바구니로 옮기기</a></div>
+		                    </div>
+		                    <div class="subdiv">
+		                        <div class="basketcmd" style="width: 50px; height: 165px; padding-top:50px; padding-left:5px;"><a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delItem(${str.bk_number });">삭제</a></div>
+		                    </div>
+		                </div>
 	                </c:if>
         		</c:forEach>
             </div>
     		
             <div class="right-align basketrowcmd">
-            	<a href="${root }cart/cart_info?ca_mbid=admin" class="abutton">장바구니보기</a>
+            	<a href="${root }cart/cart_info?ca_mbid=${mb_id}" class="abutton">장바구니보기</a>
             	<a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
                 <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">찜목록비우기</a>
             </div>
@@ -432,22 +456,25 @@ let basket = {
 				<ul class="pagination justify-content-center">
 					
 						<li class="page-item">
-						<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="page-link">처음</a>
+						<a href="${root}wish/wish_info?wi_mbid=${mb_id }&page=1" class="page-link">처음</a>
 						</li>					
 														
 					<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 							<li class="page-item active">
-								<a href="${root}wish/wish_info?wi_mbid=admin&page=${idx}" class="page-link">${idx}</a>
+								<a href="${root}wish/wish_info?wi_mbid=${mb_id }&page=${idx}" class="page-link">${idx}</a>
 							</li>		
 												
 					</c:forEach>					
 					
 						<li class="page-item">
-							<a href="${root}wish/wish_info?wi_mbid=admin&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
+							<a href="${root}wish/wish_info?wi_mbid=${mb_id }&page=${pageCountBean.pageCnt}" class="page-link">끝</a>
 						</li>
 					
 				</ul>
-			</div>		
+			</div>
+		</div>
+		<br>
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>

@@ -10,7 +10,7 @@
 <body>
 	<script type="text/javascript">
 		alert("올바른 비밀번호를 입력 해주세요.")
-		location.href="${root}member/Mbdelete"
+		location.href="${root}member/Mbdelete?mb_id2=${mb_id2}"
 	</script>
 </body>
 </html>

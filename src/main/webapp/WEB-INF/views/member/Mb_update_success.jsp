@@ -11,7 +11,7 @@
 	<h1>회원정보 수정 완료</h1>
 	<script type="text/javascript">
 		alert("회원정보 수정을 성공 하였습니다!.")
-		location.href="${root}index"
+		location.href="${root}Main/center"
 	</script>
 </body>
 </html>

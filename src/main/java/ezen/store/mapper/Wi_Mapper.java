@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import ezen.store.beans.Ca_Bean;
 import ezen.store.beans.Wi_Bean;
 
 public interface Wi_Mapper {
@@ -31,6 +30,7 @@ public interface Wi_Mapper {
 	
 	@Delete("delete from Wish_info where mb_id = #{wi_mbid}")
 		void delwishAll(String wi_mbid);
+	
 	//check
 	@Select("select mb_id,bk_number from Wish_info where mb_id = #{wi_mbid}"
 			+ " and bk_number = #{wi_bknumbers}")

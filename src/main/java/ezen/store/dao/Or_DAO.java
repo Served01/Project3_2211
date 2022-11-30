@@ -1,14 +1,13 @@
 package ezen.store.dao;
 
 import java.util.List;
-import java.util.HashMap;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Or_Bean;
+import ezen.store.beans.Or_items;
 import ezen.store.mapper.Or_Mapper;
 
 @Repository
@@ -16,19 +15,25 @@ public class Or_DAO {
 	
 	@Autowired
 	private Or_Mapper or_Mapper;
-		
 	
 	
-//	public void Or_insert(Or_Bean addOrderDataBean) {
-//		or_Mapper.Or_insert(addOrderDataBean); 
-//	}
+	public int getOrAllCount() {
+		return or_Mapper.getOrAllCount();
+	}
+	//주문 목록 개수
+	public int getOrCount(String mb_id) {
+		return or_Mapper.getOrCount(mb_id);
+	}
 	
-	//구매 내역 정보 로드
-//	public	List<Or_Bean> getOrInfo(String or_number) {
-	//	return or_Mapper.getOrInfo(or_number);
-//	}
+	public int getOrItemCount(String or_number) {
+		return or_Mapper.getOrItemCount(or_number);
+	}
 	
 	//select
+	public	List<Or_Bean> OrAllList() {
+		return or_Mapper.OrAllList();
+	}
+	
 	public	List<Or_Bean> OrList(String mb_id) {
 		return or_Mapper.OrList(mb_id);
 	}
@@ -51,10 +56,6 @@ public class Or_DAO {
 		or_Mapper.OrUpdateAfter(updateOrBean);
 	}
 	
-	public void UpdateOrInfo(Or_Bean updateOrBean) {
-		or_Mapper.UpdateOrInfo(updateOrBean);
-	}
-	
 	public Or_Bean UpdateOrBean(String mb_id, String or_number) {
 		return or_Mapper.UpdateOrBean(mb_id, or_number);
 	}
@@ -62,32 +63,38 @@ public class Or_DAO {
 	public List<Or_Bean> UpdateOriBean(String or_number) {
 		return or_Mapper.UpdateOriBean(or_number);
 	}
-//	public void UpdateOrBean(String or_mbid, String or_number) {
-//		or_Mapper.UpdateOrInfo(or_mbid, or_number);
-//	}
-//	public List<Or_Bean> OrAfter(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number, @Param("or_status") String or_status){
-//		return or_Mapper.OrAfter(or_mbid, or_number, or_status);
-//	}
-	//내역 정보 수정
-//	public void Or_update(int user_idx) {				
-//		or_Mapper.Or_update(user_idx); 		
-//	}
+	
+	public Or_Bean DvSelect(String mb_id, String dv_pk) {
+		return or_Mapper.DvSelect(mb_id, dv_pk);
+	}
 
-	public void OriUpdateAfter(List<Or_Bean> updateOriBean) {
-		or_Mapper.OriUpdateAfter(updateOriBean);
+	public List<Or_items> SelectBkQuantity(String or_number) {
+		return or_Mapper.SelectBkQuantity(or_number);
+	}
+	
+	public Or_Bean SelectBkPurchase(@Param("or_number") String or_number, @Param("bk_number") int bk_number) {
+		return or_Mapper.SelectBkPurchase(or_number, bk_number);
+	}
+	
+	public Or_Bean SelectBkAfter(@Param("or_number") String or_number, @Param("bk_number") int bk_number) {
+		return or_Mapper.SelectBkAfter(or_number, bk_number);
+	}
+
+	public void UpdateBkQuantity(Or_Bean updateBkBean) {
+		or_Mapper.UpdateBkQuantity(updateBkBean);
 		
 	}
-
 	
-	
-//	public void Or_insert(String or_mbid, int or_bknumbers) {
-//		or_Mapper.Or_insert(or_mbid, or_bknumbers); 
-//	}
-	
-	
-	/*
-	public int getContentCnt(String or_mbid) {
-		return or_Mapper.getContentCnt(or_mbid);
+	public List<Or_Bean> Orbest(){
+		return or_Mapper.Orbest();
 	}
-	*/
+	
+	//해당 책 평점 평균
+	public double getBkScore(int bk_number) {
+		return or_Mapper.getBkScore(bk_number); 
+	}
+	
+	public Bk_Bean getBkInfo(int bk_number) {
+		return or_Mapper.getBkInfo(bk_number);
+	}
 }

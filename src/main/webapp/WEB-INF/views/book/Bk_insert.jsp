@@ -11,26 +11,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>책 정보 입력 - Bootstrap</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	
 <!-- JS -->	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
+<!-- 글골 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<!-- 아이콘 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>	
 body {
+    background-color:#F3E8EB;	
 	min-height: 100vh;
-	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),
-		to(#1d466c));
-	background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+	text-align:center;
+	
 }
 .input { margin:0 0 0 50; }
 
@@ -79,6 +83,10 @@ input::file-selector-button {
     border: thin solid grey;
     border-radius: 3px;
 }
+
+a{
+	font-family: 'Noto Sans KR', sans-serif;
+	}
 </style>
 </head>
 <script>
@@ -189,10 +197,11 @@ function previewImage(targetObj, View_area) {
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto" style="margin-top:50px">
-				<h4 class="mb-3" align="center">책 정보 입력</h4>
+			<a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a> <br>
+				<h4 class="mb-3" align="center" style="font-family: 'Noto Sans KR', sans-serif; font-size:25px;">책 정보 입력</h4>
 				<form:form class="validation-form" action="${root }book/BkInsertPro" method="post" modelAttribute="InsertBkBean" enctype="multipart/form-data">		
 				<form:hidden path="bk_numExist"/>
-				<table border="1">
+				<table border="1" style="font-family: 'Noto Sans KR', sans-serif;">
 					<tr align="center" style="height:60; width:1150;">
 						<td rowspan="9" style="width:500px; height:600px;">
 							<div style="width:500px; height:600px;">
@@ -304,7 +313,7 @@ function previewImage(targetObj, View_area) {
 					</tr>
 				</table>
 				<hr class="mb-4">
-				<div class="hi">
+				<div class="hi" style="font-family: 'Noto Sans KR', sans-serif;">
 				<form:button type="submit" class="btn btn-dark">입력완료</form:button>
 				<form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
 				</div>
