@@ -96,15 +96,14 @@ public class Ca_RestController {
 			
 	}
 		
-	@GetMapping("/cart_insertOderItems/{or_number}/{ca_bknumbers}/{ca_mbid}")
+	@GetMapping("/cart_insertOderItems/{or_number}/{ca_bknumbers}/{ca_mbid}/{ca_bkcount}")
 	public String cart_insertOderItems(@PathVariable String or_number,
-									   @PathVariable int ca_bknumbers,
-									   @SessionAttribute("mb_id") String ca_mbid) {
-		
-		ca_Service.insertOderItems(or_number,ca_bknumbers,ca_mbid) ;
-			
+								@PathVariable int ca_bknumbers,
+								@PathVariable String ca_mbid,
+								@PathVariable int ca_bkcount) {
+		ca_Service.insertOderItems(or_number,ca_bknumbers,ca_mbid,ca_bkcount) ;
 		return null;
-			
+		
 	}
 		
 	@GetMapping("/cart_insertOderItem/{or_number}/{ca_bknumbers}/{ca_mbid}/{ca_bkcount}")

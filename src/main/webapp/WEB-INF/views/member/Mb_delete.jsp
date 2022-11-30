@@ -82,9 +82,9 @@
 							
 							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<div class="text-right">
-									<form:button class="btn btn-primary">삭제하기</form:button>
-									<a href="${root }member/Mbinsert" class="btn btn-danger">회원가입</a>
-									<a href="${root }index" class="btn btn-danger">메인화면</a>
+									<form:button class="btn btn-danger">탈퇴하기</form:button>
+									<a href="${root }member/Mbinsert" class="btn btn-dark">회원가입</a>
+									<a href="${root }Main/center" class="btn btn-primary">메인화면</a>
 								</div>
 							</div>
 						</form:form>

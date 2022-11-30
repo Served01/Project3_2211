@@ -133,6 +133,11 @@ public class Bk_Service {
 		return BkDAO.getBkNumList2(search_word);
 							
 	}
+	
+	public List<Bk_Number> getAllBkDateList() {
+
+		return BkDAO.getAllBkDateList();
+	}
 			
 	public PageCountBean getAllContentCnt(String bk_local, String bk_genre, int currentPage) {
 					

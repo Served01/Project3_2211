@@ -36,7 +36,7 @@ public interface Mb_Mapper {
 	Mb_Bean getMbInfo(String mb_id);
 
 	// 수정 실행 SQL문
-	@Update("update Member_info set mb_name = #{mb_name}, mb_pw = #{mb_pw}, mb_email = #{mb_email}, mb_tel = #{mb_tel} where mb_id = #{mb_id}")
+	@Update("update Member_info set mb_name = #{mb_name}, mb_pw = #{mb_pw3}, mb_email = #{mb_email}, mb_tel = #{mb_tel} where mb_id = #{mb_id}")
 	void modifyUserInfo(Mb_Bean updateMbBean);
 
 	

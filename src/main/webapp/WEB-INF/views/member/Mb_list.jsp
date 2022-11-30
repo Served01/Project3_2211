@@ -53,7 +53,8 @@ border: 1px solid #F3E8EB;
 					<td id=title style="width:150px;">탈퇴날짜</td>
 				</tr>
 				<tbody>
-					<c:forEach var="m" items="${memberlist }">
+					<c:forEach var="m" items="${memberlist }" varStatus="status">
+					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 						<tr>
 							<td><a href='${root }member/Mbselect?mb_id2=${m.mb_id}'>${m.mb_id }</a></td>
 							<td>${m.mb_name }</td>
@@ -63,6 +64,7 @@ border: 1px solid #F3E8EB;
 							<td>${m.mb_deleted }</td>
 							<td>${m.mb_deleted_date }</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

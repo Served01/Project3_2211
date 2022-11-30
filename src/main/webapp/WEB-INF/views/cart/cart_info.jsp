@@ -264,6 +264,7 @@ let basket = {
 	        alert('삭제되었습니다.')
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    //장바구니 전체 비우기
 	    delAllItem: function(){
@@ -289,6 +290,7 @@ let basket = {
 	          this.totalPrice = 0;
 	          this.reCalc();
 	          this.updateUI();
+	          this.emptyImg();
 	    },
 	    //재계산
 	    reCalc: function(){
@@ -344,6 +346,7 @@ let basket = {
 	        //전송 처리 결과가 성공이면    
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    changeKeyupPNum: function (pos,ca_bknumbers,bk_quantity) {
 	    	
@@ -380,6 +383,7 @@ let basket = {
 	        //전송 처리 결과가 성공이면    
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    checkItem: function () {
 	        this.reCalc();
@@ -404,6 +408,7 @@ let basket = {
 	    	
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    //콤마찍고 시작
 	    orderInitiator: function(){
@@ -439,13 +444,13 @@ let basket = {
 				},
 				complete : function() {
 					$(".loading").fadeOut();
-					location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+					setTimeout(basket.sendPurchase(ca_mbid,or_number),300);
+					
 			    }
 	    	})
 	    },
-	    orderItems: function(or_number){
+	    orderItems: function(or_number,ca_mbid){
 	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
-	    		var ca_mbid = '${mb_id}' ;
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
 	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
 	        	if (ca_bkcount != 0){
@@ -456,8 +461,10 @@ let basket = {
 					})		
 	        	}
 	        	        		        	
-	           // item.parentElement.parentElement.parentElement.remove();
 	        })
+	    },
+	    sendPurchase: function(ca_mbid,or_number){
+	    	location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
 	    },
 	    delPreOrder: function(){
 	    	var ca_mbid = '${mb_id}' ;
@@ -512,6 +519,11 @@ let basket = {
 		priceComma: function(bk_price){
 			var price = bk_price.toLocaleString('ko-KR');
 			document.write(price + '원');
+	    },
+	    emptyImg: function(){
+	    	if(document.querySelector('.row.data') == null){
+	    		$(".empty").show();
+	    	}
 	    },
 	    //주문번호생성로직
 	    calOrderNum1: function(){
@@ -614,6 +626,14 @@ let basket = {
 	                    </div>
 	                    <div class="split"></div>
 	                </div>
+	                <c:if test = "${empty infoCa_Bean}">
+	                	<div class="row data" >
+	                		<div class="img" style="width:100%; align:center"><img src="${root }imgs/empty_cart.png"></div>
+	                	</div>
+		       		</c:if>
+			        <div class="empty" style=" display : none;">
+	               		<div class="img" style="width:100%; align:center""><img src="${root }imgs/empty_cart.png"></div>
+	                </div>
 	        		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
 		                <div class="row data">
 		                    <div class="subdiv" style="height:165px;">
@@ -625,9 +645,9 @@ let basket = {
 		                        		<div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
 		                        	</c:otherwise>
 		                        </c:choose>
-		                        <div class="img" style="width: 120px; height: 145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" style="width: 120px; height: 145px;"></div>
+		                        <div class="img" style="width: 120px; height: 145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" onclick="location.href='${root }book/BkSelect?bk_number=${str.bk_number}'" style="width: 120px; height: 145px;"></div>
 		                        <div class="pname" style=" position: relative; height: 20px; width:360px; padding-top:20px; padding-left:20px;">
-		                            <p>제목 : ${str.bk_title }</p>
+		                            <p>제목 : <a href='${root }book/BkSelect?bk_number=${str.bk_number}'><b>${str.bk_title}</b></a></p>
 									<p>저자 : ${str.bk_writer }</p>
 						        	<p>출판사 : ${str.bk_publisher }</p>
 						        	<p>재고: ${str.bk_quantity }</p>

@@ -161,6 +161,33 @@ public class Bk_Controller {
 			}
 		
 		}
+	
+	//책 신상품 리스트
+		@GetMapping("/BkDateList")
+		public String BkDateList(Model model) {
+			
+			List<Bk_Number> bkNumList = BkService.getAllBkDateList();
+			
+			List<Bk_Bean> bkListBean2 = new ArrayList<Bk_Bean>();
+			
+			for(int i=0; i<bkNumList.size(); i++) {
+				
+				Bk_Number bk_numbers = bkNumList.get(i);
+				int bk_number = bk_numbers.getBk_number();
+						
+				Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
+				double avg_score = BkService.getBkScore(bk_number);
+						
+				bkInfoBean.setAvg_score(avg_score);
+						
+				bkListBean2.add(i, bkInfoBean);
+			}
+			
+			model.addAttribute("bkListBean2", bkListBean2);
+			
+			return "book/Bk_listNew";
+			
+		}
 		
 	// 책 상세정보
 	@GetMapping("/BkSelect")

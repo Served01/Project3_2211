@@ -6,11 +6,20 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Or_Bean;
 import ezen.store.beans.Or_items;
 
 public interface Or_Mapper {
 	
+		//모든 주문 list 출력
+		@Select("select * from order_info")
+		List<Or_Bean> OrAllList();
+		
+		//주문 list 개수 출력
+		@Select("select count(*) from order_info\r\n")
+		int getOrAllCount();
+		
 		//주문 list 출력
 		@Select("select *\r\n"
 			+ "    from order_info\r\n"
@@ -102,4 +111,18 @@ public interface Or_Mapper {
 		@Update("update book_info set bk_quantity = #{bk_quantity}\r\n"
 				+ "		where bk_number in #{bk_number}")
 		void UpdateBkQuantity(Or_Bean updateBkBean);
+		
+		//베스트셀러
+		@Select("select bk_number,count(bk_number) as count from order_items group by bk_number order by count")
+		List<Or_Bean> Orbest();
+		
+		//해당 책에 있는 리뷰 평점을 추출하여 가져와 평균을 냅니다.
+		@Select("select nvl(avg(rv_score), 0) as avg_score from Review_info where bk_number = #{bk_number}")
+		double getBkScore(int bk_number);
+		
+		//책 정보를 추출하여 가져옵니다.
+				@Select("select bk_number, bk_title, bk_writer, bk_publisher, to_char(bk_pubdate, 'YYYY-MM-DD') as bk_pubdate, bk_image, bk_local, bk_genre, bk_infodate,"
+						+ " bk_detail, bk_quantity, bk_price, bk_title_upper, bk_deleted from Book_info where bk_number = #{bk_number}")
+				Bk_Bean getBkInfo(int bk_number);
+		
 }

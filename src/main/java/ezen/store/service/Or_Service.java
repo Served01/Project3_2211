@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Or_Bean;
 import ezen.store.beans.Or_items;
 import ezen.store.beans.PageCountBean;
@@ -25,6 +26,16 @@ public class Or_Service {
 	@Value("${page.orpagButtonCnt}")
 	private int page_pageButtonCnt;
 	
+	public PageCountBean getOrAllCount(int currentPage) {
+		
+		int content_cnt = or_DAO.getOrAllCount();
+		
+		PageCountBean pageCountBean = new PageCountBean(content_cnt, currentPage, page_listcnt, page_pageButtonCnt);
+		
+		return pageCountBean;
+		
+	}
+
 	public PageCountBean getOrCount(String mb_id, int currentPage) {
 		
 		int content_cnt = or_DAO.getOrCount(mb_id);
@@ -44,7 +55,11 @@ public class Or_Service {
 		return pageCountBean;
 		
 	}
-	
+		
+		//모든 주문 목록 select
+			public	List<Or_Bean> OrAllList() {
+				return or_DAO.OrAllList();
+			}
 	
 		//주문 목록 select
 		public	List<Or_Bean> OrList(String mb_id) {
@@ -59,7 +74,7 @@ public class Or_Service {
 			return or_DAO.getOrInfo(mb_id, or_number);
 		}
 		
-		//주문 item select
+		//주문 items select
 		public	List<Or_Bean> OrSelect(String or_number) {
 			return or_DAO.OrSelect(or_number);
 		}
@@ -108,5 +123,18 @@ public class Or_Service {
 		public Or_Bean DvSelect(String mb_id, String dv_pk) {
 			return or_DAO.DvSelect(mb_id, dv_pk);
 		}
+		//베스트셀러
+		public List<Or_Bean> Orbest(){
+			return or_DAO.Orbest();
+		}
 	
+		//해당 책 평균 평점
+		public double getBkScore(int bk_number) { 
+				  
+			return or_DAO.getBkScore(bk_number); 
+			
+		}
+		public Bk_Bean getBkInfo(int bk_number) {
+			return or_DAO.getBkInfo(bk_number);
+		}
 }

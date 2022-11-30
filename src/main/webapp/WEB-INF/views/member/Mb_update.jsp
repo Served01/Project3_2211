@@ -109,8 +109,7 @@
 							</div>
 							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_pw"></form:label>
-								<form:input type="hidden" path="mb_pw" class="form-control"
-									readonly="true" />
+								<form:hidden path="mb_pw" class="form-control"/>
 							</div>
 							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<div class="text-right">
