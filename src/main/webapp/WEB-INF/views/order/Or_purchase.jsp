@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:url var='root' value='/'/>  
 <!DOCTYPE html>
 <html>
@@ -13,11 +14,15 @@
 <title>구매 화면</title>
 </head>
 
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- 검색 api -->
 <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 <script>
 
 function check(n, count) {
@@ -36,6 +41,11 @@ function check(n, count) {
     }
 }
 
+</script>
+<script>
+var $jQ = jQuery.noConflict();
+
+$jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); }); 
 </script>
 <body bgcolor="WHITE">  
 <c:import url="/Main/header"></c:import>
@@ -56,17 +66,17 @@ function check(n, count) {
  					<td align="center">구매 가격</td>
  				</tr>
  			<c:set var = "sumprice" value = "0" />
-	 		<c:forEach var="caBean" items="${infoCaBean }">
-	 		<c:set var = "bksum" value = "${caBean.bk_price * caBean.ca_bkcount }" />
+	 		<c:forEach var="oriBean" items="${OrSelect }">
+	 		<c:set var = "bksum" value = "${oriBean.bk_price * oriBean.ori_bkcount }" />
 	 		
 				<tr>
-					<td align="center" width="50"><img src="${pageContext.request.contextPath}/upload/${caBean.bk_image}" style="width:120px; height:145px;"></td>			
-				    <td align="center" width="300"><a href="${root}book/Bk_select?bk_number=${caBean.bk_number }">${caBean.bk_title }</a></td>
-					<td align="center" width="100">${caBean.bk_price }원</td>				    
+					<td align="center" width="50"><img src="${pageContext.request.contextPath}/upload/${oriBean.bk_image}" style="width:120px; height:145px;"></td>			
+				    <td align="center" width="300"><a href="${root}book/Bk_select?bk_number=${caBean.bk_number }">${oriBean.bk_title }</a></td>
+					<td align="center" width="100"><fmt:formatNumber value="${oriBean.bk_price }" pattern="#,###"/>원</td>				    
 					<td align="center" width="150">${caBean.ca_bkcount }개</td>
-				    <td align="center" width="150">${bksum }원</td>
+				    <td align="center" width="150"><fmt:formatNumber value="${bksum }" pattern="#,###"/>원</td>
 				</tr>
-	 		<c:set var= "sumprice" value="${sumprice + caBean.bk_price}"/>
+	 		<c:set var= "sumprice" value="${sumprice + oriBean.bk_price}"/>
 	 		</c:forEach>
 	 		
 	 		<tr>
@@ -85,31 +95,19 @@ function check(n, count) {
 				</c:choose>
 			</tr>
 			<tr>
-				<td colspan="5" align="right">합계금액: ${sumprice }원
+				<td colspan="5" align="right">합계금액: <fmt:formatNumber value="${sumprice }" pattern="#,###"/>원
 	 		</tr>
 	 		
 		</table>
 		</div>
 		</div>
 		
-	
-	
-
-		
-
-		
 	<form:form action="${root }order/Or_purchasePro" method="post" modelAttribute="updateOrPurchase">
 		 
 		<form:hidden path="mb_id"/>
    		<form:hidden path="or_number"/>
    		
-   		
-   		<%-- <c:forEach var="mbBean" items="${infoMbBean }" varStatus="mbstatus">
-   		
-		<form:hidden path="mb_name" name="mb_name" value="${mbBean.mb_name }"/>
-		<form:hidden path="mb_tel" name="mb_tel" value="${mbBean.mb_tel }"/>
-		</c:forEach> --%>
-		<table border="1" width="600" cellspacing="0" cellpadding="3"  align="center">
+		<table border="1" align="center" style="width:600; cellspacing:0; cellpadding:3;">
 		<tr>
 		<td align="center" colspan="2">구매자 정보
 		</td>
@@ -141,7 +139,7 @@ function check(n, count) {
 					</c:otherwise>
 				</c:choose>
 	<br>
-		 <table width="600" border="1" cellspacing="0" cellpadding="3"  align="center">
+		 <table border="1" style="width:600; cellspacing:0; cellpadding:3;" align="center">
 		 <tr>
 		 <td align="center" colspan="2">받는 사람 정보</td>
 		 </tr>
@@ -159,14 +157,14 @@ function check(n, count) {
      <tr>
       	<td  width="200">성명</td> 
        	<td  width="400"> 
-       	<form:input id="dv_name" name="dv_name" path="dv_name" class="form-control" width="400"/>
+       	<form:input id="dv_name" name="dv_name" path="dv_name" class="form-control" width="400" required="required"/>
 		<form:errors path="dv_name" style="color:red"/>
 		</td>
 	 </tr> 
      <tr>  
         <td  width="200">전화번호</td> 
         <td  width="400">
-        <form:input id="dv_tel" name="dv_tel" path="dv_tel" class="form-control" width="400"/>
+        <form:input id="dv_tel" name="dv_tel" path="dv_tel" class="form-control" width="400" required="required"/>
 		<form:errors path="dv_tel" style="color:red"/>
 		</td> 
 	 </tr> 
@@ -174,10 +172,10 @@ function check(n, count) {
         <td  width="200">주소</td> 
         <td  width="400">
         <div class="input-group">
-        <form:input id="dv_address" name="dv_address" path="dv_address" class="form-control postcodify_address" width="400"/>
+        <form:input id="dv_address" name="dv_address" path="dv_address" class="form-control postcodify_address" width="400" required="required"/>
 		<form:errors path="dv_address" style="color:red"/>
 		<div class="input-group-append">
-		<button type='button' class="btn btn-dark"  id="postcodify_search_button">검색</button>
+		<button type='button' class="btn btn-dark" id="postcodify_search_button" style="height:38px">검색</button>
 		</div>
 		</div> 
 		</td>

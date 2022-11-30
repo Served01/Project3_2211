@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>     
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <c:url var='root' value='/'/>  
 <!DOCTYPE html>
 <html>
@@ -65,7 +66,7 @@
 		</tr>
 		<tr>
 			<td>배송비</td>
-	        <td>${orBean.or_deliveryCost }</td>
+	        <td><fmt:formatNumber value="${orBean.or_deliveryCost }" pattern="#,###"/>원</td>
 		</tr>
 		<tr>
 			<td>받는 사람</td>
@@ -119,7 +120,7 @@
     	</tr>
 		<tr>
     		<td>책 가격</td>
-	        <td>${oriBean.bk_price }원</td>
+	        <td><fmt:formatNumber value="${oriBean.bk_price }" pattern="#,###"/>원</td>
     	</tr>
 		<tr>
     		<td>할인율</td>
@@ -127,12 +128,12 @@
     	</tr>
 		<tr>
     		<td>구매 개수</td>
-	    	<td>${oriBean.ori_bkcount }</td>
+	    	<td>${oriBean.ori_bkcount }개</td>
     	</tr>
     	<tr>
     		<td>구매 가격</td>
     		<c:set var= "sumprice" value="${oriBean.bk_price * oriBean.ori_bkcount}"/>
-	    	<td>${sumprice }원</td>
+	    	<td><fmt:formatNumber value="${sumprice }" pattern="#,###"/>원</td>
     	</tr>
     	
     </table>

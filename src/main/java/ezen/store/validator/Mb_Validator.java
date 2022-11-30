@@ -11,56 +11,73 @@ public class Mb_Validator implements Validator {
 	public boolean supports(Class<?> clazz) {
 
 		return Mb_Bean.class.isAssignableFrom(clazz);
+		
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
+		
 		Mb_Bean mbBean = (Mb_Bean) target;
 
 		String beanName = errors.getObjectName();
+		
+	
 
-			// 로그인시에 체크하므로 loginMbBean이므로 아래 내용을 실행하지 않고 통과합니다.
-			if (beanName.equals("insertMbBean")) {
+		// 로그인시에 체크하므로 loginMbBean이므로 아래 내용을 실행하지 않고 통과합니다.
+		if (beanName.equals("insertMbBean")) {
 
-				// 회원가입시 패스워드 체크에 사용하는 부분
-				if (mbBean.getMb_pw().equals(mbBean.getMb_pw2()) == false) {
-					errors.rejectValue("mb_pw", "NotEquals");
-					errors.rejectValue("mb_pw2", "NotEquals");
-				}
-			}
-			// 정보 수정시에 패스워드 체크에 사용하는 부분
-			if (beanName.equals("updateMbBean")){
-
-				// 정보 수정시에 패스워드 체크에 사용하는 부분
-			    if (mbBean.getMb_pw().equals(mbBean.getMb_pw2()) == false) {
-			    	errors.rejectValue("mb_pw", "NotEquals");
-			    	errors.rejectValue("mb_pw2", "NotEquals");
-			    }
-			    // 회원정보 수정시 패스워드 체크에 사용한 부분
-			    if (mbBean.getMb_pw3().equals(mbBean.getMb_pw4()) == false) {
-			    	errors.rejectValue("mb_pw3", "NotEquals");
-			    	errors.rejectValue("mb_pw4", "NotEquals");
-			    }
-			}
+			// 회원가입시 패스워드 체크에 사용하는 부분
+			if (mbBean.isMbPw12()== false) {
 				
-			//삭제시
-			if (beanName.equals("deleteMbBean")){
-				
-				if (mbBean.getMb_pw().equals(mbBean.getMb_pw2()) == false) {
-					errors.rejectValue("mb_pw", "NotEquals");
-					errors.rejectValue("mb_pw2", "NotEquals");
-				}
-				
+				errors.rejectValue("mb_pw", "NotEquals");
+				errors.rejectValue("mb_pw2", "NotEquals");
 			}
 			
-			// 아이디 입력시 중복 체크
-			if (beanName.equals("insertMbBean")) {
-				if (mbBean.isMbIdExist() == false) {
-					errors.rejectValue("mb_id", "DontCheckUserIdExist");
+		}
+		
+		// 정보 수정시에 패스워드 체크에 사용하는 부분
+		if (beanName.equals("updateMbBean")){
+
+			// 정보 수정시에 패스워드 체크에 사용하는 부분
+			if (mbBean.isMbPw12()== false) {
+				
+				errors.rejectValue("mb_pw", "NotEquals");
+			    errors.rejectValue("mb_pw2", "NotEquals");
+			   
 			}
-		 }
-      }
-   }
+			    
+			// 회원정보 수정시 패스워드 체크에 사용한 부분
+			if (mbBean.isMbPw34()==false) {
+				
+			    errors.rejectValue("mb_pw3", "NotEquals");
+			    errors.rejectValue("mb_pw4", "NotEquals");
+			    
+			}
+			
+		}
+				
+		//삭제시
+		if (beanName.equals("deleteMbBean")){
+				
+			if (mbBean.isMbPw12()== false) {
+				
+				errors.rejectValue("mb_pw", "NotEquals");
+				errors.rejectValue("mb_pw2", "NotEquals");
+				
+			}
+				
+		}
+			
+		// 아이디 입력시 중복 체크
+		if (beanName.equals("insertMbBean")) {
+			if (mbBean.isMbIdExist() == false) {
+				errors.rejectValue("mb_id", "DontCheckUserIdExist");
+			}
+		}
+      
+	}
+   
+}
 
 /*
  * ValidatorCustermarizing ----------------------------------- - Validator 1)

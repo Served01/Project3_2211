@@ -90,7 +90,7 @@ let basket = {
 			String todayString = formatTime.format(today); %>
 			
 			//로그인 아이디 받아와야됨
-			var ca_mbid = 'admin';
+			var ca_mbid = '${mb_id}';
 			var ca_bkcount = $("#amount").val();
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
@@ -108,7 +108,10 @@ let basket = {
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
+	    orderCreate: function(or_number,ca_bknumbers,ca_bkcount){
+	    	
+	    	var ca_mbid = '${mb_id}';
+	    	
 	    	$.ajax({
 				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
@@ -121,9 +124,9 @@ let basket = {
 			    }
 	    	})
 	    },
-	    orderItem: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
+	    orderItem: function(or_number,ca_bknumbers,ca_bkcount){
 	    	
-	        	
+	        	var ca_mbid='${mb_id}';
 	        	if (ca_bkcount != 0){
 	        		$.ajax({
 						url: '${root}cart/cart_insertOderItem/'+ or_number +'/'+ ca_bknumbers + '/' + ca_mbid + '/' + ca_bkcount,
@@ -154,14 +157,16 @@ let basket = {
 			return orderNumExist;
 	    },
 
-	    delPreOrder: function(ca_mbid){
+	    delPreOrder: function(){
+	    	var ca_mbid='${mb_id}';
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
 				dataType: 'text'
 			})
 	    },
-	    delPreOrderItems: function(ca_mbid){
+	    delPreOrderItems: function(){
+	    	var ca_mbid='${mb_id}';
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
 				type: 'get',
@@ -223,12 +228,8 @@ let basket = {
 };
 let wish = {
 	switchWishHeart : function(bk_number) {
-		//alert("헤이!");
-		//alert(a_memberNo);
-		
-		var mb_id = 'admin';
-		
-		
+
+		var mb_id = '${mb_id}';
 		var imgsrc = $("#wish").attr("src");
 		
 		var culsrc = imgsrc.split('-');
@@ -264,10 +265,8 @@ let wish = {
 		
 	},
 	checkWishHeart : function(bk_number){
-		
-		var mb_id = 'admin';
-		
-		
+
+		var mb_id = '${mb_id}';
 		$.ajax({
 			url : "${root}wish/wish_checkWishHeart/" + mb_id + "/" + bk_number,
 			type : "GET",
@@ -286,10 +285,8 @@ let wish = {
 		});
 	}
 };
-function addcart(ca_mbid,ca_bknumbers){
-	
-	//var ca_mbid = $("#ca_mbid").val()
-	//var ca_bknumbers = $("#ca_bknumbers").val()
+function addcart(ca_bknumbers){
+	var ca_mbid = '${mb_id}';
 	
 	$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
@@ -336,11 +333,12 @@ function delBook(bk_number){
 		</div>
 	</div>
 	
+	<div style="padding-left:400px;">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
 				<img style="width: 320px; height: 360px; padding-right: 0px; margin-right: 0px;" src="${root }upload/${ReadBkBean.bk_image}"/>
-				<div style="left: 75px; width: 150px; top: 10px;" class="input-group">
+				<div style="left: 0px; width: 320px; top: 10px; padding-left: 105px;" class="input-group">
 				<c:if test="${ReadScore != 0}">
 					<c:set var = "string1" value = "${ReadScore}"/>
       				<c:set var = "string2" value = "${fn:substring(ReadScore, 0, 3)}" />
@@ -367,39 +365,51 @@ function delBook(bk_number){
 				<!--  /like button  -->
 				</div>
 				</div>
-				<p>${ReadBkBean.bk_detail }
-				<p><b>저자</b> : ${ReadBkBean.bk_writer }
-				<p><b>출판사</b> : ${ReadBkBean.bk_publisher }
-				<p><b>출간일</b> : ${ReadBkBean.bk_pubdate }
-				<p><b>지역</b> : ${ReadBkBean.bk_local }
-				<p><b>장르</b> : ${ReadBkBean.bk_genre }
-				<p><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
+				<p style="text-align:left;">${ReadBkBean.bk_detail }
+				<p style="text-align:left;"><b>저자</b> : ${ReadBkBean.bk_writer }
+				<p style="text-align:left;"><b>출판사</b> : ${ReadBkBean.bk_publisher }
+				<p style="text-align:left;"><b>출간일</b> : ${ReadBkBean.bk_pubdate }
+				<p style="text-align:left;"><b>지역</b> : ${ReadBkBean.bk_local }
+				<p style="text-align:left;"><b>장르</b> : ${ReadBkBean.bk_genre }
+				<p style="text-align:left;"><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
 				<form name="form" method="get">
+				<div class="input-group" style="text-align:left; width:300px;">
 				<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">
 				<input type="text" id="amount" name="amount" value="1" size="3" onchange="change();"> 
 				<input type="button" value=" + " onclick="add();" style="width:35px;">
 				<input type="button" value=" - " onclick="del();" style="width:35px;"><br>
 				<input type="hidden" name="sum" size="11" readonly>
+				</div>
 				<p>
 				<div class="input-group"><b>금액</b>&nbsp;:&nbsp;<span class="input-group-append" id="my_sum">원</span><b>원</b></div>
+				<p>
 				</form>
+				<div class="input-group-append">
 				<p>
 				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
-				<input class="btn btn-info" type="button" onclick="javascript:addcart('admin',${ReadBkBean.bk_number})" value="장바구니">
-				<a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
-				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a>	
+				<input class="btn btn-info" type="button" onclick="javascript:addcart(${ReadBkBean.bk_number})" value="장바구니"></p>
+				<c:if test="${mb_id=='admin'}">
+				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a>
+				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a></p>
+				</c:if>
+				</div>	
 			</div>
 		</div>
 		<hr>
 	</div>
+	</div>
 	
-	<c:import url="/Review/RvInsert">
-	</c:import>
-	
+	<c:if test="${mb_id!='0'}">
+		<c:import url="/Review/RvInsert">
+		</c:import>
+	</c:if>
+	<br><br><br><br><br>
 	<c:import url="/Review/RvList">
 	</c:import>
+	
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
 	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
+	<br><br>
 	<c:import url="/Main/footer"></c:import>
 </body>
 </html>

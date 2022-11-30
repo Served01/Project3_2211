@@ -250,7 +250,7 @@ let basket = {
 	    delCheckedItem: function(){
 	        document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
-	        	var ca_mbid = 'admin';
+	        	var ca_mbid = '${mb_id}' ;
 	        	$.ajax({
 					url: '${root}cart/cart_delete/'+ ca_mbid +'/'+ ca_bknumbers,
 					type: 'get',
@@ -264,16 +264,17 @@ let basket = {
 	        alert('삭제되었습니다.')
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    //장바구니 전체 비우기
 	    delAllItem: function(){
-	    	
+	    	var ca_mbid = '${mb_id}' ;
 	        document.querySelectorAll('.row.data').forEach(function (item) {
 	            item.remove();
 	          });
 	          //AJAX 서버 업데이트 전송
 	        // var ca_bknumbers = ca_bknumbers; id값 받아야함
-	        var ca_mbid = 'admin';
+	      
 	        $.ajax({
 				url: '${root}cart/cart_deleteAll/' + ca_mbid,
 				type: 'get',
@@ -289,6 +290,7 @@ let basket = {
 	          this.totalPrice = 0;
 	          this.reCalc();
 	          this.updateUI();
+	          this.emptyImg();
 	    },
 	    //재계산
 	    reCalc: function(){
@@ -310,11 +312,11 @@ let basket = {
 	    },
 	    //개별 수량 변경
 	    changePNum: function (pos,ca_bknumbers,bk_quantity) {
+	    	var ca_mbid = '${mb_id}' ;
 	        var item = document.querySelector('input[name=p_num'+pos+']');
 	        var p_num = parseInt(item.getAttribute('value'));
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
-	        
-	        var ca_mbid = 'admin';
+
 	        
 	        if (parseInt(newval) < 1 || parseInt(newval) > bk_quantity) { return false; }
 	        
@@ -344,17 +346,17 @@ let basket = {
 	        //전송 처리 결과가 성공이면    
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    changeKeyupPNum: function (pos,ca_bknumbers,bk_quantity) {
+	    	
+	    	var ca_mbid = '${mb_id}' ;
 	    	
 	        var item = document.querySelector('input[name=p_num'+pos+']');
 	        
 	        var p_num = parseInt(item.getAttribute('value'));
 	        
-	        
 	        var newval = event.target.classList.contains('up') ? p_num+1 : event.target.classList.contains('down') ? p_num-1 : event.target.value;
-	        
-	        var ca_mbid = 'admin';
 	        
 	        if (newval < 1 || newval > bk_quantity) { 
 	        	alert("재고가 부족합니다.");
@@ -381,6 +383,7 @@ let basket = {
 	        //전송 처리 결과가 성공이면    
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    checkItem: function () {
 	        this.reCalc();
@@ -389,8 +392,9 @@ let basket = {
 	    delItem: function (ca_bknumbers) {
 	        event.target.parentElement.parentElement.parentElement.remove();
 	        var ca_bknumbers = ca_bknumbers;
-	        var ca_mbid = 'admin';
 			
+	        var ca_mbid = '${mb_id}' ;
+	        
 	        $.ajax({
 				url: '${root}cart/cart_delete/' + ca_mbid +'/'+ ca_bknumbers,
 				type: 'get',
@@ -404,18 +408,16 @@ let basket = {
 	    	
 	        this.reCalc();
 	        this.updateUI();
+	        this.emptyImg();
 	    },
 	    //콤마찍고 시작
 	    orderInitiator: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	<%java.util.Date today = new java.util.Date();
 			SimpleDateFormat formatTime = new SimpleDateFormat("yyMMM", Locale.ENGLISH);
 			String todayString = formatTime.format(today); %>
 			
 			$(".loading").fadeIn();
-			
-			var ca_mbid = 'admin';
-			
-				
 					
 			var or_number1 = this.calOrderNum1();
 			var or_number2 = this.calOrderNum2();
@@ -431,7 +433,8 @@ let basket = {
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number,ca_mbid){
+	    orderCreate: function(or_number){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_createOderInfo/' + or_number +'/'+ ca_mbid,
 				type: 'get',
@@ -441,7 +444,8 @@ let basket = {
 				},
 				complete : function() {
 					$(".loading").fadeOut();
-					location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+					setTimeout(basket.sendPurchase(ca_mbid,or_number),300);
+					
 			    }
 	    	})
 	    },
@@ -457,17 +461,21 @@ let basket = {
 					})		
 	        	}
 	        	        		        	
-	           // item.parentElement.parentElement.parentElement.remove();
 	        })
 	    },
-	    delPreOrder: function(ca_mbid){
+	    sendPurchase: function(ca_mbid,or_number){
+	    	location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+	    },
+	    delPreOrder: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
 				dataType: 'text'
 			})
 	    },
-	    delPreOrderItems: function(ca_mbid){
+	    delPreOrderItems: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrderItems/' + ca_mbid,
 				type: 'get',
@@ -500,7 +508,8 @@ let basket = {
 			return orderNumExist;
 	    },
 	   
-	    delPreOrder: function(ca_mbid){
+	    delPreOrder: function(){
+	    	var ca_mbid = '${mb_id}' ;
 	    	$.ajax({
 				url: '${root}cart/cart_delPreOrder/' + ca_mbid,
 				type: 'get',
@@ -510,6 +519,11 @@ let basket = {
 		priceComma: function(bk_price){
 			var price = bk_price.toLocaleString('ko-KR');
 			document.write(price + '원');
+	    },
+	    emptyImg: function(){
+	    	if(document.querySelector('.row.data') == null){
+	    		$(".empty").show();
+	    	}
 	    },
 	    //주문번호생성로직
 	    calOrderNum1: function(){
@@ -583,7 +597,7 @@ let basket = {
 	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">
-<c:import url="/Main/header"></c:import>	
+<c:import url="/Main/header"></c:import>
 	<br>
 	<h1 style="text-align:center;">장바구니</h1>
 	<p>
@@ -612,20 +626,28 @@ let basket = {
 	                    </div>
 	                    <div class="split"></div>
 	                </div>
+	                <c:if test = "${empty infoCa_Bean}">
+	                	<div class="row data" >
+	                		<div class="img" style="width:100%; align:center"><img src="${root }imgs/empty_cart.png"></div>
+	                	</div>
+		       		</c:if>
+			        <div class="empty" style=" display : none;">
+	               		<div class="img" style="width:100%; align:center""><img src="${root }imgs/empty_cart.png"></div>
+	                </div>
 	        		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
 		                <div class="row data">
 		                    <div class="subdiv" style="height:165px;">
 		                    	<c:choose>
 		                    		<c:when test="${str.bk_quantity != 0}">
-				                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked="" onclick="javascript:basket.checkItem();">&nbsp;</div>
+				                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
 		                        	</c:when>
 		                        	<c:otherwise>
 		                        		<div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
 		                        	</c:otherwise>
 		                        </c:choose>
-		                        <div class="img" style="width: 120px; height: 145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" style="width: 120px; height: 145px;"></div>
+		                        <div class="img" style="width: 120px; height: 145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" onclick="location.href='${root }book/BkSelect?bk_number=${str.bk_number}'" style="width: 120px; height: 145px;"></div>
 		                        <div class="pname" style=" position: relative; height: 20px; width:360px; padding-top:20px; padding-left:20px;">
-		                            <p>제목 : ${str.bk_title }</p>
+		                            <p>제목 : <a href='${root }book/BkSelect?bk_number=${str.bk_number}'><b>${str.bk_title}</b></a></p>
 									<p>저자 : ${str.bk_writer }</p>
 						        	<p>출판사 : ${str.bk_publisher }</p>
 						        	<p>재고: ${str.bk_quantity }</p>
@@ -654,7 +676,7 @@ let basket = {
 		                        		</div>
 				                        <div class="num">
 				                            <div class="updown">
-				                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4></input>
+				                                <input type="hidden" name="p_num${status.count}" id="p_num${status.count},${str.bk_number }" size="5" maxlength="2" class="p_num" value="0" readonly ><h4 style="margin-top: 16px;margin-bottom: 16px;color : red;">재고가없습니다</h4>
 				                            </div>
 				                        </div>
 				                        <div class="sum">0원</div>
@@ -668,7 +690,7 @@ let basket = {
 	        		</c:forEach>
 	            </div>
 	            <div class="right-align basketrowcmd">
-	            	<a href="${root}wish/wish_info?wi_mbid=admin&page=1" class="abutton" >찜목록보기</a>
+	            	<a href="${root}wish/wish_info?page=1" class="abutton" >찜목록보기</a>
 	                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delCheckedItem();">선택상품삭제</a>
 	                <a href="javascript:void(0)" class="abutton" onclick="javascript:basket.delAllItem();">장바구니비우기</a>
 	            </div>
@@ -682,8 +704,8 @@ let basket = {
 	                    <a href="javascript:void(0)" onclick="javascript:basket.orderInitiator();">선택한 상품 주문</a>
 	                </div>
 	            </div>
-           	</div>
         </form>
-<c:import url="/Main/footer"></c:import>		
+     </div>
+<c:import url="/Main/footer"></c:import>	
 </body>
 </html>

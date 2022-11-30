@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@900&display=swap" rel="stylesheet">
 <style>
+<style>
 body{
   text-align:center;
   
@@ -31,14 +32,13 @@ border: 1px solid #F3E8EB;
  
   
   
-  
 </style>
 </head>
 <body>
 
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto" id="adad" style="top:50px;">
-			<a href="#" onclick="location.href='index'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+			<a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
 					Ezen Book Store
 				</a> <br>
 			<h4 class="mb-3"style="font-family: 'Noto Sans KR', sans-serif;">회원목록 보기화면(관리자)</h4>
@@ -50,12 +50,13 @@ border: 1px solid #F3E8EB;
 					<td id=title>연락처</td>
 					<td id=title style="width:100px;">가입날짜</td>
 					<td id=title>탈퇴여부</td>
-					<td id=title>탈퇴날짜</td>
+					<td id=title style="width:150px;">탈퇴날짜</td>
 				</tr>
 				<tbody>
-					<c:forEach var="m" items="${memberlist }">
+					<c:forEach var="m" items="${memberlist }" varStatus="status">
+					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 						<tr>
-							<td><a href='${root }member/Mbselect?mb_id=${m.mb_id}'>${m.mb_id }</a></td>
+							<td><a href='${root }member/Mbselect?mb_id2=${m.mb_id}'>${m.mb_id }</a></td>
 							<td>${m.mb_name }</td>
 							<td>${m.mb_email }</td>
 							<td>${m.mb_tel }</td>
@@ -63,6 +64,7 @@ border: 1px solid #F3E8EB;
 							<td>${m.mb_deleted }</td>
 							<td>${m.mb_deleted_date }</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -92,7 +94,7 @@ border: 1px solid #F3E8EB;
 			
 			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:20px;">
 			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a> <a
-				href="${root }index" class="btn btn-dark">메인</a>
+				href="${root }Main/center" class="btn btn-dark">메인</a>
 		</div>
 	</div></div>
 	

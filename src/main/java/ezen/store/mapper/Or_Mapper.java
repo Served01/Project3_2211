@@ -6,46 +6,40 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Or_Bean;
 import ezen.store.beans.Or_items;
 
 public interface Or_Mapper {
 	
-		//주문 목록 list 출력
+		//모든 주문 list 출력
+		@Select("select * from order_info where not or_status = '0'")
+		List<Or_Bean> OrAllList();
+		
+		//주문 list 개수 출력
+		@Select("select count(*) from order_info where not or_status = '0'")
+		int getOrAllCount();
+		
+		//주문 list 출력
 		@Select("select *\r\n"
 			+ "    from order_info\r\n"
 			+ "    where mb_id in (select mb_id\r\n"
 			+ "                        from Member_info\r\n"
 			+ "                        where mb_id = #{mb_id})"
+			+ "		and not or_status = '0'"
 			+ "		order by or_date")
 		List<Or_Bean> OrList(String mb_id);
 		
-		//주문 목록 개수
+		//주문 list 개수 출력
 		@Select("select count(*)\r\n"
 				+ "    from order_info\r\n"
 				+ "    where mb_id in (select mb_id\r\n"
 				+ "                        from Member_info\r\n"
-				+ "                        where mb_id = #{mb_id})")
+				+ "                        where mb_id = #{mb_id})"
+				+ "		and not or_status = '0'")
 		int getOrCount(String mb_id);
 		
-		
-		
-//	@Insert("insert into Order_info(or_number, or_mbid, or_bknumber, or_bkprice, "
-//			+ "or_cacount, or_status, or_date, or_delivery, or_address)"
-//			+ "values(user_seq.nextval, #{or_mbid}, #{or_bknumber}, #{or_bkprice}, "
-//			+ "#{or_cacount}, #{or_status}, #{or_date}, #{or_delivery}, #{or_address})")
-//		void Or_insert(String ca_mbid, int ca_bknumbers);
-	/*
-	@Insert("insert into Order_info(or_number, or_mbid, or_bknumber, or_bkprice, "
-			+ "or_cacount, or_status, or_date, or_delivery, or_address)"
-			+ "values(user_seq.nextval, #{or_mbid}, #{or_bknumber}, #{or_bkprice}, "
-			+ "#{or_cacount}, #{or_status}, #{or_date}, #{or_delivery}, #{or_address})")
-		void Or_insert(Or_Bean addOrderDataBean);
-		*/
-//	@Select("select * from Order_info\r\n"
-//			+ "where or_number = #{or_number}")
-		
-		//주문 상세 정보 출력
+		//주문 상세 정보 select
 		@Select("select *\r\n"
 				+ "    from order_info\r\n"
 				+ "    where mb_id in (select mb_id\r\n"
@@ -54,25 +48,19 @@ public interface Or_Mapper {
 				+ "		and or_number = #{or_number}")
 		List<Or_Bean> getOrInfo (@Param("mb_id") String mb_id, @Param("or_number") String or_number);
 		
+		//주문 items select
 		@Select("select or_number, bk_title, bk_image, bk_number, bk_price, ori_bkdiscount, ori_bkcount\r\n"
 				+ "    from order_items natural join book_info\r\n"
 				+ "    where or_number in (select or_number from Order_info where or_number = #{or_number})")
 		List<Or_Bean> OrSelect(String or_number);
 		
-		//주문 상세 item 개수
+		//주문 상세 items 개수 출력
 		@Select("select count(*)\r\n"
 				+ "		from order_items\r\n"
 				+ "    where or_number = #{or_number}")
 		int getOrItemCount(String or_number);
 		
-//		@Select("select or.or_number, or.or_mbid, or.or_mbname, or.or_mbtel, or.or_status, or.or_date, or.or_delivery, or.or_deliveryCost, or.or_dvname, or.or_dvtel, or.or_dvaddress,\r\n"
-//				+ "	 	ori.ori_bknumber, ori.ori_bkprice, ori.ori_bkdiscount, ori.ori_bkcount"
-//				+ "		from order_info or, order_items ori\r\n"
-//				+ "		where or.or_mbid = #{or_mbid}"
-//				+ "		and or.or_number = #{or_number}"
-//				+ "		and or.or_number = ori.ori_number")
-//		List<Or_Bean> OrSelect(String or_mbid, String or_number);
-		
+		//mb_id 일치하는 회원(주문자)정보 select
 		@Select("select mb_id, dv_nick, dv_name, dv_tel, dv_address"
 				+ "		from delivery_info"
 				+ "		where mb_id = #{mb_id}"
@@ -84,23 +72,14 @@ public interface Or_Mapper {
 				+ "		where mb_id = #{mb_id}\r\n"
 				+ "		and or_number = #{or_number}")
 		void UpdateOrPurchase(Or_Bean updateOrPurchase);
-		//List<Or_Bean> OrUpdatePurchase(@Param("mb_id") String mb_id, @Param("or_number") String or_number);
 		
-		//주문 상황 수정
-//		@Update("update order_info set or_status = #{or_status}\r\n"
-//				+ "		where or_mbid = #{or_mbid}\r\n"
-//				+ "		and or_number = #{or_number}")
-//		List<Or_Bean> OrAfter(@Param("or_mbid") String or_mbid, @Param("or_number") String or_number, @Param("or_status") String or_status);
+		//주문 status 수정(환불 등)
 		@Update("update order_info set or_status = #{or_status}\r\n"
 				+ "		where mb_id = #{mb_id}\r\n"
 				+ "		and or_number = #{or_number}")
 		void OrUpdateAfter(Or_Bean updateOrBean);
 		
-		@Update("update order_info set mb_name = #{mb_name}, mb_tel = #{mb_tel}, or_status = #{or_status}, or_date = #{or_date}, or_delivery = #{or_delivery}, dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}" 
-				+"		where mb_id = #{mb_id}"
-				+"		and or_number = #{or_number}")
-		void UpdateOrInfo(Or_Bean UpdateOrBean);
-		
+		//mb_id 일치하는 주문 결제 완료로 표시하기 위한 select
 		@Select("select or_number, mb_id, mb_name, mb_tel, or_status, or_date, or_delivery, or_deliveryCost, dv_name, dv_tel, dv_address\r\n"
 				+ "    from order_info\r\n"
 				+ "    where mb_id in (select mb_id\r\n"
@@ -109,58 +88,43 @@ public interface Or_Mapper {
 				+ "		and or_number = #{or_number}")
 		Or_Bean UpdateOrBean (@Param("mb_id") String mb_id, @Param("or_number") String or_number);
 		
-		//주문 상황 수정(책 재고)
-//		@Select("select or_number, bk_title, bk_image, bk_number, bk_price, ori_bkdiscount, ori_bkcount\r\n"
-//				+ "    from order_items natural join book_info\r\n"
-//				+ "    where or_number in (select or_number from Order_info where or_number = #{or_number})")
-//		List<Or_Bean> UpdateOriBean(String or_number);
 		
+		//주문 상황 수정(책 재고)
+		//or number 일치하는 items select
 		@Select("select ori.or_number, bk.bk_title, bk.bk_image, ori.bk_number, ori.bk_price, ori.ori_bkdiscount, ori.ori_bkcount\r\n"
 				+ "    from order_items ori, book_info bk\r\n"
 				+ "    where or_number in (select or_number from Order_info where or_number = #{or_number})"
 				+ "		and ori.bk_number = bk.bk_number")
 		List<Or_Bean> UpdateOriBean(String or_number);
 		
-//		@Update("update book_info set bk_title=#{bk_title}, bk_writer=#{bk_writer}, bk_publisher=#{bk_publisher}, bk_pubdate=#{bk_pubdate},\r\n"
-//				+ "		bk_image=#{bk_image, jdbcType=VARCHAR}, bk_local=#{bk_local}, bk_genre=#{bk_genre}, bk_infodate=sysdate, bk_detail=#{bk_detail},\r\n"
-//				+ "		bk_quantity=bk_quantity+#{ori_bkcount}, bk_price=#{bk_price}, bk_title_upper=upper(#{bk_title}), bk_deleted=#{bk_deleted}"
-//				+ "		where bk_number = #{ori_bknumber}")
-		@Update("update book_info set bk_number = #{bk_number}, bk_quantity = (select sum(bk.bk_quantity, ori.ori_bkcount)as bk_quantity\r\n"
-				+ "																from book_info bk, order_items ori\r\n"
-				+ "																where bk.bk_number = ori.bk_number)\r\n"
-				+ "		where bk_number in (select bk_number from Order_items where bk_number = #{bk_number}")
-		void OriUpdateAfter(List<Or_Bean> updateOriBean);
-		
-		
-		
-		//책 재고 수 수정
+		//책 재고 수 수정 select
 		@Select("select bk.bk_number, bk.bk_quantity from book_info bk, order_items ori where bk.bk_number = ori.bk_number and or_number = #{or_number} order by bk.bk_number")
 		List<Or_items> SelectBkQuantity (String or_number);
 		
-		//구매시 재고 수 다운
+		//주문 확정 후 책의 재고수 감소
 		@Select("select bk.bk_number, (bk.bk_quantity - ori.ori_bkcount) as bk_quantity, bk.bk_image from book_info bk, order_items ori where ori.or_number = #{or_number} and bk.bk_number = #{bk_number} and bk.bk_number = ori.bk_number")
 		Or_Bean SelectBkPurchase(@Param("or_number") String or_number, @Param("bk_number") int bk_number);
-		//환불시 재고 수 업
+		
+		//주문 환불 후 책의 재고수 증가
 		@Select("select bk.bk_number, (bk.bk_quantity + ori.ori_bkcount) as bk_quantity from book_info bk, order_items ori where ori.or_number = #{or_number} and bk.bk_number = #{bk_number} and bk.bk_number = ori.bk_number")
 		Or_Bean SelectBkAfter(@Param("or_number") String or_number, @Param("bk_number") int bk_number);
 		
+		//주문 확정/환불 후 책 재고수 update
 		@Update("update book_info set bk_quantity = #{bk_quantity}\r\n"
 				+ "		where bk_number in #{bk_number}")
 		void UpdateBkQuantity(Or_Bean updateBkBean);
 		
-		/*
-	@Select("select user_id, user_name from user_table where user_idx = #{user_idx}")
-		Or_Bean Or_update(int user_idx);
-			
-	@Update("update user_table set user_pw = #{user_pw} where user_idx = #{user_idx}")
-		void modifyUserInfo(Ca_Bean modifyUserDataBean);
-	
-	
-		*/
+		//베스트셀러
+		@Select("select bk_number,count(bk_number) as count from order_items group by bk_number order by count")
+		List<Or_Bean> Orbest();
 		
-	
-	/*
-	@Select("select count(*) from order_info where or_mbid = #{or_mbid}")
-	int getContentCnt(String or_mbid);
-	*/
+		//해당 책에 있는 리뷰 평점을 추출하여 가져와 평균을 냅니다.
+		@Select("select nvl(avg(rv_score), 0) as avg_score from Review_info where bk_number = #{bk_number}")
+		double getBkScore(int bk_number);
+		
+		//책 정보를 추출하여 가져옵니다.
+				@Select("select bk_number, bk_title, bk_writer, bk_publisher, to_char(bk_pubdate, 'YYYY-MM-DD') as bk_pubdate, bk_image, bk_local, bk_genre, bk_infodate,"
+						+ " bk_detail, bk_quantity, bk_price, bk_title_upper, bk_deleted from Book_info where bk_number = #{bk_number}")
+				Bk_Bean getBkInfo(int bk_number);
+		
 }

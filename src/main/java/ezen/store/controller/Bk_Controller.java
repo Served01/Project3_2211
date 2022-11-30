@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Bk_Number;
@@ -49,129 +50,160 @@ public class Bk_Controller {
 	}
 	
 	// 책리스트 검색
-		@GetMapping("/BkList")
-		public String BkList(
-				@RequestParam(value="bk_local", defaultValue="") String bk_local, 
-				@RequestParam(value="bk_genre", defaultValue="") String bk_genre,
-				@RequestParam(value="mb_id", defaultValue="admin") String mb_id,
-				@ModelAttribute("searchBean") Search_Bean searchBean,
-				@RequestParam(value="page", defaultValue="1") int page,
-				Model model, BindingResult result) {
+	@GetMapping("/BkList")
+	public String BkList(
+		@RequestParam(value="bk_local", defaultValue="") String bk_local, 
+		@RequestParam(value="bk_genre", defaultValue="") String bk_genre,
+		@SessionAttribute("mb_id") String mb_id,
+		@ModelAttribute("searchBean") Search_Bean searchBean,
+		@RequestParam(value="page", defaultValue="1") int page,
+		Model model, BindingResult result) {
 			
-			//검색어의 경우
-			if(searchBean.getSearch_word() != null) {
+		//검색어의 경우
+		if(searchBean.getSearch_word() != null) {
 				
-				String search_word = searchBean.getSearch_word();
-				model.addAttribute("mb_id", mb_id);
+			String search_word = searchBean.getSearch_word();
+				
 			
-				List<Bk_Number> bkNumList = BkService.getBkNumList2(search_word);
+			List<Bk_Number> bkNumList = BkService.getBkNumList2(search_word);
 				
-				List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
+			List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
 				
-				for(int i=0; i<bkNumList.size(); i++) {
+			for(int i=0; i<bkNumList.size(); i++) {
 					
+				Bk_Number bk_numbers = bkNumList.get(i);
+				int bk_number = bk_numbers.getBk_number();
+					
+				Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
+				double avg_score = BkService.getBkScore(bk_number);
+					
+				bkInfoBean.setAvg_score(avg_score);
+					
+				bkListBean.add(i, bkInfoBean);
+			}
+				
+			model.addAttribute("bkListBean", bkListBean);
+				
+			PageCountBean pageCountBean = BkService.getContentCnt2(search_word, page);
+				
+			model.addAttribute("pageCountBean", pageCountBean);
+			
+			return "book/Bk_list";
+			
+			//지역별 전체
+		} else {
+					
+			if(bk_genre.equals("전체")) {
+					
+			model.addAttribute("bk_local", bk_local);
+			model.addAttribute("bk_genre", bk_genre);
+					
+					
+			List<Bk_Number> bkNumList = BkService.getAllBkNumList(bk_local, bk_genre);
+					
+			List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
+					
+			for(int i=0; i<bkNumList.size(); i++) {
+						
+				Bk_Number bk_numbers = bkNumList.get(i);
+				int bk_number = bk_numbers.getBk_number();
+						
+				Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
+				double avg_score = BkService.getBkScore(bk_number);
+						
+				bkInfoBean.setAvg_score(avg_score);
+						
+				bkListBean.add(i, bkInfoBean);
+			}
+					
+			model.addAttribute("bkListBean", bkListBean);
+					
+			PageCountBean pageCountBean = BkService.getAllContentCnt(bk_local, bk_genre, page);
+					
+			model.addAttribute("pageCountBean", pageCountBean);
+							
+			return "book/Bk_list";
+			
+			} 
+			//지역, 장르의 경우
+			else {
+				model.addAttribute("bk_local", bk_local);
+				model.addAttribute("bk_genre", bk_genre);
+				
+						
+				List<Bk_Number> bkNumList = BkService.getBkNumList1(bk_local, bk_genre);
+						
+				List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
+						
+				for(int i=0; i<bkNumList.size(); i++) {
+							
 					Bk_Number bk_numbers = bkNumList.get(i);
 					int bk_number = bk_numbers.getBk_number();
-					
+							
 					Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
 					double avg_score = BkService.getBkScore(bk_number);
-					
+							
 					bkInfoBean.setAvg_score(avg_score);
-					
+							
 					bkListBean.add(i, bkInfoBean);
 				}
-				
+						
 				model.addAttribute("bkListBean", bkListBean);
-				
-				PageCountBean pageCountBean = BkService.getContentCnt2(search_word, page);
-				
+						
+				PageCountBean pageCountBean = BkService.getContentCnt1(bk_local, bk_genre, page);
+						
 				model.addAttribute("pageCountBean", pageCountBean);
-			
+						
+						
 				return "book/Bk_list";
-				
-				//지역별 전체
-				} else {
-					
-				if(bk_genre.equals("전체")) {
-					
-					model.addAttribute("bk_local", bk_local);
-					model.addAttribute("bk_genre", bk_genre);
-					model.addAttribute("mb_id", mb_id);
-					
-					List<Bk_Number> bkNumList = BkService.getAllBkNumList(bk_local, bk_genre);
-					
-					List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
-					
-					for(int i=0; i<bkNumList.size(); i++) {
-						
-						Bk_Number bk_numbers = bkNumList.get(i);
-						int bk_number = bk_numbers.getBk_number();
-						
-						Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
-						double avg_score = BkService.getBkScore(bk_number);
-						
-						bkInfoBean.setAvg_score(avg_score);
-						
-						bkListBean.add(i, bkInfoBean);
-					}
-					
-					model.addAttribute("bkListBean", bkListBean);
-					
-					PageCountBean pageCountBean = BkService.getAllContentCnt(bk_local, bk_genre, page);
-					
-					model.addAttribute("pageCountBean", pageCountBean);
-					
-					
-					return "book/Bk_list";
-					} 
-					//지역, 장르의 경우
-					else {
-						model.addAttribute("bk_local", bk_local);
-						model.addAttribute("bk_genre", bk_genre);
-						model.addAttribute("mb_id", mb_id);
-						
-						List<Bk_Number> bkNumList = BkService.getBkNumList1(bk_local, bk_genre);
-						
-						List<Bk_Bean> bkListBean = new ArrayList<Bk_Bean>();
-						
-						for(int i=0; i<bkNumList.size(); i++) {
-							
-							Bk_Number bk_numbers = bkNumList.get(i);
-							int bk_number = bk_numbers.getBk_number();
-							
-							Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
-							double avg_score = BkService.getBkScore(bk_number);
-							
-							bkInfoBean.setAvg_score(avg_score);
-							
-							bkListBean.add(i, bkInfoBean);
-						}
-						
-						model.addAttribute("bkListBean", bkListBean);
-						
-						PageCountBean pageCountBean = BkService.getContentCnt1(bk_local, bk_genre, page);
-						
-						model.addAttribute("pageCountBean", pageCountBean);
-						
-						
-						return "book/Bk_list";
-					}}}
+				}
+			
+			}
 		
-
+		}
+	
+	//책 신상품 리스트
+		@GetMapping("/BkDateList")
+		public String BkDateList(Model model) {
+			
+			List<Bk_Number> bkNumList = BkService.getAllBkDateList();
+			
+			List<Bk_Bean> bkListBean2 = new ArrayList<Bk_Bean>();
+			
+			for(int i=0; i<bkNumList.size(); i++) {
+				
+				Bk_Number bk_numbers = bkNumList.get(i);
+				int bk_number = bk_numbers.getBk_number();
+						
+				Bk_Bean bkInfoBean = BkService.getBkInfo(bk_number);
+				double avg_score = BkService.getBkScore(bk_number);
+						
+				bkInfoBean.setAvg_score(avg_score);
+						
+				bkListBean2.add(i, bkInfoBean);
+			}
+			
+			model.addAttribute("bkListBean2", bkListBean2);
+			
+			return "book/Bk_listNew";
+			
+		}
+		
+	// 책 상세정보
 	@GetMapping("/BkSelect")
 	public String BkSelect(@RequestParam("bk_number") int bk_number,
 						   @RequestParam(value="page", defaultValue="1") int page,
-							Model model) {
+						   Model model) {
 		 
-		 model.addAttribute("bk_number", bk_number);
+		model.addAttribute("bk_number", bk_number);
 
-		 double ReadScore = BkService.getBkScore(bk_number);
-		 model.addAttribute("ReadScore", ReadScore);
+		double ReadScore = BkService.getBkScore(bk_number);
+		model.addAttribute("ReadScore", ReadScore);
 
-		 Bk_Bean ReadBkBean = BkService.getBkInfo(bk_number);
-		 model.addAttribute("ReadBkBean", ReadBkBean);
+		Bk_Bean ReadBkBean = BkService.getBkInfo(bk_number);
+		model.addAttribute("ReadBkBean", ReadBkBean);
 		 
-		 model.addAttribute("page", page);
+		model.addAttribute("page", page);
 		 
 		return "book/Bk_select";
 	}
@@ -193,12 +225,15 @@ public class Bk_Controller {
 	public String bkUpdatePro(@Validated @ModelAttribute("updateBkBean") Bk_Bean updateBkBean, BindingResult result) {
 		
 		if (result.hasErrors()) {
+			
 		return "book/Bk_update";
+		
 		}
 		
 		BkService.updateBook(updateBkBean);
 		
 		return "book/Bk_update_success";
+	
 	}
 	
 	

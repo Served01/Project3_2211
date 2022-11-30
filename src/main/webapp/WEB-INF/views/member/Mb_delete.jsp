@@ -58,7 +58,7 @@
 </style>
 </head>
 <body>
-	<a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a> <br>
+<a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a> <br>
 <h2 class="mb-3" style="font-family: 'Noto Sans KR', sans-serif;">회원정보 삭제</h2>
 <hr style="width:600px;">
 	<div class="container"	>
@@ -82,9 +82,9 @@
 							
 							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<div class="text-right">
-									<form:button class="btn btn-primary">삭제하기</form:button>
-									<a href="${root }member/Mbinsert" class="btn btn-danger">회원가입</a>
-									<a href="${root }index" class="btn btn-danger">메인화면</a>
+									<form:button class="btn btn-danger">탈퇴하기</form:button>
+									<a href="${root }member/Mbinsert" class="btn btn-dark">회원가입</a>
+									<a href="${root }Main/center" class="btn btn-primary">메인화면</a>
 								</div>
 							</div>
 						</form:form>

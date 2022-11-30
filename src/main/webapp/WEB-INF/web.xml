@@ -5,7 +5,7 @@
     <welcome-file>Ma_main_session.jsp</welcome-file>
   </welcome-file-list>
 	<session-config>
-		<session-timeout>21600</session-timeout>
+		<session-timeout>-1</session-timeout>
 	</session-config>
 </web-app>
-<!-- 6시간 -->
+<!-- 6시간 21600 -->

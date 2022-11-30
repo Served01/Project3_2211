@@ -72,47 +72,46 @@
 				<div class="card-body">
 			<form:form action="${root}member/Mbupdatepro" method="post"
 							modelAttribute="updateMbBean">
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_id">아이디</form:label>
 								<form:input path="mb_id" class="form-control" readonly="true" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_name">변경할 이름</form:label>
 								<form:input type="text" path="mb_name" class="form-control"  required="true"/>
 								<form:errors path="mb_name" style="color:red" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_pw2">현재 비밀번호</form:label>
 								<form:input type="password" path="mb_pw2" class="form-control" />
 								<form:errors path="mb_pw2" style="color:red" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_pw3">변경할 비밀번호</form:label>
 								<form:input type="password" path="mb_pw3" class="form-control" />
 								<form:errors path="mb_pw3" style="color:red" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_pw4">변경할 비밀번호 확인</form:label>
 								<form:input type="password" path="mb_pw4" class="form-control" />
 								<form:errors path="mb_pw4" style="color:red" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_email">변경할 이메일</form:label>
 								<form:input type="email" path="mb_email" class="form-control"
 									disabled="disabled" />
 								<form:errors path="mb_email" style="color:red" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_tel">변경할 연락처</form:label>
 								<form:input type="tel" path="mb_tel" class="form-control" />
 								<form:errors path="mb_tel" style="color:red" />
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<form:label path="mb_pw"></form:label>
-								<form:input type="hidden" path="mb_pw" class="form-control"
-									readonly="true" />
+								<form:hidden path="mb_pw" class="form-control"/>
 							</div>
-							<div class="form-group">
+							<div class="form-group"style="font-family: 'Noto Sans KR', sans-serif;">
 								<div class="text-right">
 									<form:button class="btn btn-primary">수정하기</form:button>
 									<a href="${root }member/Mbinsert" class="btn btn-danger">회원가입</a>

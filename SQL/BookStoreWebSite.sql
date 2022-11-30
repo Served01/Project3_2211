@@ -21,7 +21,9 @@ insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun1',1234
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun2',12345678,'test2','test2@gmail.com','010-1234-4567');
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun3',12345678,'test3','test3@gmail.com','010-1234-4567');
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun4',12345678,'test4','test4@gmail.com','010-1234-4567');
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun5',12345678,'test5','test5@gmail.com','010-1234-4567');
 
+commit
 select * from Member_info;
 
 
@@ -143,10 +145,6 @@ insert into cart_info(mb_id,bk_number) values ('hyun1',20220001);
 insert into cart_info(mb_id,bk_number) values ('hyun1',20220002);
 insert into cart_info(mb_id,bk_number) values ('hyun1',20220003);
 
-insert into cart_info(mb_id,bk_number) values ('admin',20220001);
-insert into cart_info(mb_id,bk_number) values ('admin',20220002);
-insert into cart_info(mb_id,bk_number) values ('admin',20220003);
-
 select * from cart_info;
 
 
@@ -162,9 +160,6 @@ create table Wish_info(
 
 insert into Wish_info values('hyun1',20220004);
 insert into Wish_info values('hyun1',20220005);
-
-insert into Wish_info values('admin',20220004);
-insert into Wish_info values('admin',20220005);
 
 select * from wish_info;
 
@@ -203,8 +198,6 @@ insert into ORDER_INFO (or_number, mb_id)
            
 select * from order_INFO;
 
-delete from order_info where mb_id = 'admin';
-
 drop table order_info;
 
 
@@ -231,18 +224,12 @@ insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
             (select bk_price from book_info where bk_number = 20220002), 1);
 insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
     values('22NOVZXY002',20220003,
-            (select bk_price from book_info where bk_number = 20220003), 2);
+            (select bk_price from book_info where bk_number = 20220001), 2);
 insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
     values('22NOVZXY002',20220004,
-            (select bk_price from book_info where bk_number = 20220004), 2);
-            
-insert into order_items (or_number, bk_number, bk_price, ori_bkcount)
-    values('22NOV39M398',20220004,
-            (select bk_price from book_info where bk_number = 20220004), 2);
+            (select bk_price from book_info where bk_number = 20220002), 2);
             
 select * from order_items;
-
-delete from order_items;
 
 drop table order_items;
 
