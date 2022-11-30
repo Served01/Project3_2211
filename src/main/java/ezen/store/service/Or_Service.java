@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Or_Bean;
 import ezen.store.beans.Or_items;
 import ezen.store.beans.PageCountBean;
@@ -122,5 +123,18 @@ public class Or_Service {
 		public Or_Bean DvSelect(String mb_id, String dv_pk) {
 			return or_DAO.DvSelect(mb_id, dv_pk);
 		}
+		//베스트셀러
+		public List<Or_Bean> Orbest(){
+			return or_DAO.Orbest();
+		}
 	
+		//해당 책 평균 평점
+		public double getBkScore(int bk_number) { 
+				  
+			return or_DAO.getBkScore(bk_number); 
+			
+		}
+		public Bk_Bean getBkInfo(int bk_number) {
+			return or_DAO.getBkInfo(bk_number);
+		}
 }

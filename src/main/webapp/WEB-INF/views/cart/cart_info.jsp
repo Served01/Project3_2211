@@ -439,13 +439,13 @@ let basket = {
 				},
 				complete : function() {
 					$(".loading").fadeOut();
-					location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
+					setTimeout(basket.sendPurchase(ca_mbid,or_number),300);
+					
 			    }
 	    	})
 	    },
-	    orderItems: function(or_number){
+	    orderItems: function(or_number,ca_mbid){
 	    	document.querySelectorAll("input[name=buy]:checked").forEach(function (item) {
-	    		var ca_mbid = '${mb_id}' ;
 	        	var ca_bknumbers = parseInt(item.getAttribute('value'));
 	        	var ca_bkcount = parseInt(item.parentElement.parentElement.nextElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.getAttribute('value'));
 	        	if (ca_bkcount != 0){
@@ -456,8 +456,10 @@ let basket = {
 					})		
 	        	}
 	        	        		        	
-	           // item.parentElement.parentElement.parentElement.remove();
 	        })
+	    },
+	    sendPurchase: function(ca_mbid,or_number){
+	    	location.href="${root}order/Or_purchase?mb_id="+ca_mbid+"&or_number="+or_number;
 	    },
 	    delPreOrder: function(){
 	    	var ca_mbid = '${mb_id}' ;

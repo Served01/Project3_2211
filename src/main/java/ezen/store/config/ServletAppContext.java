@@ -1,7 +1,5 @@
 package ezen.store.config;
 
-import javax.validation.Validator;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -18,8 +16,6 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
 import ezen.store.mapper.Bk_Mapper;
 import ezen.store.mapper.Ca_Mapper;
 import ezen.store.mapper.Dv_Mapper;

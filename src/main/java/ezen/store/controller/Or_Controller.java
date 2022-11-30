@@ -1,8 +1,10 @@
 package ezen.store.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ezen.store.beans.Ca_Bean;
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Dv_Bean;
 import ezen.store.beans.Mb_Bean;
 import ezen.store.beans.Or_Bean;
@@ -40,6 +42,35 @@ public class Or_Controller {
 	@Autowired
 	private Mb_Service mb_Service;
 	
+	@Value("${page.orlistcnt2}")
+	private int page_listcnt2;  
+	
+	//베스트셀러
+	@GetMapping("/Or_bestSeller")
+	public String OrBestSeller(Model model) {
+		
+		List<Or_Bean> bestSBean = or_Service.Orbest();
+		
+		List<Bk_Bean> bestSellerBeans = new ArrayList<Bk_Bean>();
+		
+		for(int i = 0; i<bestSBean.size(); i++) {
+			
+			Or_Bean bestSellerBean = bestSBean.get(i);
+			int bk_number = bestSellerBean.getBk_number();
+			double avg_score = or_Service.getBkScore(bk_number);
+			
+			Bk_Bean bestSbook = or_Service.getBkInfo(bk_number);
+			
+			bestSbook.setAvg_score(avg_score);
+			
+			bestSellerBeans.add(i,bestSbook);
+			
+		}
+		model.addAttribute("page2",page_listcnt2);
+		model.addAttribute("bestSellerBeans", bestSellerBeans);
+		
+		return "order/Or_bestSeller";
+	}
 	
 	//주문 list all select
 	@GetMapping("/Or_alllist")

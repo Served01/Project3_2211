@@ -153,7 +153,7 @@
 							</li>
 						</ul>
 					
-					<li class="buddha-menu-item primary-navigation-li"><a data-href="/pages/about" href="/pages/about" aria-label="About" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">베스트셀러</a></li>
+					<li class="buddha-menu-item primary-navigation-li"><a data-href="${root }order/Or_bestSeller" href="/pages/about" aria-label="About" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">베스트셀러</a></li>
 					<li class="buddha-menu-item primary-navigation-li"><a data-href="${root }book/BkDateList" href="/pages/special-offers" aria-label="Special Offers" data-no-instant="" onclick="mmGoToPage(this, event); return false;" style="color:#008BD0">신상품</a></li>
 					<li class="primary-navigation-li buddha-disabled">
 						<a href="/" title="">Home</a>
