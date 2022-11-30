@@ -21,7 +21,9 @@ insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun1',1234
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun2',12345678,'test2','test2@gmail.com','010-1234-4567');
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun3',12345678,'test3','test3@gmail.com','010-1234-4567');
 insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun4',12345678,'test4','test4@gmail.com','010-1234-4567');
+insert into Member_info(mb_id,mb_pw,mb_name,mb_email,mb_tel) values('hyun5',12345678,'test5','test5@gmail.com','010-1234-4567');
 
+commit
 select * from Member_info;
 
 

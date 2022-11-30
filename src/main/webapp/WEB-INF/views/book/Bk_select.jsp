@@ -403,13 +403,13 @@ function delBook(bk_number){
 		<c:import url="/Review/RvInsert">
 		</c:import>
 	</c:if>
-	
+	<br><br><br><br><br>
 	<c:import url="/Review/RvList">
 	</c:import>
 	
 	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
 	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
-	
+	<br><br>
 	<c:import url="/Main/footer"></c:import>
 </body>
 </html>

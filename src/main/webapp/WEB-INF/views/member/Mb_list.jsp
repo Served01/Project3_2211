@@ -53,7 +53,8 @@ border: 1px solid #F3E8EB;
 					<td id=title style="width:150px;">탈퇴날짜</td>
 				</tr>
 				<tbody>
-					<c:forEach var="m" items="${memberlist }">
+					<c:forEach var="m" items="${memberlist }" varStatus="status">
+					<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 						<tr>
 							<td><a href='${root }member/Mbselect?mb_id2=${m.mb_id}'>${m.mb_id }</a></td>
 							<td>${m.mb_name }</td>
@@ -63,6 +64,7 @@ border: 1px solid #F3E8EB;
 							<td>${m.mb_deleted }</td>
 							<td>${m.mb_deleted_date }</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -86,10 +88,12 @@ border: 1px solid #F3E8EB;
 					<li class="page-item">	
 						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
+					
 				</ul>
 			</div>	
+			
 			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:20px;">
-			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a>
+			<a href="${root }member/Mbselect?mb_id2=${mb_id }" class="btn btn-info">마이페이지</a>
 			<a href="${root }Main/center" class="btn btn-danger">메인화면</a>
 		</div>
 	</div>

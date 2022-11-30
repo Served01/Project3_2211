@@ -59,9 +59,9 @@
 </head>
 <body>
 <a href="${root}Main/center" class="navbar-brand" style="font-family: 'Frank Ruhl Libre', serif; font-size:35px"><span class="material-symbols-outlined" style="font-size:36px; vertical-align: middle;">menu_book</span>Ezen Book Store</a> <br>
-<h2 class="mb-3" style="font-family: 'Noto Sans KR', sans-serif;">회원정보 삭제</h2>
+<h2 class="mb-3" style="font-family: 'Noto Sans KR', sans-serif;">회원 탈퇴</h2>
 <hr style="width:600px;">
-	<div class="container"	>
+	<div class="container">
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">

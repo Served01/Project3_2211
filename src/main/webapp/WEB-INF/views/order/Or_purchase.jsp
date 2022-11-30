@@ -41,7 +41,11 @@ function check(n, count) {
 }
 
 </script>
-<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
+<script>
+var $jQ = jQuery.noConflict();
+
+$jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); }); 
+</script>
 <body bgcolor="WHITE">  
 <c:import url="/Main/header"></c:import>
 		<br>
@@ -96,12 +100,6 @@ function check(n, count) {
 		</table>
 		</div>
 		</div>
-		
-	
-	
-
-		
-
 		
 	<form:form action="${root }order/Or_purchasePro" method="post" modelAttribute="updateOrPurchase">
 		 

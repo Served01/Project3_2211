@@ -119,8 +119,6 @@ var mb_id = '${mb_id}';
 
 function addcart(ca_mbid,ca_bknumbers){
 	
-
-	
 		$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
 		type: 'get',
@@ -174,8 +172,7 @@ $(window).on('load', function () {
 	</div>
 <!-- 이 페이지 형식상 </div>를 쓰면 모양이 무너짐. -->
 <div class="input-group">
-<aside class="sidebar" style="width:300px;board-left-width:10px;left:20px; background-color:#white" id="menu-bar">
-	<c:if test="${bk_local == '국내'}">
+<aside class="sidebar" style="width:300px;height:1000px;board-left-width:10px;left:20px; background-color:#white" id="menu-bar">
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left;">국내도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
@@ -189,8 +186,6 @@ $(window).on('load', function () {
 	            <li id="잡지" ><a href="${root }book/BkList?bk_local=국내&bk_genre=잡지">잡지</a></li>
         	</ul>
         </div>
-     </c:if>
-     <c:if test="${bk_local == '해외'}">
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left; padding-left: 0px; width: 230px;">해외도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
@@ -204,12 +199,10 @@ $(window).on('load', function () {
 	            <li id="소설" ><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지">잡지</a></li>
         	</ul>
         </div>
-      </c:if>
-      </aside>
+</aside>
     <div class="container">
-	<c:forEach var="bl" items="${bkListBean}" varStatus="status">
+	<c:forEach var="bl" items="${bkListBean2}" varStatus="status">
 		<c:if test="${bl.bk_deleted != 'deleted'}">
-		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 		<div class="container">
 	<div class="input-group-append">
 	<div class="container">
@@ -256,41 +249,16 @@ $(window).on('load', function () {
 				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
 				<a href='#' onclick="javascript:delBook(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
 			</c:if>
-				<a href='#' onclick="javascript:addcart('${mb_id}',${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
+				<a href='#' onclick="javascript:addcart(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
 			</div>
 		</div>
 		</div>
 		<hr>
 		</c:if>
-		</c:if>
 	</c:forEach>
 	</div>
-	<!-- 페이지네이션 -->
-	<div class="container">
-    		<div class=hi>
-            	<ul id="hiyo" class="pagination" style="padding-left:100px;">
-					
-					<li class="page-item">
-						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
-					</li>					
-														
-				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
-					
-					<li class="page-item active">
-						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
-					</li>		
-												
-				</c:forEach>					
-					
-					<li class="page-item">
-						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
-					</li>
-					
-				</ul>
-			</div>
-			</div>
-
 </div>
+<br><br><br>
 <c:import url="/Main/footer"></c:import>
 </body>
 </html>

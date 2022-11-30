@@ -119,8 +119,6 @@ var mb_id = '${mb_id}';
 
 function addcart(ca_mbid,ca_bknumbers){
 	
-
-	
 		$.ajax({
 		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
 		type: 'get',
@@ -168,14 +166,13 @@ $(window).on('load', function () {
 
 	<div class="jumbotron" style="padding-top:30px; padding-bottom: 30px;">
 		<div class="container" style="font-family: 'Noto Sans KR', sans-serif;">
-					<h1 class="display-5">책 리스트</h1>
+					<h1 class="display-5">베스트셀러</h1>
 				<h2 class="display-5">${bk_local} ${bk_genre}</h2>
 		</div>
 	</div>
 <!-- 이 페이지 형식상 </div>를 쓰면 모양이 무너짐. -->
 <div class="input-group">
-<aside class="sidebar" style="width:300px;board-left-width:10px;left:20px; background-color:#white" id="menu-bar">
-	<c:if test="${bk_local == '국내'}">
+<aside class="sidebar" style="width:300px;height:1000px;board-left-width:10px;left:20px; background-color:#white" id="menu-bar">
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left;">국내도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
@@ -189,8 +186,6 @@ $(window).on('load', function () {
 	            <li id="잡지" ><a href="${root }book/BkList?bk_local=국내&bk_genre=잡지">잡지</a></li>
         	</ul>
         </div>
-     </c:if>
-     <c:if test="${bk_local == '해외'}">
        <h1 style="padding-left: 0px; width: 230px;"><span class="logo" style="color:#170000; text-align:left; padding-left: 0px; width: 230px;">해외도서</span></h1>
         <div class="menu">
           <ul class="navbar-aside">
@@ -204,28 +199,27 @@ $(window).on('load', function () {
 	            <li id="소설" ><a href="${root }book/BkList?bk_local=해외&bk_genre=잡지">잡지</a></li>
         	</ul>
         </div>
-      </c:if>
-      </aside>
+</aside>
     <div class="container">
-	<c:forEach var="bl" items="${bkListBean}" varStatus="status">
-		<c:if test="${bl.bk_deleted != 'deleted'}">
-		<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
+	<c:forEach var="bs" items="${bestSellerBeans}" varStatus="status">
+		<c:if test="${bs.bk_deleted != 'deleted'}">
+		<c:if test="${0 <= status.count and status.count <= page2}">
 		<div class="container">
 	<div class="input-group-append">
 	<div class="container">
 		<div class="row">
 		<div class="content_inner"></div>
 			<div class="col-md-3" align="center">	
-				<img src="${root }upload/${bl.bk_image}" style="width: 200px; height: 230px;">	
+				<img src="${root }upload/${bs.bk_image}" style="width: 200px; height: 230px;">	
 			</div>
 				<h4 style="text-align:center; margin-bottom:0px; width:230px; height: 35px;">
-					<c:if test="${bl.avg_score != 0}">
-						<c:set var = "string1" value = "${bl.avg_score}"/>
+					<c:if test="${bs.avg_score != 0}">
+						<c:set var = "string1" value = "${bs.avg_score}"/>
       					<c:set var = "string2" value = "${fn:substring(string1, 0, 3)}" />
       				<p>	
 					<p style="font-size:19px;">평점 : ${string2}/5.0점</p>
 					</c:if>
-					<c:if test="${bl.avg_score == 0.0}">
+					<c:if test="${bs.avg_score == 0.0}">
 					<p>
 					<p style="font-size:19px;">등록된 평점이 없습니다.</p>
 					</c:if>
@@ -234,29 +228,29 @@ $(window).on('load', function () {
 		</div>		
 			<div class="col-md-7">
 			<br>
-				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}'><b>${bl.bk_title}</b></a>
+				<a href='${root }book/BkSelect?bk_number=${bs.bk_number}'><b>${bs.bk_title}</b></a>
 				<!--  like button  -->
 				<script>
 					$(document).ready(function(){
-						setTimeout(wish.checkWishHeart(${bl.bk_number},${status.count}), 200);
+						setTimeout(wish.checkWishHeart(${bs.bk_number},${status.count}), 200);
 					})
 				</script>
-				<img src="${root }imgs/heart.svg"  id="wish${status.count }"  onclick="javascript:wish.switchWishHeart(${bl.bk_number},${status.count})"/>
+				<img src="${root }imgs/heart.svg"  id="wish${status.count }"  onclick="javascript:wish.switchWishHeart(${bs.bk_number},${status.count})"/>
 				
-				<p>${bl.bk_writer} | ${bl.bk_publisher} | ${bl.bk_pubdate} 출시 
+				<p>${bs.bk_writer} | ${bs.bk_publisher} | ${bs.bk_pubdate} 출시 
 				<p style="padding-top: 20px">
-				<c:set var = "string3" value = "${bl.bk_detail}"/>
+				<c:set var = "string3" value = "${bs.bk_detail}"/>
       			<c:set var = "string4" value = "${fn:substring(string3, 0, 30)}" />
       			${string4}...
-				<p><b>${bl.bk_price} 원 | 재고 : ${bl.bk_quantity}권</b>
+				<p><b>${bs.bk_price} 원 | 재고 : ${bs.bk_quantity}권</b>
 				
 			</div>
 			<div class="col-md-2" style="padding-top: 70px; width:230px">
 			<c:if test = "${mb_id == 'admin' }">
-				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
-				<a href='#' onclick="javascript:delBook(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
+				<a href='${root}book/BkUpdate?bk_number=${bs.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
+				<a href='#' onclick="javascript:delBook(${bs.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
 			</c:if>
-				<a href='#' onclick="javascript:addcart('${mb_id}',${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
+				<a href='#' onclick="javascript:addcart(${bs.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
 			</div>
 		</div>
 		</div>
@@ -265,32 +259,8 @@ $(window).on('load', function () {
 		</c:if>
 	</c:forEach>
 	</div>
-	<!-- 페이지네이션 -->
-	<div class="container">
-    		<div class=hi>
-            	<ul id="hiyo" class="pagination" style="padding-left:100px;">
-					
-					<li class="page-item">
-						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=1" class="page-link">First</a>
-					</li>					
-														
-				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
-					
-					<li class="page-item active">
-						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${idx}" class="page-link">${idx}</a>
-					</li>		
-												
-				</c:forEach>					
-					
-					<li class="page-item">
-						<a href="${root}book/BkList?bk_local=${bk_local }&bk_genre=${bk_genre }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
-					</li>
-					
-				</ul>
-			</div>
-			</div>
-
 </div>
+<br><br><br>
 <c:import url="/Main/footer"></c:import>
 </body>
 </html>

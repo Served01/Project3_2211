@@ -70,6 +70,11 @@ public class Bk_DAO {
 							
 		}
 		
+		public List<Bk_Number> getAllBkDateList() {
+
+			return bk_Mapper.getAllBkDateList();
+		}
+		
 		public List<Bk_Number> getAllBkNumList(String bk_local,String bk_genre){
 					
 			return bk_Mapper.getAllBkNumList(bk_local,bk_genre);

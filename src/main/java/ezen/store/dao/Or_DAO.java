@@ -4,6 +4,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import ezen.store.beans.Bk_Bean;
 import ezen.store.beans.Or_Bean;
 import ezen.store.beans.Or_items;
 import ezen.store.mapper.Or_Mapper;
@@ -13,8 +15,11 @@ public class Or_DAO {
 	
 	@Autowired
 	private Or_Mapper or_Mapper;
-		
 	
+	
+	public int getOrAllCount() {
+		return or_Mapper.getOrAllCount();
+	}
 	//주문 목록 개수
 	public int getOrCount(String mb_id) {
 		return or_Mapper.getOrCount(mb_id);
@@ -25,6 +30,10 @@ public class Or_DAO {
 	}
 	
 	//select
+	public	List<Or_Bean> OrAllList() {
+		return or_Mapper.OrAllList();
+	}
+	
 	public	List<Or_Bean> OrList(String mb_id) {
 		return or_Mapper.OrList(mb_id);
 	}
@@ -76,15 +85,16 @@ public class Or_DAO {
 		
 	}
 	
-	
-//	public void Or_insert(String or_mbid, int or_bknumbers) {
-//		or_Mapper.Or_insert(or_mbid, or_bknumbers); 
-//	}
-	
-	
-	/*
-	public int getContentCnt(String or_mbid) {
-		return or_Mapper.getContentCnt(or_mbid);
+	public List<Or_Bean> Orbest(){
+		return or_Mapper.Orbest();
 	}
-	*/
+	
+	//해당 책 평점 평균
+	public double getBkScore(int bk_number) {
+		return or_Mapper.getBkScore(bk_number); 
+	}
+	
+	public Bk_Bean getBkInfo(int bk_number) {
+		return or_Mapper.getBkInfo(bk_number);
+	}
 }

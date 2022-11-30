@@ -35,6 +35,8 @@ public class Or_Bean {
 	private String bk_title_upper;
 	private String bk_deleted;
 	
+	private double avg_score;
+	
 	public String getOr_number() {
 		return or_number;
 	}
@@ -202,6 +204,12 @@ public class Or_Bean {
 	}
 	public void setBk_deleted(String bk_deleted) {
 		this.bk_deleted = bk_deleted;
+	}
+	public double getAvg_score() {
+		return avg_score;
+	}
+	public void setAvg_score(double avg_score) {
+		this.avg_score = avg_score;
 	}
 	
 	

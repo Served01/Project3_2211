@@ -27,10 +27,10 @@
 <c:import url="/Main/header"></c:import>
 <form name="orderlist" id="orderlist" method="post" class="orderlist">
 	<br>
-	<h1 class="display-5">구매 내역</h1>
+	<h1 class="display-5">모든 회원의 구매 내역</h1>
 	<br>
 	<div class="container">
-	<c:forEach var="orBean" items="${listOrBean}" varStatus="status">
+	<c:forEach var="orBean" items="${allListOrBean}" varStatus="status">
 	<c:if test="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">
 			
  		<table class="table table-hover"> 
@@ -56,15 +56,10 @@
 	            	<td>${orBean.or_status }</td>
 				</tr>
 				<tr>
-					<td><td>
+					<td></td><td>
 						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
-					<c:if test="${orBean.or_status ne '교환'}">
-					<c:if test="${orBean.or_status ne '환불'}">
-					<c:if test="${orBean.or_status ne '취소'}">
 						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
-					</c:if>
-					</c:if>
-					</c:if>
+					</td>
 					</tr>
 					</c:if>
 		</table>
