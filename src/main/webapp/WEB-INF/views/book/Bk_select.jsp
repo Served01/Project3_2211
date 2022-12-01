@@ -60,7 +60,7 @@ function add () {
     hm.value ++ ;
 
     var sum_ = parseInt(hm.value) * sell_price;
-document.getElementById("my_sum").innerHTML=sum_;
+document.getElementById("my_sum").innerHTML=sum_.toLocaleString('ko-KR');
 }
 
 function del () {
@@ -68,7 +68,7 @@ function del () {
         if (hm.value > 1) {
             hm.value -- ;
             var sum_ = parseInt(hm.value) * sell_price;
-document.getElementById("my_sum").innerHTML=sum_;	
+document.getElementById("my_sum").innerHTML=sum_.toLocaleString('ko-KR');	
         }
 }
 
@@ -79,7 +79,7 @@ function change () {
             hm.value = 0;
         }
     var sum_ = parseInt(hm.value) * sell_price;
-document.getElementById("my_sum").innerHTML=sum_;
+document.getElementById("my_sum").innerHTML=sum_.toLocaleString('ko-KR');
 }
 //주문
 
@@ -108,7 +108,7 @@ let basket = {
 	    	
 	    	//로케이션~ 주문번호 넘겨줌 location.href='결제?or_number=or_number'
 	    },
-	    orderCreate: function(or_number,ca_bknumbers,ca_bkcount){
+	    orderCreate: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
 	    	
 	    	var ca_mbid = '${mb_id}';
 	    	
@@ -124,7 +124,7 @@ let basket = {
 			    }
 	    	})
 	    },
-	    orderItem: function(or_number,ca_bknumbers,ca_bkcount){
+	    orderItem: function(or_number,ca_mbid,ca_bknumbers,ca_bkcount){
 	    	
 	        	var ca_mbid='${mb_id}';
 	        	if (ca_bkcount != 0){
@@ -338,11 +338,11 @@ function delBook(bk_number){
 		<div class="row">
 			<div class="col-md-4">
 				<img style="width: 320px; height: 360px; padding-right: 0px; margin-right: 0px;" src="${root }upload/${ReadBkBean.bk_image}"/>
-				<div style="left: 0px; width: 320px; top: 10px; padding-left: 105px;" class="input-group">
+				<div style="left: 0px; width: 320px; top: 10px; padding-left: 70px;" class="input-group">
 				<c:if test="${ReadScore != 0}">
 					<c:set var = "string1" value = "${ReadScore}"/>
       				<c:set var = "string2" value = "${fn:substring(ReadScore, 0, 3)}" />
-					<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${string2}/5.0 점</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5><b>평점</b></h5>&nbsp;:&nbsp;<div class="input-group-append">${string2}/5.0 점</div>
 				</c:if>
 				<c:if test="${ReadScore == 0.0}">
 					<div><h5>등록된 평점이 없습니다.</h5></div>
@@ -380,7 +380,7 @@ function delBook(bk_number){
 				<input type="button" value=" + " onclick="add();" style="width:35px;">
 				<input type="button" value=" - " onclick="del();" style="width:35px;"><br>
 				<input type="hidden" name="sum" size="11" readonly>
-				</c:if>0
+				</c:if>
 				</div>
 				<p>
 				<div class="input-group"><b>금액</b>&nbsp;:&nbsp;<span class="input-group-append" id="my_sum">원</span><b>원</b></div>

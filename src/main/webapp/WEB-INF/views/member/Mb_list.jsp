@@ -35,10 +35,11 @@ border: 1px solid #F3E8EB;
 </style>
 </head>
 <body>
-
+<br><br><br><br>
 	<div class="container" align="center">
 		<div class="input-form col-md-12 mx-auto" id="adad" style="top:50px;">
-			<a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+		<br>
+			<a href="#" onclick="location.href='${root}Main/center'" style="font-size:30px; font-family:'Frank Ruhl Libre', serif;">
 					Ezen Book Store
 				</a> <br>
 			<h4 class="mb-3"style="font-family: 'Noto Sans KR', sans-serif;">회원목록 보기화면(관리자)</h4>
@@ -68,12 +69,12 @@ border: 1px solid #F3E8EB;
 					</c:forEach>
 				</tbody>
 			</table>
-			<br><br>
+			<br>
 			<!-- 페이지네이션 -->
-			<div class=hi>
-            	<ul id="hiyo" class="pagination" style="padding-left:470px;font-family: 'Noto Sans KR', sans-serif;">
+			<div class=hi align="center">
+            	<ul id="hiyo" class="pagination" align="center" style="width:898px; font-family:'Noto Sans KR', sans-serif;">
 					
-					<li class="page-item">
+					<li class="page-item align="center" ">
 						<a href="${root}member/Mblist?mb_id=${mb_id}&page=1" class="page-link">First</a>
 					</li>					
 														
@@ -85,19 +86,18 @@ border: 1px solid #F3E8EB;
 												
 				</c:forEach>					
 					
-					<li class="page-item">	
+					<li class="page-item" align="center" >	
 						<a href="${root}member/Mblist?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>
 			</div>	
 			
-			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:40px;">
-			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a> <a
-				href="${root }Main/center" class="btn btn-dark">메인</a>
+			<div align="center" class="mb-4" style="font-family: 'Noto Sans KR', sans-serif;">
+			<a href="${root }member/Mbselect?mb_id2=${mb_id }" class="btn btn-info">마이페이지</a>
+			<a href="${root }Main/center" class="btn btn-danger">메인화면</a>
 		</div>
-	</div></div>
-	
-
+	</div>
+</div>
 </body>
 </html>

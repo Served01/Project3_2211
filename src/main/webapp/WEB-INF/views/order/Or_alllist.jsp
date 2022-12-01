@@ -58,8 +58,8 @@
 				</tr>
 				<tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td></td><td>
-						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
-						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+						<button type="button" class="btn btn-dark" style="width: 96px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
+						<button type="button" class="btn btn-dark" style="width: 96px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
 					</td>
 					</tr>
 					</c:if>
@@ -73,19 +73,19 @@
             	<ul id="hiyo" class="pagination" style="padding-left:80px;">
 					
 					<li class="page-item">
-						<a href="${root}order/Or_list?mb_id=${mb_id}&page=1" class="page-link">First</a>
+						<a href="${root}order/Or_alllist?page=1" class="page-link">First</a>
 					</li>					
 														
 				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 					<li class="page-item active">
-						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${idx}" class="page-link">${idx}</a>
+						<a href="${root}order/Or_alllist?page=${idx}" class="page-link">${idx}</a>
 					</li>		
 												
 				</c:forEach>					
 					
 					<li class="page-item">
-						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+						<a href="${root}order/Or_alllist?page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>

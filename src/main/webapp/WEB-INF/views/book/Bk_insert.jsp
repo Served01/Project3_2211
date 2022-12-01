@@ -315,7 +315,7 @@ function previewImage(targetObj, View_area) {
 				<hr class="mb-4">
 				<div class="hi" style="font-family: 'Noto Sans KR', sans-serif;">
 				<form:button type="submit" class="btn btn-dark">입력완료</form:button>
-				<form:button class="btn btn-dark" href="javascript:window.history.back();">뒤로가기</form:button>
+				<a href="javascript:window.history.back();" class="btn btn-dark">뒤로가기</a>
 				</div>
 			</form:form>
 			</div>

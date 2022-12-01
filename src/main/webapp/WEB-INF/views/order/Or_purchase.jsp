@@ -60,7 +60,8 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
         <div style="padding-top: 50px">
  		<table class="table table-hover">  
  				<tr>
- 					<td colspan="2" align="center">상품</td>
+ 					<td></td>
+ 					<td align="center">상품</td>
  					<td align="center">개당 가격</td>
  					<td align="center">개수</td>
  					<td align="center">구매 가격</td>
@@ -182,9 +183,9 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 	 </tr>
      </table>
      <br>
-      <div align="center" style="font-family: 'Noto Sans KR', sans-serif;">
+      <div align="center">
      <button type="submit" class="btn btn-dark"  style="width: 86px; height: 44px;" >구매 확정</button>
-    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px; padding-top:9px;" class="btn btn-dark" role="button">뒤로가기</a> 
+    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px;" class="btn btn-dark" role="button">뒤로가기</a> 
     </div>
     <br>
 </form:form>

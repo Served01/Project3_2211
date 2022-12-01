@@ -125,7 +125,7 @@ async function start() {
 	<form:form action="${root }Review/RvUpdatePro" method="post" modelAttribute="updateRvBean">
 			<div class="container" style="height:350px">
       <div class="info" style="margin-left:150px;width:900px">
-     <h1 style="text-align:center;">리뷰 수정</h1>
+     <h1 style="text-align:center; width: 850px;">리뷰 수정</h1>
 		<!-- enctype은 post방식일때만 쓰는 것으로 기본값인 application/x-www-form-urlencoded,
 			 파일이나 이미지를 이용할 때 쓰는 multipart/form-data, 그리고 text/plain 방식이 있다.-->
 		<!-- multipart/form-data는 함부로 쓰면 안된다. 전송할때 인코딩을 하여 보내는 방식이 아니고 이 인코딩 방식을
