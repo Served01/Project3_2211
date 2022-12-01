@@ -31,8 +31,8 @@ text-align:center;
 			<h1 style="text-align:center"id="suo" class="display-5">다시 시도해 주십시오.</h1>
 				<div>
 				<div class="ae1" style="padding-top:20px">
-		<button type="button" class="btn btn-success btn-lg" onclick="location.href='/login'">장바구니</button>
-    	<button type="button" class="btn btn-danger btn-lg" onclick="location.href='/findIdPw'">홈으로</button>
+		<button type="button" class="btn btn-success btn-lg" onclick="location.href='${root}cart/cart_info'">장바구니</button>
+    	<button type="button" class="btn btn-danger btn-lg" onclick="location.href='${root}Main/center'">홈으로</button>
     	</div>
     </div>
 			<div style="float:right" class="find-btn">

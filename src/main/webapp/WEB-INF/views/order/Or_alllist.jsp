@@ -12,6 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
 <style>
 		.hi{
 		    text-align:center;
@@ -27,7 +28,7 @@
 <c:import url="/Main/header"></c:import>
 <form name="orderlist" id="orderlist" method="post" class="orderlist">
 	<br>
-	<h1 class="display-5">모든 회원의 구매 내역</h1>
+	<h1 class="display-5" style="font-family: 'Noto Sans KR', sans-serif;">모든 회원의 구매 내역</h1>
 	<br>
 	<div class="container">
 	<c:forEach var="orBean" items="${allListOrBean}" varStatus="status">
@@ -35,27 +36,27 @@
 			
  		<table class="table table-hover"> 
 		<c:if test="${orBean.or_status ne '0'}">
-				<tr>
+				<tr style="font-family: 'Noto Sans KR', sans-serif;">
 	            	<td width="300">주문번호</td>
 	            	<td width="450"><a href="${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }"> ${orBean.or_number }</a></td>
 	            </tr> 
-	            <tr>
+	            <tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td>구매날짜</td>
 	            	<td>${orBean.or_date }</td>
 				</tr>
-	            <tr>
+	            <tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td>송장번호</td>
 	            	<td>${orBean.or_delivery }</td>
 				</tr>
-	            <tr>
+	            <tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td>배송지</td>
 	            	<td>${orBean.dv_address }</td>
 				</tr>
-				<tr>
+				<tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td>배송 상태</td>
 	            	<td>${orBean.or_status }</td>
 				</tr>
-				<tr>
+				<tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td></td><td>
 						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
 						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
@@ -69,7 +70,7 @@
 	<br>
 	<!-- 페이지네이션 -->
     		<div class=hi>
-            	<ul id="hiyo" class="pagination">
+            	<ul id="hiyo" class="pagination" style="padding-left:80px;">
 					
 					<li class="page-item">
 						<a href="${root}order/Or_list?mb_id=${mb_id}&page=1" class="page-link">First</a>

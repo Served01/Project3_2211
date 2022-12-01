@@ -12,7 +12,7 @@
 
 	<script>
 		alert("주문 수정 성공")
-		location.href="${root}order/Or_list?mb_id='${mb_id}'"
+		location.href="${root}order/Or_list?mb_id=${mb_id}"
 	</script>
 
 </body>

@@ -13,11 +13,11 @@ import ezen.store.beans.Or_items;
 public interface Or_Mapper {
 	
 		//모든 주문 list 출력
-		@Select("select * from order_info")
+		@Select("select * from order_info where not or_status = '0'")
 		List<Or_Bean> OrAllList();
 		
 		//주문 list 개수 출력
-		@Select("select count(*) from order_info\r\n")
+		@Select("select count(*) from order_info where not or_status = '0'")
 		int getOrAllCount();
 		
 		//주문 list 출력
@@ -26,6 +26,7 @@ public interface Or_Mapper {
 			+ "    where mb_id in (select mb_id\r\n"
 			+ "                        from Member_info\r\n"
 			+ "                        where mb_id = #{mb_id})"
+			+ "		and not or_status = '0'"
 			+ "		order by or_date")
 		List<Or_Bean> OrList(String mb_id);
 		
@@ -34,7 +35,8 @@ public interface Or_Mapper {
 				+ "    from order_info\r\n"
 				+ "    where mb_id in (select mb_id\r\n"
 				+ "                        from Member_info\r\n"
-				+ "                        where mb_id = #{mb_id})")
+				+ "                        where mb_id = #{mb_id})"
+				+ "		and not or_status = '0'")
 		int getOrCount(String mb_id);
 		
 		//주문 상세 정보 select

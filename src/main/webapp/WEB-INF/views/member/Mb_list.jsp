@@ -92,7 +92,7 @@ border: 1px solid #F3E8EB;
 				</ul>
 			</div>	
 			
-			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:20px;">
+			<div class="mb-4" style="font-family: 'Noto Sans KR', sans-serif; padding-left:40px;">
 			<a href="${root }member/Mbinsert" class="btn btn-dark">마이페이지</a> <a
 				href="${root }Main/center" class="btn btn-dark">메인</a>
 		</div>

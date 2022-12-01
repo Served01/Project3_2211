@@ -594,6 +594,8 @@ let basket = {
 	 $(window).on('load', function () {
 		 $(".loading").fadeOut();
 		// $("body").css("background", "white");
+		
+		
 	 });
 </script>
 <body onmouseover="javascript:basket.checkItem()">

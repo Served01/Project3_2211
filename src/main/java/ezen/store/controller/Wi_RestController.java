@@ -30,11 +30,15 @@ public class Wi_RestController {
 	@GetMapping("/wish_add/{wi_mbid}/{wi_bknumbers}")
 	public String wish_add(@SessionAttribute("mb_id") String wi_mbid,
 						   @PathVariable int wi_bknumbers) {
-		wi_Service.addWishStuff(wi_mbid, wi_bknumbers);
-		boolean chk = true;
 		
-		return chk + "";
-		
+		if(wi_mbid != "0") {
+			wi_Service.addWishStuff(wi_mbid, wi_bknumbers);
+			boolean chk = true;
+			
+			return chk + "";
+		}else {
+			return "not login";
+		}
 	}
 	
 	
@@ -43,22 +47,30 @@ public class Wi_RestController {
 	public String wish_delete(@SessionAttribute("mb_id") String wi_mbid,
 							  @PathVariable int wi_bknumbers) {
 		
-		wi_Service.delwish(wi_mbid,wi_bknumbers) ;
 		
-		boolean chk = true;
-		
-		return chk + "";
-		
+		if(wi_mbid != "0") {
+			wi_Service.delwish(wi_mbid,wi_bknumbers) ;
+			
+			boolean chk = true;
+			
+			return chk + "";
+		}else {
+			return "not login";
+		}
 	}
 	
 	//restAPI
 	@GetMapping("/wish_deleteAll/{wi_mbid}")
 	public String wish_deleteAll(@SessionAttribute("mb_id") String wi_mbid) {
 		
-		wi_Service.delwishAll(wi_mbid);
 		
-		return null;
-		
+		if(wi_mbid != "0") {
+			wi_Service.delwishAll(wi_mbid);
+			
+			return null;
+		}else {
+			return "not login";
+		}
 	}
 	
 

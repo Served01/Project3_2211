@@ -40,7 +40,9 @@
             <form:button style="height:50px;" class="btn btn-outline-success" type="submit">Search</form:button>
           </form:form>
           <div class="btn-group" role="group" aria-label="Basic example">
-			
+		<c:if test="${mb_id != '0'}">         
+		<h6 style="background:#f0f8ff; font-family:'Noto Sans KR', sans-serif; font-size:15px; margin-bottom:0px; padding-top:3px; width:100px; height:50px; border-radius: 20px 20px 20px 20px / 15px 15px 15px 15px; border:5px inset #f0f8ff;">${sessionScope.mb_id}님<br>반갑습니다.</h6>&nbsp;&nbsp;
+		</c:if>
 		<c:if test="${mb_id == 'admin'}">
 			<button type="button" onclick="location.href='${root }book/BkInsert'">책 등록</button>
 			<button type="button" onclick="location.href='${root }member/Mblist'">전체회원목록</button>
@@ -71,7 +73,6 @@
 								<a data-href="${root}order/Or_list?mb_id=${mb_id }" href="" aria-label="Environmental Express" data-no-instant="" onclick="mmGoToPage(this, event); return false;">주문내역</a>
 							</li>
 						</ul>
-					
 				</ul>
 		  </c:otherwise>  
 		  

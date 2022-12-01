@@ -374,26 +374,21 @@ function delBook(bk_number){
 				<p style="text-align:left;"><b>재고수</b> : ${ReadBkBean.bk_quantity }개	
 				<form name="form" method="get">
 				<div class="input-group" style="text-align:left; width:300px;">
-				<c:if test="${mb_id !='0'}">
 				<b>수량</b> : <input type=hidden name="sell_price" value="${ReadBkBean.bk_price }">
 				<input type="text" id="amount" name="amount" value="1" size="3" onchange="change();"> 
 				<input type="button" value=" + " onclick="add();" style="width:35px;">
 				<input type="button" value=" - " onclick="del();" style="width:35px;"><br>
 				<input type="hidden" name="sum" size="11" readonly>
-				</c:if>0
 				</div>
 				<p>
 				<div class="input-group"><b>금액</b>&nbsp;:&nbsp;<span class="input-group-append" id="my_sum">원</span><b>원</b></div>
 				<p>
 				</form>
-
 				<div class="input-group-append">
-				<c:if test="${mb_id !='0'}">
 				<p>
 				<p><a href="#" class="btn btn-info" onclick="javascript:basket.orderInitiator(${ReadBkBean.bk_number});">도서주문 &raquo;</a>
 				<input class="btn btn-info" type="button" onclick="javascript:addcart(${ReadBkBean.bk_number})" value="장바구니"></p>
-				</c:if>
-				<c:if test="${mb_id =='admin'}">
+				<c:if test="${mb_id=='admin'}">
 				<p><a href='${root }book/BkUpdate?bk_number=${ReadBkBean.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a>
 				<a href='#' onclick="javascript:delBook(${ReadBkBean.bk_number})" class="btn btn-secondary" role="button">삭제 &raquo;</a></p>
 				</c:if>
@@ -403,18 +398,5 @@ function delBook(bk_number){
 		<hr style="width:700px; margin-right:400px;">
 	</div>
 	</div>
-	
-	<c:if test="${mb_id!='0'}">
-		<c:import url="/Review/RvInsert">
-		</c:import>
-	</c:if>
-	<br><br><br><br><br>
-	<c:import url="/Review/RvList">
-	</c:import>
-	
-	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
-	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
-	<br><br>
-	<c:import url="/Main/footer"></c:import>
 </body>
 </html>

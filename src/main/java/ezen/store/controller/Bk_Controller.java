@@ -90,7 +90,7 @@ public class Bk_Controller {
 			
 			return "book/Bk_list";
 			
-			//지역별 전체
+		//지역별 전체
 		} else {
 					
 			if(bk_genre.equals("전체")) {
@@ -207,6 +207,25 @@ public class Bk_Controller {
 		 
 		return "book/Bk_select";
 	}
+	
+	// 책 상세정보
+	@GetMapping("/BkSelect2")
+	public String BkSelect2(@RequestParam("bk_number") int bk_number,
+							@RequestParam(value="page", defaultValue="1") int page,
+							Model model) {
+	 
+	model.addAttribute("bk_number", bk_number);
+
+	double ReadScore = BkService.getBkScore(bk_number);
+	model.addAttribute("ReadScore", ReadScore);
+
+	Bk_Bean ReadBkBean = BkService.getBkInfo(bk_number);
+	model.addAttribute("ReadBkBean", ReadBkBean);
+	 
+	model.addAttribute("page", page);
+	 
+	return "book/Bk_select2";
+}
 	
 	// 책정보 수정 페이지 컨트롤러
 	@GetMapping("/BkUpdate")

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <c:url var='root' value='/'/>
 <!DOCTYPE html>
 <html>
@@ -16,15 +17,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
         <!-- JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
         <!-- 구글폰트 -->
         <link href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -55,16 +52,16 @@
 <body>
 <div class="container">
             <div class="info" style="margin-left:150px;width:900px">
-                <h1 style="text-align:center">리뷰 목록</h1>
+                <h1 style="width:850px; text-align:center">리뷰 목록</h1>
                 <br><br>
 		<div class="reviews">
 			<table class="table">
 				<thead>
 					<tr>
-                        <th scope="col">작성자</th>
-                        <th scope="col">작성일</th>
-                        <th scope="col">내용</th>
-                        <th></th>
+                        <th scope="col" style="width:124px;">작성자</th>
+                        <th scope="col" style="width:124px;">작성일</th>
+                        <th scope="col" style="width:74px;">평점</th>
+                        <th scope="col" style="width:624px;">내용</th>
 	                    <th></th>
                     </tr>
 				</thead>
@@ -74,7 +71,10 @@
 					
 					<tr>
 						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.mb_id }</td>
-						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_date }</td>
+						<c:set var = "string1" value = "${rvl.rv_date}"/>
+      					<c:set var = "string2" value = "${fn:substring(string1, 0, 10)}" />
+						<td style="padding-top:18px; height:15px; align-items : center;">${string2}</td>
+						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_score }점</td>
 						<td style="padding-top:18px; height:15px; align-items : center;">${rvl.rv_content }</td>	
 					<c:if test="${mb_id==rvl.mb_id or mb_id=='admin'}">
 						<th><button type="button" style="float:right" class="btn btn-dark" onclick="location.href='${root }Review/RvUpdate?rv_number=${rvl.rv_number }&mb_id=${rvl.mb_id }&bk_number=${rvl.bk_number}'">수정</button></th>
@@ -91,7 +91,7 @@
 			<br><br>
 			<!-- 페이지네이션 -->
     		<div class=hi>
-            	<ul id="hiyo" class="pagination">
+            	<ul id="hiyo" class="pagination" style="padding-left:80px;">
 					
 					<li class="page-item">
 						<a href="${root}book/BkSelect?mb_id=${mb_id}&bk_number=${bk_number }&page=1" class="page-link">First</a>

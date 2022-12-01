@@ -38,25 +38,7 @@ public class Mb_Controller {
 		return "member/Mb_logout";
 	
 	}
-		
-	// 세션 종료후 자동 초기화
-	@GetMapping("/MbInitial")
-	public String Mbintial(Model model) {
-					
-		model.addAttribute("mb_id","0");
-					
-		return "member/Mb_not_login";
-	
-	}
-	
-	//로그인을 요구하는 페이지
-	@GetMapping("/MbRequired")
-	public String Mbrequired(@ModelAttribute("tempMbBean") Mb_Bean tempMbBean) {
-		
-		return "member/Mb_required_login";
-	
-	}
-	
+
 	// 회원 전체목록 기능
 	@GetMapping("/Mblist")
 	public String Mblist(@RequestParam(value="page", defaultValue="1") int page,

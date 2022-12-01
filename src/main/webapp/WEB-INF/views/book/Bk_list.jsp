@@ -61,36 +61,44 @@ padding-top: 8px;
 let wish = {
 		switchWishHeart : function(bk_number,su) {
 			
-var mb_id = '${mb_id}';
-			var imgsrc = $("#wish"+su).attr("src");
-			var culsrc = imgsrc.split('-');
-			
-			if (culsrc[1] == null){
-				//여기다가 찜추가
-				$.ajax({
-				url: '${root}wish/wish_add/' + mb_id +'/'+ bk_number,
-				type: 'get',
-				dataType: 'text',
-				success : function(result) {
-					if(result=="true") {
-						$("#wish"+su).attr("src","${root }imgs/heart-fill.svg");
-					}
-				}
-				})
+			var mb_id = '${mb_id}';
+			if(mb_id != "0"){
+				var imgsrc = $("#wish"+su).attr("src");
+				var culsrc = imgsrc.split('-');
 				
-			}else{
-				//여기다가 찜삭제
-				$.ajax({
-					url: '${root}wish/wish_delete/' + mb_id +'/'+ bk_number,
+				if (culsrc[1] == null){
+					//여기다가 찜추가
+					$.ajax({
+					url: '${root}wish/wish_add/' + mb_id +'/'+ bk_number,
 					type: 'get',
 					dataType: 'text',
 					success : function(result) {
 						if(result=="true") {
-							$("#wish"+su).attr("src","${root }imgs/heart.svg");
+							$("#wish"+su).attr("src","${root }imgs/heart-fill.svg");
+						}else if(result=="not login"){
+							alert("로그인이 필요한 서비스입니다");
 						}
 					}
 					})
-				
+					
+				}else{
+					//여기다가 찜삭제
+					$.ajax({
+						url: '${root}wish/wish_delete/' + mb_id +'/'+ bk_number,
+						type: 'get',
+						dataType: 'text',
+						success : function(result) {
+							if(result=="true") {
+								$("#wish"+su).attr("src","${root }imgs/heart.svg");
+							}else if(result=="not login"){
+								alert("로그인이 필요한 서비스입니다");
+							}
+						}
+						})
+					
+				}
+			}else{
+				alert("로그인이 필요한 서비스입니다")
 			}
 			
 			
@@ -103,7 +111,6 @@ var mb_id = '${mb_id}';
 				type : "GET",
 				dataType : "text",
 				error : function(e) {
-					alert("안됨1");
 					//alert(e);
 				},
 				success : function(result) {
@@ -120,22 +127,28 @@ var mb_id = '${mb_id}';
 function addcart(ca_mbid,ca_bknumbers){
 	
 
-	
-		$.ajax({
-		url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
-		type: 'get',
-		dataType: 'text',
-		success: function(){
-			 var conFirm = confirm('장바구니에 추가되엇습니다. 장바구니로 가시겟습니까?');
-			 if (conFirm) {
-			      location.href="${root}cart/cart_info?ca_mbid="+ca_mbid;
-			   }
-			   else {
-			     false;
-			   }
+		if(ca_mbid != "0"){
+			$.ajax({
+			url: '${root}cart/cart_add/' + ca_mbid +'/'+ ca_bknumbers,
+			type: 'get',
+			dataType: 'text',
+			success: function(result){
+				if(result == 'not login'){
+					alert("로그인이 필요한 서비스입니다.")
+				}else{
+					 var conFirm = confirm('장바구니에 추가되엇습니다. 장바구니로 가시겟습니까?');
+					 if (conFirm) {
+					      location.href="${root}cart/cart_info?ca_mbid="+ca_mbid;
+					   }
+					   else {
+					     false;
+					   }
+				}
+			}
+			})
+		}else{
+			alert("로그인이 필요한 서비스입니다.")
 		}
-	})
-	
 };
 
 function delBook(bk_number){
@@ -256,7 +269,9 @@ $(window).on('load', function () {
 				<a href='${root}book/BkUpdate?bk_number=${bl.bk_number}' class="btn btn-secondary" role="button">수정 &raquo;</a><br>
 				<a href='#' onclick="javascript:delBook(${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px;">삭제 &raquo;</a><br>
 			</c:if>
+			<c:if test = "${mb_id != '0' }">
 				<a href='#' onclick="javascript:addcart('${mb_id}',${bl.bk_number})" class="btn btn-secondary" role="button" style="margin-top:10px">장바구니 &raquo;</a>
+			</c:if>
 			</div>
 		</div>
 		</div>

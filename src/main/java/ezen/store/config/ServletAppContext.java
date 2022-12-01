@@ -86,7 +86,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 		return factory;		
 	}
 	
-	//Review 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
+	//Member 관련 Query 실행을 위한 객체를 관리(Mapper 관리)
 	@Bean
 	public MapperFactoryBean<Mb_Mapper> getMbMapperFactoryBean(SqlSessionFactory factory){
 		

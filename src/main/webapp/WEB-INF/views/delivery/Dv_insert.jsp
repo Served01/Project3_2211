@@ -96,7 +96,7 @@
 
     <div class="input-form-backgroud row" style="font-family: 'Noto Sans KR', sans-serif;">
       <div class="input-form col-md-12 mx-auto">
-      <a href="#" onclick="location.href='index'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
+      <a href="#" onclick="location.href='Main/center'" style="font-size:30px;font-family:'Frank Ruhl Libre', serif;">
 					Ezen Book Store
 				</a> <br>
         <h4 class="mb-3" style="font-family: 'Noto Sans KR', sans-serif;">배송지 추가</h4>

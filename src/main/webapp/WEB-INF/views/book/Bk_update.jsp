@@ -14,9 +14,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!-- JS -->	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -187,28 +185,28 @@ function previewImage(targetObj, View_area) {
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">제목</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_title"/>
+						<form:input class="form-control" path="bk_title" required="true"/>
 						<form:errors path="bk_title" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">저자</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_writer"/>
+						<form:input class="form-control" path="bk_writer" required="true"/>
 						<form:errors path="bk_writer" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">출판사</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_publisher"/>
+						<form:input class="form-control" path="bk_publisher" required="true"/>
 						<form:errors path="bk_publisher" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="70" width="200">출간일</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_pubdate" placeholder="xxxx-xx-xx"/>
+						<form:input class="form-control" path="bk_pubdate" placeholder="xxxx-xx-xx" required="true"/>
 						<form:errors path="bk_pubdate" style="color:red"></form:errors>
 						</td>
 					</tr>
@@ -240,7 +238,7 @@ function previewImage(targetObj, View_area) {
 						<td height="70" width="200">재고</td>
 						<td height="20" width="200">
 						<div class="input-group">
-						<form:input class="form-control" path="bk_quantity"/>			
+						<form:input class="form-control" path="bk_quantity" required="true"/>			
 						<div class="input-group-append" style="text-align:center; align-items : center;">
 						개
 						</div>
@@ -250,12 +248,12 @@ function previewImage(targetObj, View_area) {
 					</tr>
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td height="20" width="10">
-						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
+						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')" requierd="true"/></td>
 						<form:errors path="upload_file" style="color:red"></form:errors>
 						<td height="70" width="200">가격</td>
 						<td height="20" width="400">
 						<div class="input-group" style="text-align:center; align-items : center;">
-						<form:input class="form-control" path="bk_price"/>
+						<form:input class="form-control" path="bk_price" required="true"/>
 						<div class="input-group-append" style="text-align:center; align-items : center;">
 						원
 						</div>
@@ -264,12 +262,11 @@ function previewImage(targetObj, View_area) {
 						</td>
 					</tr>
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
-						<td colspan="4">상세내용
-						</td>
+						<td colspan="4">상세내용</td>
 					</tr>
 					<tr align="center"style="font-family: 'Noto Sans KR', sans-serif;">
 						<td colspan="4" height="600" width="400">
-						<form:textarea class="form-control" path="bk_detail" style="width: 1000px; height: 600px; resize: none;"/>
+						<form:textarea class="form-control" path="bk_detail" style="width: 1000px; height: 600px; resize: none;" required="true"/>
 						<form:errors path="bk_detail" style="color:red"></form:errors>
 						</td>
 					</tr>
@@ -283,7 +280,6 @@ function previewImage(targetObj, View_area) {
 			</div>
 			</div>
 			</div>
-
 </body>
 
 </html>

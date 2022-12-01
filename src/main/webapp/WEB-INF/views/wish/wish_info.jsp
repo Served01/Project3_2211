@@ -15,7 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	
 </head>
 <style>
@@ -414,7 +414,7 @@ let basket = {
                 	</div>
 		        </c:if>
 			        <div class="empty" style=" display : none;">
-	               		<div class="img" style="width:100%; align:center""><img src="${root }imgs/empty_cart.png"></div>
+	               		<div class="img" style="width:100%; align:center;"><img src="${root }imgs/empty_cart.png"></div>
 	                </div>
         		<c:forEach var="str" items="${infoWi_Bean}" varStatus="status">
         			<c:if test ="${pageCountBean.firstContent <= status.count and status.count <= pageCountBean.lastContent}">

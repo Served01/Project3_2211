@@ -205,7 +205,7 @@ function previewImage(targetObj, View_area) {
 					<tr align="center" style="height:60; width:1150;">
 						<td rowspan="9" style="width:500px; height:600px;">
 							<div style="width:500px; height:600px;">
-								<div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; dispaly: inline; '>
+								<div id='View_area' style='position:relative; width: 100%; height: 100%; color: black; border: 0px solid black; dispaly: inline;'>
 							</div>
 							</div>
 						</td>
@@ -225,28 +225,28 @@ function previewImage(targetObj, View_area) {
 					<tr align="center">
 						<td height="70" width="200">제목</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_title"/>
+						<form:input class="form-control" path="bk_title" required="true"/>
 						<form:errors path="bk_title" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
 						<td height="70" width="200">저자</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_writer"/>
+						<form:input class="form-control" path="bk_writer" required="true"/>
 						<form:errors path="bk_writer" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
 						<td height="70" width="200">출판사</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_publisher"/>
+						<form:input class="form-control" path="bk_publisher" required="true"/>
 						<form:errors path="bk_publisher" style="color:red"></form:errors>
 						</td>
 					</tr>
 					<tr align="center">
 						<td height="70" width="200">출간일</td>
 						<td height="20" width="400">
-						<form:input class="form-control" path="bk_pubdate" placeholder="xxxx-xx-xx"/>
+						<form:input class="form-control" path="bk_pubdate" placeholder="xxxx-xx-xx" required="true"/>
 						<form:errors path="bk_pubdate" style="color:red"></form:errors>
 						</td>
 					</tr>
@@ -278,7 +278,7 @@ function previewImage(targetObj, View_area) {
 						<td height="70" width="200">재고</td>
 						<td height="20" width="200">
 						<div class="input-group">
-						<form:input class="form-control" path="bk_quantity"/>			
+						<form:input class="form-control" path="bk_quantity" required="true"/>			
 						<div class="input-group-append" style="text-align:center; align-items : center;">
 						개
 						</div>
@@ -288,12 +288,12 @@ function previewImage(targetObj, View_area) {
 					</tr>
 					<tr align="center">
 						<td height="20" width="10">
-						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')"/></td>
+						<form:input type="file" class="form-control" path="upload_file" id="ex_file" accept="image/*" onchange="previewImage(this,'View_area')" required="true"/></td>
 						<form:errors path="upload_file" style="color:red"></form:errors>
 						<td height="70" width="200">가격</td>
 						<td height="20" width="400">
 						<div class="input-group" style="text-align:center; align-items : center;">
-						<form:input class="form-control" path="bk_price"/>
+						<form:input class="form-control" path="bk_price" required="true"/>
 						<div class="input-group-append" style="text-align:center; align-items : center;">
 						원
 						</div>
@@ -307,7 +307,7 @@ function previewImage(targetObj, View_area) {
 					</tr>
 					<tr align="center">
 						<td colspan="4" height="600" width="400">
-						<form:textarea class="form-control" path="bk_detail" style="width: 1000px; height: 600px; resize: none;"/>
+						<form:textarea class="form-control" path="bk_detail" style="width: 1000px; height: 600px; resize: none;" required="true"/>
 						<form:errors path="bk_detail" style="color:red"></form:errors>
 						</td>
 					</tr>

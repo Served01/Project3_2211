@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:url var='root' value='/'/>  
 <!DOCTYPE html>
 <html>
@@ -65,17 +66,17 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
  					<td align="center">구매 가격</td>
  				</tr>
  			<c:set var = "sumprice" value = "0" />
-	 		<c:forEach var="caBean" items="${infoCaBean }">
-	 		<c:set var = "bksum" value = "${caBean.bk_price * caBean.ca_bkcount }" />
+	 		<c:forEach var="oriBean" items="${OrSelect }">
+	 		<c:set var = "bksum" value = "${oriBean.bk_price * oriBean.ori_bkcount }" />
 	 		
 				<tr>
-					<td align="center" width="50"><img src="${pageContext.request.contextPath}/upload/${caBean.bk_image}" style="width:120px; height:145px;"></td>			
-				    <td align="center" width="300"><a href="${root}book/Bk_select?bk_number=${caBean.bk_number }">${caBean.bk_title }</a></td>
-					<td align="center" width="100">${caBean.bk_price }원</td>				    
-					<td align="center" width="150">${caBean.ca_bkcount }개</td>
-				    <td align="center" width="150">${bksum }원</td>
+					<td align="center" width="50"><img src="${pageContext.request.contextPath}/upload/${oriBean.bk_image}" style="width:120px; height:145px;"></td>			
+				    <td align="center" width="300"><a href="${root}book/Bk_select?bk_number=${caBean.bk_number }">${oriBean.bk_title }</a></td>
+					<td align="center" width="100"><fmt:formatNumber value="${oriBean.bk_price }" pattern="#,###"/>원</td>				    
+					<td align="center" width="150">${oriBean.ori_bkcount }개</td>
+				    <td align="center" width="150"><fmt:formatNumber value="${bksum }" pattern="#,###"/>원</td>
 				</tr>
-	 		<c:set var= "sumprice" value="${sumprice + caBean.bk_price}"/>
+	 		<c:set var= "sumprice" value="${sumprice + bksum}"/>
 	 		</c:forEach>
 	 		
 	 		<tr>
@@ -94,7 +95,7 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 				</c:choose>
 			</tr>
 			<tr>
-				<td colspan="5" align="right">합계금액: ${sumprice }원
+				<td colspan="5" align="right">합계금액: <fmt:formatNumber value="${sumprice }" pattern="#,###"/>원
 	 		</tr>
 	 		
 		</table>
@@ -156,14 +157,14 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
      <tr>
       	<td  width="200">성명</td> 
        	<td  width="400"> 
-       	<form:input id="dv_name" name="dv_name" path="dv_name" class="form-control" width="400"/>
+       	<form:input id="dv_name" name="dv_name" path="dv_name" class="form-control" width="400" required="required"/>
 		<form:errors path="dv_name" style="color:red"/>
 		</td>
 	 </tr> 
      <tr>  
         <td  width="200">전화번호</td> 
         <td  width="400">
-        <form:input id="dv_tel" name="dv_tel" path="dv_tel" class="form-control" width="400"/>
+        <form:input id="dv_tel" name="dv_tel" path="dv_tel" class="form-control" width="400" required="required"/>
 		<form:errors path="dv_tel" style="color:red"/>
 		</td> 
 	 </tr> 
@@ -171,7 +172,7 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
         <td  width="200">주소</td> 
         <td  width="400">
         <div class="input-group">
-        <form:input id="dv_address" name="dv_address" path="dv_address" class="form-control postcodify_address" width="400"/>
+        <form:input id="dv_address" name="dv_address" path="dv_address" class="form-control postcodify_address" width="400" required="required"/>
 		<form:errors path="dv_address" style="color:red"/>
 		<div class="input-group-append">
 		<button type='button' class="btn btn-dark" id="postcodify_search_button" style="height:38px">검색</button>
@@ -181,9 +182,9 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 	 </tr>
      </table>
      <br>
-      <div align="center">
+      <div align="center" style="font-family: 'Noto Sans KR', sans-serif;">
      <button type="submit" class="btn btn-dark"  style="width: 86px; height: 44px;" >구매 확정</button>
-    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px;" class="btn btn-dark" role="button">뒤로가기</a> 
+    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px; padding-top:9px;" class="btn btn-dark" role="button">뒤로가기</a> 
     </div>
     <br>
 </form:form>

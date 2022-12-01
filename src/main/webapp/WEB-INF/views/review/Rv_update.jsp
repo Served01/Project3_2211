@@ -121,8 +121,11 @@ async function start() {
 
 </script>   
 <body>
-
+<c:import url="/book/BkSelect2"></c:import>
 	<form:form action="${root }Review/RvUpdatePro" method="post" modelAttribute="updateRvBean">
+			<div class="container" style="height:350px">
+      <div class="info" style="margin-left:150px;width:900px">
+     <h1 style="text-align:center;">리뷰 수정</h1>
 		<!-- enctype은 post방식일때만 쓰는 것으로 기본값인 application/x-www-form-urlencoded,
 			 파일이나 이미지를 이용할 때 쓰는 multipart/form-data, 그리고 text/plain 방식이 있다.-->
 		<!-- multipart/form-data는 함부로 쓰면 안된다. 전송할때 인코딩을 하여 보내는 방식이 아니고 이 인코딩 방식을
@@ -130,8 +133,6 @@ async function start() {
 		
 		<form:hidden path="bk_number"/>
 		<form:hidden path="rv_number"/>
-		<div class="container">
-		<div>
 			<div class="input-group">
 		
 		
@@ -171,6 +172,13 @@ async function start() {
 				</div>
 				</div>			
 		</form:form>
-					
+	<br><br><br><br><br>
+	<c:import url="/Review/RvList">
+	</c:import>
+	
+	<!-- import 할때는 ${root}를 쓰면 오히려 인식 못함 -->
+	<!-- import는 임포트된 페이지의 파라미터값이 자동으로 적용됨 -->
+	<br><br>
+	<c:import url="/Main/footer"></c:import>				
 </body>
 </html>
