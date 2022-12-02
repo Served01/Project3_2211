@@ -72,9 +72,9 @@ border: 1px solid #F3E8EB;
 			<br>
 			<!-- 페이지네이션 -->
 			<div class=hi align="center">
-            	<ul id="hiyo" class="pagination" align="center" style="width:898px; font-family:'Noto Sans KR', sans-serif;">
+            	<ul id="hiyo" class="pagination" style="text-align:center; width:190px; font-family:'Noto Sans KR', sans-serif; margin:0; padding:0; margin-bottom:10px;">
 					
-					<li class="page-item align="center" ">
+					<li class="page-item" align="center">
 						<a href="${root}member/Mblist?mb_id=${mb_id}&page=1" class="page-link">First</a>
 					</li>					
 														

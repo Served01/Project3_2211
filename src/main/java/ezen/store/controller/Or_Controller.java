@@ -127,6 +127,20 @@ public class Or_Controller {
 		List<Or_Bean> itemsOrBean = or_Service.OrSelect(or_number);
 		model.addAttribute("itemsOrBean", itemsOrBean);
 		
+		int allprice = 0;
+				
+		//bk_number(개수만큼 반복)와 bk_quantity 추출 및 수정 대입
+		for(int i=0; i<itemsOrBean.size(); i++) {
+			
+			Or_Bean or_items = itemsOrBean.get(i);
+			int bk_price = or_items.getBk_price();
+			int ori_bkcount = or_items.getOri_bkcount();
+			
+			allprice = allprice + (bk_price * ori_bkcount);
+			
+			model.addAttribute("allprice", allprice);
+		}
+		
 		//order item 수에 맞춰 페이지 생성
 		PageCountBean pageCountBean = or_Service.getOrItemCount(or_number, page);
 		model.addAttribute("pageCountBean", pageCountBean);

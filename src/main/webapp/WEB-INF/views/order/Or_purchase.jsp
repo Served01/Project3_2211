@@ -72,10 +72,10 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 	 		
 				<tr>
 					<td align="center" width="50"><img src="${pageContext.request.contextPath}/upload/${oriBean.bk_image}" style="width:120px; height:145px;"></td>			
-				    <td align="center" width="300"><a href="${root}book/Bk_select?bk_number=${caBean.bk_number }">${oriBean.bk_title }</a></td>
-					<td align="center" width="100"><fmt:formatNumber value="${oriBean.bk_price }" pattern="#,###"/>원</td>				    
-					<td align="center" width="150">${oriBean.ori_bkcount }개</td>
-				    <td align="center" width="150"><fmt:formatNumber value="${bksum }" pattern="#,###"/>원</td>
+				    <td align="center" style="width:300; padding-top:69px;"><a href="${root}book/Bk_select?bk_number=${caBean.bk_number }">${oriBean.bk_title }</a></td>
+					<td align="center" style="width:100; padding-top:69px;"><fmt:formatNumber value="${oriBean.bk_price }" pattern="#,###"/>원</td>				    
+					<td align="center" style="width:150; padding-top:69px;">${oriBean.ori_bkcount }개</td>
+				    <td align="center" style="width:150; padding-top:69px;"><fmt:formatNumber value="${bksum }" pattern="#,###"/>원</td>
 				</tr>
 	 		<c:set var= "sumprice" value="${sumprice + bksum}"/>
 	 		</c:forEach>
@@ -84,19 +84,20 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 			 	<c:choose>
 					<c:when test="${sumprice < 30000}">
 						<td colspan="5" align="right">배송비: 3,000원
-						<p style="color:red">*30,000원 이상 구매시 배송비 무료
+						<p style="color:red">*30,000원 이상 구매시 배송비 무료</p>
 						</td>
-						<c:set var= "sumprice" value="${sumprice + 3000}"/>
+						<c:set var= "allprice" value="${sumprice + 3000}"/>
 					</c:when>
 					<c:otherwise>
 						<td colspan="5" align="right">배송비: 0원
-						<p style="color:red">*30,000원 이상 구매시 배송비 무료
+						<p style="color:red">*30,000원 이상 구매시 배송비 무료</p>
+						<c:set var= "allprice" value="${sumprice }"/>
 						</td>
 					</c:otherwise>
 				</c:choose>
 			</tr>
 			<tr>
-				<td colspan="5" align="right">합계금액: <fmt:formatNumber value="${sumprice }" pattern="#,###"/>원
+				<td colspan="5" align="right">합계금액: <fmt:formatNumber value="${allprice }" pattern="#,###"/>원
 	 		</tr>
 	 		
 		</table>
@@ -183,9 +184,9 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 	 </tr>
      </table>
      <br>
-      <div align="center">
+      <div align="center" style="font-family: 'Noto Sans KR', sans-serif;">
      <button type="submit" class="btn btn-dark"  style="width: 86px; height: 44px;" >구매 확정</button>
-    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px;" class="btn btn-dark" role="button">뒤로가기</a> 
+    <a href="javascript:window.history.back();"  style="width: 86px; height: 44px; padding-top:9px;" class="btn btn-dark" role="button">뒤로가기</a> 
     </div>
     <br>
 </form:form>

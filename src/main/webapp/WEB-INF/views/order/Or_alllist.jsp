@@ -41,6 +41,9 @@
 	            	<td width="450"><a href="${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }"> ${orBean.or_number }</a></td>
 	            </tr> 
 	            <tr style="font-family: 'Noto Sans KR', sans-serif;">
+					<td>회원아이디</td>
+	            	<td>${orBean.mb_id }</td>
+	            <tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td>구매날짜</td>
 	            	<td>${orBean.or_date }</td>
 				</tr>
@@ -58,8 +61,10 @@
 				</tr>
 				<tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td></td><td>
-						<button type="button" class="btn btn-dark" style="width: 96px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
-						<button type="button" class="btn btn-dark" style="width: 96px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
+					<c:if test="${orBean.or_status ne '환불'}">
+						<button type="button" class="btn btn-dark" style="width: 91px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
+					</c:if>
 					</td>
 					</tr>
 					</c:if>

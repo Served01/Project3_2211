@@ -58,12 +58,8 @@
 				<tr style="font-family: 'Noto Sans KR', sans-serif;">
 					<td><td>
 						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_select?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 보기</button>
-					<c:if test="${orBean.or_status ne '교환'}">
 					<c:if test="${orBean.or_status ne '환불'}">
-					<c:if test="${orBean.or_status ne '취소'}">
 						<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
-					</c:if>
-					</c:if>
 					</c:if>
 					</tr>
 					</c:if>

@@ -70,6 +70,10 @@
 	        <td><fmt:formatNumber value="${orBean.or_deliveryCost }" pattern="#,###"/>원</td>
 		</tr>
 		<tr style="font-family: 'Noto Sans KR', sans-serif;">
+			<td>총 구매 가격</td>
+			<td><fmt:formatNumber value="${allprice + orBean.or_deliveryCost }" pattern="#,###"/>원</td>
+		</tr>
+		<tr style="font-family: 'Noto Sans KR', sans-serif;">
 			<td>받는 사람</td>
 	        <td>${orBean.dv_name }</td>
 		</tr>
@@ -86,17 +90,25 @@
 			<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_list?mb_id=${orBean.mb_id }'">주문 목록</button>
 			</td>
 			<td>
-			<c:if test="${orBean.or_status ne '교환'}">
 			<c:if test="${orBean.or_status ne '환불'}">
-			<c:if test="${orBean.or_status ne '취소'}">
 			<button type="button" class="btn btn-dark" style="width: 86px; height: 44px;" onClick="location.href='${root}order/Or_after?mb_id=${orBean.mb_id }&or_number=${orBean.or_number }'">주문 변경</button>
 			</c:if>
-			</c:if>
-			</c:if>
 			</td>
+			<c:if test="${mb_id eq 'admin' }">
+		<tr style="font-family: 'Noto Sans KR', sans-serif;">
+			<td>
+			<button type="button" class="btn btn-dark" style="width: 128px; height: 44px;" onClick="location.href='${root}order/Or_alllist'">주문 전체 목록</button>
+			</td>
+			<td>
+			</td>
+			
+			</tr>
+			</c:if>
     	</tr>
 			
-	           	 </table>                 	
+	           	 </table>         
+	           	 
+	           	 <c:set var= "or_num" value="${orBean.or_number}"/>
     </c:forEach>
     </div>
     <br>
@@ -116,7 +128,7 @@
 	        <td>${oriBean.bk_number }</td>
 		</tr> --%>
 		<tr style="font-family: 'Noto Sans KR', sans-serif;">
-			<td rowspan="5"><div class="img" style="width: 170px; height: 220px; padding-left: 180px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" style="width: 170px; height: 220px;"></div></td>
+			<td rowspan="5"><div class="img" style="width: 170px; height: 220px; padding-left: 180px;"><img src="${pageContext.request.contextPath}/upload/${oriBean.bk_image }" style="width: 170px; height: 220px;"></div></td>
 	        <td colspan="2"><a href="${root}book/Bk_select?bk_number=${oriBean.bk_number }">${oriBean.bk_title }</a></td>
     	</tr>
 		<tr style="font-family: 'Noto Sans KR', sans-serif;">
@@ -136,7 +148,6 @@
     		<c:set var= "sumprice" value="${oriBean.bk_price * oriBean.ori_bkcount}"/>
 	    	<td><fmt:formatNumber value="${sumprice }" pattern="#,###"/>원</td>
     	</tr>
-    	
     </table>
     </div>
     </c:forEach>
@@ -147,19 +158,19 @@
             	<ul id="hiyo" class="pagination" style="padding-left:90px;">
 					
 					<li class="page-item">
-						<a href="${root}order/Or_list?mb_id=${mb_id}&page=1" class="page-link">First</a>
+						<a href="${root}order/Or_select?mb_id=${mb_id}&or_number=${or_num }&page=1" class="page-link">First</a>
 					</li>					
 														
 				<c:forEach var="idx" begin="${pageCountBean.min }" end="${pageCountBean.max }">
 					
 					<li class="page-item active">
-						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${idx}" class="page-link">${idx}</a>
+						<a href="${root}order/Or_select?mb_id=${mb_id}&or_number=${or_num }&page=${idx}" class="page-link">${idx}</a>
 					</li>		
 												
 				</c:forEach>					
 					
 					<li class="page-item">
-						<a href="${root}order/Or_list?mb_id=${mb_id}&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
+						<a href="${root}order/Or_select?mb_id=${mb_id}&or_number=${or_num }&page=${pageCountBean.pageCnt}" class="page-link">Last</a>
 					</li>
 					
 				</ul>

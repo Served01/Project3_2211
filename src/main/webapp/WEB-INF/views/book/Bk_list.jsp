@@ -229,7 +229,7 @@ $(window).on('load', function () {
 		<div class="row">
 		<div class="content_inner"></div>
 			<div class="col-md-3" align="center">	
-				<img src="${root }upload/${bl.bk_image}" style="width: 200px; height: 230px;">	
+				<a href='${root }book/BkSelect?bk_number=${bl.bk_number}'><img src="${root }upload/${bl.bk_image}" style="width: 200px; height: 230px;"></a>	
 			</div>
 				<h4 style="text-align:center; margin-bottom:0px; width:230px; height: 35px;">
 					<c:if test="${bl.avg_score != 0}">

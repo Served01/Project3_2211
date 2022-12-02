@@ -17,7 +17,7 @@ public interface Or_Mapper {
 		List<Or_Bean> OrAllList();
 		
 		//주문 list 개수 출력
-		@Select("select count(*) from order_info where not or_status = '0'")
+		@Select("select count(*) from order_info where not or_status = '0' order by or_date desc")
 		int getOrAllCount();
 		
 		//주문 list 출력
@@ -27,7 +27,7 @@ public interface Or_Mapper {
 			+ "                        from Member_info\r\n"
 			+ "                        where mb_id = #{mb_id})"
 			+ "		and not or_status = '0'"
-			+ "		order by or_date")
+			+ "		order by or_date desc")
 		List<Or_Bean> OrList(String mb_id);
 		
 		//주문 list 개수 출력
@@ -68,7 +68,7 @@ public interface Or_Mapper {
 		Or_Bean DvSelect(String mb_id, String dv_pk);
 		
 		//주문 확정
-		@Update("update order_info set mb_name = #{mb_name}, mb_tel = #{mb_tel}, or_status = '구매 확정', or_delivery = #{or_delivery}, dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}, or_date = sysdate\r\n"
+		@Update("update order_info set mb_name = #{mb_name}, mb_tel = #{mb_tel}, or_status = '구매 확정', or_delivery = #{or_delivery}, or_deliveryCost = #{or_deliveryCost}, dv_name = #{dv_name}, dv_tel = #{dv_tel}, dv_address = #{dv_address}, or_date = sysdate\r\n"
 				+ "		where mb_id = #{mb_id}\r\n"
 				+ "		and or_number = #{or_number}")
 		void UpdateOrPurchase(Or_Bean updateOrPurchase);
