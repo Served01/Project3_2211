@@ -108,8 +108,8 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 		 
 		<form:hidden path="mb_id"/>
    		<form:hidden path="or_number"/>
-   		
-		<table border="1" align="center" style="width:600; cellspacing:0; cellpadding:3;">
+   		<div align = 'center'>
+		<table border="1" style="width:600; cellspacing:0; cellpadding:3;">
 		<tr>
 		<td align="center" colspan="2">구매자 정보
 		</td>
@@ -125,7 +125,7 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 		<form:input path="mb_tel" value="${infoMbBean.mb_tel}" class="form-control" readonly="true"/></td>
    		</tr>
    		</table>
-   		
+   		</div>
     	<form:hidden path="or_status" value="구매 확정"/>
 		<form:hidden path="or_date"/>
 		<% int ran = 0;
@@ -140,8 +140,8 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 				<form:hidden path="or_deliveryCost" value="0"/>
 					</c:otherwise>
 				</c:choose>
-	<br>
-		 <table border="1" style="width:600; cellspacing:0; cellpadding:3;" align="center">
+	<br><div align="center">
+		 <table border="1" style="width:600; cellspacing:0; cellpadding:3;">
 		 <tr>
 		 <td align="center" colspan="2">받는 사람 정보</td>
 		 </tr>
@@ -183,6 +183,7 @@ $jQ(function() { $jQ("#postcodify_search_button").postcodifyPopUp(); });
 		</td>
 	 </tr>
      </table>
+     </div>
      <br>
       <div align="center" style="font-family: 'Noto Sans KR', sans-serif;">
      <button type="submit" class="btn btn-dark"  style="width: 86px; height: 44px;" >구매 확정</button>

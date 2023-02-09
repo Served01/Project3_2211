@@ -634,7 +634,7 @@ let basket = {
 	                	</div>
 		       		</c:if>
 			        <div class="empty" style=" display : none;">
-	               		<div class="img" style="width:100%; align:center""><img src="${root }imgs/empty_cart.png"></div>
+	               		<div class="img" style="width:100%; align:center;"><img src="${root }imgs/empty_cart.png"></div>
 	                </div>
 	        		<c:forEach var="str" items="${infoCa_Bean}" varStatus="status">
 		                <div class="row data">
@@ -644,7 +644,7 @@ let basket = {
 				                        <div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" checked onclick="javascript:basket.checkItem();">&nbsp;</div>
 		                        	</c:when>
 		                        	<c:otherwise>
-		                        		<div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" unchecked  onclick="javascript:basket.checkItem();">&nbsp;</div>
+		                        		<div class="check" style="padding-top:50px;"><input type="checkbox" name="buy" value="${str.bk_number }" onclick="javascript:basket.checkItem();">&nbsp;</div>
 		                        	</c:otherwise>
 		                        </c:choose>
 		                        <div class="img" style="width: 120px; height: 145px; padding-top:10px;"><img src="${pageContext.request.contextPath}/upload/${str.bk_image }" onclick="location.href='${root }book/BkSelect?bk_number=${str.bk_number}'" style="width: 120px; height: 145px;"></div>
